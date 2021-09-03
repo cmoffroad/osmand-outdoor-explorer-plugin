@@ -3,30 +3,30 @@
    "items":[
       {
          "type":"PLUGIN",
-         "pluginId":"cmoffroad.enduro",
+         "pluginId":"enduro.plugin",
          "version" : 1,
          "icon": {
-             "" : "@cmoffroad-enduro.png"
+             "" : "@plugin-id.png"
              
          },
          "image": {
-             "" :"@cmoffroad-enduro.webp"
+             "" :"@plugin-image.webp"
          },
          "name":{
             "":"Enduro Plugin"
          },
          "description":{
-            "":""
+            "":"Enduro Plugin"
          }
       },
       {
          "type":"RESOURCES",
-         "pluginId":"cmoffroad.enduro",
+         "pluginId":"enduro.plugin",
          "file":"res"
       },
       {
          "type":"PROFILE",
-         "pluginId":"cmoffroad.enduro",
+         "pluginId":"enduro.plugin",
          "file":"profile_enduro.json",
          "appMode": {
            "iconColor": "DEFAULT",
@@ -46,7 +46,7 @@
       },
       {
          "type":"FILE",
-         "pluginId":"cmoffroad.enduro",
+         "pluginId":"enduro.plugin",
          "subtype" : "rendering_style",
          "file":"\/rendering\/enduro.render.xml"
       }
