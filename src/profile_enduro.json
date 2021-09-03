@@ -182,7 +182,9 @@
   "nrenderer_contourColorScheme": "white",
   "nrenderer_contourWidth": "thick",
   "nrenderer_contourDensity": "medium_w",
-  "nrenderer_hideService": "false",
-  "nrenderer_hideResidential": "true",
+  "nrenderer_showFixme": "true",
+  "nrenderer_showFuel": "true",
+  "nrenderer_showResidential": "false",
+  "nrenderer_showService": "true",
   "nrenderer_depthContours": "true"
 }

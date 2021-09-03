@@ -4,8 +4,6 @@
   <renderingProperty attr="baseAppMode" name="Default Rendering mode" description="Map optimization for respective User Profile based on base (parent) profile"
     type="string" possibleValues="default, car, bicycle, pedestrian, public_transport, boat, ski"/>
   <renderingProperty attr="contourLines" name="Show contour lines" description="Select minimum zoom level to display in map if available. Separate contour file may be needed." type="string" possibleValues="disabled,16,15,14,13,12,11" defaultValueDescription="default13" category="details"/>
-  <renderingProperty attr="OSMMapperAssistant" name="OSM mapper assistant" description="Show fixme and other features to help OSM mappers"
-    type="boolean" possibleValues="" category="details"/>
   <renderingProperty attr="currentTrackColor" name="Current GPX color" description="Color of the currently recording track"
     type="string" possibleValues="red,orange,lightblue,blue,purple,translucent_red,translucent_orange,translucent_lightblue,translucent_blue,translucent_purple" defaultValueDescription="default"/>
   <renderingProperty attr="currentTrackWidth" name="Current GPX width" description="Width of the currently recording track"
@@ -13,8 +11,13 @@
   <renderingProperty attr="contourColorScheme" name="Contour lines color scheme" description="Contour lines color scheme" type="string" possibleValues="white,yellow,green,light_brown,brown,dark_brown,red" defaultValueDescription="default"/>
   <renderingProperty attr="contourWidth" name="Contour lines width" description="Contour lines width" type="string" possibleValues="thin,medium,thick" defaultValueDescription="default"/>
   <renderingProperty attr="contourDensity" name="Contour lines density" description="Contour lines density" type="string" possibleValues="low,medium_w,high" defaultValueDescription="default"/>
-  <renderingProperty attr="hideService" name="Hide service border" description="Hide service border" type="boolean" possibleValues="" category="hide"/>
-  <renderingProperty attr="hideResidential" name="Hide residential shadow" description="Hide residential shadow" type="boolean" possibleValues="" category="hide"/>
+
+  <!-- DETAILS -->
+  <renderingProperty attr="showFixme" name="Highlight fixme data" description="Show fixme tags"
+    type="boolean" possibleValues="" category="details"/>
+  <renderingProperty attr="showFuel" name="Show gas stations" description="Show gas stations" type="boolean" possibleValues="" category="details"/>
+  <renderingProperty attr="showService" name="Highlight service roads" description="Highlight service roads" type="boolean" possibleValues="" category="details"/>
+  <renderingProperty attr="showResidential" name="Highlight residential roads" description="Highlight residential roads" type="boolean" possibleValues="" category="details"/>
 
   <renderingProperty attr="engine_v1" type="boolean"/>
   <renderingAttribute name="defaultColor">
@@ -1181,7 +1184,7 @@
     </switch>
 
     <!-- TEXT - FIXME -->
-    <switch OSMMapperAssistant="true" minzoom="15" intersectionSizeFactor="0" intersectionMargin="0">
+    <switch showFixme="true" minzoom="15" intersectionSizeFactor="0" intersectionMargin="0">
       <switch tag="fixme_tag" value="yes" nameTag="fixme" textColor="#ffffff" textHaloColor="#ccf800e0" textWrapWidth="20" textOrder="1">
         <case maxzoom="15" textSize="10" textDy="-40"/>
         <case minzoom="16" textSize="11" textDy="-50"/>
@@ -1199,8 +1202,8 @@
     <!-- POINT - FORD -->
     <case minzoom="14" tag="ford" value="yes" icon="topo_ford" shield="topo_ford_shield"/>
 
-    <!-- POINT - FUELD -->
-    <case minzoom="12" tag="amenity" value="fuel" icon="amenity_fuel"  shield="orange_round_shield" iconVisibleSize="1" />
+    <!-- POINT - FUEL -->
+    <case showFuel="true" minzoom="12" tag="amenity" value="fuel" icon="amenity_fuel"  shield="orange_round_shield" iconVisibleSize="1" />
 
     <!-- POINT - TEMPLE -->
     <case minzoom="14" tag="amenity" value="place_of_worship" iconOrder="40">
@@ -1234,7 +1237,7 @@
     <case minzoom="14" tag="natural" value="cave_entrance" icon="topo_cave" shield="topo_cave_shield" iconOrder="85"/>
 
     <!-- POINT - FIXME -->
-    <switch OSMMapperAssistant="true" iconVisibleSize="0" intersectionSizeFactor="0" iconOrder="128">
+    <switch showFixme="true" iconVisibleSize="0" intersectionSizeFactor="0" iconOrder="128">
       <switch minzoom="12" tag="fixme_tag" value="yes">
         <case maxzoom="12" icon="fixme_tag_lowzoom_yes"/>
         <case maxzoom="15" icon="fixme_tag_lowzoom2_yes"/>
@@ -1485,7 +1488,7 @@
             <!-- [highway=residential] -->
             <switch>
               <case tag="highway" value="residential" color="$roadColorSurface" color__1="$roadColorSurface" color_0="$roadBorderSurface" shadowColor="$roadBorderSurface" shadowRadius="1">
-                <apply_if hideResidential="false" shadowColor="#FF8C00" />
+                <apply_if showResidential="true" shadowColor="#FF8C00" />
               </case>
             </switch>
             <!-- [highway=track] -->
@@ -1502,8 +1505,8 @@
               <case tag="highway" value="living_street" color_0="#444444"/>
 
               <apply color="$roadColorSurface" color__1="$roadBorderSurface"/>
-              <apply_if hideService="true" color__1="#CCCCCC" />
-              <apply_if hideService="false" shadowColor="#FF0000" shadowRadius="1:1"/>
+              <apply_if showService="false" shadowColor="$roadBorderSurface" shadowRadius="1:1" />
+              <apply_if showService="true" shadowColor="#FF0000" shadowRadius="1:1"/>
             </switch>
           </switch>
           <apply>
@@ -1707,7 +1710,7 @@
     </switch>
 
     <!-- LINE - FIXME -->
-    <switch OSMMapperAssistant="true" minzoom="12">
+    <switch showFixme="true" minzoom="12">
       <case tag="fixme_tag" value="yes" color="#aaf800e0"/>
       <apply>
         <case maxzoom="14" strokeWidth="4:4"/>
