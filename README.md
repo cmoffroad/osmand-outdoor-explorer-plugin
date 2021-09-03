@@ -5,7 +5,8 @@
 ### OsmAnd Installation
 
 - Install [OsmAnd](https://osmand.net/) application on your device
-- Download your country dataset.
+- Open the application. Tap on Get started
+- Download your country dataset and Go to the map.
 
 ### Plugin Import/Update
 
@@ -22,10 +23,12 @@ Coming soon...
 ### Pending
 
 - datasets
-  - `motorcycle=yes` and `survey=ground` integration
+  - [w] `motorcycle` and `source:geometry` integration
 
 ### Todo
 
+- documentation
+  - include styles table
 - rendering
   - remove waterway oneway arrows
   - change ford icon to blue dot ?

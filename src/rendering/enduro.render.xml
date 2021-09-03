@@ -43,8 +43,8 @@
       <case additional="surface=asphalt" />
       <apply attrColorValue="#FFFFFF" />
     </switch>
-    <!-- <case additional="survey_ground=yes" attrColorValue="#FF0000" />
-    <case additional="source=gps" attrColorValue="#FF0000" /> -->
+    <!-- <case additional="survey=ground" attrColorValue="#FF0000" /> -->
+    <!-- <case additional="motorcycle=yes" attrColorValue="#FF0000" /> -->
     <case additional="surface=" attrColorValue="#000000" />
     <case attrColorValue="#888888" />
   </renderingAttribute>
