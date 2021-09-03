@@ -1,2 +1,5 @@
 zip -x "**/.DS_Store" -r ./build/cmoffroad-enduro-latest.osf ./src/
-zip -x "**/.DS_Store" -r ./build/test.osf ./tests/plugin
+
+git add ./build/cmoffroad-enduro-latest.osf
+git commit -m "update OSF"
+git push
