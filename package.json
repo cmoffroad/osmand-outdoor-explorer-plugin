@@ -1,0 +1,16 @@
+{
+  "name": "osmand-enduro-plugin",
+  "version": "0.1.0",
+  "description": "",
+  "scripts": {
+    "start": "bash scripts/watch.sh",
+    "push": "bash scripts/push.sh",
+    "test": "bash scripts/test.sh",
+    "build": "bash scripts/build.sh"
+  },
+  "author": "cmoffroad",
+  "license": "MIT",
+  "devDependencies": {
+    "onchange": "^7.1.0"
+  }
+}

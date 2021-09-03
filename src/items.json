@@ -1,0 +1,54 @@
+{
+   "version":1,
+   "items":[
+      {
+         "type":"PLUGIN",
+         "pluginId":"cmoffroad.enduro",
+         "version" : 1,
+         "icon": {
+             "" : "@cmoffroad-enduro.png"
+             
+         },
+         "image": {
+             "" :"@cmoffroad-enduro.webp"
+         },
+         "name":{
+            "":"Enduro Plugin"
+         },
+         "description":{
+            "":""
+         }
+      },
+      {
+         "type":"RESOURCES",
+         "pluginId":"cmoffroad.enduro",
+         "file":"res"
+      },
+      {
+         "type":"PROFILE",
+         "pluginId":"cmoffroad.enduro",
+         "file":"profile_enduro.json",
+         "appMode": {
+           "iconColor": "DEFAULT",
+           "iconName": "ic_action_enduro_motorcycle",
+           "locIcon": "DEFAULT",
+           "navIcon": "DEFAULT",
+           "order": 5,
+           "parent": "car",
+           "routeService": "OSMAND",
+           "routingProfile": "pedestrian",
+           "stringKey": "motorcycle",
+           "userProfileName": "Enduro"
+         },
+         "prefs" : {
+            "renderer":"enduro.render.xml"
+        }
+      },
+      {
+         "type":"FILE",
+         "pluginId":"cmoffroad.enduro",
+         "subtype" : "rendering_style",
+         "file":"\/rendering\/enduro.render.xml"
+      }
+   ]
+}
