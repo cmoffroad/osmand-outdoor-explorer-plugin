@@ -2,7 +2,7 @@
 
 ## Installation
 
-- Download [Plugin OSF file](./build/cmoffroad-enduro-latest.osf) from your mobile browser.
+- Download [Plugin OSF file](https://github.com/cmoffroad/osmand-plugin-enduro/raw/master/build/cmoffroad-enduro-latest.osf) from your mobile browser.
 
 ## TODO
 - remove waterway oneway arrows
