@@ -49,6 +49,24 @@
          "pluginId":"enduro.plugin",
          "subtype" : "rendering_style",
          "file":"\/rendering\/enduro.render.xml"
+      },
+      {
+         "type":"SUGGESTED_DOWNLOADS",
+         "pluginId":"enduro.plugin",
+         "items": [
+            {
+               "scope-id" : "road_map",
+               "search-type" : "worldregion"
+            }, 
+            {
+               "scope-id" : "srtm_map",
+               "search-type" : "worldregion"
+            },
+            {
+               "scope-id" : "srtm_map",
+               "search-type" : "worldregion"
+            },
+         ]
       }
    ]
 }
