@@ -60,20 +60,17 @@
             },
             {
                "scope-id" : "map",
-               "names": [ "Thailand_asia_2.obf.zip" ]
-            }, 
-            {
-               "scope-id" : "road_map",
-               "names": [ "Thailand_asia_2" ]
+               "search-type" : "worldregion"
             }, 
             {
                "scope-id" : "srtm_map",
-               "names": [ "Thailand_asia_2.srtmf.obf.zip" ]
+               "search-type" : "worldregion"
             },
             {
                "scope-id" : "hillshade",
-               "names": [ "Thailand_asia_2.srtm.obf.zip" ]
-            }, {
+               "search-type" : "worldregion"
+            }, 
+            {
                 "scope-id" : "wikimap",
                 "search-type" : "worldregion"
             }
