@@ -6,17 +6,16 @@
          "pluginId":"enduro.plugin",
          "version" : 1,
          "icon": {
-             "" : "@plugin-id.png"
-             
+            "" : "@enduro-id.png" 
          },
          "image": {
-             "" :"@plugin-image.webp"
+             "" :"@enduro-image.png"
          },
          "name":{
-            "":"Enduro Plugin"
+            "":"Enduro"
          },
          "description":{
-            "":"Enduro Plugin"
+            "":"This plugin for OsmAnd includes a default profile and style for Enduro improving the appearance of unpaved roads and trails."
          }
       },
       {
