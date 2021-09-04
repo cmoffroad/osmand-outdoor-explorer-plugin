@@ -55,6 +55,11 @@
          "pluginId":"enduro.plugin",
          "items": [
             {
+               "scope-id" : "test-downloads",
+               "limit" : 1,
+               "search-type" : "latlon"
+            }, 
+            {
                "scope-id" : "road_map",
                "search-type" : "worldregion"
             }, 

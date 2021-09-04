@@ -6,7 +6,8 @@
     "start": "bash scripts/watch.sh",
     "push": "bash scripts/push.sh",
     "test": "bash scripts/test.sh",
-    "build": "bash scripts/build.sh"
+    "build": "bash scripts/build.sh",
+    "commit": "bash scripts/commit.sh"
   },
   "author": "cmoffroad",
   "license": "MIT",
