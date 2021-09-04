@@ -54,21 +54,16 @@
          "pluginId":"enduro.plugin",
          "items": [
             {
-               "scope-id" : "test-downloads",
-               "limit" : 1,
+               "scope-id" : "map",
                "search-type" : "latlon"
             }, 
             {
-               "scope-id" : "road_map",
-               "search-type" : "worldregion"
-            }, 
-            {
                "scope-id" : "srtm_map",
-               "search-type" : "worldregion"
+               "search-type" : "latlon"
             },
             {
-               "scope-id" : "srtm_map",
-               "search-type" : "worldregion"
+               "scope-id" : "hillshade",
+               "search-type" : "latlon"
             },
          ]
       }
