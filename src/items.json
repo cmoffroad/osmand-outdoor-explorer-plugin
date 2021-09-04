@@ -15,7 +15,7 @@
             "":"Enduro"
          },
          "description":{
-            "":"This plugin includes a profile and style for <b>Enduro</b> improving the appearance of unpaved roads and trails. <ul><li>1.</li><li>2.</li></ul>"
+            "":"This plugin includes a profile for <b>Enduro</b> riders and a custom style improving the appearance of unpaved roads and trails."
          }
       },
       {
@@ -58,12 +58,19 @@
                "names": [ "Thailand_asia_2.obf.zip" ]
             }, 
             {
+               "scope-id" : "road_map",
+               "names": [ "Thailand_asia_2" ]
+            }, 
+            {
                "scope-id" : "srtm_map",
                "names": [ "Thailand_asia_2.srtmf.obf.zip" ]
             },
             {
                "scope-id" : "hillshade",
                "names": [ "Thailand_asia_2.srtm.obf.zip" ]
+            }, {
+                "scope-id" : "wikimap",
+                "search-type" : "worldregion"
             }
          ]
       }
