@@ -69,10 +69,6 @@
             {
                "scope-id" : "hillshade",
                "search-type" : "worldregion"
-            }, 
-            {
-                "scope-id" : "wikimap",
-                "search-type" : "worldregion"
             }
          ]
       }
