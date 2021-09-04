@@ -54,6 +54,11 @@
          "pluginId":"enduro.plugin",
          "items": [
             {
+                "scope-id" : "test-downloads",
+                "limit" : 1,
+                "search-type" : "latlon"
+            },
+            {
                "scope-id" : "map",
                "names": [ "Thailand_asia_2.obf.zip" ]
             }, 
