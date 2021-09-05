@@ -186,5 +186,6 @@
   "nrenderer_showFuel": "true",
   "nrenderer_showResidential": "false",
   "nrenderer_showService": "true",
+  "nrenderer_groundSurveyMode": "true",
   "nrenderer_depthContours": "true"
 }

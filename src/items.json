@@ -15,7 +15,7 @@
             "":"Enduro"
          },
          "description":{
-            "":"This plugin includes a profile for <b>Enduro</b> riders and a custom style improving the appearance of unpaved roads and trails."
+            "":"<p>This plugin for OsmAnd includes a profile for Enduro riders and a lightweight style improving the appearance of unpaved roads and trails.</p><p>Noticeable features compared to standard offroad/topo map styles:</p><ul><li>roads colored based on OSM <code>surface</code> tag</li><li>tracks share the same line thickness as residential and service roads</li><li>path/footway use straight line when <code>motorcycle=yes</code></li></ul><p>Customizable Details:</p><ul><li><strong>Ground survey mode</strong>: unpaved roads/paths that were not added based on ground survey (<code>source:geometry=GPS|survey|mapillary</code>) will have their color faded to grey</li><li><strong>Show fixme notes</strong>: show <code>fixme</code> notes on roads/paths including text (e.g. <code>fixme=precision|continue|resurvey</code>)</li><li><strong>Show gas stations</strong>: include gas stations with an icon</li><li><strong>Highlight service roads</strong>: Show red border around service roads (<code>highway=service</code>)</li><li><strong>Highlight residential roads</strong>: Show orange border around residential roads (<code>highway=residential</code>)</li></ul>"
          }
       },
       {

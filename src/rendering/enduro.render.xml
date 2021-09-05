@@ -19,27 +19,20 @@
     type="string" possibleValues="thin,medium,bold" defaultValueDescription="default"/>
 
   <!-- DETAILS -->
-  <renderingProperty attr="showFixme" name="Highlight fixme data" description="Show fixme tags"
+  <renderingProperty attr="groundSurveyMode" name="Ground Survey mode" description="Ground Survey mode" type="boolean" possibleValues="" category="details"/>
+  <renderingProperty attr="showFixme" name="Show fixme notes" description="Show fixme notes"
     type="boolean" possibleValues="" category="details"/>
   <renderingProperty attr="showFuel" name="Show gas stations" description="Show gas stations" type="boolean" possibleValues="" category="details"/>
   <renderingProperty attr="showService" name="Highlight service roads" description="Highlight service roads" type="boolean" possibleValues="" category="details"/>
   <renderingProperty attr="showResidential" name="Highlight residential roads" description="Highlight residential roads" type="boolean" possibleValues="" category="details"/>
-
-  <renderingProperty attr="engine_v1" type="boolean"/>
-
-
+  
   <!-- ATTRIBUTES -->
   <renderingAttribute name="defaultColor">
-    <!-- next line should should make background transparent for underlays to be visible, but this curretnly does not work as desired -->
-    <!-- To change default color completely you should do that also for tag="place" value="island" and tag="natural" value="land" (search this file) -->
-    <case attrColorValue="#fffbf4">
-    </case>
+    <case attrColorValue="#fffbf4" />
   </renderingAttribute>
 
   <renderingAttribute name="shadowRendering">
-  <!-- 0 - no shadow, 1 - one step, 2 - blur shadow, 3 - solid shadow -->
-    <!-- next line ensures bridges stand out ok -->
-    <!-- <case minzoom="14" nightMode="false" attrIntValue="3" shadowColor="#969696"/> -->
+    <!-- 0 - no shadow, 1 - one step, 2 - blur shadow, 3 - solid shadow -->
     <case minzoom="13" attrIntValue="3"/>
     <case minzoom="8" maxzoom="12" attrIntValue="2" />
     <case attrIntValue="0"/>
@@ -50,11 +43,13 @@
       <case additional="surface=paved" />
       <case additional="surface=concrete" />
       <case additional="surface=asphalt" />
+      <case additional="surface=chipseal" />
       <apply attrColorValue="#FFFFFF" />
     </switch>
-    <!-- <case additional="survey=ground" attrColorValue="#FF0000" /> -->
-    <!-- <case additional="motorcycle=yes" attrColorValue="#FF0000" /> -->
-    <case additional="surface=" attrColorValue="#000000" />
+    <case additional="surface=" attrColorValue="#888888">
+      <apply_if groundSurveyMode="true" additional="survey=ground" attrColorValue="#000000" />
+      <apply_if groundSurveyMode="false" attrColorValue="#000000" />
+    </case>
     <case attrColorValue="#888888" />
   </renderingAttribute>
 
@@ -65,7 +60,7 @@
       <case additional="surface=asphalt" />
       <apply attrColorValue="#000000" />
     </switch>
-    <case additional="surface=" attrColorValue="#BBBBBB" />
+    <!-- <case additional="surface=" attrColorValue="#FFFFFF" /> -->
     <case attrColorValue="#FFFFFF" />
   </renderingAttribute>
 
@@ -613,10 +608,6 @@
       <switch tag="fixme_tag" value="yes" nameTag="fixme" textColor="#ffffff" textHaloColor="#ccf800e0" textWrapWidth="20" textOrder="1">
         <case maxzoom="15" textSize="10" textDy="-40"/>
         <case minzoom="16" textSize="11" textDy="-50"/>
-        <apply_if engine_v1="true">
-          <case maxzoom="15" textDy="-33"/>
-          <case minzoom="16" textDy="-50"/>
-        </apply_if>
       </switch>
       <apply textBold="true" textHaloRadius="2"/>
     </switch>
@@ -1123,10 +1114,6 @@
           </apply>
         </switch>
       </apply>
-      <apply_if engine_v1="false" minzoom="15" pathIcon="stroke_brown_left" pathIconStep="100">
-        <apply_if contourColorScheme="light_brown" pathIcon="stroke_light_brown_left"/>
-        <apply_if contourColorScheme="dark_brown" pathIcon="stroke_dark_brown_left"/>
-      </apply_if>
     </switch>
 
     <!-- LINE - FIXME -->
