@@ -1,4 +1,4 @@
-# OsmAnd Plugin Enduro
+# OsmAnd Plugin Enduro (Android only)
 
 This plugin for OsmAnd includes a profile for Enduro riders and a lightweight style improving the appearance of unpaved roads and trails.
 
@@ -20,7 +20,7 @@ Customizable Details:
 
 ### OsmAnd Installation
 
-- Install [OsmAnd](https://osmand.net/) application on your device
+- Install [OsmAnd](https://play.google.com/store/apps/details?id=net.osmand) application on your device
 - Open the application. Tap on Get started
 
 ### Plugin First-time Installation
