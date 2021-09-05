@@ -616,13 +616,13 @@
   <point>
 
     <!-- POINT - FORD -->
-    <case minzoom="14" tag="ford" value="yes" icon="topo_ford" shield="topo_ford_shield"/>
+    <case minzoom="12" tag="ford" value="yes" icon="topo_ford" shield="topo_ford_shield"/>
 
     <!-- POINT - FUEL -->
-    <case showFuel="true" minzoom="12" tag="amenity" value="fuel" icon="amenity_fuel"  shield="orange_round_shield" iconVisibleSize="1" />
+    <case showFuel="true" minzoom="12" tag="amenity" value="fuel" icon="amenity_fuel" shield="orange_round_shield" iconVisibleSize="1" />
 
     <!-- POINT - TEMPLE -->
-    <case minzoom="14" tag="amenity" value="place_of_worship" iconOrder="40">
+    <case minzoom="12" tag="amenity" value="place_of_worship" iconOrder="40">
       <case additional="religion=christian" icon="topo_christian" shield="topo_christian_shield"/>
       <case additional="religion=jewish" icon="topo_jewish" shield="topo_jewish_shield"/>
       <case additional="religion=muslim" icon="topo_muslim" shield="topo_muslim_shield"/>
@@ -635,30 +635,27 @@
     </case>
 
     <!-- POINT - NOEXIT -->
-    <case tag="noexit" value="yes" icon="" >
-      <apply_if maxzoom="14" icon="barrier_small_red_bold_2"/>
-      <apply_if minzoom="15" icon="barrier_small_red_bold_1"/>
+    <case minzoom="12" tag="noexit" value="yes" icon="" >
+      <apply_if maxzoom="14" icon="barrier_small_black_bold_2"/>
+      <apply_if minzoom="15" icon="barrier_small_black_bold_1"/>
     </case>
 
     <!-- POINT - GATE -->
-    <case tag="barrier" value="gate" icon="" >
+    <case minzoom="12" tag="barrier" value="gate" icon="" >
       <apply_if maxzoom="14" icon="barrier_small_red_bold_2"/>
       <apply_if minzoom="15" icon="barrier_small_red_bold_1"/>
     </case>
 
     <!-- POINT - WATERFALL -->
-    <case minzoom="15" tag="waterway" value="waterfall" icon="topo_waterfall" shield="topo_waterfall_shield"/>
+    <case minzoom="12" tag="waterway" value="waterfall" icon="topo_waterfall" shield="topo_waterfall_shield"/>
 
     <!-- POINT - CAVE -->
-    <case minzoom="14" tag="natural" value="cave_entrance" icon="topo_cave" shield="topo_cave_shield" iconOrder="85"/>
+    <case minzoom="12" tag="natural" value="cave_entrance" icon="topo_cave" shield="topo_cave_shield" iconOrder="85"/>
 
     <!-- POINT - FIXME -->
-    <switch showFixme="true" iconVisibleSize="0" intersectionSizeFactor="0" iconOrder="128">
-      <switch minzoom="12" tag="fixme_tag" value="yes">
-        <case maxzoom="12" icon="fixme_tag_lowzoom_yes"/>
-        <case maxzoom="15" icon="fixme_tag_lowzoom2_yes"/>
-        <case minzoom="16" icon="fixme_tag_yes" icon_shift_px="0.5" icon_shift_py="-0.5"/>
-      </switch>
+    <switch minzoom="12" showFixme="true" tag="fixme_tag" value="yes" iconVisibleSize="0" intersectionSizeFactor="0" iconOrder="128">
+      <case maxzoom="14" icon="fixme_tag_lowzoom2_yes" />
+      <case minzoom="15" icon="fixme_tag_lowzoom_yes" />
     </switch>
   </point>
 
@@ -1117,7 +1114,7 @@
     </switch>
 
     <!-- LINE - FIXME -->
-    <switch showFixme="true" minzoom="12">
+    <switch showFixme="true" minzoom="9">
       <case tag="fixme_tag" value="yes" color="#aaf800e0"/>
       <apply>
         <case maxzoom="14" strokeWidth="4:4"/>
