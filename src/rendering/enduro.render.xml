@@ -1,36 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <renderingStyle name="Enduro" depends="" version="1">
+
   <renderingProperty attr="appMode" name="Rendering mode" description="Map optimization for respective User Profile" type="string" possibleValues="browse map,car,bicycle,pedestrian"/>
+
   <renderingProperty attr="baseAppMode" name="Default Rendering mode" description="Map optimization for respective User Profile based on base (parent) profile"
     type="string" possibleValues="default, car, bicycle, pedestrian, public_transport, boat, ski"/>
+
+  <!-- PROPERTY - CONTOUR LINES -->
   <renderingProperty attr="contourLines" name="Show contour lines" description="Select minimum zoom level to display in map if available. Separate contour file may be needed." type="string" possibleValues="disabled,16,15,14,13,12,11" defaultValueDescription="default13" category="details"/>
-  <renderingProperty attr="currentTrackColor" name="Current GPX color" description="Color of the currently recording track"
-    type="string" possibleValues="red,orange,lightblue,blue,purple,translucent_red,translucent_orange,translucent_lightblue,translucent_blue,translucent_purple" defaultValueDescription="default"/>
-  <renderingProperty attr="currentTrackWidth" name="Current GPX width" description="Width of the currently recording track"
-    type="string" possibleValues="thin,medium,bold" defaultValueDescription="default"/>
   <renderingProperty attr="contourColorScheme" name="Contour lines color scheme" description="Contour lines color scheme" type="string" possibleValues="white,yellow,green,light_brown,brown,dark_brown,red" defaultValueDescription="default"/>
   <renderingProperty attr="contourWidth" name="Contour lines width" description="Contour lines width" type="string" possibleValues="thin,medium,thick" defaultValueDescription="default"/>
   <renderingProperty attr="contourDensity" name="Contour lines density" description="Contour lines density" type="string" possibleValues="low,medium_w,high" defaultValueDescription="default"/>
 
+  <!-- PROPERTY - TRACK RECORDING -->
+  <renderingProperty attr="currentTrackColor" name="Current GPX color" description="Color of the currently recording track"
+    type="string" possibleValues="red,orange,lightblue,blue,purple,translucent_red,translucent_orange,translucent_lightblue,translucent_blue,translucent_purple" defaultValueDescription="default"/>
+  <renderingProperty attr="currentTrackWidth" name="Current GPX width" description="Width of the currently recording track"
+    type="string" possibleValues="thin,medium,bold" defaultValueDescription="default"/>
+
   <!-- DETAILS -->
-  <renderingProperty attr="showFixme" name="Highlight fixme data" description="Show fixme tags"
+  <renderingProperty attr="groundSurveyMode" name="Ground Survey mode" description="Ground Survey mode" type="boolean" possibleValues="" category="details"/>
+  <renderingProperty attr="showFixme" name="Show fixme notes" description="Show fixme notes"
     type="boolean" possibleValues="" category="details"/>
   <renderingProperty attr="showFuel" name="Show gas stations" description="Show gas stations" type="boolean" possibleValues="" category="details"/>
   <renderingProperty attr="showService" name="Highlight service roads" description="Highlight service roads" type="boolean" possibleValues="" category="details"/>
   <renderingProperty attr="showResidential" name="Highlight residential roads" description="Highlight residential roads" type="boolean" possibleValues="" category="details"/>
-
-  <renderingProperty attr="engine_v1" type="boolean"/>
+  
+  <!-- ATTRIBUTES -->
   <renderingAttribute name="defaultColor">
-    <!-- next line should should make background transparent for underlays to be visible, but this curretnly does not work as desired -->
-    <!-- To change default color completely you should do that also for tag="place" value="island" and tag="natural" value="land" (search this file) -->
-    <case attrColorValue="#fffbf4">
-    </case>
+    <case attrColorValue="#fffbf4" />
   </renderingAttribute>
 
   <renderingAttribute name="shadowRendering">
-  <!-- 0 - no shadow, 1 - one step, 2 - blur shadow, 3 - solid shadow -->
-    <!-- next line ensures bridges stand out ok -->
-    <!-- <case minzoom="14" nightMode="false" attrIntValue="3" shadowColor="#969696"/> -->
+    <!-- 0 - no shadow, 1 - one step, 2 - blur shadow, 3 - solid shadow -->
     <case minzoom="13" attrIntValue="3"/>
     <case minzoom="8" maxzoom="12" attrIntValue="2" />
     <case attrIntValue="0"/>
@@ -41,11 +43,13 @@
       <case additional="surface=paved" />
       <case additional="surface=concrete" />
       <case additional="surface=asphalt" />
+      <case additional="surface=chipseal" />
       <apply attrColorValue="#FFFFFF" />
     </switch>
-    <!-- <case additional="survey=ground" attrColorValue="#FF0000" /> -->
-    <!-- <case additional="motorcycle=yes" attrColorValue="#FF0000" /> -->
-    <case additional="surface=" attrColorValue="#000000" />
+    <case additional="surface=" attrColorValue="#888888">
+      <apply_if groundSurveyMode="true" additional="survey=ground" attrColorValue="#000000" />
+      <apply_if groundSurveyMode="false" attrColorValue="#000000" />
+    </case>
     <case attrColorValue="#888888" />
   </renderingAttribute>
 
@@ -56,7 +60,7 @@
       <case additional="surface=asphalt" />
       <apply attrColorValue="#000000" />
     </switch>
-    <case additional="surface=" attrColorValue="#BBBBBB" />
+    <!-- <case additional="surface=" attrColorValue="#FFFFFF" /> -->
     <case attrColorValue="#FFFFFF" />
   </renderingAttribute>
 
@@ -108,171 +112,13 @@
     <case attrColorValue="#ad0b0b"/>
   </renderingAttribute>
 
-  <!-- Motorway -->
-  <renderingAttribute name="motorwayRoadColor">
-    <case attrColorValue="#FB5734" />
-  </renderingAttribute>
-  <renderingAttribute name="motorwayRoadShadowColor">
-    <case attrColorValue="$accessPrivateColor"/>
-    <apply_if maxzoom="6" attrColorValue="#666666"/>
-  </renderingAttribute>
-
-  <!-- Trunk  -->
-  <renderingAttribute name="trunkRoadColor">
-    <case attrColorValue="#FB5734" />
-  </renderingAttribute>
-  <renderingAttribute name="trunkRoadShadowColor">
-    <case attrColorValue="#000000" />
-    <apply_if maxzoom="6" attrColorValue="#666666"/>
-  </renderingAttribute>
-  <!-- Primary  -->
-  <renderingAttribute name="primaryRoadColor">
-    <case attrColorValue="#FF9067" />
-  </renderingAttribute>
-  <renderingAttribute name="primaryRoadShadowColor">
-    <case attrColorValue="#000000" />
-  </renderingAttribute>
-  <!-- Secondary  -->
-  <renderingAttribute name="secondaryRoadColor">
-    <case attrColorValue="#FFA14B" />
-  </renderingAttribute>
-  <renderingAttribute name="secondaryRoadShadowColor">
-    <case attrColorValue="#000000" />
-  </renderingAttribute>
-  <!-- Tertiary  -->
-  <renderingAttribute name="tertiaryRoadColor">
-    <case attrColorValue="#FFC073" />
-  </renderingAttribute>
-  <renderingAttribute name="tertiaryRoadShadowColor">
-    <case attrColorValue="#000000" />
-  </renderingAttribute>
-
-  <renderingAttribute name="pedestrianRoadColor">
-    <case attrColorValue="#ececec">
-      <apply_if additional="construction=yes" attrColorValue="#cccccc"/>
-      <apply_if baseAppMode="pedestrian" attrColorValue="#E7E7FF"/>
-    </case>
-    <apply_if baseAppMode="car" attrColorValue="#cccccc"/>
-  </renderingAttribute>
-
-  <renderingAttribute name="footwayColor">
-    <case attrColorValue="#00005B"/>
-  </renderingAttribute>
-
-  <renderingAttribute name="pedestrianRoadShadowColor">
-    <case baseAppMode="car" attrColorValue="#cccccc"/>
-    <case attrColorValue="#7B6EDE"/>
-<!--    <apply_if baseAppMode="pedestrian" attrColorValue="#004AC3"/>-->
-  </renderingAttribute>
-
-  <renderingAttribute name="buswayRoadColor">
-    <case attrColorValue="#C7DCFF">
-      <apply_if additional="tunnel=yes" attrColorValue="#E9F2F2"/>
-      <apply_if additional="covered=yes" attrColorValue="#E9F2F2"/>
-      <apply_if additional="construction=yes" attrColorValue="#cccccc"/>
-    </case>
-  </renderingAttribute>
-
-  <renderingAttribute name="buswayRoadShadowColor">
-    <case attrColorValue="#30000000">
-    </case>
-  </renderingAttribute>
-
-  <renderingAttribute name="racewayColor">
-    <case attrColorValue="#ececec"/>
-  </renderingAttribute>
-  <renderingAttribute name="racewayStrokeColor">
-    <case attrColorValue="#9F4408"/>
-  </renderingAttribute>
-
-
-  <renderingAttribute name="cyclewayColor">
-    <case attrColorValue="#0000ff"/>
-  </renderingAttribute>
-  <renderingConstant name="cyclewayStrokeWidth" value="1"/>
-
-  <renderingAttribute name="bridlewayColor">
-    <case attrColorValue="#339900"/>
-  </renderingAttribute>
-  <renderingConstant name="bridlewayStrokeWidth" value="1:1"/>
-
-
-  <renderingConstant name="footwayStrokeWidth" value="0.7:0.7"/>
-  <renderingConstant name="footwayLowZoomStrokeWidth" value="0.5:0.5"/>
-
-  <renderingAttribute name="primaryResidentialHighwayAreaColor">
-    <case attrColorValue="#E9E9E9"/>
-  </renderingAttribute>
-  <renderingAttribute name="primaryResidentialHighwayAreaShadowColor">
-    <case attrColorValue="#000000"/>
-  </renderingAttribute>
-
-  <renderingAttribute name="constructionHighwayBGColor">
-    <case attrColorValue="#ffffff"/>
-  </renderingAttribute>
-  <renderingAttribute name="pierColor">
-    <case attrColorValue="#ffffff"/>
-  </renderingAttribute>
-  <renderingAttribute name="barrierLineColor">
-    <case attrColorValue="#333333"/>
-  </renderingAttribute>
-  <renderingAttribute name="damStrokeColor">
-    <case attrColorValue="#333333"/>
-  </renderingAttribute>
-  <renderingAttribute name="barrierHedgeColor">
-    <case attrColorValue="#aed1a0"/>
-  </renderingAttribute>
-
-  <renderingAttribute name="railwayRailColor">
-    <case maxzoom="15" attrColorValue="#222222">
-    </case>
-    <case minzoom="16" maxzoom="17" attrColorValue="#444444">
-    </case>
-    <case minzoom="18" attrColorValue="#555555">
-    </case>
-  </renderingAttribute>
-  <renderingAttribute name="railwayBridgeColor1">
-    <case attrColorValue="#000000"/>
-  </renderingAttribute>
-  <renderingAttribute name="railwayBridgeColor2">
-    <case attrColorValue="#ffffff"/>
-  </renderingAttribute>
-  <renderingAttribute name="railwayAbandonedBridgeColor1">
-    <case attrColorValue="#000000"/>
-  </renderingAttribute>
-  <renderingAttribute name="railwayAbandonedBridgeColor2">
-    <case attrColorValue="#ffffff"/>
-  </renderingAttribute>
-
-  <renderingConstant name="null" value="#00000000"/>
-
   <renderingAttribute name="waterColor">
     <case attrColorValue="#AA7fc0ee"/>
   </renderingAttribute>
-<!--  <renderingAttribute name="waterStrokeColor">
-    <case attrColorValue="#4580cf"/>
-  </renderingAttribute>-->
-  <renderingAttribute name="waterwayColor">
-    <case attrColorValue="#7fc0eeAA"/>
-  </renderingAttribute>
-  <renderingAttribute name="waterwayTunnelColor">
-    <case attrColorValue="#B0CCDF"/>
-  </renderingAttribute>
+
   <renderingAttribute name="woodColor">
     <case attrColorValue="#c4ecb4"/>
   </renderingAttribute>
-  <renderingAttribute name="woodYoungColor">
-    <case attrColorValue="#c5ecb8"/>
-  </renderingAttribute>
-  <renderingAttribute name="woodLostColor">
-    <case attrColorValue="#fbfde6"/>
-  </renderingAttribute>
-
-  <renderingAttribute name="landuseLoggingColor">
-    <case attrColorValue="#fbfde6"/>
-  </renderingAttribute>
-
-  <renderingConstant name="wetlandColorNight" value="#1b3238"/>
 
   <renderingAttribute name="contourLineColor">
     <case contourColorScheme="white" attrColorValue="#44ffffff"/>
@@ -321,86 +167,10 @@
     <case attrColorValue="#CCCCCC"/>
   </renderingAttribute>
 
-  <renderingAttribute name="landuseResidentialRuralColor">
-    <case maxzoom="14" attrColorValue="#666666">
-    </case>
-    <case minzoom="15" attrColorValue="#ABABAB">
-    </case>
-  </renderingAttribute>
-  <renderingAttribute name="landuseResidentialUrbanColor">
-    <case maxzoom="14" attrColorValue="#FFA577">
-    </case>
-    <case minzoom="15" attrColorValue="#F2D3B6">
-    </case>
-  </renderingAttribute>
-
-  <renderingAttribute name="landuseVineyardColor">
-    <case attrColorValue="#bbeca1"/>
-  </renderingAttribute>
   <renderingAttribute name="landuseOrchardColor">
     <case attrColorValue="#bbeca1"/>
   </renderingAttribute>
-  <renderingAttribute name="landusePlantNurseryColor">
-    <case attrColorValue="#d5ffbe"/>
-  </renderingAttribute>
-  <renderingAttribute name="landuseGreenhouseHorticultureColor">
-    <case attrColorValue="#f6e3cf"/>
-  </renderingAttribute>
 
-  <renderingAttribute name="landuseAllotmentsColor">
-    <case attrColorValue="#a1eca6"/>
-  </renderingAttribute>
-  <renderingAttribute name="landuseIndustrialColor">
-    <case attrColorValue="#EDE8EB"/>
-  </renderingAttribute>
-  <renderingAttribute name="powerPolygonsColor">
-    <case attrColorValue="#bbbbbb"/>
-  </renderingAttribute>
-  <renderingAttribute name="landuseRailwayColor">
-    <case attrColorValue="#EDE8EB"/>
-  </renderingAttribute>
-  <renderingAttribute name="landuseGaragesColor">
-    <case attrColorValue="#EDE8EB"/>
-  </renderingAttribute>
-  <renderingAttribute name="landuseConstructionColor">
-    <case attrColorValue="#eaeae6"/>
-  </renderingAttribute>
-  <renderingAttribute name="spoilHeapColor">
-    <case attrColorValue="#66d9d5d2"/>
-  </renderingAttribute>
-  <renderingAttribute name="aerodromeColor">
-    <case attrColorValue="#ECEEF1"/>
-  </renderingAttribute>
-  <renderingAttribute name="runwayColor">
-    <case attrColorValue="#ffffff"/>
-  </renderingAttribute>
-  <renderingAttribute name="runwayOutlineColor">
-    <case attrColorValue="#333333"/>
-  </renderingAttribute>
-  <renderingAttribute name="runwayLayer1StrokeColor">
-    <case attrColorValue="#000000"/>
-  </renderingAttribute>
-  <renderingAttribute name="runwayAbandonedOutlineColor">
-    <case attrColorValue="#66333333"/>
-  </renderingAttribute>
-  <renderingAttribute name="breakwaterColor">
-    <case attrColorValue="#aaaaaa"/>
-  </renderingAttribute>
-
-
-  <renderingAttribute name="publicTransportPlatformColor">
-    <case attrColorValue="#bababa"/>
-  </renderingAttribute>
-  <renderingAttribute name="publicTransportPlatformDisusedColor">
-    <case attrColorValue="#44888888"/>
-  </renderingAttribute>
-
-  <renderingAttribute name="recreationGroundColor">
-    <case attrColorValue="#EBFFE4"/>
-  </renderingAttribute>
-  <renderingAttribute name="beachResortColor">
-    <case attrColorValue="#e6d4a9"/>
-  </renderingAttribute>
   <renderingAttribute name="grassColor">
     <case attrColorValue="#E5FFE8"/>
   </renderingAttribute>
@@ -409,9 +179,6 @@
   </renderingAttribute>
   <renderingAttribute name="farmyardColor">
     <case attrColorValue="#EEE5D9"/>
-  </renderingAttribute>
-  <renderingAttribute name="gardenColor">
-    <case attrColorValue="#82a1ff60"/>
   </renderingAttribute>
   <renderingAttribute name="desertColor">
     <case attrColorValue="#fff7bf"/>
@@ -422,190 +189,14 @@
   <renderingAttribute name="beachColor">
     <case attrColorValue="#FFD9A7"/>
   </renderingAttribute>
-  <renderingAttribute name="screeColor">
-    <case attrColorValue="#F4F4F4"/>
-  </renderingAttribute>
-  <renderingAttribute name="glacierColor">
-    <case attrColorValue="#E4FDFF"/>
-  </renderingAttribute>
-  <renderingAttribute name="glacierStrokeColor">
-    <case attrColorValue="#99ccff"/>
-  </renderingAttribute>
-  <renderingAttribute name="bareRockColor">
-    <case attrColorValue="#FAFAFA"/>
-  </renderingAttribute>
-  <renderingAttribute name="landslideColor">
-    <case attrColorValue="#86e9d0bf"/>
-  </renderingAttribute>
-  <renderingAttribute name="landfillColor">
-    <case attrColorValue="#DEDECF"/>
-  </renderingAttribute>
-  <renderingAttribute name="aerodromeTextColor">
-    <case attrColorValue="#053274"/>
-  </renderingAttribute>
-  <renderingAttribute name="aerodromeTextHaloColor">
-    <case attrColorValue="#ffffff"/>
-  </renderingAttribute>
-  <renderingAttribute name="aerowayTextColor">
-    <case attrColorValue="#333333"/>
-  </renderingAttribute>
-  <renderingAttribute name="aerowayTextHaloColor">
-    <case attrColorValue="#ffffff"/>
-  </renderingAttribute>
+  
 
-  <renderingAttribute name="railwayStationTextColor">
-    <case attrColorValue="#000000"/>
-  </renderingAttribute>
-
-  <renderingAttribute name="pierTextColor">
-    <case attrColorValue="#1f62ae"/>
-  </renderingAttribute>
-
-  <renderingAttribute name="powerLineColor">
-    <case attrColorValue="#000000"/>
-  </renderingAttribute>
-  <renderingAttribute name="ridgeColor">
-    <case attrColorValue="#603700"/>
-  </renderingAttribute>
-
-  <renderingAttribute name="attractionColor">
-    <case attrColorValue="#41ffc6a4"/>
-  </renderingAttribute>
-  <renderingAttribute name="attractionStrokeColor">
-    <case attrColorValue="#000000"/>
-  </renderingAttribute>
-
-  <renderingConstant name="buildingTextHaloRadiusDay" value="2"/>
-
-  <renderingAttribute name="buildingTextColor">
-    <case attrColorValue="#404040"/>
-  </renderingAttribute>
-  <renderingAttribute name="buildingTextHaloColor">
-    <case attrColorValue="#eeffffff"/>
-  </renderingAttribute>
-
-  <renderingAttribute name="runwayTextColor">
-    <case attrColorValue="#333333"/>
-  </renderingAttribute>
-  <renderingAttribute name="runwayTextHaloColor">
-    <case attrColorValue="#ffffff"/>
-  </renderingAttribute>
-  <renderingAttribute name="abandonedHighwayTextColor">
-    <case attrColorValue="#777777"/>
-  </renderingAttribute>
-  <renderingAttribute name="militaryTextColor">
-    <case attrColorValue="#990d2a"/>
-  </renderingAttribute>
-  <renderingAttribute name="militaryTextHaloColor">
-    <case attrColorValue="#eeffffff"/>
-  </renderingAttribute>
-
-  <renderingAttribute name="peakVolcanoTextColor">
-    <case attrColorValue="#654321"/>
-  </renderingAttribute>
-  <renderingAttribute name="peakVolcanoTextHaloColor">
-    <case attrColorValue="#eeffffff"/>
-  </renderingAttribute>
-  <renderingAttribute name="glacierTextColor">
-    <case attrColorValue="#085186"/>
-  </renderingAttribute>
-  <renderingAttribute name="glacierTextHaloColor">
-    <case attrColorValue="$glacierColor"/>
-  </renderingAttribute>
-  <renderingAttribute name="craterTextColor">
-    <case attrColorValue="#4e0d0d"/>
-  </renderingAttribute>
-  <renderingAttribute name="capeTextColor">
-    <case attrColorValue="#333333"/>
-  </renderingAttribute>
-
-
-  <renderingConstant name="waterTextHaloRadiusDay" value="1"/>
-  <renderingAttribute name="waterTextColor">
-    <case attrColorValue="#266579"/>
-  </renderingAttribute>
 
   <renderingAttribute name="waterTextHaloColor">
     <case attrColorValue="#FFFFFF"/>
   </renderingAttribute>
 
-  <renderingAttribute name="transportTextColor">
-    <case attrColorValue="#000000"/>
-  </renderingAttribute>
-  <renderingAttribute name="transportTextHaloColor">
-    <case attrColorValue="#ffffff"/>
-  </renderingAttribute>
-
-  <renderingConstant name="textHaloRadius" value="2"/>
   <renderingConstant name="" value=""/>
-
-  <renderingAttribute name="defaultTextHaloColor">
-    <case attrColorValue="#ffffff"/>
-  </renderingAttribute>
-
-  <renderingConstant name="landuseManmadeTextHaloRadiusDay" value="2"/>
-  <renderingAttribute name="landuseManmadeTextColor">
-    <case attrColorValue="#000000"/>
-  </renderingAttribute>
-  <renderingAttribute name="landuseManmadeFadedTextColor">
-    <case attrColorValue="#525252"/>
-  </renderingAttribute>
-  <renderingAttribute name="landuseManmadeTextHaloColor">
-    <case attrColorValue="#ffffff"/>
-  </renderingAttribute>
-  <renderingAttribute name="historicTextColor">
-    <case attrColorValue="#000000"/>
-  </renderingAttribute>
-  <renderingAttribute name="historicTextHaloColor">
-    <case attrColorValue="#ffffff"/>
-  </renderingAttribute>
-  <renderingAttribute name="tourismAttractionTextColor">
-    <case attrColorValue="#734a08"/>
-  </renderingAttribute>
-  <renderingAttribute name="manMadeTextColor">
-    <case attrColorValue="#444444"/>
-  </renderingAttribute>
-  <renderingAttribute name="accomodationTextColor">
-    <case attrColorValue="$black"/>
-  </renderingAttribute>
-  <renderingAttribute name="accomodationTextHaloColor">
-    <case attrColorValue="#ffffff"/>
-  </renderingAttribute>
-
-  <renderingConstant name="black" value="#000000"/>
-  <renderingConstant name="white" value="#ffffff"/>
-
-  <renderingAttribute name="motorwayTextColor">
-    <case attrColorValue="$black"/>
-  </renderingAttribute>
-  <renderingAttribute name="trunkTextColor">
-    <case attrColorValue="$black"/>
-  </renderingAttribute>
-  <renderingAttribute name="primaryTextColor">
-    <case attrColorValue="$black"/>
-  </renderingAttribute>
-  <renderingAttribute name="secondaryTextColor">
-    <case attrColorValue="$black"/>
-  </renderingAttribute>
-  <renderingAttribute name="tertiaryTextColor">
-    <case attrColorValue="$black"/>
-  </renderingAttribute>
-  <renderingAttribute name="unclassifiedTextColor">
-    <case attrColorValue="$black"/>
-  </renderingAttribute>
-  <renderingAttribute name="residentialTextColor">
-    <case attrColorValue="$black"/>
-  </renderingAttribute>
-  <renderingAttribute name="pedestrianTextColor">
-    <case attrColorValue="$black"/>
-  </renderingAttribute>
-  <renderingAttribute name="serviceTextColor">
-    <case attrColorValue="$black"/>
-  </renderingAttribute>
-
-  <renderingAttribute name="railwayTextColor">
-    <case attrColorValue="#333333"/>
-  </renderingAttribute>
 
   <renderingAttribute name="boundaryColorInner">
     <case minzoom="12" attrColorValue="#aa0002B4"/>
@@ -616,183 +207,12 @@
     <case attrColorValue="#300002B4"/>
   </renderingAttribute>
 
-
-
-  <renderingAttribute name="osmcBlackColor">
-    <case engine_v1="true" attrColorValue="#75000000"/>
-    <case attrColorValue="#44000000"/>
-  </renderingAttribute>
-  <renderingAttribute name="osmcBlueColor">
-    <case engine_v1="true" attrColorValue="#750000ff"/>
-    <case attrColorValue="#440000ff"/>
-  </renderingAttribute>
-  <renderingAttribute name="osmcGreenColor">
-    <case engine_v1="true" attrColorValue="#7500ff00"/>
-    <case attrColorValue="#4400ff00"/>
-  </renderingAttribute>
-  <renderingAttribute name="osmcRedColor">
-    <case engine_v1="true" attrColorValue="#75ff0000"/>
-    <case attrColorValue="#44ff0000"/>
-  </renderingAttribute>
-  <renderingAttribute name="osmcYellowColor">
-    <case engine_v1="true" attrColorValue="#75ffff00"/>
-    <case attrColorValue="#44ffff00"/>
-  </renderingAttribute>
-  <renderingAttribute name="osmcOrangeColor">
-    <case engine_v1="true" attrColorValue="#88ffba00"/>
-    <case attrColorValue="#66ffba00"/>
-  </renderingAttribute>
-  <renderingAttribute name="osmcBrownColor">
-    <case engine_v1="true" attrColorValue="#75705409"/>
-    <case attrColorValue="#44705409"/>
-  </renderingAttribute>
-  <renderingAttribute name="osmcPurpleColor">
-    <case engine_v1="true" attrColorValue="#75ab00d6"/>
-    <case attrColorValue="#44ab00d6"/>
-  </renderingAttribute>
-  <renderingAttribute name="osmcDefaultColor">
-    <case engine_v1="true" attrColorValue="#750058a2"/>
-    <case attrColorValue="#280058a2"/>
-  </renderingAttribute>
-  <renderingAttribute name="iwnColor">
-    <case attrColorValue="#d94545"/>
-  </renderingAttribute>
-  <renderingAttribute name="nwnColor">
-    <case attrColorValue="#0000ff"/>
-  </renderingAttribute>
-  <renderingAttribute name="rwnColor">
-    <case attrColorValue="#DFC200"/>
-  </renderingAttribute>
-  <renderingAttribute name="rwnTextColor">
-    <case attrColorValue="#988400"/>
-  </renderingAttribute>
-  <renderingAttribute name="lwnColor">
-    <case attrColorValue="#00D783"/>
-  </renderingAttribute>
-
-  <renderingAttribute name="iwnNodeTextColor">
-    <case attrColorValue="#d94545"/>
-  </renderingAttribute>
-  <renderingAttribute name="nwnNodeTextColor">
-    <case attrColorValue="#0000ff"/>
-  </renderingAttribute>
-  <renderingAttribute name="rwnNodeTextColor">
-    <case attrColorValue="#ff6600"/>
-  </renderingAttribute>
-  <renderingAttribute name="lwnNodeTextColor">
-    <case attrColorValue="#cf00d7"/>
-  </renderingAttribute>
-
-  <renderingAttribute name="hikingRoutesTextColor">
-    <case attrColorValue="#DD5407"/>
-  </renderingAttribute>
-
-  <renderingAttribute name="iwnNodeNetworkColor">
-    <case attrColorValue="#66d94545"/>
-  </renderingAttribute>
-  <renderingAttribute name="nwnNodeNetworkColor">
-    <case attrColorValue="#660000ff"/>
-  </renderingAttribute>
-  <renderingAttribute name="rwnNodeNetworkColor">
-    <case attrColorValue="#66ff6600"/>
-  </renderingAttribute>
-  <renderingAttribute name="lwnNodeNetworkColor">
-    <case attrColorValue="#66cf00d7"/>
-  </renderingAttribute>
-
-  <renderingAttribute name="routeBusColor">
-    <case attrColorValue="#ff0000"/>
-  </renderingAttribute>
-  <renderingAttribute name="routeShareTaxiColor">
-    <case attrColorValue="#f620cb"/>
-  </renderingAttribute>
-  <renderingAttribute name="routeTrolleybusColor">
-    <case attrColorValue="#920071"/>
-  </renderingAttribute>
-  <renderingAttribute name="routeTramColor">
-    <case attrColorValue="#0000ff"/>
-  </renderingAttribute>
-  <renderingAttribute name="routeTrainColor">
-    <case attrColorValue="#8c3f01"/>
-  </renderingAttribute>
-  <renderingAttribute name="routeLightrailColor">
-    <case attrColorValue="#009100"/>
-  </renderingAttribute>
-
-  <renderingAttribute name="horseRouteDefaultColor">
-    <case engine_v1="true" attrColorValue="#8000ad88"/>
-    <case attrColorValue="#3500ad88"/>
-  </renderingAttribute>
-
-  <renderingAttribute name="litYesColor">
-    <case engine_v1="false" attrColorValue="#55ffeb00"/>
-    <case attrColorValue="#66ffeb00"/>
-  </renderingAttribute>
-  <renderingAttribute name="litNoColor">
-    <case engine_v1="false" attrColorValue="#66ff0000"/>
-    <case attrColorValue="#88ff0000"/>
-  </renderingAttribute>
-
-  <renderingAttribute name="placeCountryTextColor">
-    <case attrColorValue="#3D3D3D"/>
-  </renderingAttribute>
-  <renderingAttribute name="placeCountryTextHaloColor">
-    <case attrColorValue="#ffffff"/>
-  </renderingAttribute>
-  <renderingAttribute name="placeStateProvinceTextColor">
-    <case attrColorValue="#505050"/>
-  </renderingAttribute>
-  <renderingAttribute name="placeStateProvinceTextHaloColor">
-    <case attrColorValue="#ffffff"/>
-  </renderingAttribute>
   <renderingAttribute name="placeCityVillageTextColor">
-    <case attrColorValue="#000000"/>
-  </renderingAttribute>
-  <renderingAttribute name="placeSuburbTextColor">
     <case attrColorValue="#000000"/>
   </renderingAttribute>
   <renderingConstant name="placeTextHaloRadiusDay" value="1:1"/>
   <renderingAttribute name="placeCityVillageTextHaloColor">
     <case attrColorValue="#ffffff"/>
-  </renderingAttribute>
-  <renderingAttribute name="placeLocalityTextColor">
-    <case attrColorValue="#777777"/>
-  </renderingAttribute>
-
-  <renderingConstant name="placeHamletMinZoom" value="12"/>
-  <renderingConstant name="placeSuburbMinZoom" value="12"/>
-  <renderingConstant name="placeNeighbourhoodMinZoom" value="13"/>
-  <renderingAttribute name="forestTextColor">
-    <case attrColorValue="#388738"/>
-  </renderingAttribute>
-
-  <renderingAttribute name="naturalLanduseTextHaloColor">
-    <case attrColorValue="#ffffff"/>
-  </renderingAttribute>
-
-  <renderingConstant name="highwayTrackTextHaloRadiusDay" value="1"/>
-
-  <renderingAttribute name="highwayTrackTextHaloColor">
-    <case attrColorValue="#ffffff"/>
-  </renderingAttribute>
-  <renderingAttribute name="highwayLowLevelTextColor">
-    <case attrColorValue="#000000"/>
-  </renderingAttribute>
-
-  <renderingAttribute name="debugTextDisplayBBox">
-    <case attrBoolValue="false"/>
-  </renderingAttribute>
-  <renderingAttribute name="debugTextDisplayShieldBBox">
-    <case attrBoolValue="false"/>
-  </renderingAttribute>
-  <renderingAttribute name="debugTextDoNotFindIntersections">
-    <case attrBoolValue="false"/>
-  </renderingAttribute>
-  <renderingAttribute name="debugTextDoNotFindIntersectionsSameName">
-    <case attrBoolValue="false"/>
-  </renderingAttribute>
-  <renderingAttribute name="debugTextDisplayShortRoadNames">
-    <case attrBoolValue="false"/>
   </renderingAttribute>
 
   <order>
@@ -1172,7 +592,7 @@
     </switch>
 
     <!-- TEXT - WATER -->
-    <switch textColor="$waterTextColor" textHaloRadius="$waterTextHaloRadiusDay" textHaloColor="$waterTextHaloColor" textItalic="true">
+    <switch textColor="#266579" textHaloRadius="1" textHaloColor="$waterTextHaloColor" textItalic="true">
       <switch textSize="12">
         <case minzoom="13" tag="landuse" value="water" nameTag="" textWrapWidth="20" textOrder="218"/>
         <case minzoom="13" tag="landuse" value="reservoir" nameTag="" textWrapWidth="20" textOrder="218"/>
@@ -1188,10 +608,6 @@
       <switch tag="fixme_tag" value="yes" nameTag="fixme" textColor="#ffffff" textHaloColor="#ccf800e0" textWrapWidth="20" textOrder="1">
         <case maxzoom="15" textSize="10" textDy="-40"/>
         <case minzoom="16" textSize="11" textDy="-50"/>
-        <apply_if engine_v1="true">
-          <case maxzoom="15" textDy="-33"/>
-          <case minzoom="16" textDy="-50"/>
-        </apply_if>
       </switch>
       <apply textBold="true" textHaloRadius="2"/>
     </switch>
@@ -1200,13 +616,13 @@
   <point>
 
     <!-- POINT - FORD -->
-    <case minzoom="14" tag="ford" value="yes" icon="topo_ford" shield="topo_ford_shield"/>
+    <case minzoom="12" tag="ford" value="yes" icon="topo_ford" shield="topo_ford_shield"/>
 
     <!-- POINT - FUEL -->
-    <case showFuel="true" minzoom="12" tag="amenity" value="fuel" icon="amenity_fuel"  shield="orange_round_shield" iconVisibleSize="1" />
+    <case showFuel="true" minzoom="12" tag="amenity" value="fuel" icon="amenity_fuel" shield="orange_round_shield" iconVisibleSize="1" />
 
     <!-- POINT - TEMPLE -->
-    <case minzoom="14" tag="amenity" value="place_of_worship" iconOrder="40">
+    <case minzoom="12" tag="amenity" value="place_of_worship" iconOrder="40">
       <case additional="religion=christian" icon="topo_christian" shield="topo_christian_shield"/>
       <case additional="religion=jewish" icon="topo_jewish" shield="topo_jewish_shield"/>
       <case additional="religion=muslim" icon="topo_muslim" shield="topo_muslim_shield"/>
@@ -1219,30 +635,27 @@
     </case>
 
     <!-- POINT - NOEXIT -->
-    <case tag="noexit" value="yes" icon="" >
-      <apply_if maxzoom="14" icon="barrier_small_red_bold_2"/>
-      <apply_if minzoom="15" icon="barrier_small_red_bold_1"/>
+    <case minzoom="12" tag="noexit" value="yes" icon="" >
+      <apply_if maxzoom="14" icon="barrier_small_black_bold_2"/>
+      <apply_if minzoom="15" icon="barrier_small_black_bold_1"/>
     </case>
 
     <!-- POINT - GATE -->
-    <case tag="barrier" value="gate" icon="" >
+    <case minzoom="12" tag="barrier" value="gate" icon="" >
       <apply_if maxzoom="14" icon="barrier_small_red_bold_2"/>
       <apply_if minzoom="15" icon="barrier_small_red_bold_1"/>
     </case>
 
     <!-- POINT - WATERFALL -->
-    <case minzoom="15" tag="waterway" value="waterfall" icon="topo_waterfall" shield="topo_waterfall_shield"/>
+    <case minzoom="12" tag="waterway" value="waterfall" icon="topo_waterfall" shield="topo_waterfall_shield"/>
 
     <!-- POINT - CAVE -->
-    <case minzoom="14" tag="natural" value="cave_entrance" icon="topo_cave" shield="topo_cave_shield" iconOrder="85"/>
+    <case minzoom="12" tag="natural" value="cave_entrance" icon="topo_cave" shield="topo_cave_shield" iconOrder="85"/>
 
     <!-- POINT - FIXME -->
-    <switch showFixme="true" iconVisibleSize="0" intersectionSizeFactor="0" iconOrder="128">
-      <switch minzoom="12" tag="fixme_tag" value="yes">
-        <case maxzoom="12" icon="fixme_tag_lowzoom_yes"/>
-        <case maxzoom="15" icon="fixme_tag_lowzoom2_yes"/>
-        <case minzoom="16" icon="fixme_tag_yes" icon_shift_px="0.5" icon_shift_py="-0.5"/>
-      </switch>
+    <switch minzoom="12" showFixme="true" tag="fixme_tag" value="yes" iconVisibleSize="0" intersectionSizeFactor="0" iconOrder="128">
+      <case maxzoom="14" icon="fixme_tag_lowzoom2_yes" />
+      <case minzoom="15" icon="fixme_tag_lowzoom_yes" />
     </switch>
   </point>
 
@@ -1252,11 +665,6 @@
       <case minzoom="11" tag="natural" value="beach" color_0="$beachColor"/>
       <case minzoom="11" tag="natural" value="sand" color_0="$sandColor"/>
       <case minzoom="6" tag="natural" value="desert" color="$desertColor"/>
-      <switch minzoom="13">
-        <case tag="wood:lost" value="dead_wood"/>
-        <case tag="wood:lost" value="windfall"/>
-        <apply color_0="$woodLostColor"/>
-      </switch>
       <switch minzoom="6">
         <case tag="natural" value="wood"/>
         <case tag="landuse" value="forest"/>
@@ -1583,7 +991,7 @@
         </case>
         <case maxzoom="15" strokeWidth=""/>
         <case minzoom="16" strokeWidth_4="2:2" strokeWidth_5="2:2"/>
-        <apply color_5="$footwayColor" pathEffect_5="1_2"/>
+        <apply color_5="#00005B" pathEffect_5="1_2"/>
         <apply_if additional="conveying=yes" pathEffect_5="2_1"/>
       </case>
     </switch>
@@ -1703,14 +1111,10 @@
           </apply>
         </switch>
       </apply>
-      <apply_if engine_v1="false" minzoom="15" pathIcon="stroke_brown_left" pathIconStep="100">
-        <apply_if contourColorScheme="light_brown" pathIcon="stroke_light_brown_left"/>
-        <apply_if contourColorScheme="dark_brown" pathIcon="stroke_dark_brown_left"/>
-      </apply_if>
     </switch>
 
     <!-- LINE - FIXME -->
-    <switch showFixme="true" minzoom="12">
+    <switch showFixme="true" minzoom="9">
       <case tag="fixme_tag" value="yes" color="#aaf800e0"/>
       <apply>
         <case maxzoom="14" strokeWidth="4:4"/>
