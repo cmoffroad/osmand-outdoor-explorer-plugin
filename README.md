@@ -16,6 +16,11 @@ Customizable Details:
 - **Highlight service roads**: Show red border around service roads (`highway=service`)
 - **Highlight residential roads**: Show orange border around residential roads (`highway=residential`)
 
+<p float="left">
+  <img src="https://raw.githubusercontent.com/cmoffroad/osmand-plugin-enduro/master/screenshots/sample1.jpeg" width="250" />
+  <img src="https://raw.githubusercontent.com/cmoffroad/osmand-plugin-enduro/master/screenshots/sample2.jpeg" width="250" />
+</p>
+
 ## Setup
 
 ### OsmAnd Installation
