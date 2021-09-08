@@ -111,7 +111,7 @@
   "terrain_mode": "HILLSHADE",
   "hillshade_min_zoom": "3",
   "hillshade_max_zoom": "19",
-  "hillshade_transparency": "77",
+  "hillshade_transparency": "15",
   "slope_min_zoom": "3",
   "slope_max_zoom": "17",
   "slope_transparency": "80",
