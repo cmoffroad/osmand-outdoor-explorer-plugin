@@ -25,6 +25,7 @@
   <renderingProperty attr="showFuel" name="Show gas stations" description="Show gas stations" type="boolean" possibleValues="" category="details"/>
   <renderingProperty attr="showService" name="Highlight service roads" description="Highlight service roads" type="boolean" possibleValues="" category="details"/>
   <renderingProperty attr="showResidential" name="Highlight residential roads" description="Highlight residential roads" type="boolean" possibleValues="" category="details"/>
+  <renderingProperty attr="showAdminBoundaries" name="Show admin boundaries" description="Show admin boundaries" type="boolean" possibleValues="" category="details"/>
   
   <!-- ATTRIBUTES -->
   <renderingAttribute name="defaultColor">
@@ -615,6 +616,9 @@
 
   <point>
 
+    <!-- POINT - VIEWPOINT -->
+    <case minzoom="12" tag="tourism" value="viewpoint" icon="topo_viewpoint" shield="topo_viewpoint_shield" iconOrder="85"/>
+
     <!-- POINT - FORD -->
     <case minzoom="12" tag="ford" value="yes" icon="topo_ford" shield="topo_ford_shield"/>
 
@@ -999,14 +1003,14 @@
     <!-- LINE - WATER -->
     <switch>
       <switch minzoom="12">
-        <case tag="waterway" value="stream"/>
+        <case tag="waterway" value="stream" />
         <apply_if minzoom="13" maxzoom="13" strokeWidth="1.2"/>
         <apply_if minzoom="14" maxzoom="14" strokeWidth="1.5"/>
         <apply_if minzoom="15" maxzoom="16" strokeWidth="1.2:1.2"/>
         <apply_if minzoom="17" maxzoom="17" strokeWidth="1.4:1.4"/>
         <apply_if minzoom="18" strokeWidth="2:2"/>
       </switch>
-      <switch minzoom="5">
+      <switch minzoom="5" >
         <case tag="waterway" value="river">
           <apply minzoom="13" >
             <case maxzoom="13" />
@@ -1049,7 +1053,7 @@
         <case maxzoom="17" pathEffect="9_5.5"/>
         <case minzoom="18" pathEffect="12_7"/>
       </apply_if>
-      <apply color="$waterColor"/>
+      <apply color="$waterColor" />
     </switch>
 
     <!-- LINE - CONTOUR -->
@@ -1127,11 +1131,11 @@
     </switch>
 
     <!-- LINE - ADMIN LEVELS -->
-    <switch minzoom="2">
+    <switch minzoom="2" showAdminBoundaries="true">
       <case tag="admin_level" value="0"/>
       <case tag="admin_level" value="1"/>
       <case tag="admin_level" value="2"/>
-      <apply color="$boundaryColorOuter" color_0="$boundaryColorInner">
+      <apply color="$boundaryColorOuter">
         <case maxzoom="2" strokeWidth="0.7"/>
         <case maxzoom="3" strokeWidth="0.9" strokeWidth_0="0.8"/>
         <case maxzoom="4" strokeWidth="1:1" strokeWidth_0="0.8"/>
@@ -1139,6 +1143,19 @@
         <case maxzoom="6" strokeWidth="3:3" strokeWidth_0="1.3"/>
         <case maxzoom="8" strokeWidth="4:4" strokeWidth_0="1:1"/>
         <case minzoom="9" strokeWidth="6:6" strokeWidth_0="1:1"/>
+      </apply>
+    </switch>
+    <switch minzoom="2" showAdminBoundaries="true">
+      <case tag="admin_level" value="3"/>
+      <case tag="admin_level" value="4"/>
+      <apply color="$boundaryColorOuter" pathEffect="10_10">
+        <case maxzoom="2" strokeWidth="0.3"/>
+        <case maxzoom="3" strokeWidth="0.4" strokeWidth_0="0.8"/>
+        <case maxzoom="4" strokeWidth="0.5" strokeWidth_0="0.8"/>
+        <case maxzoom="5" strokeWidth="1" strokeWidth_0="1"/>
+        <case maxzoom="6" strokeWidth="1.5" strokeWidth_0="1.3"/>
+        <case maxzoom="8" strokeWidth="2" strokeWidth_0="1:1"/>
+        <case minzoom="9" strokeWidth="3" strokeWidth_0="1:1"/>
       </apply>
     </switch>
   </line>
