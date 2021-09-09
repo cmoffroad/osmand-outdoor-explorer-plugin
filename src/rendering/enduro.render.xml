@@ -899,9 +899,10 @@
           <switch>
             <!-- [highway=residential] -->
             <switch>
-              <case tag="highway" value="residential" color="$roadColorSurface" color__1="$roadColorSurface" color_0="$roadBorderSurface" shadowColor="$roadBorderSurface" shadowRadius="1">
-                <apply_if showResidential="true" shadowColor="#FF8C00" />
-              </case>
+              <case tag="highway" value="living_street" />
+              <case tag="highway" value="residential" />
+              <apply color="$roadColorSurface" color__1="$roadColorSurface" color_0="$roadBorderSurface" shadowColor="$roadBorderSurface" shadowRadius="1" />
+              <apply_if showResidential="true" shadowColor="#FF8C00" />
             </switch>
             <!-- [highway=track] -->
             <switch>
@@ -913,9 +914,6 @@
             <!-- [highway=service] -->
             <switch>
               <case tag="highway" value="service" color_0="#444444"/>
-              <case tag="highway" value="services" color_0="#444444"/>
-              <case tag="highway" value="living_street" color_0="#444444"/>
-
               <apply color="$roadColorSurface" color__1="$roadBorderSurface"/>
               <apply_if showService="false" shadowColor="$roadBorderSurface" shadowRadius="1:1" />
               <apply_if showService="true" shadowColor="#FF0000" shadowRadius="1:1"/>
@@ -973,20 +971,41 @@
     <!-- LINE - HIGHWAY HIGH ZOOM -->
     <switch minzoom="12">
       <switch>
-        <!-- [highway=footway] -->
-        <case tag="highway" value="footway" />
         <!-- [highway=path] -->
         <case tag="highway" value="path" />
-
         <apply_if maxzoom="12" strokeWidth_5="0.5:0.5" />
         <apply_if maxzoom="13" strokeWidth_5="0.5:0.5" />
         <apply_if maxzoom="14" strokeWidth_5="0.7:0.7" />
         <apply_if minzoom="15" strokeWidth_5="1:1" />
-        <apply  color="$roadBorderSurface" shadowRadius="2" color_5="$roadColorSurface" pathEffect_5="5_2" pathEffect="5_2" strokeWidth="0.5" shadowRadius="0"
+        <apply  color="$roadBorderSurface" shadowRadius="2" color_5="$roadColorSurface" pathEffect_5="7_2" pathEffect="7_2" strokeWidth="0.5" shadowRadius="0"
           >
           <apply_if additional="motorcycle=yes" pathEffect_5="" pathEffect=""  />
           <apply_if additional="surface=paved" strokeWidth="1" shadowRadius="1" />
         </apply>
+      </switch>
+      <switch>
+        <!-- [highway=footway] -->
+        <case tag="highway" value="footway" />
+        <apply_if maxzoom="12" strokeWidth_5="0.5:0.5" />
+        <apply_if maxzoom="13" strokeWidth_5="0.5:0.5" />
+        <apply_if maxzoom="14" strokeWidth_5="0.7:0.7" />
+        <apply_if minzoom="15" strokeWidth_5="1:1" />
+        <apply  color="$roadBorderSurface" shadowRadius="2" color_5="$roadColorSurface" pathEffect_5="2_2" pathEffect="2_2" strokeWidth="0.5" shadowRadius="0"
+          >
+          <apply_if additional="motorcycle=yes" pathEffect_5="" pathEffect=""  />
+          <apply_if additional="surface=paved" strokeWidth="1" shadowRadius="1" />
+        </apply>
+      </switch>
+      <!-- [highway=cycleway|bridleway|busway|pedestrian|escape|raceway] -->
+      <switch>
+        <case tag="highway" value="cycleway" />
+        <case tag="highway" value="busway" />
+        <case tag="highway" value="pedestrian" />
+        <apply_if maxzoom="12" strokeWidth_5="0.5:0.5" />
+        <apply_if maxzoom="13" strokeWidth_5="0.5:0.5" />
+        <apply_if maxzoom="14" strokeWidth_5="0.7:0.7" />
+        <apply_if minzoom="15" strokeWidth_5="1:1" />
+        <apply shadowRadius="2" color_5="#FF0000" strokeWidth="0.5" />
       </switch>
       <case minzoom="15" tag="highway" value="steps" strokeWidth="0.1">
         <case maxzoom="15">
@@ -995,7 +1014,7 @@
         </case>
         <case maxzoom="15" strokeWidth=""/>
         <case minzoom="16" strokeWidth_4="2:2" strokeWidth_5="2:2"/>
-        <apply color_5="#00005B" pathEffect_5="1_2"/>
+        <apply color_5="#FF0000" pathEffect_5="1_2"/>
         <apply_if additional="conveying=yes" pathEffect_5="2_1"/>
       </case>
     </switch>
