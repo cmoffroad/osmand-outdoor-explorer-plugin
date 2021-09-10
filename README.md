@@ -4,13 +4,13 @@ This plugin for OsmAnd includes a profile for Enduro riders and a lightweight st
 
 Noticeable features compared to standard offroad/topo map styles:
 
-- roads colored based on OSM `surface` tag
+- roads colored based on OSM `surface` tag (paved/unpaved/unspecified)
 - tracks share the same line thickness as residential and service roads
-- path/footway use straight line when `motorcycle=yes`
+- path use straight line when `motorcycle=yes`
 
 Customizable Details:
 
-- **Ground survey mode**: unpaved roads/paths that were not added based on ground survey (`source:geometry=GPS|survey|mapillary`) will have their color faded to grey
+- **Ground survey mode**: unpaved roads/paths that were not added based on ground survey (`source=GPS|survey|mapillary`) will have their color faded to grey
 - **Show fixme notes**: show `fixme` notes on roads/paths including text (e.g. `fixme=precision|continue|resurvey`)
 - **Show gas stations**: include gas stations with an icon
 - **Highlight service roads**: Show red border around service roads (`highway=service`)
@@ -28,7 +28,7 @@ Customizable Details:
 - Install [OsmAnd](https://play.google.com/store/apps/details?id=net.osmand) application on your device
 - Open the application. Tap on Get started
 
-### Plugin First-time Installation
+### Plugin First-time Installation (Android only)
 
 - Download [Plugin OSF file](https://github.com/cmoffroad/osmand-plugin-enduro/raw/master/build/osmand-plugin-enduro.osf) from your mobile browser.
 - Once download is complete, click on Open.
@@ -40,11 +40,15 @@ Customizable Details:
 - Tap on current profile icon (top left)
 - Select Enduro profile
 
+> If a "Permission Denied" occurs, go to your Android phone Settings > Apps > OsmAnd > Permissions and turn on Storage
+
 ### Plugin Future Updates
 
 Future plugin updates can be manually installed by following the exact same first 3 steps as above.
 
 ## Documentation
+
+> Work in progress...
 
 |Type|Tag|Style|Condition|
 |---|---|---|---|
@@ -57,8 +61,8 @@ Future plugin updates can be manually installed by following the exact same firs
 |way|`surface=concrete`|||
 |way|`surface=chipseal`|||
 |way|`surface=paved`|||
-|way|`surface={other}`||`!groundSurveyMode \|\| source:geometry=GPS\|survey\|mapillary`|
-|way|`surface={other}`||`groundSurveyMode && source:geometry!=GPS\|survey\|mapillary`|
+|way|`surface={other}`||`!groundSurveyMode \|\| source=GPS\|survey\|mapillary`|
+|way|`surface={other}`||`groundSurveyMode && source!=GPS\|survey\|mapillary`|
 |way|`!surface`|||
 |node|`amenity=fuel`||`showFuel`|
 |node|`amenity=place_of_worship`|||
