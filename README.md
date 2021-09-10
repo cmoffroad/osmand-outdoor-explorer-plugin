@@ -40,7 +40,9 @@ Customizable Details:
 - Tap on current profile icon (top left)
 - Select Enduro profile
 
-> If a "Permission Denied" occurs, go to your Android phone Settings > Apps > OsmAnd > Permissions and turn on Storage
+> If a "Permission Denied" occurs, 
+> - go to your Android phone Settings > Apps > OsmAnd > Permissions
+> - turn on Storage and try reinstalling the plugin
 
 ### Plugin Future Updates
 
