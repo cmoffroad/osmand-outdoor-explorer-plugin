@@ -27,6 +27,8 @@ Customizable Details:
 
 - Install [OsmAnd](https://play.google.com/store/apps/details?id=net.osmand) application on your device
 - Open the application. Tap on Get started
+- Download Recommended Country dataset
+- Open Menu > Plugins > make sure Trip Recording is enabled
 
 ### Plugin First-time Installation (Android only)
 
