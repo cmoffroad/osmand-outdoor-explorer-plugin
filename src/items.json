@@ -43,10 +43,24 @@
          }
       },
       {
-         "type":"FILE",
+         "type":"PROFILE",
          "pluginId":"offroad-survey.plugin",
-         "subtype" : "rendering_style",
-         "file":"\/rendering\/offroad-survey.render.xml"
+         "file":"profile_offroad-survey.json",
+         "appMode": {
+           "iconColor": "DEFAULT",
+           "iconName": "ic_action_enduro_motorcycle",
+           "locIcon": "DEFAULT",
+           "navIcon": "DEFAULT",
+           "order": 5,
+           "parent": "car",
+           "routeService": "OSMAND",
+           "routingProfile": "pedestrian",
+           "stringKey": "motorcycle",
+           "userProfileName": "Offroad Survey"
+         },
+         "prefs" : {
+            "renderer":"enduro.render.xml"
+        }
       },
       {
          "type":"SUGGESTED_DOWNLOADS",
