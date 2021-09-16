@@ -3,55 +3,54 @@
    "items":[
       {
          "type":"PLUGIN",
-         "pluginId":"enduro.plugin",
+         "pluginId":"offroad-survey.plugin",
          "version" : 1,
          "icon": {
-            "" : "@enduro-id.png" 
+            "" : "@offroad-survey-id.png" 
          },
          "image": {
-             "" :"@enduro-image.png"
+             "" :"@offroad-survey-image.png"
          },
          "name":{
-            "":"Enduro"
+            "":"Offroad Survey"
          },
          "description":{
-            "":"<p>This plugin for OsmAnd includes a profile for Enduro riders and a lightweight style improving the appearance of unpaved roads and trails.</p><p>Noticeable features compared to standard offroad/topo map styles:</p><ul><li>roads colored based on OSM <code>surface</code> tag</li><li>tracks share the same line thickness as residential and service roads</li><li>path/footway use straight line when <code>motorcycle=yes</code></li></ul><p>Customizable Details:</p><ul><li><strong>Ground survey mode</strong>: unpaved roads/paths that were not added based on ground survey (<code>source:geometry=GPS|survey|mapillary</code>) will have their color faded to grey</li><li><strong>Show fixme notes</strong>: show <code>fixme</code> notes on roads/paths including text (e.g. <code>fixme=precision|continue|resurvey</code>)</li><li><strong>Show gas stations</strong>: include gas stations with an icon</li><li><strong>Highlight service roads</strong>: Show red border around service roads (<code>highway=service</code>)</li><li><strong>Highlight residential roads</strong>: Show orange border around residential roads (<code>highway=residential</code>)</li></ul>"
+            "":"<p>This plugin for OsmAnd includes a default profile for offroad surveys and a lightweight map style improving the appearance of unpaved roads and trails.</p><p>More details available at: <a href=""https://github.com/cmoffroad/osmand-offroad-survey-plugin"">https://github.com/cmoffroad/osmand-offroad-survey-plugin</a></p>"
          }
       },
       {
          "type":"RESOURCES",
-         "pluginId":"enduro.plugin",
+         "pluginId":"offroad-survey.plugin",
          "file":"res"
       },
       {
          "type":"PROFILE",
-         "pluginId":"enduro.plugin",
-         "file":"profile_enduro.json",
+         "pluginId":"offroad-survey.plugin",
+         "file":"profile_offroad-survey.json",
          "appMode": {
            "iconColor": "DEFAULT",
-           "iconName": "ic_action_enduro_motorcycle",
+           "iconName": "ic_world_globe_dark",
            "locIcon": "DEFAULT",
            "navIcon": "DEFAULT",
-           "order": 5,
-           "parent": "car",
-           "routeService": "OSMAND",
-           "routingProfile": "pedestrian",
-           "stringKey": "motorcycle",
-           "userProfileName": "Enduro"
+           "order": 0,
+           "routeService": "STRAIGHT",
+           "routingProfile": "",
+           "stringKey": "default",
+           "userProfileName": "Browse map"
          },
          "prefs" : {
-            "renderer":"enduro.render.xml"
-        }
+            "renderer":"offroad-survey.render.xml"
+         }
       },
       {
          "type":"FILE",
-         "pluginId":"enduro.plugin",
+         "pluginId":"offroad-survey.plugin",
          "subtype" : "rendering_style",
-         "file":"\/rendering\/enduro.render.xml"
+         "file":"\/rendering\/offroad-survey.render.xml"
       },
       {
          "type":"SUGGESTED_DOWNLOADS",
-         "pluginId":"enduro.plugin",
+         "pluginId":"offroad-survey.plugin",
          "items": [
             {
                 "scope-id" : "test-downloads",

@@ -1,1 +1,1 @@
-cd ./src && zip -x "**/.DS_Store" -r ../build/osmand-plugin-enduro.osf .
+cd ./src && zip -x "**/.DS_Store" -r ../build/osmand-offroad-survey-plugin.osf .
