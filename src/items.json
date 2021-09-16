@@ -29,25 +29,6 @@
          "file":"profile_offroad-survey.json",
          "appMode": {
            "iconColor": "DEFAULT",
-           "iconName": "ic_world_globe_dark",
-           "locIcon": "DEFAULT",
-           "navIcon": "DEFAULT",
-           "order": 0,
-           "routeService": "STRAIGHT",
-           "routingProfile": "",
-           "stringKey": "default",
-           "userProfileName": "Browse map"
-         },
-         "prefs" : {
-            "renderer":"offroad-survey.render.xml"
-         }
-      },
-      {
-         "type":"PROFILE",
-         "pluginId":"offroad-survey.plugin",
-         "file":"profile_offroad-survey.json",
-         "appMode": {
-           "iconColor": "DEFAULT",
            "iconName": "ic_action_enduro_motorcycle",
            "locIcon": "DEFAULT",
            "navIcon": "DEFAULT",
@@ -59,8 +40,14 @@
            "userProfileName": "Offroad Survey"
          },
          "prefs" : {
-            "renderer":"enduro.render.xml"
-        }
+            "renderer":"offroad-survey.render.xml"
+         }
+      },
+      {
+         "type":"FILE",
+         "pluginId":"offroad-survey.plugin",
+         "subtype" : "rendering_style",
+         "file":"\/rendering\/offroad-survey.render.xml"
       },
       {
          "type":"SUGGESTED_DOWNLOADS",
