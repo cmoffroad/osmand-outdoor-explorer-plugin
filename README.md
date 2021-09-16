@@ -8,7 +8,7 @@ Noticeable features compared to standard offroad/topo map styles:
 
 - roads colored based on OSM `surface` tag (paved/unpaved/unspecified)
 - tracks share the same line thickness as residential and service roads
-- path use straight line when `motorcycle=yes`
+- path use straight line when `motorcycle=yes` is enabled
 
 Customizable Details:
 
@@ -28,7 +28,7 @@ Customizable Details:
 
 - Install [OsmAnd](https://play.google.com/store/apps/details?id=net.osmand) application on your device
 - Open the application. Tap on Get started
-- Download Recommended Country dataset
+- Download Recommended Country dataset (if not yet installed)
 - Open Menu > Plugins > make sure Trip Recording is enabled
 
 ### Plugin First-time Installation (Android only)
@@ -55,20 +55,24 @@ Future plugin updates can be manually installed by following the exact same firs
 
 |Type|Tag|Style|Condition|
 |---|---|---|---|
-|way|`fixme=*`||`showFixme`|
-|way|`highway=service`||`showService`|
-|way|`highway=residential`||`showResidential`|
+|way|`fixme=*`||`showFixme=yes`|
+|way|`highway=service`||`showService=yes`|
+|way|`highway=residential`||`showResidential=yes`|
 |way|`highway=path`||`motorcycle=yes`|
 |way|`highway=path`||`motorcycle=no \|\| !motorcycle`|
 |way|`surface=asphalt`|||
 |way|`surface=concrete`|||
 |way|`surface=chipseal`|||
 |way|`surface=paved`|||
-|way|`surface={other}`||`!groundSurveyMode \|\| source=GPS\|survey\|mapillary`|
-|way|`surface={other}`||`groundSurveyMode && source!=GPS\|survey\|mapillary`|
+|way|`surface={other}`||`!groundSurveyMode \|\| source=GPS`|
+|way|`surface={other}`||`groundSurveyMode && source!=GPS`|
 |way|`!surface`|||
 |node|`amenity=place_of_worship`|||
-|node|`fixme=*`||`showFixme`|
+|node|`barrier=gate`|||
+|node|`fixme=*`||`showFixme=yes`|
 |node|`ford=yes`|||
-|node|`gate=*`|||
+|node|`natural=cave_entrance`|||
 |node|`noexit=yes`|||
+|node|`fixme=*`|||
+|node|`tourism=viewpoint`|||
+|node|`waterway=waterfall`||
