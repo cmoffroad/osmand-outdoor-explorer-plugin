@@ -15,7 +15,7 @@
             "":"Offroad Survey"
          },
          "description":{
-            "":"<p>This plugin for OsmAnd includes a default profile for offroad surveys and a lightweight map style improving the appearance of unpaved roads and trails.</p><p>More info at <a href=""https://github.com/cmoffroad/osmand-offroad-survey-plugin"">https://github.com/cmoffroad/osmand-offroad-survey-plugin</a></p>"
+            "":"<p>This plugin for OsmAnd includes a default profile for offroad surveys and a lightweight map style improving the appearance of unpaved roads and trails.</p><p>More info at <a href='https://github.com/cmoffroad/osmand-offroad-survey-plugin'>https://github.com/cmoffroad/osmand-offroad-survey-plugin</a></p>"
          }
       },
       {

@@ -976,7 +976,7 @@
         <apply_if maxzoom="13" strokeWidth_5="0.5:0.5" />
         <apply_if maxzoom="14" strokeWidth_5="0.7:0.7" />
         <apply_if minzoom="15" strokeWidth_5="1:1" />
-        <apply  color="$roadBorderSurface" shadowRadius="2" color_5="$roadColorSurface" pathEffect_5="7_2" pathEffect="7_2" strokeWidth="0.5" shadowRadius="0"
+        <apply  color="$roadBorderSurface" color_5="$roadColorSurface" pathEffect_5="7_2" pathEffect="7_2" strokeWidth="0.5" shadowRadius="0"
           >
           <apply_if additional="motorcycle=yes" pathEffect_5="" pathEffect=""  />
           <apply_if additional="surface=paved" strokeWidth="1" shadowRadius="1" />
@@ -989,7 +989,7 @@
         <apply_if maxzoom="13" strokeWidth_5="0.5:0.5" />
         <apply_if maxzoom="14" strokeWidth_5="0.7:0.7" />
         <apply_if minzoom="15" strokeWidth_5="1:1" />
-        <apply  color="$roadBorderSurface" shadowRadius="2" color_5="$roadColorSurface" pathEffect_5="2_2" pathEffect="2_2" strokeWidth="0.5" shadowRadius="0"
+        <apply  color="$roadBorderSurface" color_5="$roadColorSurface" pathEffect_5="2_2" pathEffect="2_2" strokeWidth="0.5" shadowRadius="0"
           >
           <apply_if additional="motorcycle=yes" pathEffect_5="" pathEffect=""  />
           <apply_if additional="surface=paved" strokeWidth="1" shadowRadius="1" />
