@@ -170,7 +170,7 @@
   "av_recorder_split": "false",
   "av_rs_clip_length": "5",
   "av_rs_storage_size": "5",
-  "renderer":"offroad-survey.render.xml",
+  "renderer": "Offroad survey",
   "nrenderer_appMode": "default",
   "nrenderer_defAppMode": "",
   "nrenderer_contourLines": "11",
