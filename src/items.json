@@ -24,9 +24,8 @@
          "file":"res"
       },
       {
-         "type":"PROFILE",
-         "pluginId":"offroad-survey.plugin",
-         "file":"profile_offroad-survey.json",
+         "type": "PROFILE",
+         "file": "profile_motorcycle.json",
          "appMode": {
            "iconColor": "DEFAULT",
            "iconName": "ic_action_enduro_motorcycle",
