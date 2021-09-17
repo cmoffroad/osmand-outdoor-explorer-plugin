@@ -1,6 +1,6 @@
 # OsmAnd Offroad Survey Plugin (Android only)
 
-This plugin for OsmAnd can be used for off-road ground surveys and includes a lightweight map style improving the appearance of unpaved roads and trails.
+This plugin for OsmAnd includes a default profile for offroad surveys and a lightweight map style improving the appearance of unpaved roads and trails.
 
 Based on following offroad guidelines: https://github.com/cmoffroad/osm-guidelines
 
