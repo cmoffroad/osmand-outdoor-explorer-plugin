@@ -15,7 +15,7 @@
             "":"Offroad Survey"
          },
          "description":{
-            "":"<p>This plugin for OsmAnd includes a default profile for offroad surveys and a lightweight map style improving the appearance of unpaved roads and trails.</p><p>More info at <a href=""https://github.com/cmoffroad/osmand-offroad-survey-plugin"">https://github.com/cmoffroad/osmand-offroad-survey-plugin</a></p>"
+            "":"<p>This plugin for OsmAnd includes a lightweight map style that can be used for offroad ground surveys.</p><p>More info at <a href=""https://github.com/cmoffroad/osmand-offroad-survey-plugin"">https://github.com/cmoffroad/osmand-offroad-survey-plugin</a></p>"
          }
       },
       {
@@ -26,51 +26,15 @@
       {
          "type":"PROFILE",
          "pluginId":"offroad-survey.plugin",
-         "file":"profile_offroad-survey.json",
-         "appMode": {
-           "iconColor": "DEFAULT",
-           "iconName": "ic_action_enduro_motorcycle",
-           "locIcon": "DEFAULT",
-           "navIcon": "DEFAULT",
-           "order": 5,
-           "parent": "car",
-           "routeService": "OSMAND",
-           "routingProfile": "pedestrian",
-           "stringKey": "offroad-survey",
-           "userProfileName": "Offroad Survey"
-         },
          "prefs" : {
-            "renderer":"offroad-survey.render.xml"
-        }
+           "renderer":"offroad-survey.render.xml"
+         }
       },
       {
          "type":"FILE",
          "pluginId":"offroad-survey.plugin",
          "subtype" : "rendering_style",
          "file":"\/rendering\/offroad-survey.render.xml"
-      },
-      {
-         "type":"SUGGESTED_DOWNLOADS",
-         "pluginId":"offroad-survey.plugin",
-         "items": [
-            {
-                "scope-id" : "test-downloads",
-                "limit" : 1,
-                "search-type" : "latlon"
-            },
-            {
-               "scope-id" : "map",
-               "search-type" : "worldregion"
-            }, 
-            {
-               "scope-id" : "srtm_map",
-               "search-type" : "worldregion"
-            },
-            {
-               "scope-id" : "hillshade",
-               "search-type" : "worldregion"
-            }
-         ]
       }
    ]
 }
