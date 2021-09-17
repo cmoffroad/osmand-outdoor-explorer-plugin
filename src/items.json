@@ -38,10 +38,7 @@
            "routingProfile": "pedestrian",
            "stringKey": "motorcycle",
            "userProfileName": "Offroad Survey"
-         },
-         "prefs" : {
-            "renderer":"offroad-survey.render.xml"
-        }
+         }
       },
       {
          "type":"FILE",
