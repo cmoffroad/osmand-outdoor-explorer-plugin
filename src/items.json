@@ -1,4 +1,4 @@
-{
+   {
    "version":1,
    "items":[
       {
@@ -25,6 +25,7 @@
       },
       {
          "type": "PROFILE",
+         "pluginId":"offroad-survey.plugin",
          "file": "profile_motorcycle.json",
          "appMode": {
            "iconColor": "DEFAULT",
@@ -44,6 +45,29 @@
          "pluginId":"offroad-survey.plugin",
          "subtype" : "rendering_style",
          "file":"\/rendering\/offroad-survey.render.xml"
+      },      
+      {
+         "type":"SUGGESTED_DOWNLOADS",
+         "pluginId":"offroad-survey.plugin",
+         "items": [
+            {
+                "scope-id" : "test-downloads",
+                "limit" : 1,
+                "search-type" : "latlon"
+            },
+            {
+               "scope-id" : "map",
+               "search-type" : "worldregion"
+            }, 
+            {
+               "scope-id" : "srtm_map",
+               "search-type" : "worldregion"
+            },
+            {
+               "scope-id" : "hillshade",
+               "search-type" : "worldregion"
+            }
+         ]
       }
    ]
 }

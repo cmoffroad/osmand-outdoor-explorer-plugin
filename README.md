@@ -1,4 +1,4 @@
-# OsmAnd Offroad Survey Plugin (Android only)
+# OsmAnd Offroad Survey Plugin
 
 This plugin for OsmAnd includes a default profile for offroad surveys and a lightweight map style improving the appearance of unpaved roads and trails.
 
@@ -29,21 +29,37 @@ Customizable Details:
 - Install [OsmAnd](https://play.google.com/store/apps/details?id=net.osmand) application on your device
 - Open the application. Tap on Get started
 - Download Recommended Country dataset (if not yet installed)
-- Open Menu > Plugins > make sure Trip Recording is enabled
 
 ### Plugin First-time Installation (Android only)
 
 - Download [Plugin OSF file](https://github.com/cmoffroad/osmand-offroad-survey-plugin/raw/master/build/osmand-offroad-survey-plugin.osf) from your mobile browser.
 - Once download is complete, click on Open.
 - OsmAnd should automatically open and inform you the plugin has been successfully added.
-- Wait a few seconds for Suggested maps to show up
-- Download suggested datasets for your country (if any)
+- Wait a few seconds for Suggested maps to show up (standard, contour lines, hillshade)
+- Download suggested datasets for your country (if not yet installed)
 - Select OK
+- Tap profile icon on top left corner
+- Select offroad motorcycle icon
+- Map style can be configured further under "Details".
 
 > If a "Permission Denied" error occurs, 
 > - open your Android phone Settings application
 > - go to Apps > OsmAnd > Permissions
 > - turn on Storage and try reinstalling the plugin
+
+#### OsmAnd subscriptions
+
+Please note that in the free OsmAnd version:
+- elevation data (Countour lines and Terrain) is not shown
+- OSM country datasets are updated once a month
+
+If you are serious about doing offroad ground surveys, you can purchase a [one time or yearly subscription](https://docs.osmand.net/en/main@latest/osmand/purchases/android#free-and-paid-features) to enable:
+- elevation data
+- hourly OSM datasets update
+
+> I am not affiliated in any way with OsmAnd, and gain no revenues from this plugin. After much research and experimentation, I have not found better platforms to build my own maps.
+
+> The OsmAnd Live feature is extremely useful for preparing maps before a trip.  e.g. you could add in OpenStreetMap missing tracks via satellite imagery, or add fixme tag on paths that are missing data and may need to be resurveyed. Your OSM changes will appear in your OsmAnd application within an hour.
 
 ### Plugin Future Updates
 
@@ -51,28 +67,19 @@ Future plugin updates can be manually installed by following the exact same firs
 
 ## Documentation
 
-> Work in progress...
-
 |Type|Tag|Style|Condition|
 |---|---|---|---|
-|way|`fixme=*`||`showFixme=yes`|
-|way|`highway=service`||`showService=yes`|
-|way|`highway=residential`||`showResidential=yes`|
-|way|`highway=path`||`motorcycle=yes`|
-|way|`highway=path`||`motorcycle=no \|\| !motorcycle`|
-|way|`surface=asphalt`|||
-|way|`surface=concrete`|||
-|way|`surface=chipseal`|||
-|way|`surface=paved`|||
-|way|`surface={other}`||`!groundSurveyMode \|\| source=GPS`|
-|way|`surface={other}`||`groundSurveyMode && source!=GPS`|
-|way|`!surface`|||
-|node|`amenity=place_of_worship`|||
-|node|`barrier=gate`|||
-|node|`fixme=*`||`showFixme=yes`|
-|node|`ford=yes`|||
-|node|`natural=cave_entrance`|||
-|node|`noexit=yes`|||
-|node|`fixme=*`|||
-|node|`tourism=viewpoint`|||
-|node|`waterway=waterfall`||
+|way|`fixme=*`|![](https://www.gifpng.com/100x10/FFFFFF/?border-width=3&border-type=rectangle&border-color=a228FF&font-size=0)|`showFixme=yes`|
+|way|`highway=service`|![](https://www.gifpng.com/100x10/FFFFFF/?border-width=1&border-type=rectangle&border-color=FF0000&font-size=0)|`showService=yes`|
+|way|`highway=residential`|![](https://www.gifpng.com/100x10/FFFFFF/?border-width=1&border-type=rectangle&border-color=FF8C00&font-size=0)|`showResidential=yes`|
+|way|`highway=path`|______________|`motorcycle=yes`|
+|way|`highway=path`|_ _ _ _ _ _ _ _ _|`motorcycle!=yes`|
+|way|`highway=footway`|_ _ _ _ _ _ _ _ _||
+|way|`surface=asphalt`|![](https://www.gifpng.com/100x10/FFFFFF/?border-width=1&border-type=rectangle&border-color=000000&font-size=0)||
+|way|`surface=concrete`|![](https://www.gifpng.com/100x10/FFFFFF/?border-width=1&border-type=rectangle&border-color=000000&font-size=0)||
+|way|`surface=concrete:lanes`|![](https://www.gifpng.com/100x10/FFFFFF/?border-width=1&border-type=rectangle&border-color=000000&font-size=0)||
+|way|`surface=chipseal`|![](https://www.gifpng.com/100x10/FFFFFF/?border-width=1&border-type=rectangle&border-color=000000&font-size=0)||
+|way|`surface=paved`|![](https://www.gifpng.com/100x10/FFFFFF/?border-width=1&border-type=rectangle&border-color=000000&font-size=0)||
+|way|`surface={other}`|![](https://www.gifpng.com/100x10/000000/?border-width=1&border-type=rectangle&border-color=FFFFFF&font-size=0)|`source=GPS \|\| groundSurveyMode=false`|
+|way|`surface={other}`|![](https://www.gifpng.com/100x10/888888/?border-width=1&border-type=rectangle&border-color=FFFFFF&font-size=0)|`source!=GPS && groundSurveyMode=true`|
+|way|`!surface`|![](https://www.gifpng.com/100x10/888888/?border-width=1&border-type=rectangle&border-color=FFFFFF&font-size=0)||
