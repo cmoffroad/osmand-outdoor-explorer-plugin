@@ -8,11 +8,11 @@ Noticeable features compared to standard offroad/topo map styles:
 
 - roads colored based on OSM `surface` tag (paved/unpaved/unspecified)
 - tracks share the same line thickness as residential and service roads
-- path use straight line when `motorcycle=yes` is enabled
+- path use a straight line when `motorcycle=yes` is enabled
 
 Customizable Details:
 
-- **Ground survey mode**: unpaved roads/paths that were not added based on ground survey (`source=GPS`) will have their color faded to grey
+- **Ground survey mode**: unpaved roads/paths that were not added based on a ground survey (`source=GPS`) will have their color faded to grey
 - **Show fixme notes**: show `fixme` notes on roads/paths including text (e.g. `fixme=precision|continue|resurvey`)
 - **Highlight service roads**: Show red border around service roads (`highway=service`)
 - **Highlight residential roads**: Show orange border around residential roads (`highway=residential`)
