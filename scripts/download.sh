@@ -1,0 +1,1 @@
+curl -o tests/Map.osm https://overpass-api.de/api/map?bbox=98.5558,18.7001,99.3926,19.3517

@@ -39,7 +39,17 @@
   </renderingAttribute>
 
 
+
+
   <renderingAttribute name="roadColorSurface">
+    <apply tag="highway" value="path">
+      <case additional="motorcycle=yes" />
+      <case attrColorValue="#aaf800e0" />
+    </apply>
+    <apply groundSurveyMode="true">
+      <case additional="survey=ground" />
+      <case attrColorValue="#aaf800e0" />
+    </apply>    
     <switch>
       <case additional="surface=paved" />
       <case additional="surface=concrete" />
@@ -49,10 +59,11 @@
       <case additional="surface=chipseal" />
       <apply attrColorValue="#FFFFFF" />
     </switch>
-    <case additional="surface=" attrColorValue="#888888">
+    <case additional="surface=" attrColorValue="#000000" />
+    <!-- <case additional="surface=" attrColorValue="#888888">
       <apply_if groundSurveyMode="true" additional="survey=ground" attrColorValue="#000000" />
       <apply_if groundSurveyMode="false" attrColorValue="#000000" />
-    </case>
+    </case> -->
     <case attrColorValue="#888888" />
   </renderingAttribute>
 
@@ -905,8 +916,7 @@
             </switch>
             <!-- [highway=track] -->
             <switch>
-              <case tag="highway" value="track">
-              </case>
+              <case tag="highway" value="track" />
               <apply color="$roadColorSurface" color__1="$roadBorderSurface"
               color_0="$roadBorderSurface" shadowColor="$roadBorderSurface" shadowRadius="1:1" />
             </switch>
@@ -978,7 +988,7 @@
         <apply_if minzoom="15" strokeWidth_5="1:1" />
         <apply  color="$roadBorderSurface" color_5="$roadColorSurface" pathEffect_5="7_2" pathEffect="7_2" strokeWidth="0.5" shadowRadius="0"
           >
-          <apply_if additional="motorcycle=yes" pathEffect_5="" pathEffect=""  />
+<!--           <apply_if additional="motorcycle=yes" pathEffect_5="" pathEffect=""  /> -->
           <apply_if additional="surface=paved" strokeWidth="1" shadowRadius="1" />
         </apply>
       </switch>
@@ -989,11 +999,7 @@
         <apply_if maxzoom="13" strokeWidth_5="0.5:0.5" />
         <apply_if maxzoom="14" strokeWidth_5="0.7:0.7" />
         <apply_if minzoom="15" strokeWidth_5="1:1" />
-        <apply  color="$roadBorderSurface" color_5="$roadColorSurface" pathEffect_5="2_2" pathEffect="2_2" strokeWidth="0.5" shadowRadius="0"
-          >
-          <apply_if additional="motorcycle=yes" pathEffect_5="" pathEffect=""  />
-          <apply_if additional="surface=paved" strokeWidth="1" shadowRadius="1" />
-        </apply>
+        <apply  color="#FF0000" color_5="#FF0000" pathEffect_5="2_2" pathEffect="2_2" strokeWidth="0.5" shadowRadius="0" />
       </switch>
       <!-- [highway=cycleway|bridleway|busway|pedestrian|escape|raceway] -->
       <switch>
@@ -1137,7 +1143,7 @@
 
     <!-- LINE - FIXME -->
     <switch showFixme="true" minzoom="13">
-      <case tag="fixme_tag" value="yes" color="#aaf800e0"/>
+      <case tag="fixme_tag" value="yes" color="#aaf800e0" />
       <apply>
         <case maxzoom="14" strokeWidth="4:4"/>
         <case maxzoom="15" strokeWidth="6:6"/>
