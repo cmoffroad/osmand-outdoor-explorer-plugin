@@ -46,7 +46,7 @@
       <case additional="motorcycle=yes" />
       <case attrColorValue="#aaf800e0" />
     </apply>
-    <apply groundSurveyMode="true">
+    <apply groundSurveyMode="true" minzoom="13">
       <case additional="survey=ground" />
       <case attrColorValue="#aaf800e0" />
     </apply>    
@@ -1142,7 +1142,7 @@
     </switch>
 
     <!-- LINE - FIXME -->
-    <switch showFixme="true" minzoom="13">
+    <!-- <switch showFixme="true" minzoom="13">
       <case tag="fixme_tag" value="yes" color="#aaf800e0" />
       <apply>
         <case maxzoom="14" strokeWidth="4:4"/>
@@ -1152,7 +1152,7 @@
         <case maxzoom="18" strokeWidth="12:12"/>
         <case minzoom="19" strokeWidth="14:14"/>
       </apply>
-    </switch>
+    </switch> -->
 
     <!-- LINE - ADMIN LEVELS -->
     <switch minzoom="2" showAdminBoundaries="true">
