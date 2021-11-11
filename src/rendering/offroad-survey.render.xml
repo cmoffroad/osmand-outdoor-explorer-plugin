@@ -42,14 +42,16 @@
 
 
   <renderingAttribute name="roadColorSurface">
+    <case attrColorValue="#444444" maxzoom="12" />
+    <!-- <case tag="fixme_tag" value="yes" attrColorValue="#fa00ff" /> -->
     <apply tag="highway" value="path">
       <case additional="motorcycle=yes" />
-      <case attrColorValue="#aaf800e0" />
+      <case attrColorValue="#fa00ff" />
     </apply>
     <apply groundSurveyMode="true" minzoom="13">
       <case additional="survey=ground" />
-      <case attrColorValue="#aaf800e0" />
-    </apply>    
+      <case attrColorValue="#fa00ff" />
+    </apply>
     <switch>
       <case additional="surface=paved" />
       <case additional="surface=concrete" />
@@ -60,13 +62,8 @@
       <apply attrColorValue="#FFFFFF" />
     </switch>
     <case additional="surface=" attrColorValue="#000000" />
-    <!-- <case additional="surface=" attrColorValue="#888888">
-      <apply_if groundSurveyMode="true" additional="survey=ground" attrColorValue="#000000" />
-      <apply_if groundSurveyMode="false" attrColorValue="#000000" />
-    </case> -->
-    <case attrColorValue="#888888" />
+    <case attrColorValue="#fa00ff" minzoom="13" />
   </renderingAttribute>
-
   <renderingAttribute name="roadBorderSurface">
     <switch>
       <case additional="surface=paved" />
@@ -132,48 +129,20 @@
 
   <renderingAttribute name="woodColor">
     <case attrColorValue="#c4ecb4"/>
+
+<!--     <case attrColorValue="#c8e9c3"/> -->
   </renderingAttribute>
 
   <renderingAttribute name="contourLineColor">
-    <case contourColorScheme="white" attrColorValue="#44ffffAA"/>
-    <case contourColorScheme="yellow" attrColorValue="#44FFF29E"/>
-    <case contourColorScheme="green" attrColorValue="#4400ff00"/>
-    <case contourColorScheme="light_brown" attrColorValue="#119C5615">
-    </case>
-    <case contourColorScheme="brown" attrColorValue="#44bd6819">
-    </case>
-    <case contourColorScheme="dark_brown" attrColorValue="#22522D0B">
-    </case>
-    <case contourColorScheme="red" attrColorValue="#44ff0000"/>
-    <case attrColorValue="#44bd6819">
+    <case attrColorValue="#AAAAAACC">
     </case>
   </renderingAttribute>
   <renderingAttribute name="contourLineColor50m">
-    <case contourColorScheme="white" attrColorValue="#44ffffff"/>
-    <case contourColorScheme="yellow" attrColorValue="#44FFF29E"/>
-    <case contourColorScheme="green" attrColorValue="#4400ff00"/>
-    <case contourColorScheme="light_brown" attrColorValue="#339C5615">
-    </case>
-    <case contourColorScheme="brown" attrColorValue="#889C5615">
-    </case>
-    <case contourColorScheme="dark_brown" attrColorValue="#55522D0B">
-    </case>
-    <case contourColorScheme="red" attrColorValue="#44ff0000"/>
-    <case attrColorValue="#889C5615">
+    <case attrColorValue="#AAAAAACC">
     </case>
   </renderingAttribute>
   <renderingAttribute name="contourLineColor100m">
-    <case contourColorScheme="white" attrColorValue="#99ffffff"/>
-    <case contourColorScheme="yellow" attrColorValue="#44FFF29E"/>
-    <case contourColorScheme="green" attrColorValue="#4400ff00"/>
-    <case contourColorScheme="light_brown" attrColorValue="#559C5615">
-    </case>
-    <case contourColorScheme="brown" attrColorValue="#aa9C5615">
-    </case>
-    <case contourColorScheme="dark_brown" attrColorValue="#66522D0B">
-    </case>
-    <case contourColorScheme="red" attrColorValue="#44ff0000"/>
-    <case attrColorValue="#aa9C5615">
+    <case attrColorValue="#AAAAAACC">
     </case>
   </renderingAttribute>
 
@@ -205,6 +174,8 @@
   </renderingAttribute>
   
 
+  <renderingConstant name="boundaryNationalParkColor" value="#a0800080"/>
+  <renderingConstant name="boundaryNationalParkColor2" value="#5009dd09"/>
 
   <renderingAttribute name="waterTextHaloColor">
     <case attrColorValue="#FFFFFF"/>
@@ -940,34 +911,15 @@
           </apply>
         </switch>
       </switch>
-      <apply>
+      <!-- <apply>
         <switch minzoom="12" cap_3="BUTT">
-          <switch baseAppMode="car">
-            <switch>
-              <case additional="vehicle=private"/>
-              <case additional="vehicle=no"/>
-              <case additional="motor_vehicle=private"/>
-              <case additional="motor_vehicle=no"/>
-              <case additional="motorcar=private"/>
-              <case additional="motorcar=no"/>
-              <case additional="motorcycle=private"/>
-              <case additional="motorcycle=no"/>
-              <apply color_3="$accessPrivateColor"/>
-            </switch>
-            <switch>
-              <case additional="vehicle=yes"/>
-              <case additional="motor_vehicle=yes"/>
-              <case additional="motorcar=yes"/>
-              <case additional="motorcycle=yes"/>
-            </switch>
-          </switch>
           <switch>
             <case additional="access=private" color_3="$accessPrivateColor"/>
             <case additional="access=no" color_3="$accessPrivateColor"/>
             <case additional="access=customers" color_3="$accessPrivateColor"/>
           </switch>
         </switch>
-      </apply>
+      </apply> -->
       <apply_if minzoom="13" maxzoom="13" pathEffect_3="1_3"/>
       <apply_if minzoom="14" maxzoom="14" pathEffect_3="2_6"/>
       <apply_if minzoom="15" maxzoom="15" pathEffect_3="2_8"/>
@@ -978,14 +930,16 @@
     </switch>
 
     <!-- LINE - HIGHWAY HIGH ZOOM -->
-    <switch minzoom="12">
+    <switch minzoom="13">
       <switch>
         <!-- [highway=path] -->
         <case tag="highway" value="path" />
-        <apply_if maxzoom="12" strokeWidth_5="0.5:0.5" />
-        <apply_if maxzoom="13" strokeWidth_5="0.5:0.5" />
-        <apply_if maxzoom="14" strokeWidth_5="0.7:0.7" />
-        <apply_if minzoom="15" strokeWidth_5="1:1" />
+        <apply_if maxzoom="13" strokeWidth_5="0.5" />
+        <apply_if maxzoom="14" strokeWidth_5="0.75" />
+        <apply_if minzoom="15" strokeWidth_5="1" />
+        <apply_if minzoom="16" strokeWidth_5="1.5" />
+        <apply_if minzoom="16" strokeWidth_5="2" />
+        <apply_if minzoom="17" strokeWidth_5="3" />
         <apply  color="$roadBorderSurface" color_5="$roadColorSurface" pathEffect_5="7_2" pathEffect="7_2" strokeWidth="0.5" shadowRadius="0"
           >
 <!--           <apply_if additional="motorcycle=yes" pathEffect_5="" pathEffect=""  /> -->
@@ -995,11 +949,13 @@
       <switch>
         <!-- [highway=footway] -->
         <case tag="highway" value="footway" />
-        <apply_if maxzoom="12" strokeWidth_5="0.5:0.5" />
-        <apply_if maxzoom="13" strokeWidth_5="0.5:0.5" />
-        <apply_if maxzoom="14" strokeWidth_5="0.7:0.7" />
-        <apply_if minzoom="15" strokeWidth_5="1:1" />
-        <apply  color="#FF0000" color_5="#FF0000" pathEffect_5="2_2" pathEffect="2_2" strokeWidth="0.5" shadowRadius="0" />
+        <apply_if maxzoom="13" strokeWidth_5="0.5" /> 
+        <apply_if maxzoom="14" strokeWidth_5="0.75" />
+        <apply_if minzoom="15" strokeWidth_5="1" />
+        <apply_if minzoom="16" strokeWidth_5="1.5" />
+        <apply_if minzoom="16" strokeWidth_5="2" />
+        <apply_if minzoom="17" strokeWidth_5="3" />
+        <apply  color="$roadBorderSurface" color_5="$roadColorSurface" pathEffect_5="2_2" pathEffect="2_2" strokeWidth="0.5" shadowRadius="0" />
       </switch>
       <!-- [highway=cycleway|bridleway|busway|pedestrian|escape|raceway] -->
       <switch>
