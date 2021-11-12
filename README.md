@@ -68,17 +68,15 @@ Future plugin updates can be manually installed by following the exact same firs
 
 ## Documentation
 
-|Type|Tag|Style|Condition|
-|---|---|---|---|
-|way|`highway=service`|![](https://www.gifpng.com/100x6/FFFFFF/?border-width=1&border-type=rectangle&border-color=FF0000&font-size=0)|`showService=yes`|
-|way|`highway=path`|![](https://gifpng.com/100x20/FFFFFF/000000?font-size=35&text=-%20-%20-%20-%20-)|`motorcycle=yes`|
-|way|`highway=path`|![](https://gifpng.com/100x20/FFFFFF/F396EC?font-size=35&text=-%20-%20-%20-%20-)|`motorcycle!=yes`|
-|way|`highway=footway`|![](https://gifpng.com/100x15/F6F8FA/FF0000?text=-%20-%20-%20-%20-%20-%20-%20-%20-)||
-|way|`highway=*`|![](https://www.gifpng.com/100x6/F396EC/?border-width=1&border-type=rectangle&border-color=FFFFFF&font-size=0)|`source!~GPS && groundSurveyMode=true`|
-|way|`surface=asphalt`|![](https://www.gifpng.com/100x6/FFFFFF/?border-width=1&border-type=rectangle&border-color=000000&font-size=0)||
-|way|`surface=concrete`|![](https://www.gifpng.com/100x6/FFFFFF/?border-width=1&border-type=rectangle&border-color=000000&font-size=0)||
-|way|`surface=concrete:lanes`|![](https://www.gifpng.com/100x6/FFFFFF/?border-width=1&border-type=rectangle&border-color=000000&font-size=0)||
-|way|`surface=chipseal`|![](https://www.gifpng.com/100x6/FFFFFF/?border-width=1&border-type=rectangle&border-color=000000&font-size=0)||
-|way|`surface=paved`|![](https://www.gifpng.com/100x6/FFFFFF/?border-width=1&border-type=rectangle&border-color=000000&font-size=0)||
-|way|`surface={other}`|![](https://www.gifpng.com/100x6/000000/?border-width=1&border-type=rectangle&border-color=FFFFFF&font-size=0)||
-|way|`!surface`|![](https://www.gifpng.com/100x6/888888/?border-width=1&border-type=rectangle&border-color=FFFFFF&font-size=0)||
+|Type|Tag|Style|
+|---|---|---|
+|way|`highway=track + surface=unpaved + source=GPS`|![](https://www.gifpng.com/100x3/000000/?border-width=0&border-type=rectangle&border-color=FFFFFF&font-size=0)|
+|way|`highway=track`|![](https://www.gifpng.com/100x3/fa00ff/?border-width=0&border-type=rectangle&border-color=fa00ff&font-size=0)|
+|way|`highway=path + motorcycle=yes + surface=unpaved + source=GPS`|![](https://gifpng.com/100x20/FFFFFF/000000?font-size=35&text=-%20-%20-%20-%20-)|
+|way|`highway=path`|![](https://gifpng.com/100x20/F6F8FA/fa00ff?font-size=35&text=-%20-%20-%20-%20-)|
+|way|`highway=footway + surface=unpaved + source=GPS`|![](https://gifpng.com/100x15/FFFFFF/000000?text=-%20-%20-%20-%20-%20-%20-%20-%20-)|
+|way|`highway=footway`|![](https://gifpng.com/100x15/F6F8FA/fa00ff?text=-%20-%20-%20-%20-%20-%20-%20-%20-)|
+|way|`highway={other} + surface=asphalt\|concrete\|concrete:lanes\|chipseal\|paved`|![](https://www.gifpng.com/100x6/FFFFFF/?border-width=1&border-type=rectangle&border-color=000000&font-size=0)|
+|way|`highway={other} + surface={other}`|![](https://www.gifpng.com/100x6/000000/?border-width=1&border-type=rectangle&border-color=FFFFFF&font-size=0)|
+|way|`highway={other} + !surface`|![](https://www.gifpng.com/100x6/888888/?border-width=1&border-type=rectangle&border-color=FFFFFF&font-size=0)|
+|way|`highway=service`|![](https://www.gifpng.com/100x6/FFFFFF/?border-width=1&border-type=rectangle&border-color=FF0000&font-size=0)|

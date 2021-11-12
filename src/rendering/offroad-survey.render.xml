@@ -41,7 +41,6 @@
 
   <renderingAttribute name="roadColorSurface">
     <case attrColorValue="#444444" maxzoom="12" />
-    <!-- <case tag="fixme_tag" value="yes" attrColorValue="#fa00ff" /> -->
     <apply tag="highway" value="track" minzoom="13">
       <case additional="survey=ground" />
       <case attrColorValue="#fa00ff" />
@@ -85,7 +84,6 @@
   </renderingAttribute>
 
   <renderingAttribute name="roadBorderSurface">
-    <case additional="fixme=" attrColorValue="#fa00ff" />
     <switch>
       <case additional="surface=paved" />
       <case additional="surface=concrete" />
@@ -1098,7 +1096,7 @@
         </switch>
         <switch minzoom="11">
           <case additional="contourtype=100m" color="$contourLineColor100m"/>
-          <!-- <case additional="contourtype=200f" color="$contourLineColor100m"/> -->
+          <case additional="contourtype=200f" color="$contourLineColor100m"/>
           <apply>
             <case contourWidth="thin" strokeWidth="1"/>
             <case contourWidth="medium" strokeWidth="1.3"/>
@@ -1122,12 +1120,12 @@
     <switch showFixme="true" minzoom="12">
       <case tag="fixme_tag" value="yes" color="#aaf800e0" />
       <apply>
-        <case maxzoom="14" strokeWidth="4:4"/>
-        <case maxzoom="15" strokeWidth="6:6"/>
-        <case maxzoom="16" strokeWidth="8:8"/>
-        <case maxzoom="17" strokeWidth="10:10"/>
-        <case maxzoom="18" strokeWidth="12:12"/>
-        <case minzoom="19" strokeWidth="14:14"/>
+        <case maxzoom="14" strokeWidth="2:2"/>
+        <case maxzoom="15" strokeWidth="3:3"/>
+        <case maxzoom="16" strokeWidth="4:4"/>
+        <case maxzoom="17" strokeWidth="5:5"/>
+        <case maxzoom="18" strokeWidth="6:6"/>
+        <case minzoom="19" strokeWidth="7:7"/>
       </apply>
     </switch>
 
