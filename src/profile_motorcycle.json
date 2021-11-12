@@ -214,9 +214,8 @@
   "nrenderer_whiteWaterSports": "false",
   "nrenderer_roadStyle": "",
   "nrenderer_pisteRoutes": "false",
-  "nrenderer_groundSurveyMode": "true",
+  "nrenderer_groundSurveyMode": "false",
   "nrenderer_showFixme": "true",
   "nrenderer_showService": "true",
-  "nrenderer_showResidential": "false",
   "nrenderer_showAdminBoundaries": "true"
 }
