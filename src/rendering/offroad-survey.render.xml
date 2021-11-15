@@ -20,12 +20,10 @@
 
   <!-- DETAILS -->
   <renderingProperty attr="groundSurveyMode" name="Ground Survey mode" description="Ground Survey mode" type="boolean" possibleValues="" category="details"/>
-  <renderingProperty attr="showFixme" name="Show fixme notes" description="Show fixme notes"
-    type="boolean" possibleValues="" category="details"/>
-  <renderingProperty attr="showService" name="Highlight service roads" description="Highlight service roads" type="boolean" possibleValues="" category="details"/>
+  <!-- <renderingProperty attr="showService" name="Highlight service roads" description="Highlight service roads" type="boolean" possibleValues="" category="details"/> -->
 <!--   <renderingProperty attr="showResidential" name="Highlight residential roads" description="Highlight residential roads" type="boolean" possibleValues="" category="details"/>
- -->  <renderingProperty attr="showAdminBoundaries" name="Show admin boundaries" description="Show admin boundaries" type="boolean" possibleValues="" category="details"/>
-  
+ --><!--   <renderingProperty attr="showAdminBoundaries" name="Show admin boundaries" description="Show admin boundaries" type="boolean" possibleValues="" category="details"/> -->
+
   <!-- ATTRIBUTES -->
   <renderingAttribute name="defaultColor">
     <case attrColorValue="#fffbf4" />
@@ -38,36 +36,42 @@
     <case attrIntValue="0"/>
   </renderingAttribute>
 
-
   <renderingAttribute name="roadColorSurface">
     <case attrColorValue="#444444" maxzoom="12" />
     <apply tag="highway" value="track" minzoom="13">
       <case additional="survey=ground" />
-      <case attrColorValue="#fa00ff" />
+      <case groundSurveyMode="true" attrColorValue="#fa00ff" />
+      <case groundSurveyMode="false" attrColorValue="#00000000" />
     </apply>
     <apply tag="highway" value="track" minzoom="13">
       <case additional="surface=" />
-      <case attrColorValue="#fa00ff" />
+      <case groundSurveyMode="true" attrColorValue="#fa00ff" />
+      <case groundSurveyMode="false" attrColorValue="#00000000" />
     </apply>
     <apply tag="highway" value="path" minzoom="13">
       <case additional="motorcycle=yes" />
-      <case attrColorValue="#fa00ff" />
+      <case groundSurveyMode="true" attrColorValue="#fa00ff" />
+      <case groundSurveyMode="false" attrColorValue="#00000000" />
     </apply>
     <apply tag="highway" value="path" minzoom="13">
       <case additional="survey=ground" />
-      <case attrColorValue="#fa00ff" />
+      <case groundSurveyMode="true" attrColorValue="#fa00ff" />
+      <case groundSurveyMode="false" attrColorValue="#00000000" />
     </apply>
     <apply tag="highway" value="path" minzoom="13">
       <case additional="surface=" />
-      <case attrColorValue="#fa00ff" />
+      <case groundSurveyMode="true" attrColorValue="#fa00ff" />
+      <case groundSurveyMode="false" attrColorValue="#00000000" />
     </apply>
     <apply tag="highway" value="footway" minzoom="13">
       <case additional="survey=ground" />
-      <case attrColorValue="#fa00ff" />
+      <case groundSurveyMode="true" attrColorValue="#fa00ff" />
+      <case groundSurveyMode="false" attrColorValue="#00000000" />
     </apply>
     <apply tag="highway" value="footway" minzoom="13">
       <case additional="surface=" />
-      <case attrColorValue="#fa00ff" />
+      <case groundSurveyMode="true" attrColorValue="#fa00ff" />
+      <case groundSurveyMode="false" attrColorValue="#00000000" />
     </apply>
     <switch>
       <case additional="surface=paved" />
@@ -79,7 +83,7 @@
       <apply attrColorValue="#FFFFFF" />
     </switch>
     <case additional="surface=" attrColorValue="#000000" minzoom="13" />
-    <case groundSurveyMode="true" attrColorValue="#fa00ff" minzoom="13" />
+    <!-- <case groundSurveyMode="true" attrColorValue="#fa00ff" minzoom="13" /> -->
     <case attrColorValue="#AAAAAA" minzoom="13" />
   </renderingAttribute>
 
@@ -608,7 +612,7 @@
     </switch>
 
     <!-- TEXT - FIXME -->
-    <switch showFixme="true" minzoom="15" intersectionSizeFactor="0" intersectionMargin="0">
+    <switch groundSurveyMode="true" minzoom="15" intersectionSizeFactor="0" intersectionMargin="0">
       <switch tag="fixme_tag" value="yes" nameTag="fixme" textColor="#ffffff" textHaloColor="#ccf800e0" textWrapWidth="20" textOrder="1">
         <case maxzoom="15" textSize="10" textDy="-40"/>
         <case minzoom="16" textSize="11" textDy="-50"/>
@@ -657,7 +661,7 @@
     <case minzoom="12" tag="natural" value="cave_entrance" icon="topo_cave" shield="topo_cave_shield" iconOrder="85"/>
 
     <!-- POINT - FIXME -->
-    <switch minzoom="12" showFixme="true" tag="fixme_tag" value="yes" iconVisibleSize="0" intersectionSizeFactor="0" iconOrder="128">
+    <switch minzoom="12" groundSurveyMode="true" tag="fixme_tag" value="yes" iconVisibleSize="0" intersectionSizeFactor="0" iconOrder="128">
       <case maxzoom="14" icon="fixme_tag_lowzoom2_yes" />
       <case minzoom="15" icon="fixme_tag_lowzoom_yes" />
     </switch>
@@ -914,8 +918,8 @@
             <switch minzoom="13">
               <case tag="highway" value="service" color_0="#444444"/>
               <apply color="$roadColorSurface" color__1="$roadBorderSurface"/>
-              <apply_if showService="false" shadowColor="$roadBorderSurface" shadowRadius="1:1" />
-              <apply_if showService="true" shadowColor="#FF0000" shadowRadius="1:1"/>
+              <!-- <apply_if showService="false" shadowColor="$roadBorderSurface" shadowRadius="1:1" /> -->
+              <apply_if shadowColor="#FF0000" shadowRadius="1:1"/>
             </switch>
           </switch>
           <apply>
@@ -959,10 +963,10 @@
         <apply_if minzoom="16" strokeWidth_5="1.5" />
         <apply_if minzoom="16" strokeWidth_5="2" />
         <apply_if minzoom="17" strokeWidth_5="3" />
-        <apply  color="$roadBorderSurface" color_5="$roadColorSurface" pathEffect_5="7_2" pathEffect="7_2" strokeWidth="0.5" shadowRadius="0"
+        <apply  color="$roadColorSurface" color_5="$roadColorSurface" pathEffect_5="7_2" pathEffect="7_2" strokeWidth="0.5" shadowRadius="0"
           >
 <!--           <apply_if additional="motorcycle=yes" pathEffect_5="" pathEffect=""  /> -->
-          <apply_if additional="surface=paved" strokeWidth="1" shadowRadius="1" />
+          <!-- <apply_if additional="surface=paved" strokeWidth="1" shadowRadius="1" /> -->
         </apply>
       </switch>
       <switch>
@@ -974,7 +978,7 @@
         <apply_if minzoom="16" strokeWidth_5="1.5" />
         <apply_if minzoom="16" strokeWidth_5="2" />
         <apply_if minzoom="17" strokeWidth_5="3" />
-        <apply  color="$roadBorderSurface" color_5="$roadColorSurface" pathEffect_5="2_2" pathEffect="2_2" strokeWidth="0.5" shadowRadius="0" />
+        <apply  color="$roadColorSurface" color_5="$roadColorSurface" pathEffect_5="2_2" pathEffect="2_2" strokeWidth="0.5" shadowRadius="0" />
       </switch>
       <!-- [highway=cycleway|bridleway|busway|pedestrian|escape|raceway] -->
       <switch>
@@ -1117,7 +1121,7 @@
     </switch>
 
     <!-- LINE - FIXME -->
-    <switch showFixme="true" minzoom="12">
+    <switch groundSurveyMode="true" minzoom="12">
       <case tag="fixme_tag" value="yes" color="#aaf800e0" />
       <apply>
         <case maxzoom="14" strokeWidth="2:2"/>
@@ -1130,7 +1134,7 @@
     </switch>
 
     <!-- LINE - ADMIN LEVELS -->
-    <switch minzoom="2" showAdminBoundaries="true">
+    <switch minzoom="2">
       <case tag="admin_level" value="0"/>
       <case tag="admin_level" value="1"/>
       <case tag="admin_level" value="2"/>
@@ -1144,7 +1148,7 @@
         <case minzoom="9" strokeWidth="6:6" strokeWidth_0="1:1"/>
       </apply>
     </switch>
-    <switch minzoom="2" showAdminBoundaries="true">
+    <switch minzoom="2">
       <case tag="admin_level" value="3"/>
       <case tag="admin_level" value="4"/>
       <apply color="$boundaryColorOuter" pathEffect="10_10">
