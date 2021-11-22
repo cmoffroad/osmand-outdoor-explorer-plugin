@@ -38,6 +38,11 @@
 
   <renderingAttribute name="roadColorSurface">
     <case attrColorValue="#444444" maxzoom="12" />
+    <apply tag="highway" value="unclassified" minzoom="13">
+      <case additional="survey=ground" />
+      <case groundSurveyMode="true" attrColorValue="#fa00ff" />
+      <case groundSurveyMode="false" attrColorValue="#00000000" />
+    </apply>
     <apply tag="highway" value="track" minzoom="13">
       <case additional="survey=ground" />
       <case groundSurveyMode="true" attrColorValue="#fa00ff" />
