@@ -29,7 +29,7 @@ Based on official [documentation](https://docs.osmand.net/en/main@latest/develop
       cd ../targets
 
       ### export JAVA
-      export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-16.0.1.jdk/Contents/Home/include
+      export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-16.0.1.jdk/Contents/Home
 
       ### compile
       sh intel-darwin.sh release
