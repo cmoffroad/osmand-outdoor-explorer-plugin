@@ -28,19 +28,19 @@ Based on official [documentation](https://docs.osmand.net/en/main@latest/develop
       sh configure.sh
       cd ../targets
 
+      ### export JAVA
+      export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-16.0.1.jdk/Contents/Home/include
+
       ### compile
       sh intel-darwin.sh release
-
-      # binaries will be compiled under ./intel-darwin-intel-darwin-clang-release.baked
-      # check if any compilation errors (red)
-      # I got stuck here because of dependencies error with third-party skia library
+      cd ./intel-darwin-intel-darwin-clang-release.baked
+      make -j4
 
 ### OsmAnd-resources
       
       ### download
       cd ~/Documents/WORKSPACE/OsmAnd
       git clone https://github.com/osmandapp/OsmAnd-resources.git
-
 
 ### OsmAndMapCreator
     
@@ -55,8 +55,8 @@ Based on official [documentation](https://docs.osmand.net/en/main@latest/develop
       sh OsmAndMapCreator.sh
 
 - Select in menu Window > Preferences
-  - For `Native lib file`, set `~/Documents/WORKSPACE/OsmAnd/OsmAnd-core-legacy/targets/intel-darwin-intel-darwin-clang-release.baked/libosmand.dylib`
-  - For `Rendering style file (path)`, set the rendering file of your choice e.g. `~/Documents/WORKSPACE/OsmAnd/OsmAnd-resources/rendering_styles/topo.render.xml`
+  - For `Directory with binary files`, set `/Documents/WORKSPACE/OsmAnd/OsmAnd-core-legacy/binaries/darwin/intel/Release/`
+  - For `Rendering style file`, set the rendering file of your choice e.g. `~/Documents/WORKSPACE/OsmAnd/OsmAnd-resources/rendering_styles/topo.render.xml`
   - Close Preferences window 
 - Top right corner of click on `Online Rendering` button
   - Confirm details and click `OK`
