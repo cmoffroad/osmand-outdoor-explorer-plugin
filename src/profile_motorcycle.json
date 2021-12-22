@@ -173,7 +173,7 @@
   "av_recorder_split": "false",
   "av_rs_clip_length": "5",
   "av_rs_storage_size": "5",
-  "nrenderer_contourLines": "11",
+  "nrenderer_contourLines": "13",
   "nrenderer_currentTrackColor": "translucent_orange",
   "nrenderer_currentTrackWidth": "bold",
   "nrenderer_transportStops": "false",
@@ -187,7 +187,7 @@
   "nrenderer_showAccess": "false",
   "nrenderer_showLez": "false",
   "nrenderer_contourColorScheme": "white",
-  "nrenderer_contourWidth": "thick",
+  "nrenderer_contourWidth": "thin",
   "nrenderer_contourDensity": "medium_w",
   "nrenderer_coloredBuildings": "false",
   "nrenderer_streetLighting": "false",
@@ -214,9 +214,5 @@
   "nrenderer_whiteWaterSports": "false",
   "nrenderer_roadStyle": "",
   "nrenderer_pisteRoutes": "false",
-  "nrenderer_groundSurveyMode": "true",
-  "nrenderer_showFixme": "true",
-  "nrenderer_showService": "true",
-  "nrenderer_showResidential": "false",
-  "nrenderer_showAdminBoundaries": "true"
+  "nrenderer_groundSurveyMode": "true"
 }

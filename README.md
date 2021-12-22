@@ -1,5 +1,7 @@
 # OsmAnd Offroad Survey Plugin
 
+[Quick Download Link.](https://github.com/cmoffroad/osmand-offroad-survey-plugin/raw/master/build/osmand-offroad-survey-plugin.osf)
+
 This plugin for OsmAnd includes a default profile for offroad surveys and a lightweight map style improving the appearance of unpaved roads and trails.
 
 Based on following offroad guidelines: https://github.com/cmoffroad/osm-guidelines
@@ -7,15 +9,9 @@ Based on following offroad guidelines: https://github.com/cmoffroad/osm-guidelin
 Noticeable features compared to standard offroad/topo map styles:
 
 - roads colored based on OSM `surface` tag (paved/unpaved/unspecified)
-- tracks share the same line thickness as residential and service roads
-- path use a straight line when `motorcycle=yes` is enabled
-
-Customizable Details:
-
-- **Ground survey mode**: unpaved roads/paths that were not added based on a ground survey (`source=GPS`) will have their color faded to grey
-- **Show fixme notes**: show `fixme` notes on roads/paths including text (e.g. `fixme=precision|continue|resurvey`)
-- **Highlight service roads**: Show red border around service roads (`highway=service`)
-- **Highlight residential roads**: Show orange border around residential roads (`highway=residential`)
+- tracks have the same line thickness as residential and service roads
+- dead-end (`noexit=yes`) shown as black dot, any barriers (`barrier=*`) as a red dot, fixme as pink dot
+- **Ground survey mode**: unpaved roads that were not added based on a ground survey (`source=GPS`), as well as paths tagged without `motorcycle=yes` will have their color set to pink
 
 <p float="left">
   <img src="https://raw.githubusercontent.com/cmoffroad/osmand-offroad-survey-plugin/master/screenshots/sample1.jpeg" width="250" />
@@ -67,19 +63,15 @@ Future plugin updates can be manually installed by following the exact same firs
 
 ## Documentation
 
-|Type|Tag|Style|Condition|
-|---|---|---|---|
-|way|`fixme=*`|![](https://www.gifpng.com/100x10/FFFFFF/?border-width=3&border-type=rectangle&border-color=a228FF&font-size=0)|`showFixme=yes`|
-|way|`highway=service`|![](https://www.gifpng.com/100x10/FFFFFF/?border-width=1&border-type=rectangle&border-color=FF0000&font-size=0)|`showService=yes`|
-|way|`highway=residential`|![](https://www.gifpng.com/100x10/FFFFFF/?border-width=1&border-type=rectangle&border-color=FF8C00&font-size=0)|`showResidential=yes`|
-|way|`highway=path`|______________|`motorcycle=yes`|
-|way|`highway=path`|_ _ _ _ _ _ _ _ _|`motorcycle!=yes`|
-|way|`highway=footway`|_ _ _ _ _ _ _ _ _||
-|way|`surface=asphalt`|![](https://www.gifpng.com/100x10/FFFFFF/?border-width=1&border-type=rectangle&border-color=000000&font-size=0)||
-|way|`surface=concrete`|![](https://www.gifpng.com/100x10/FFFFFF/?border-width=1&border-type=rectangle&border-color=000000&font-size=0)||
-|way|`surface=concrete:lanes`|![](https://www.gifpng.com/100x10/FFFFFF/?border-width=1&border-type=rectangle&border-color=000000&font-size=0)||
-|way|`surface=chipseal`|![](https://www.gifpng.com/100x10/FFFFFF/?border-width=1&border-type=rectangle&border-color=000000&font-size=0)||
-|way|`surface=paved`|![](https://www.gifpng.com/100x10/FFFFFF/?border-width=1&border-type=rectangle&border-color=000000&font-size=0)||
-|way|`surface={other}`|![](https://www.gifpng.com/100x10/000000/?border-width=1&border-type=rectangle&border-color=FFFFFF&font-size=0)|`source=GPS \|\| groundSurveyMode=false`|
-|way|`surface={other}`|![](https://www.gifpng.com/100x10/888888/?border-width=1&border-type=rectangle&border-color=FFFFFF&font-size=0)|`source!=GPS && groundSurveyMode=true`|
-|way|`!surface`|![](https://www.gifpng.com/100x10/888888/?border-width=1&border-type=rectangle&border-color=FFFFFF&font-size=0)||
+|Type|Tag|Style|
+|---|---|---|
+|way|`highway=track + surface=unpaved + source=GPS`|![](https://www.gifpng.com/100x3/000000/?border-width=0&border-type=rectangle&border-color=FFFFFF&font-size=0)|
+|way|`highway=track`|![](https://www.gifpng.com/100x3/fa00ff/?border-width=0&border-type=rectangle&border-color=fa00ff&font-size=0)|
+|way|`highway=path + motorcycle=yes + surface=unpaved + source=GPS`|![](https://gifpng.com/100x20/FFFFFF/000000?font-size=35&text=-%20-%20-%20-%20-)|
+|way|`highway=path`|![](https://gifpng.com/100x20/F6F8FA/fa00ff?font-size=35&text=-%20-%20-%20-%20-)|
+|way|`highway=footway + surface=unpaved + source=GPS`|![](https://gifpng.com/100x15/FFFFFF/000000?text=-%20-%20-%20-%20-%20-%20-%20-%20-)|
+|way|`highway=footway`|![](https://gifpng.com/100x15/F6F8FA/fa00ff?text=-%20-%20-%20-%20-%20-%20-%20-%20-)|
+|way|`highway={other} + surface=asphalt\|concrete\|concrete:lanes\|chipseal\|paved`|![](https://www.gifpng.com/100x6/FFFFFF/?border-width=1&border-type=rectangle&border-color=000000&font-size=0)|
+|way|`highway={other} + surface={other}`|![](https://www.gifpng.com/100x6/000000/?border-width=1&border-type=rectangle&border-color=FFFFFF&font-size=0)|
+|way|`highway={other} + !surface`|![](https://www.gifpng.com/100x6/888888/?border-width=1&border-type=rectangle&border-color=FFFFFF&font-size=0)|
+|way|`highway=service`|![](https://www.gifpng.com/100x6/FFFFFF/?border-width=1&border-type=rectangle&border-color=FF0000&font-size=0)|
