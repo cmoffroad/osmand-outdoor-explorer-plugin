@@ -75,3 +75,12 @@ Future plugin updates can be manually installed by following the exact same firs
 |way|`highway={other} + surface={other}`|![](https://www.gifpng.com/100x6/000000/?border-width=1&border-type=rectangle&border-color=FFFFFF&font-size=0)|
 |way|`highway={other} + !surface`|![](https://www.gifpng.com/100x6/888888/?border-width=1&border-type=rectangle&border-color=FFFFFF&font-size=0)|
 |way|`highway=service`|![](https://www.gifpng.com/100x6/FFFFFF/?border-width=1&border-type=rectangle&border-color=FF0000&font-size=0)|
+
+
+## Contact
+
+Do you have any questions, or want to report a bug or request a change or new feature? 
+
+Please contact me via:
+- https://www.facebook.com/osmexplorer
+- https://www.openstreetmap.org/message/new/cmoffroad
