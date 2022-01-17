@@ -19,7 +19,6 @@
     type="string" possibleValues="thin,medium,bold" defaultValueDescription="default"/>
 
   <!-- DETAILS -->
-  <renderingProperty attr="groundSurveyMode" name="Ground Survey mode" description="Ground Survey mode" type="boolean" possibleValues="" category="details"/>
   <!-- <renderingProperty attr="showService" name="Highlight service roads" description="Highlight service roads" type="boolean" possibleValues="" category="details"/> -->
 <!--   <renderingProperty attr="showResidential" name="Highlight residential roads" description="Highlight residential roads" type="boolean" possibleValues="" category="details"/>
  --><!--   <renderingProperty attr="showAdminBoundaries" name="Show admin boundaries" description="Show admin boundaries" type="boolean" possibleValues="" category="details"/> -->
@@ -40,46 +39,38 @@
     <case attrColorValue="#444444" maxzoom="12" />
     <apply tag="highway" value="track" minzoom="13">
       <case additional="survey=ground" />
-      <case groundSurveyMode="true" attrColorValue="#fa00ff" />
-      <case groundSurveyMode="false" attrColorValue="#00000000" />
+      <case attrColorValue="#fa00ff" />
     </apply>
     <apply tag="highway" value="track" minzoom="13">
       <case additional="surface=" />
-      <case groundSurveyMode="true" attrColorValue="#fa00ff" />
-      <case groundSurveyMode="false" attrColorValue="#00000000" />
+      <case attrColorValue="#fa00ff" />
     </apply>
     <apply tag="highway" value="path" minzoom="13">
       <case additional="motorcycle=yes" />
-      <case groundSurveyMode="true" attrColorValue="#fa00ff" />
-      <case groundSurveyMode="false" attrColorValue="#00000000" />
+      <case attrColorValue="#fa00ff" />
     </apply>
     <apply tag="highway" value="path" minzoom="13">
       <case additional="survey=ground" />
-      <case groundSurveyMode="true" attrColorValue="#fa00ff" />
-      <case groundSurveyMode="false" attrColorValue="#00000000" />
+      <case attrColorValue="#fa00ff" />
     </apply>
     <apply tag="highway" value="path" minzoom="13">
       <case additional="surface=" />
-      <case groundSurveyMode="true" attrColorValue="#fa00ff" />
-      <case groundSurveyMode="false" attrColorValue="#00000000" />
+      <case attrColorValue="#fa00ff" />
     </apply>
     <apply tag="highway" value="footway" minzoom="13">
       <case additional="survey=ground" />
-      <case groundSurveyMode="true" attrColorValue="#fa00ff" />
-      <case groundSurveyMode="false" attrColorValue="#00000000" />
+      <case attrColorValue="#fa00ff" />
     </apply>
     <apply tag="highway" value="footway" minzoom="13">
       <case additional="surface=" />
-      <case groundSurveyMode="true" attrColorValue="#fa00ff" />
-      <case groundSurveyMode="false" attrColorValue="#00000000" />
+      <case attrColorValue="#fa00ff" />
     </apply>
     <apply tag="highway" value="unclassified" minzoom="13">
       <case additional="survey=ground" />
-      <case groundSurveyMode="true" attrColorValue="#fa00ff" />
+      <case attrColorValue="#fa00ff" />
     </apply>
     <apply tag="highway" value="service" minzoom="13">
       <case additional="survey=ground" />
-      <case groundSurveyMode="false" attrColorValue="#00000000" />
     </apply>
     <switch>
       <case additional="surface=paved" />
@@ -91,7 +82,6 @@
       <apply attrColorValue="#FFFFFF" />
     </switch>
     <case additional="surface=" attrColorValue="#000000" minzoom="13" />
-    <!-- <case groundSurveyMode="true" attrColorValue="#fa00ff" minzoom="13" /> -->
     <case attrColorValue="#AAAAAA" minzoom="13" />
   </renderingAttribute>
 
@@ -468,112 +458,21 @@
       <case minzoom="5" tag="place" value="city" nameTag="" intersectionMargin="25" textOrder="32">
         <case minzoom="6" maxzoom="7" textSize="17"/>
         <case minzoom="8" textSize="20"/>
-        <apply>
-          <switch>
-            <case additional="population_rounded=1500000000" textOrder="6"/>
-            <case additional="population_rounded=400000000" textOrder="7"/>
-            <case additional="population_rounded=200000000" textOrder="8"/>
-            <case additional="population_rounded=100000000" textOrder="9"/>
-            <case additional="population_rounded=50000000" textOrder="10"/>
-            <case additional="population_rounded=25000000" textOrder="11"/>
-            <case additional="population_rounded=20000000" textOrder="12"/>
-            <case additional="population_rounded=15000000" textOrder="13"/>
-            <case additional="population_rounded=12000000" textOrder="14"/>
-            <case additional="population_rounded=9000000" textOrder="15"/>
-            <case additional="population_rounded=7000000" textOrder="16"/>
-            <case additional="population_rounded=5000000" textOrder="17"/>
-            <case additional="population_rounded=3000000" textOrder="18"/>
-            <apply_if maxzoom="5" textSize="13"/>
-          </switch>
-          <case additional="population_rounded=2000000" textOrder="19"/>
-          <case additional="population_rounded=1000000" textOrder="20"/>
-          <case additional="population_rounded=700000" textOrder="21"/>
-          <case additional="population_rounded=400000" textOrder="22"/>
-          <case additional="population_rounded=200000" textOrder="32"/>
-          <case additional="population_rounded=100000" textOrder="33"/>
-          <case additional="population_rounded=70000" textOrder="34"/>
-          <case additional="population_rounded=40000" textOrder="35"/>
-          <case additional="population_rounded=20000" textOrder="36"/>
-          <case additional="population_rounded=10000" textOrder="37"/>
-          <case additional="population_rounded=5000" textOrder="38"/>
-          <case additional="population_rounded=2500" textOrder="39"/>
-          <case additional="population_rounded=1000" textOrder="40"/>
-          <case additional="population_rounded=500" textOrder="41"/>
-          <case additional="population_rounded=200" textOrder="42"/>
-          <case additional="population_rounded=100" textOrder="43"/>
-        </apply>
       </case>
-
       <switch>
         <case minzoom="8" tag="place" value="town" textSize="16" textOrder="36" nameTag="" intersectionMargin="15"/>
-        <apply>
-          <case additional="population_rounded=1500000000" textOrder="6"/>
-          <case additional="population_rounded=400000000" textOrder="7"/>
-          <case additional="population_rounded=200000000" textOrder="8"/>
-          <case additional="population_rounded=100000000" textOrder="9"/>
-          <case additional="population_rounded=50000000" textOrder="10"/>
-          <case additional="population_rounded=25000000" textOrder="11"/>
-          <case additional="population_rounded=20000000" textOrder="12"/>
-          <case additional="population_rounded=15000000" textOrder="13"/>
-          <case additional="population_rounded=12000000" textOrder="14"/>
-          <case additional="population_rounded=9000000" textOrder="15"/>
-          <case additional="population_rounded=7000000" textOrder="16"/>
-          <case additional="population_rounded=5000000" textOrder="17"/>
-          <case additional="population_rounded=3000000" textOrder="18"/>
-          <case additional="population_rounded=2000000" textOrder="19"/>
-          <case additional="population_rounded=1000000" textOrder="20"/>
-          <case additional="population_rounded=700000" textOrder="21"/>
-          <case additional="population_rounded=400000" textOrder="22"/>
-          <case additional="population_rounded=200000" textOrder="32"/>
-          <case additional="population_rounded=100000" textOrder="33"/>
-          <case additional="population_rounded=70000" textOrder="33"/>
-          <case additional="population_rounded=40000" textOrder="33"/>
-          <case additional="population_rounded=20000" textOrder="33"/>
-          <case additional="population_rounded=10000" textOrder="33"/>
-          <case additional="population_rounded=5000" textOrder="33"/>
-          <case additional="population_rounded=2500" textOrder="33"/>
-          <case additional="population_rounded=1000" textOrder="33"/>
-          <case additional="population_rounded=500" textOrder="33"/>
-          <case additional="population_rounded=200" textOrder="33"/>
-          <case additional="population_rounded=100" textOrder="33"/>
-        </apply>
       </switch>
       <switch>
         <case minzoom="11" tag="place" value="village" textSize="14" textOrder="40" nameTag="" intersectionMargin="15">
-          <apply_if minzoom="16" textSize="16"/>
-          <apply_if minzoom="17" textSize="17"/>
+      <!--     <apply_if minzoom="16" textSize="16"/>
+          <apply_if minzoom="17" textSize="17"/> -->
         </case>
-        <apply>
-          <case additional="population_rounded=1500000000" textOrder="6"/>
-          <case additional="population_rounded=400000000" textOrder="7"/>
-          <case additional="population_rounded=200000000" textOrder="8"/>
-          <case additional="population_rounded=100000000" textOrder="9"/>
-          <case additional="population_rounded=50000000" textOrder="10"/>
-          <case additional="population_rounded=25000000" textOrder="11"/>
-          <case additional="population_rounded=20000000" textOrder="12"/>
-          <case additional="population_rounded=15000000" textOrder="13"/>
-          <case additional="population_rounded=12000000" textOrder="14"/>
-          <case additional="population_rounded=9000000" textOrder="15"/>
-          <case additional="population_rounded=7000000" textOrder="16"/>
-          <case additional="population_rounded=5000000" textOrder="17"/>
-          <case additional="population_rounded=3000000" textOrder="18"/>
-          <case additional="population_rounded=2000000" textOrder="19"/>
-          <case additional="population_rounded=1000000" textOrder="20"/>
-          <case additional="population_rounded=700000" textOrder="21"/>
-          <case additional="population_rounded=400000" textOrder="22"/>
-          <case additional="population_rounded=200000" textOrder="32"/>
-          <case additional="population_rounded=100000" textOrder="33"/>
-          <case additional="population_rounded=70000" textOrder="34"/>
-          <case additional="population_rounded=40000" textOrder="35"/>
-          <case additional="population_rounded=20000" textOrder="36"/>
-          <case additional="population_rounded=10000" textOrder="37"/>
-          <case additional="population_rounded=5000" textOrder="38"/>
-          <case additional="population_rounded=2500" textOrder="39"/>
-          <case additional="population_rounded=1000" textOrder="40"/>
-          <case additional="population_rounded=500" textOrder="41"/>
-          <case additional="population_rounded=200" textOrder="42"/>
-          <case additional="population_rounded=100" textOrder="43"/>
-        </apply>
+      </switch>
+      <switch>
+        <case minzoom="13" tag="place" value="hamlet" textSize="12" textOrder="40" nameTag="" intersectionMargin="15">
+      <!--     <apply_if minzoom="16" textSize="16"/>
+          <apply_if minzoom="17" textSize="17"/> -->
+        </case>
       </switch>
       <apply textHaloRadius="$placeTextHaloRadiusDay" textHaloColor="$placeCityVillageTextHaloColor"/>
       <apply textDy="-5"/>
@@ -620,7 +519,7 @@
     </switch>
 
     <!-- TEXT - FIXME -->
-    <switch groundSurveyMode="true" minzoom="15" intersectionSizeFactor="0" intersectionMargin="0">
+    <switch minzoom="15" intersectionSizeFactor="0" intersectionMargin="0">
       <switch tag="fixme_tag" value="yes" nameTag="fixme" textColor="#ffffff" textHaloColor="#ccf800e0" textWrapWidth="20" textOrder="1">
         <case maxzoom="15" textSize="10" textDy="-40"/>
         <case minzoom="16" textSize="11" textDy="-50"/>
@@ -657,7 +556,10 @@
     </case>
 
     <!-- POINT - GATE -->
-    <case minzoom="12" tag="barrier" value="gate" icon="" >
+    <case minzoom="12" tag="barrier" value="log" icon="mm_hazard_yes">
+    </case>
+
+    <case minzoom="12" tag="barrier" value="" >
       <apply_if maxzoom="14" icon="barrier_small_red_bold_2"/>
       <apply_if minzoom="15" icon="barrier_small_red_bold_1"/>
     </case>
@@ -669,7 +571,7 @@
     <case minzoom="12" tag="natural" value="cave_entrance" icon="topo_cave" shield="topo_cave_shield" iconOrder="85"/>
 
     <!-- POINT - FIXME -->
-    <switch minzoom="12" groundSurveyMode="true" tag="fixme_tag" value="yes" iconVisibleSize="0" intersectionSizeFactor="0" iconOrder="128">
+    <switch minzoom="12" tag="fixme_tag" value="yes" iconVisibleSize="0" intersectionSizeFactor="0" iconOrder="128">
       <case maxzoom="14" icon="fixme_tag_lowzoom2_yes" />
       <case minzoom="15" icon="fixme_tag_lowzoom_yes" />
     </switch>
@@ -885,7 +787,7 @@
           <switch minzoom="12">
             <switch>
               <!-- [highway=unclassified] -->
-              <case tag="highway" value="unclassified" color="$roadColorSurface" color__3="$roadColorSurface" shadowColor="$roadBorderSurface" />
+              <case tag="highway" value="unclassified" color="$roadColorSurface" color_0="$roadBorderSurface" color__3="$roadBorderSurface" shadowColor="$roadBorderSurface" />
             </switch>
             <apply cap="ROUND" color_0="#000000">
               <case minzoom="12" maxzoom="12" strokeWidth="0.9"/>
@@ -1129,7 +1031,7 @@
     </switch>
 
     <!-- LINE - FIXME -->
-    <switch groundSurveyMode="true" minzoom="12">
+    <switch minzoom="12">
       <case tag="fixme_tag" value="yes" color="#aaf800e0" />
       <apply>
         <case maxzoom="14" strokeWidth="2:2"/>

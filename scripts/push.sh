@@ -5,6 +5,4 @@ echo '$(cat ./src/rendering/offroad-survey.render.xml)' > /sdcard/Android/data/n
 EOF
 adb shell am force-stop net.osmand
 adb shell monkey -p net.osmand 1
-# adb shell am start -n "net.osmand/.plus.activities.MapActivity"
-
-# adb shell am start -n osmand.net/osmand.net.ActivityName
+# adb shell am start -n "net.osmand/.plus.activities.search.GeoIntentActivity"

@@ -10,8 +10,8 @@ Noticeable features compared to standard offroad/topo map styles:
 
 - roads colored based on OSM `surface` tag (paved/unpaved/unspecified)
 - tracks have the same line thickness as residential and service roads
-- dead-end (`noexit=yes`) shown as black dot, any barriers (`barrier=*`) as a red dot, fixme as pink dot
-- **Ground survey mode**: unpaved roads that were not added based on a ground survey (`source=GPS`), as well as paths tagged without `motorcycle=yes` will have their color set to pink
+- dead-end (`noexit=yes`) shown as black dots, fallen trees (`barrier=log`) as danger icon, all other barriers (`barrier=*`) as red dots, fixme as pink dots
+- unpaved roads that were not added based on a ground survey (`source=GPS`), as well as paths tagged without `motorcycle=yes` will have their color set to pink
 
 <p float="left">
   <img src="https://raw.githubusercontent.com/cmoffroad/osmand-offroad-survey-plugin/master/screenshots/sample1.jpeg" width="250" />
