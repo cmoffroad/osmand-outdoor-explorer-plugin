@@ -28,6 +28,18 @@
     <case attrColorValue="#fffbf4" />
   </renderingAttribute>
 
+  <renderingAttribute name="gpsColor">
+    <case attrColorValue="#fffb00" />
+  </renderingAttribute>
+
+  <renderingAttribute name="missingColor">
+    <case attrColorValue="#fa00ff" />
+  </renderingAttribute>
+
+  <renderingAttribute name="fixmeColor">
+    <case attrColorValue="#fffb00" />
+  </renderingAttribute>
+
   <renderingAttribute name="shadowRendering">
     <!-- 0 - no shadow, 1 - one step, 2 - blur shadow, 3 - solid shadow -->
     <case minzoom="13" attrIntValue="3"/>
@@ -39,35 +51,35 @@
     <case attrColorValue="#444444" maxzoom="12" />
     <apply tag="highway" value="track" minzoom="13">
       <case additional="survey=ground" />
-      <case attrColorValue="#fa00ff" />
+      <case attrColorValue="$missingColor" />
     </apply>
     <apply tag="highway" value="track" minzoom="13">
       <case additional="surface=" />
-      <case attrColorValue="#fa00ff" />
+      <case attrColorValue="$missingColor" />
     </apply>
     <apply tag="highway" value="path" minzoom="13">
       <case additional="motorcycle=yes" />
-      <case attrColorValue="#fa00ff" />
+      <case attrColorValue="$missingColor" />
     </apply>
     <apply tag="highway" value="path" minzoom="13">
       <case additional="survey=ground" />
-      <case attrColorValue="#fa00ff" />
+      <case attrColorValue="$missingColor" />
     </apply>
     <apply tag="highway" value="path" minzoom="13">
       <case additional="surface=" />
-      <case attrColorValue="#fa00ff" />
+      <case attrColorValue="$missingColor" />
     </apply>
     <apply tag="highway" value="footway" minzoom="13">
       <case additional="survey=ground" />
-      <case attrColorValue="#fa00ff" />
+      <case attrColorValue="$missingColor" />
     </apply>
     <apply tag="highway" value="footway" minzoom="13">
       <case additional="surface=" />
-      <case attrColorValue="#fa00ff" />
+      <case attrColorValue="$missingColor" />
     </apply>
     <apply tag="highway" value="unclassified" minzoom="13">
       <case additional="survey=ground" />
-      <case attrColorValue="#fa00ff" />
+      <case attrColorValue="$missingColor" />
     </apply>
     <apply tag="highway" value="service" minzoom="13">
       <case additional="survey=ground" />
@@ -98,17 +110,7 @@
 
   <renderingAttribute name="gpx">
     <switch>
-      <case currentTrackColor="red" color="#ff0000"/>
-      <case currentTrackColor="orange" color="#ff7200"/>
-      <case currentTrackColor="lightblue" color="#2ec6ff"/>
-      <case currentTrackColor="blue" color="#4e4eff"/>
-      <case currentTrackColor="purple" color="#a71de1"/>
-      <case currentTrackColor="translucent_red" color="#aaff0000"/>
-      <case currentTrackColor="translucent_orange" color="#aaff7200"/>
-      <case currentTrackColor="translucent_lightblue" color="#aa00ffff"/>
-      <case currentTrackColor="translucent_blue" color="#aa4e4eff"/>
-      <case currentTrackColor="translucent_purple" color="#aaa71de1"/>
-      <case color="#ff0000">
+      <case color="#gpsColor">
         <apply_if roadStyle="germanRoadAtlas" color="#aa0088"/> <!-- does not works -->
       </case>
       <apply cap="ROUND">
@@ -519,7 +521,7 @@
     </switch>
 
     <!-- TEXT - FIXME -->
-    <switch minzoom="15" intersectionSizeFactor="0" intersectionMargin="0">
+    <switch minzoom="14" intersectionSizeFactor="0" intersectionMargin="0">
       <switch tag="fixme_tag" value="yes" nameTag="fixme" textColor="#ffffff" textHaloColor="#ccf800e0" textWrapWidth="20" textOrder="1">
         <case maxzoom="15" textSize="10" textDy="-40"/>
         <case minzoom="16" textSize="11" textDy="-50"/>
@@ -572,7 +574,7 @@
 
     <!-- POINT - FIXME -->
     <switch minzoom="12" tag="fixme_tag" value="yes" iconVisibleSize="0" intersectionSizeFactor="0" iconOrder="128">
-      <case maxzoom="14" icon="fixme_tag_lowzoom2_yes" />
+      <case maxzoom="14" icon="fixme_tag_lowzoom_yes" />
       <case minzoom="15" icon="fixme_tag_lowzoom_yes" />
     </switch>
   </point>
@@ -1032,7 +1034,7 @@
 
     <!-- LINE - FIXME -->
     <switch minzoom="12">
-      <case tag="fixme_tag" value="yes" color="#aaf800e0" />
+      <case tag="fixme_tag" value="yes" color="$fixmeColor" />
       <apply>
         <case maxzoom="14" strokeWidth="2:2"/>
         <case maxzoom="15" strokeWidth="3:3"/>
