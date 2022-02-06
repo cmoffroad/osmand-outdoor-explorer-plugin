@@ -12,20 +12,20 @@ function tile2lat(y,z) {
 const deg2num = (lat_deg, lon_deg, zoom) => {
   const lat_rad = lat_deg * (Math.PI / 180);
   const n = Math.pow(2.0, zoom);
-  const xtile = parseInt((lon_deg + 180.0) / 360.0 * n);
-  const ytile = parseInt((1.0 - Math.log(Math.tan(lat_rad) + (1 / Math.cos(lat_rad))) / Math.PI) / 2.0 * n)
+  const xtile = ((lon_deg + 180.0) / 360.0 * n);
+  const ytile = ((1.0 - Math.log(Math.tan(lat_rad) + (1 / Math.cos(lat_rad))) / Math.PI) / 2.0 * n)
   return [xtile, ytile];
 }
 
 const generateGPX = (zoom, lat, lon, xTiles, yTiles) => {
   const tileSize = 256;
 
-  const obfs = "Thailand_asia,Thailand_asia_22_01_00,Thailand_asia_22_02_00,Thailand_asia.srtm".split(',');
+  const obfs = "Thailand_asia_22_02_00,Thailand_asia_22_01_00,Thailand_asia,Thailand_asia.srtm".split(',');
 
   const xml = `<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
 <gpx version='1.1' xmlns='http://www.topografix.com/GPX/1/1' 
-  width='${xTiles*tileSize}' height='${yTiles*tileSize}'
-  renderingProperties='appMode=default,groundSurveyMode=true,hmRendered=true,lang=en,contourLines=13'
+  width='${xTiles*tileSize}' height='${yTiles*tileSize}' zoom='${zoom}' 
+  renderingProperties='appMode=default,lang=en,contourLines=12,contourDensity=medium_w,contourWidth=thin'
   renderingName='src/rendering/offroad-survey'
 >
   <wpt lat='${lat}' lon='${lon}'>
@@ -40,7 +40,9 @@ const generateGPX = (zoom, lat, lon, xTiles, yTiles) => {
   console.log(`echo "${xml.replace(/\n/g, '')}" > ./tmp/${zoom}.gpx`)
 }
 
-const generateHTML = (zoom, lat, lon, date, previewDir) => {
+const generateHTML = (zooms, lat, lon, date, previewDir) => {
+
+  const zoom = zooms[0]
 
   const [xTileCenter, yTileCenter] = deg2num(lat, lon, zoom);
   const xTileMin = xTileCenter + 1 - (xTiles / 2);
@@ -69,7 +71,6 @@ const generateHTML = (zoom, lat, lon, date, previewDir) => {
 <body>
 <div id='map'></div>
 <script>
-  const zoom = ${zoom};
   const center = [ ${lat}, ${lon} ];
 
   const pluginLayer = L.tileLayer('./tiles/{z}/{x}/{y}.png?date=${date}', {
@@ -77,15 +78,15 @@ const generateHTML = (zoom, lat, lon, date, previewDir) => {
   });
 
   var map = new L.Map('map', { 
-    minZoom: zoom, 
-    maxZoom: zoom,
+    minZoom: ${zooms[zooms.length-1]}, 
+    maxZoom: ${zoom},
     maxBounds: L.latLngBounds(
-      L.latLng(${latMin}, ${lonMin}),
-      L.latLng(${latMax}, ${lonMax})
+       L.latLng(${latMin}, ${lonMin}),
+       L.latLng(${latMax}, ${lonMax})
     ),
     layers: [ pluginLayer ]
   })
-  .setView(center, zoom);
+  .setView(center, ${zoom});
   map.attributionControl.setPrefix('');
 
   var baseLayers = {
@@ -112,14 +113,10 @@ const generateHTML = (zoom, lat, lon, date, previewDir) => {
 const processZoom = (zoom, lat, lon, xTiles, yTiles, dirTiles) => {
   
   const [xTileCenter, yTileCenter] = deg2num(lat, lon, zoom);
-  const xTileMin = Math.floor(xTileCenter + 1 - (xTiles / 2));
-  const yTileMin = Math.floor(yTileCenter + 1 - (yTiles / 2));
-
-  console.log(`rm -rf ./tmp/*`);
+  const xTileMin = parseInt(xTileCenter + 0.5 - (xTiles) / 2);
+  const yTileMin = parseInt(yTileCenter + 0.5 - (yTiles) / 2);
 
   generateGPX(zoom, lat, lon, xTiles, yTiles);
-
-  console.log(`rm -rf ${dirTiles}`);
 
   for (var x=0; x<xTiles; x++) {
     console.log(`mkdir -p ${dirTiles}/${zoom}/${xTileMin + x}`);
@@ -134,20 +131,25 @@ const processZoom = (zoom, lat, lon, xTiles, yTiles, dirTiles) => {
   console.log(`convert ./tmp/${zoom}.png -crop 256x256 -set filename:tile "%[fx:page.x/256+${xTileMin}]/%[fx:page.y/256+${yTileMin}]" +repage "${dirTiles}/${zoom}/%[filename:tile].png"`);
 }
 
-const lat = 19.3619;
-const lon = 98.6302;
-const zoom = 13;
+// const lat = 19.3619, lon = 98.6302;
+const lat = 19.2085242, lon = 98.8059622;
+const zooms = [13];
 
-const xTiles = 10;
-const yTiles = 5;
+const xTiles = 35;
+const yTiles = 30;
 
 const date = new Date().toISOString().split('T')[0];
 
 const previewDir = `../../OSM/osm-tools/osmand-offroad-survey-plugin-preview`;
 const dirTiles = `${previewDir}/tiles`;
 
-processZoom(13, lat, lon, xTiles, yTiles, dirTiles);
+console.log(`rm -rf ./tmp/*`);
+console.log(`rm -rf ${dirTiles}`);
 
-generateHTML(zoom, lat, lon, date, previewDir);
+for (var i=0;i<zooms.length; i++) {
+  processZoom(zooms[i], lat, lon, xTiles/Math.pow(2, i), yTiles/Math.pow(2, i), dirTiles);
+}
+
+generateHTML(zooms, lat, lon, date, previewDir);
 
 console.log(`open ${previewDir}/index.html`);
