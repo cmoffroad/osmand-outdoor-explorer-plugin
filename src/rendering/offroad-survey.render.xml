@@ -79,7 +79,6 @@
     </apply>
     <apply tag="highway" value="unclassified" minzoom="13">
       <case additional="survey=ground" />
-      <case attrColorValue="$missingColor" />
     </apply>
     <apply tag="highway" value="service" minzoom="13">
       <case additional="survey=ground" />
