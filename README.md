@@ -13,6 +13,8 @@ Noticeable features compared to standard offroad/topo map styles:
 - dead-end (`noexit=yes`) shown as black dots, fallen trees (`barrier=log`) as danger icon, all other barriers (`barrier=*`) as red dots, fixme as pink dots
 - unpaved roads that were not added based on a ground survey (`source=GPS`), as well as paths tagged without `motorcycle=yes` will have their color set to pink
 
+[Web Preview.](https://cmoffroad.github.io/osm-tools/osmand-offroad-survey-plugin-preview/)
+
 <p float="left">
   <img src="https://raw.githubusercontent.com/cmoffroad/osmand-offroad-survey-plugin/master/screenshots/sample1.jpeg" width="250" />
   <img src="https://raw.githubusercontent.com/cmoffroad/osmand-offroad-survey-plugin/master/screenshots/sample2.jpeg" width="250" />
