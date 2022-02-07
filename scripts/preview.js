@@ -12,8 +12,8 @@ function tile2lat(y,z) {
 const deg2num = (lat_deg, lon_deg, zoom) => {
   const lat_rad = lat_deg * (Math.PI / 180);
   const n = Math.pow(2.0, zoom);
-  const xtile = ((lon_deg + 180.0) / 360.0 * n);
-  const ytile = ((1.0 - Math.log(Math.tan(lat_rad) + (1 / Math.cos(lat_rad))) / Math.PI) / 2.0 * n)
+  const xtile = parseInt((lon_deg + 180.0) / 360.0 * n);
+  const ytile = parseInt((1.0 - Math.log(Math.tan(lat_rad) + (1 / Math.cos(lat_rad))) / Math.PI) / 2.0 * n)
   return [xtile, ytile];
 }
 
@@ -24,7 +24,7 @@ const generateGPX = (zoom, lat, lon, xTiles, yTiles) => {
 
   const xml = `<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
 <gpx version='1.1' xmlns='http://www.topografix.com/GPX/1/1' 
-  width='${xTiles*tileSize}' height='${yTiles*tileSize}' zoom='${zoom}' 
+  width='${xTiles*tileSize}' height='${yTiles*tileSize}' zoom='${zoom}' mapDensity='1'
   renderingProperties='appMode=default,lang=en,contourLines=12,contourDensity=medium_w,contourWidth=thin'
   renderingName='src/rendering/offroad-survey'
 >
@@ -113,8 +113,8 @@ const generateHTML = (zooms, lat, lon, date, previewDir) => {
 const processZoom = (zoom, lat, lon, xTiles, yTiles, dirTiles) => {
   
   const [xTileCenter, yTileCenter] = deg2num(lat, lon, zoom);
-  const xTileMin = parseInt(xTileCenter + 0.5 - (xTiles) / 2);
-  const yTileMin = parseInt(yTileCenter + 0.5 - (yTiles) / 2);
+  const xTileMin = parseInt(xTileCenter + 1 - (xTiles / 2));
+  const yTileMin = parseInt(yTileCenter + 1 - (yTiles / 2));
 
   generateGPX(zoom, lat, lon, xTiles, yTiles);
 
@@ -122,7 +122,7 @@ const processZoom = (zoom, lat, lon, xTiles, yTiles, dirTiles) => {
     console.log(`mkdir -p ${dirTiles}/${zoom}/${xTileMin + x}`);
   }
 
-  console.log(`java -Xms64M -Xmx512M -cp ../OsmAndMapCreator-main/OsmAndMapCreator.jar net.osmand.swing.OsmAndImageRendering \
+  console.log(`java -Xms64M -Xmx1024M -cp ../OsmAndMapCreator-main/OsmAndMapCreator.jar net.osmand.swing.OsmAndImageRendering \
   -native=/Users/julien/Documents/WORKSPACE/OsmAnd/OsmAnd-core-legacy/binaries/darwin/intel/Release \
   -obfFiles=./obf/ \
   -gpxFile=./tmp/${zoom}.gpx \
@@ -132,11 +132,16 @@ const processZoom = (zoom, lat, lon, xTiles, yTiles, dirTiles) => {
 }
 
 // const lat = 19.3619, lon = 98.6302;
-const lat = 19.2085242, lon = 98.8059622;
+// const lat = 19.2085242, lon = 98.8059622;
+const center = [ 19.2085242, 98.8059622 ];
 const zooms = [13];
 
-const xTiles = 35;
-const yTiles = 30;
+const [x, y] = deg2num(center[0], center[1], zooms[0]);
+const lat = tile2lat(y+0.5, zooms[0]), lon = tile2lon(x+0.5, zooms[0]);
+
+// needs to be odd for now
+const xTiles = 49;
+const yTiles = 49;
 
 const date = new Date().toISOString().split('T')[0];
 
