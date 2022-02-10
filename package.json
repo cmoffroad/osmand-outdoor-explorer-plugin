@@ -11,7 +11,7 @@
     "commit": "bash scripts/commit.sh",
     "download": "bash scripts/download.sh",
     "redraw": "bash scripts/redraw.sh",
-    "preview": "node scripts/preview.js > scripts/preview.sh && sh scripts/preview.sh"
+    "preview": "node scripts/preview.js $TILES > scripts/preview.sh && sh scripts/preview.sh"
   },
   "author": "cmoffroad",
   "license": "MIT",

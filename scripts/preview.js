@@ -17,10 +17,23 @@ const deg2num = (lat_deg, lon_deg, zoom) => {
   return [xtile, ytile];
 }
 
-const generateGPX = (zoom, lat, lon, xTiles, yTiles) => {
+const getOBFs = (dir) => {
+  const files = fs.readdirSync(dir);
+
+  return files
+    .filter(fileName => fileName.match(/^Thailand.*\.obf$/))
+    .map(fileName => ({
+      name: fileName.replace(/\.obf$/, ''),
+      time: fs.statSync(`${dir}/${fileName}`).mtime.getTime(),
+    }))
+    .sort((a, b) => b.time - a.time)
+    .map(file => file.name);
+};
+
+const generateGPX = (zoom, lat, lon, xTiles, yTiles, obfs) => {
   const tileSize = 256;
 
-  const obfs = "Thailand_asia_22_02_00,Thailand_asia_22_01_00,Thailand_asia,Thailand_asia.srtm".split(',');
+  // const obfs = "Thailand_asia_22_02_10,Thailand_asia_22_02_00,Thailand_asia_22_01_00,Thailand_asia,Thailand_asia.srtm".split(',');
 
   const xml = `<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
 <gpx version='1.1' xmlns='http://www.topografix.com/GPX/1/1' 
@@ -139,13 +152,13 @@ const generateHTML = (zooms, lat, lon, date, previewDir) => {
   console.log(`echo "${html.replace(/\n/g, '')}" > ${previewDir}/index.html`)
 }
 
-const processZoom = (zoom, lat, lon, xTiles, yTiles, dirTiles) => {
+const processZoom = (zoom, lat, lon, xTiles, yTiles, dirTiles, obfs) => {
   
   const [xTileCenter, yTileCenter] = deg2num(lat, lon, zoom);
   const xTileMin = parseInt(xTileCenter + 1 - (xTiles / 2));
   const yTileMin = parseInt(yTileCenter + 1 - (yTiles / 2));
 
-  generateGPX(zoom, lat, lon, xTiles, yTiles);
+  generateGPX(zoom, lat, lon, xTiles, yTiles, obfs);
 
   for (var x=0; x<xTiles; x++) {
     console.log(`mkdir -p ${dirTiles}/${zoom}/${xTileMin + x}`);
@@ -160,28 +173,37 @@ const processZoom = (zoom, lat, lon, xTiles, yTiles, dirTiles) => {
   console.log(`convert ./tmp/${zoom}.png -crop 256x256 -set filename:tile "%[fx:page.x/256+${xTileMin}]/%[fx:page.y/256+${yTileMin}]" +repage "${dirTiles}/${zoom}/%[filename:tile].png"`);
 }
 
+const args = process.argv.slice(2);
+const tiles = parseInt(args[0] || '0');
+
 // const lat = 19.3619, lon = 98.6302;
 // const lat = 19.2085242, lon = 98.8059622;
 const center = [ 19.2085242, 98.8059622 ];
 const zooms = [13];
 
+// needs to be odd for now
+const xTiles = tiles;
+const yTiles = tiles;
+
 const [x, y] = deg2num(center[0], center[1], zooms[0]);
 const lat = tile2lat(y+0.5, zooms[0]), lon = tile2lon(x+0.5, zooms[0]);
-
-// needs to be odd for now
-const xTiles = 49;
-const yTiles = 49;
 
 const date = new Date().toISOString().split('T')[0];
 
 const previewDir = `../../OSM/osm-tools/osmand-offroad-survey-plugin-preview`;
-const dirTiles = `${previewDir}/tiles`;
 
-console.log(`rm -rf ./tmp/*`);
-console.log(`rm -rf ${dirTiles}`);
+if (xTiles > 0 && yTiles > 0) {
+  const dirTiles = `${previewDir}/tiles`;
+  const dirObfs  = `./obf`;
 
-for (var i=0;i<zooms.length; i++) {
-  processZoom(zooms[i], lat, lon, xTiles/Math.pow(2, i), yTiles/Math.pow(2, i), dirTiles);
+  console.log(`rm -rf ./tmp/*`);
+  console.log(`rm -rf ${dirTiles}`);
+
+  const obfs = getOBFs(dirObfs);
+
+  for (var i=0;i<zooms.length; i++) {
+    processZoom(zooms[i], lat, lon, xTiles/Math.pow(2, i), yTiles/Math.pow(2, i), dirTiles, obfs);
+  }
 }
 
 generateHTML(zooms, lat, lon, date, previewDir);
