@@ -61,10 +61,10 @@
       <case additional="surface=" />
       <case attrColorValue="$missingColor" />
     </apply> -->
-    <!-- <apply tag="highway" value="path" minzoom="13">
+    <apply tag="highway" value="path" minzoom="13">
       <case additional="motorcycle=yes" />
       <case attrColorValue="$missingColor" />
-    </apply> -->
+    </apply>
     <apply tag="highway" value="path" minzoom="13">
       <case additional="survey=ground" />
       <case attrColorValue="$missingColor" />
