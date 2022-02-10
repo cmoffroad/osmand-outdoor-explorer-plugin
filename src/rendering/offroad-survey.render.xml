@@ -40,6 +40,10 @@
     <case attrColorValue="#fffb00" />
   </renderingAttribute>
 
+  <renderingAttribute name="accessColor">
+    <case attrColorValue="#CCFF7F7F" />
+  </renderingAttribute>
+
   <renderingAttribute name="shadowRendering">
     <!-- 0 - no shadow, 1 - one step, 2 - blur shadow, 3 - solid shadow -->
     <case minzoom="13" attrIntValue="3"/>
@@ -53,35 +57,33 @@
       <case additional="survey=ground" />
       <case attrColorValue="$missingColor" />
     </apply>
-    <apply tag="highway" value="track" minzoom="13">
+    <!-- <apply tag="highway" value="track" minzoom="13">
       <case additional="surface=" />
       <case attrColorValue="$missingColor" />
-    </apply>
-    <apply tag="highway" value="path" minzoom="13">
+    </apply> -->
+    <!-- <apply tag="highway" value="path" minzoom="13">
       <case additional="motorcycle=yes" />
       <case attrColorValue="$missingColor" />
-    </apply>
+    </apply> -->
     <apply tag="highway" value="path" minzoom="13">
       <case additional="survey=ground" />
       <case attrColorValue="$missingColor" />
     </apply>
-    <apply tag="highway" value="path" minzoom="13">
+    <!-- <apply tag="highway" value="path" minzoom="13">
       <case additional="surface=" />
       <case attrColorValue="$missingColor" />
-    </apply>
+    </apply -->>
     <apply tag="highway" value="footway" minzoom="13">
       <case additional="survey=ground" />
       <case attrColorValue="$missingColor" />
     </apply>
-    <apply tag="highway" value="footway" minzoom="13">
+    <!-- <apply tag="highway" value="footway" minzoom="13">
       <case additional="surface=" />
       <case attrColorValue="$missingColor" />
     </apply>
-    <apply tag="highway" value="unclassified" minzoom="13">
-      <case additional="survey=ground" />
-    </apply>
-    <apply tag="highway" value="service" minzoom="13">
-      <case additional="survey=ground" />
+     -->
+     <apply tag="highway" value="service" minzoom="13">
+      <apply attrColorValue="$accessColor" />
     </apply>
     <switch>
       <case additional="surface=paved" />
@@ -93,10 +95,10 @@
       <apply attrColorValue="#FFFFFF" />
     </switch>
     <case additional="surface=" attrColorValue="#000000" minzoom="13" />
-    <case attrColorValue="#DDDDDD" minzoom="13" />
+    <case attrColorValue="#888888" minzoom="13" />
   </renderingAttribute>
 
-  <renderingAttribute name="roadBorderSurface">
+ <!--  <renderingAttribute name="roadBorderSurface">
     <switch>
       <case additional="surface=paved" />
       <case additional="surface=concrete" />
@@ -108,6 +110,27 @@
     </switch>
     <case additional="surface=" attrColorValue="#00FFFFFF" />
     <case attrColorValue="#AAAAAA" />
+  </renderingAttribute> -->
+
+  <renderingAttribute name="roadBorderSurface">
+    <apply tag="highway" value="tertiary" minzoom="13">
+      <case additional="survey=ground" />
+      <case attrColorValue="$missingColor" />
+    </apply>
+    <apply tag="highway" value="unclassified" minzoom="13">
+      <case additional="survey=ground" />
+      <case attrColorValue="$missingColor" />
+    </apply>
+    <switch>
+      <case additional="surface=paved" />
+      <case additional="surface=concrete" />
+      <case additional="surface=concrete:plates" />
+      <case additional="surface=concrete:lanes" />
+      <case additional="surface=asphalt" />
+      <case additional="surface=chipseal" />
+      <apply attrColorValue="#000000" />
+    </switch>
+    <case attrColorValue="#00000000" />
   </renderingAttribute>
 
   <renderingAttribute name="gpx">
@@ -239,6 +262,10 @@
         <case tag="ford" value="yes"/>
         <case tag="waterway" value="waterfall"/>
         <case tag="fixme_tag" value="yes"/>
+        <case tag="natural" value="peak">
+          <apply_if additional="ele_limit=200" maxzoom="12" order="-1"/>
+          <apply_if additional="ele_limit=500" maxzoom="11" order="-1"/>
+        </case>
       </switch>
 
       <!-- ORDER - POLYGON -->
@@ -535,13 +562,16 @@
   <point>
 
     <!-- POINT - VIEWPOINT -->
-    <case minzoom="12" tag="tourism" value="viewpoint" icon="topo_viewpoint" shield="topo_viewpoint_shield" iconOrder="85"/>
+    <case minzoom="13" tag="tourism" value="viewpoint" icon="topo_viewpoint" shield="topo_viewpoint_shield" iconOrder="85" iconVisibleSize="10" intersectionSizeFactor="2"/>
+
+    <!-- POINT - PEAK -->
+    <case minzoom="13" tag="natural" value="peak" iconOrder="65" icon="natural_peak" iconVisibleSize="10" intersectionSizeFactor="2" />
 
     <!-- POINT - FORD -->
-    <case minzoom="12" tag="ford" value="yes" icon="topo_ford" shield="topo_ford_shield"/>
+    <case minzoom="13" tag="ford" value="yes" icon="topo_ford" shield="topo_ford_shield" iconVisibleSize="10" intersectionSizeFactor="2"/>
 
     <!-- POINT - TEMPLE -->
-    <case minzoom="12" tag="amenity" value="place_of_worship" iconOrder="40">
+    <case minzoom="13" tag="amenity" value="place_of_worship" iconOrder="40" iconVisibleSize="10" intersectionSizeFactor="2">
       <case additional="religion=christian" icon="topo_christian" shield="topo_christian_shield"/>
       <case additional="religion=jewish" icon="topo_jewish" shield="topo_jewish_shield"/>
       <case additional="religion=muslim" icon="topo_muslim" shield="topo_muslim_shield"/>
@@ -553,32 +583,30 @@
       <case icon="topo_religion_unknown" shield="topo_religion_unknown_shield"/>
     </case>
 
+    <!-- POINT - WATERFALL -->
+    <case minzoom="13" tag="waterway" value="waterfall" icon="topo_waterfall" shield="topo_waterfall_shield"/>
+
+    <!-- POINT - CAVE -->
+    <case minzoom="13" tag="natural" value="cave_entrance" icon="topo_cave" shield="topo_cave_shield" iconOrder="85"/>
+
     <!-- POINT - NOEXIT -->
-    <case minzoom="12" tag="noexit" value="yes" icon="" >
+    <case minzoom="14" tag="noexit" value="yes" icon="" >
       <apply_if maxzoom="14" icon="barrier_small_black_bold_2"/>
       <apply_if minzoom="15" icon="barrier_small_black_bold_1"/>
     </case>
 
     <!-- POINT - GATE -->
-    <case minzoom="12" tag="barrier" value="log" icon="mm_hazard_yes">
+    <case minzoom="14" tag="barrier" value="log" icon="mm_hazard_yes">
     </case>
 
-    <case minzoom="12" tag="barrier" value="" >
+    <case minzoom="14" tag="barrier" value="" >
       <apply_if maxzoom="14" icon="barrier_small_red_bold_2"/>
       <apply_if minzoom="15" icon="barrier_small_red_bold_1"/>
     </case>
 
-    <!-- POINT - WATERFALL -->
-    <case minzoom="12" tag="waterway" value="waterfall" icon="topo_waterfall" shield="topo_waterfall_shield"/>
-
-    <!-- POINT - CAVE -->
-    <case minzoom="12" tag="natural" value="cave_entrance" icon="topo_cave" shield="topo_cave_shield" iconOrder="85"/>
-
     <!-- POINT - FIXME -->
-    <switch minzoom="12" tag="fixme_tag" value="yes" iconVisibleSize="0" intersectionSizeFactor="0" iconOrder="128">
-      <case maxzoom="14" icon="fixme_tag_lowzoom_yes" />
-      <case minzoom="15" icon="fixme_tag_lowzoom_yes" />
-    </switch>
+    <case minzoom="14" tag="fixme_tag" value="yes" iconOrder="128" icon="fixme_tag_lowzoom_yes"  iconVisibleSize="10" intersectionSizeFactor="2"  />
+
   </point>
 
   <polygon>
@@ -769,7 +797,7 @@
             <apply shadowColor="#000000"/>
             <apply_if maxzoom="11" shadowRadius="1"/>
             <apply_if minzoom="12" shadowRadius="1:1"/>
-            <apply color="$roadColorSurface" color__1="$roadBorderSurface" color__3="$roadBorderSurface" cap="ROUND">
+            <apply color="$roadColorSurface" color__1="$roadBorderSurface" color__3="$roadBorderSurface" shadowColor="$roadBorderSurface" cap="ROUND">
               <case maxzoom="13">
                 <apply>
                   <apply_if minzoom="11" maxzoom="11" strokeWidth="0.9" strokeWidth_3="0.9"/>
@@ -834,7 +862,7 @@
               <case tag="highway" value="service" color_0="#444444"/>
               <apply color="$roadColorSurface" color__1="$roadBorderSurface"/>
               <!-- <apply_if showService="false" shadowColor="$roadBorderSurface" shadowRadius="1:1" /> -->
-              <apply_if shadowColor="#FF0000" shadowRadius="1:1"/>
+              <apply_if shadowColor="$roadBorderSurface" shadowRadius="1:1"/>
             </switch>
           </switch>
           <apply>
@@ -1036,7 +1064,7 @@
     </switch>
 
     <!-- LINE - FIXME -->
-    <switch minzoom="12">
+    <switch minzoom="13">
       <case tag="fixme_tag" value="yes" color="$fixmeColor" />
       <apply>
         <case maxzoom="14" strokeWidth="2:2"/>

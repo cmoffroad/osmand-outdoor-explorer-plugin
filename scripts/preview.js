@@ -71,10 +71,17 @@ const generateHTML = (zooms, lat, lon, date, previewDir) => {
 <body>
 <div id='map'></div>
 <script>
-  const center = [ ${lat}, ${lon} ];
+  const hash = location.hash || '#map=13/${lat}/${lon}';
+  const tokens = hash.substring(5).split('/');
+
+  if (!location.hash) {
+    history.pushState(null,null, hash);
+  }
+
+  const center = [ tokens[1], tokens[2] ], zoom = tokens[0];
 
   const pluginLayer = L.tileLayer('./tiles/{z}/{x}/{y}.png?date=${date}', {
-    attribution: '<a href="https://github.com/cmoffroad/osmand-offroad-survey-plugin">osmand-offroad-survey-plugin</a>'
+    attribution: 'osmand-offroad-survey-plugin'
   });
 
   var map = new L.Map('map', { 
@@ -84,10 +91,15 @@ const generateHTML = (zooms, lat, lon, date, previewDir) => {
        L.latLng(${latMin}, ${lonMin}),
        L.latLng(${latMax}, ${lonMax})
     ),
-    layers: [ pluginLayer ]
+    layers: [ pluginLayer ],
+    zoomControl: false
   })
   .setView(center, ${zoom});
   map.attributionControl.setPrefix('');
+  map.on('moveend', (e) => {
+    const center = e.target.getCenter(), zoom = e.target.getZoom();
+    history.pushState(null,null, '#map=' + zoom + '/' + center.lat + '/' + center.lng);      
+  });
 
   var baseLayers = {
     'osmand-offroad-survey-plugin': pluginLayer,
@@ -103,6 +115,23 @@ const generateHTML = (zooms, lat, lon, date, previewDir) => {
   };
 
   L.control.layers(baseLayers, overlays).addTo(map);
+
+  L.Control.EditLink = L.Control.extend({
+    onAdd: function(map) {
+      var link = L.DomUtil.create('button');
+      link.innerHTML = 'Edit in OSM';
+      link.onclick = () => window.open('http://www.openstreetmap.org/edit' + location.hash);
+
+      var div = L.DomUtil.create('div');
+      div.className='leaflet-control-layers';
+      div.appendChild(link);
+      
+      return div;
+    },
+    onRemove: function(map) {}
+  });
+
+  new L.Control.EditLink({ position: 'topleft' }).addTo(map);
 </script>
 </body>
 </html>`
