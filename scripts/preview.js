@@ -38,7 +38,7 @@ const generateGPX = (zoom, lat, lon, xTiles, yTiles, obfs) => {
   const xml = `<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
 <gpx version='1.1' xmlns='http://www.topografix.com/GPX/1/1' 
   width='${xTiles*tileSize}' height='${yTiles*tileSize}' zoom='${zoom}' mapDensity='1'
-  renderingProperties='appMode=default,lang=en,contourLines=12,contourDensity=medium_w,contourWidth=thin'
+  renderingProperties='appMode=default,lang=en,contourLines=11,contourDensity=medium_w,contourWidth=thin'
   renderingName='src/rendering/offroad-survey'
 >
   <wpt lat='${lat}' lon='${lon}'>
@@ -53,7 +53,7 @@ const generateGPX = (zoom, lat, lon, xTiles, yTiles, obfs) => {
   console.log(`echo "${xml.replace(/\n/g, '')}" > ./tmp/${zoom}.gpx`)
 }
 
-const generateHTML = (zooms, lat, lon, date, previewDir) => {
+const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
 
   const zoom = zooms[0]
 
@@ -74,15 +74,19 @@ const generateHTML = (zooms, lat, lon, date, previewDir) => {
   <title>OsmAnd Offroad-Survey Plugin Preview (Northern Thailand)</title>
   <meta charset='utf-8' />
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <link rel='stylesheet' href='https://unpkg.com/leaflet@1.7.1/dist/leaflet.css' integrity='sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==' crossorigin=''/>
-    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css'>
+    <link rel='stylesheet' href='https://unpkg.com/leaflet@1.7.1/dist/leaflet.css' integrity='sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==' crossorigin='' />
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css' />
+    <link rel='stylesheet' href='https://aratcliffe.github.io/Leaflet.contextmenu/dist/leaflet.contextmenu.css' />
     <script src='https://unpkg.com/leaflet@1.7.1/dist/leaflet.js' integrity='sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==' crossorigin=''></script>
+    <script src='http://aratcliffe.github.io/Leaflet.contextmenu/dist/leaflet.contextmenu.js'></script>
     <style>
     html,body,#map{width:100%;height:100%;margin: 0; padding: 0;}
+    #crosshair { left: calc(50% - 10px); top: calc(50% - 10px); position: absolute; width: 20px; height: 20px; z-index: 10000; text-align: center; font-weight: normal; font-size: 32px; color: #222; text-shadow: 1px 1px 3px #fff; }
   </style>
 </head>
 <body>
 <div id='map'></div>
+<div id='crosshair'>⌖</div>
 <script>
   const hash = location.hash || '#map=13/${lat}/${lon}';
   const tokens = hash.substring(5).split('/');
@@ -94,18 +98,37 @@ const generateHTML = (zooms, lat, lon, date, previewDir) => {
   const center = [ tokens[1], tokens[2] ], zoom = tokens[0];
 
   const pluginLayer = L.tileLayer('./tiles/{z}/{x}/{y}.png?date=${date}', {
-    attribution: 'osmand-offroad-survey-plugin'
+    attribution: '',
+    minNativeZoom: ${zoom},
+    maxNativeZoom: ${zoom}
   });
 
   var map = new L.Map('map', { 
-    minZoom: ${zooms[zooms.length-1]}, 
-    maxZoom: ${zoom},
-    maxBounds: L.latLngBounds(
+    minZoom: 12, 
+    maxZoom: 15,
+    maxBounds: ${xTiles} > 0 && ${yTiles} > 0 ? L.latLngBounds(
        L.latLng(${latMin}, ${lonMin}),
        L.latLng(${latMax}, ${lonMax})
-    ),
+    ) : undefined,
     layers: [ pluginLayer ],
-    zoomControl: false
+    zoomControl: true,
+    contextmenu: true,
+    contextmenuWidth: 200,
+    contextmenuItems: [
+      /*{
+        text: 'Center map here',
+        callback: (e) => map.panTo(e.latlng)
+      },
+      '-',*/
+      {
+        text: 'Edit in OSM (Maxar)',
+        callback: (e) => window.open('http://www.openstreetmap.org/edit#background=Maxar-Standard&map=16/' + e.latlng.lat + '/' + e.latlng.lng)
+      },
+      {
+        text: 'Edit in OSM (WorldTopoMap)',
+        callback: (e) => window.open('http://www.openstreetmap.org/edit#background=custom:https://{switch:services,server}.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer/tile/{zoom}/{y}/{x}&map=16/' + e.latlng.lat + '/' + e.latlng.lng)
+      }      
+    ]
   })
   .setView(center, ${zoom});
   map.attributionControl.setPrefix('');
@@ -116,35 +139,23 @@ const generateHTML = (zooms, lat, lon, date, previewDir) => {
 
   var baseLayers = {
     'osmand-offroad-survey-plugin': pluginLayer,
-    'komoot': L.tileLayer('http://{s}.tile.komoot.de/komoot/{z}/{x}/{y}.png?lang=en'),
     'cyclemap': L.tileLayer('https://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey=6170aad10dfd42a38d4d8c709a536f38'),
+    'opentopomap': L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png'),
+    'worldtopomap': L.tileLayer('https://services.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'),
+    'komoot': L.tileLayer('https://{s}.tile.komoot.de/komoot/{z}/{x}/{y}.png?lang=en'),
     'mapy.cz': L.tileLayer('https://mapserver.mapy.cz/base-m/{z}-{x}-{y}?sdk=HgUbCgUbGkgqAQkYBxYEHQNHQlJfR1VfQlBZSw%3D%3D'),
     'google (terrain)': L.tileLayer('https://mt3.Google.com/vt?z={z}&x={x}&y={y}&lyrs=p'),
     'google (satellite)': L.tileLayer('https://mt3.Google.com/vt?z={z}&x={x}&y={y}&lyrs=y')
   };
 
   var overlays = {
-    'OSM GPS traces': L.tileLayer('https://{s}.gps-tile.openstreetmap.org/lines/{z}/{x}/{y}.png')
+    'OSM GPS traces': L.tileLayer('https://{s}.gps-tile.openstreetmap.org/lines/{z}/{x}/{y}.png'),
+    /*'Hillshade': L.tileLayer('https://services.arcgisonline.com/arcgis/rest/services/Elevation/World_Hillshade/MapServer/tile/{z}/{y}/{x}?transparent=true')*/
   };
 
+  L.tileLayer('http://localhost:3000/Hillshade%20Thailand%20asia/{z}/{x}/{y}', { maxNativeZoom: 12, transparency: true, opacity: 0.1 }).addTo(map);
+
   L.control.layers(baseLayers, overlays).addTo(map);
-
-  L.Control.EditLink = L.Control.extend({
-    onAdd: function(map) {
-      var link = L.DomUtil.create('button');
-      link.innerHTML = 'Edit in OSM';
-      link.onclick = () => window.open('http://www.openstreetmap.org/edit' + location.hash);
-
-      var div = L.DomUtil.create('div');
-      div.className='leaflet-control-layers';
-      div.appendChild(link);
-      
-      return div;
-    },
-    onRemove: function(map) {}
-  });
-
-  new L.Control.EditLink({ position: 'topleft' }).addTo(map);
 </script>
 </body>
 </html>`
@@ -206,6 +217,6 @@ if (xTiles > 0 && yTiles > 0) {
   }
 }
 
-generateHTML(zooms, lat, lon, date, previewDir);
+generateHTML(zooms, lat, lon, xTiles, yTiles, date, previewDir);
 
 console.log(`open ${previewDir}/index.html`);

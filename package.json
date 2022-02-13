@@ -16,6 +16,8 @@
   "author": "cmoffroad",
   "license": "MIT",
   "devDependencies": {
-    "onchange": "^7.1.0"
+    "express": "^4.17.2",
+    "onchange": "^7.1.0",
+    "sqlite3": "^5.0.2"
   }
 }
