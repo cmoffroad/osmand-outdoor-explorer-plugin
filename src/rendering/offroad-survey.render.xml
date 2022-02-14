@@ -506,7 +506,7 @@
     </switch>
 
     <!-- TEXT - WATER -->
-    <switch textColor="#266579" textHaloRadius="1" textHaloColor="$waterTextHaloColor" textItalic="true">
+    <!-- <switch textColor="#266579" textHaloRadius="1" textHaloColor="$waterTextHaloColor" textItalic="true">
       <switch textSize="12">
         <case minzoom="13" tag="landuse" value="water" nameTag="" textWrapWidth="20" textOrder="218"/>
         <case minzoom="13" tag="landuse" value="reservoir" nameTag="" textWrapWidth="20" textOrder="218"/>
@@ -515,7 +515,7 @@
           <case minzoom="15" tag="waterway" value="waterfall" nameTag="" textWrapWidth="20" textOnPath="true" textOrder="217"/>
         </switch>
       </switch>
-    </switch>
+    </switch> -->
 
     <!-- TEXT - FIXME -->
     <switch minzoom="14" intersectionSizeFactor="0" intersectionMargin="0">

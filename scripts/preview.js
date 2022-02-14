@@ -150,11 +150,10 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
 
   var overlays = {
     'OSM GPS traces': L.tileLayer('https://{s}.gps-tile.openstreetmap.org/lines/{z}/{x}/{y}.png'),
-    /*'Hillshade': L.tileLayer('https://services.arcgisonline.com/arcgis/rest/services/Elevation/World_Hillshade/MapServer/tile/{z}/{y}/{x}?transparent=true')*/
   };
 
-  L.tileLayer('http://localhost:3000/Hillshade%20Thailand%20asia/{z}/{x}/{y}', { maxNativeZoom: 12, transparency: true, opacity: 0.1 }).addTo(map);
-
+  L.tileLayer('./tiles/{z}/{x}/{y}-hillshade.png', { minNativeZoom: 12, maxNativeZoom: 12, transparency: true, opacity: 0.2 }).addTo(map);
+  
   L.control.layers(baseLayers, overlays).addTo(map);
 </script>
 </body>
@@ -215,6 +214,8 @@ if (xTiles > 0 && yTiles > 0) {
   for (var i=0;i<zooms.length; i++) {
     processZoom(zooms[i], lat, lon, xTiles/Math.pow(2, i), yTiles/Math.pow(2, i), dirTiles, obfs);
   }
+
+  console.log(`node ./scripts/tiles/extract.js`);
 }
 
 generateHTML(zooms, lat, lon, xTiles, yTiles, date, previewDir);
