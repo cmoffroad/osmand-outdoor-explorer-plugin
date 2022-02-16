@@ -11,6 +11,9 @@
   <renderingProperty attr="contourWidth" name="Contour lines width" description="Contour lines width" type="string" possibleValues="thin,medium,thick" defaultValueDescription="default"/>
   <renderingProperty attr="contourDensity" name="Contour lines density" description="Contour lines density" type="string" possibleValues="low,medium_w,high" defaultValueDescription="default"/>
 
+  <renderingProperty attr="showBoundaries" name="Show Boundaries" description="Show Administrative Boundaries" type="boolean" possibleValues=""
+    category="details"/>
+
   <!-- ATTRIBUTES -->
   <renderingAttribute name="defaultColor">
     <case attrColorValue="#fffbf4" />
@@ -1050,7 +1053,7 @@
         <case minzoom="9" strokeWidth="6:6" strokeWidth_0="1:1"/>
       </apply>
     </switch>
-    <switch minzoom="2">
+    <switch minzoom="2" showBoundaries="true">
       <case tag="admin_level" value="3"/>
       <case tag="admin_level" value="4"/>
       <apply color="$boundaryColorOuter" pathEffect="10_10">
@@ -1062,6 +1065,22 @@
         <case maxzoom="8" strokeWidth="2" strokeWidth_0="1:1"/>
         <case minzoom="9" strokeWidth="3" strokeWidth_0="1:1"/>
       </apply>
+    </switch>
+    <switch showBoundaries="true">
+      <switch>
+        <case tag="admin_level" value="5" minzoom="11" pathEffect="6_3_2_3_2_3" pathEffect_0="6_3_2_3_2_3"/>
+        <case tag="admin_level" value="6" minzoom="11" pathEffect="6_3_2_3" pathEffect_0="6_3_2_3"/>
+<!--         <case tag="admin_level" value="7" minzoom="12" pathEffect="5_1" pathEffect_0="5_1"/>
+        <case tag="admin_level" value="8" minzoom="12" pathEffect="5_1" pathEffect_0="5_1"/>
+        <case tag="admin_level" value="9" minzoom="13" pathEffect="4_1" pathEffect_0="4_1"/>
+        <case tag="admin_level" value="10" minzoom="13" pathEffect="4_1" pathEffect_0="4_1"/>
+ -->        <apply color="$boundaryColorOuter" color_0="$boundaryColorInner" strokeWidth="3:3" strokeWidth_0="0.6"/>
+      </switch>
+      <!-- <case tag="boundary" value="national_park" minzoom="7">
+        <case maxzoom="9" strokeWidth="1.5:1.5"/>
+        <case minzoom="10" strokeWidth="3:3"/>
+        <apply color="$boundaryNationalParkColor2" color_0="$boundaryNationalParkColor" strokeWidth_0="0.6" pathEffect="4_1" pathEffect_0="4_1"/>
+      </case> -->
     </switch>
   </line>
 </renderingStyle>
