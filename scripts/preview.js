@@ -78,7 +78,7 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css' />
     <link rel='stylesheet' href='https://aratcliffe.github.io/Leaflet.contextmenu/dist/leaflet.contextmenu.css' />
     <script src='https://unpkg.com/leaflet@1.7.1/dist/leaflet.js' integrity='sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==' crossorigin=''></script>
-    <script src='http://aratcliffe.github.io/Leaflet.contextmenu/dist/leaflet.contextmenu.js'></script>
+    <script src='https://aratcliffe.github.io/Leaflet.contextmenu/dist/leaflet.contextmenu.js'></script>
     <style>
     html,body,#map{width:100%;height:100%;margin: 0; padding: 0;}
     #crosshair { left: calc(50% - 10px); top: calc(50% - 10px); position: absolute; width: 20px; height: 20px; z-index: 10000; text-align: center; font-weight: normal; font-size: 32px; color: #222; text-shadow: 1px 1px 3px #fff; }
@@ -122,11 +122,11 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
       '-',*/
       {
         text: 'Edit in OSM (Maxar)',
-        callback: (e) => window.open('http://www.openstreetmap.org/edit#background=Maxar-Standard&map=16/' + e.latlng.lat + '/' + e.latlng.lng)
+        callback: (e) => window.open('https://www.openstreetmap.org/edit#background=Maxar-Standard&map=16/' + e.latlng.lat + '/' + e.latlng.lng)
       },
       {
         text: 'Edit in OSM (WorldTopoMap)',
-        callback: (e) => window.open('http://www.openstreetmap.org/edit#background=custom:https://{switch:services,server}.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer/tile/{zoom}/{y}/{x}&map=16/' + e.latlng.lat + '/' + e.latlng.lng)
+        callback: (e) => window.open('https://www.openstreetmap.org/edit#background=custom:https://{switch:services,server}.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer/tile/{zoom}/{y}/{x}&map=16/' + e.latlng.lat + '/' + e.latlng.lng)
       }      
     ]
   })
