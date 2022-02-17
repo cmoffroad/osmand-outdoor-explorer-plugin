@@ -14,6 +14,9 @@
   <renderingProperty attr="showBoundaries" name="Show Boundaries" description="Show Administrative Boundaries" type="boolean" possibleValues=""
     category="details"/>
 
+  <renderingProperty attr="showFixme" name="Show Fixme" description="Show Fixme Notes" type="boolean" possibleValues=""
+    category="details"/>
+
   <!-- ATTRIBUTES -->
   <renderingAttribute name="defaultColor">
     <case attrColorValue="#fffbf4" />
@@ -190,7 +193,15 @@
   <renderingAttribute name="beachColor">
     <case attrColorValue="#FFD9A7"/>
   </renderingAttribute>
-  
+
+  <renderingConstant name="highwayTrackTextHaloRadiusDay" value="1"/>
+
+  <renderingAttribute name="highwayTrackTextHaloColor">
+    <case nightMode="true" attrColorValue="#99333333"/>
+    <case attrColorValue="#ffffff"/>
+  </renderingAttribute>
+
+  <renderingConstant name="highwayTrackTextHaloColorDay" value="#aaf1eae4"/>  
 
   <renderingConstant name="boundaryNationalParkColor" value="#a0800080"/>
   <renderingConstant name="boundaryNationalParkColor2" value="#5009dd09"/>
@@ -231,8 +242,9 @@
         <case tag="noexit" value="" />
         <case tag="ford" value="yes"/>
         <case tag="waterway" value="waterfall"/>
-        <!-- <case tag="fixme_tag" value="yes"/> -->
-        <case tag="fixme" value="continue"/>
+        <case tag="fixme_tag" value="yes"/>
+        <case tag="note_tag" value="yes"/>
+        <case tag="description_tag" value="yes"/>
         <case tag="natural" value="peak">
           <apply_if additional="ele_limit=200" maxzoom="12" order="-1"/>
           <apply_if additional="ele_limit=500" maxzoom="11" order="-1"/>
@@ -271,6 +283,9 @@
       <!-- ORDER - LINE -->
       <switch area="false" objectType="2" order="80">
         <case tag="fixme_tag" value="yes" order="12"/>
+        <case tag="description_tag" value="yes" order="13"/>
+        <case tag="note_tag" value="yes" order="14"/>
+        <case tag="name" value="" order="11"/>
         <!-- default line -->
         <case layer="-1" tag="" value="" order="11"/>
         <case tag="" value="" order="12"/>
@@ -521,13 +536,56 @@
     </switch> -->
 
     <!-- TEXT - FIXME -->
-    <switch minzoom="14" intersectionSizeFactor="0" intersectionMargin="0">
-      <switch tag="fixme_tag" value="yes" nameTag="fixme" textColor="#ffffff" textHaloColor="#ccf800e0" textWrapWidth="20" textOrder="1" additional="object_type=way" minzoom="14">
+    <switch showFixme="true" minzoom="13" intersectionSizeFactor="0" intersectionMargin="0">
+      <switch tag="fixme_tag" value="yes" nameTag="fixme" textColor="#ffffff" textHaloColor="#ccf800e0" textWrapWidth="20" textOrder="1">
         <case maxzoom="15" textSize="10" textDy="-40"/>
         <case minzoom="16" textSize="11" textDy="-50"/>
       </switch>
+      <!-- <switch>
+        <case tag="description_tag" value="yes" nameTag="description"/>
+        <apply textColor="#ffffff" textHaloColor="#cc347b4c" textOrder="33" textWrapWidth="20">
+          <apply_if minzoom="13" textSize="11" textDy="30"/>
+          <apply_if engine_v1="true" minzoom="16" textDy="24"/>
+        </apply>
+      </switch> -->
       <apply textBold="true" textHaloRadius="2"/>
     </switch>
+
+    <!-- <switch minzoom="14" textColor="#000000" textHaloRadius="$highwayTrackTextHaloRadiusDay" textHaloColor="$highwayTrackTextHaloColorDay" textOnPath="true" nameTag="">
+      <case tag="highway" value="primary" textOrder="94"/>
+      <case tag="highway" value="secondary" textOrder="94"/>
+      <case tag="highway" value="tertiary" textOrder="94"/>
+      <case minzoom="16" tag="area:highway" value="tertiary" textBold="true" textItalic="true" textOrder="95" intersectsWith="any" textWrapWidth="25"/>
+      <case tag="highway" value="tertiary_link" textOrder="96"/>
+      <apply>
+        <case maxzoom="14" textSize="12"/>
+        <case maxzoom="15" textSize="13"/>
+        <case maxzoom="16" textSize="14"/>
+        <case maxzoom="17" textSize="16"/>
+        <case minzoom="18" textSize="18"/>
+      </apply>
+    </switch> -->
+
+    <switch minzoom="13">
+      <switch>
+        <case tag="highway" value="track" nameTag="" textOrder="11"/>
+        <case tag="highway" value="path" nameTag="" textOrder="12"/>
+        <case tag="highway" value="footway" nameTag="" textOrder="13"/>
+        <apply>
+          <case nameTag="" />
+          <apply maxzoom="14" textSize="12"/>
+        </apply>
+      </switch>
+      <apply textColor="#000000" textHaloRadius="$highwayTrackTextHaloRadiusDay" textHaloColor="$highwayTrackTextHaloColorDay" textOnPath="true"/>
+      <apply_if minzoom="15">
+        <case maxzoom="15" textSize="13"/>
+        <case maxzoom="16" textSize="14"/>
+        <case maxzoom="17" textSize="16"/>
+        <case minzoom="18" textSize="18"/>
+      </apply_if>
+    </switch>
+
+
   </text>
 
   <point>
@@ -576,7 +634,7 @@
     </case>
 
     <!-- POINT - FIXME -->
-    <case minzoom="14" tag="fixme_tag" value="yes" iconOrder="128" icon="fixme_tag_lowzoom_yes"  iconVisibleSize="10" intersectionSizeFactor="2" />
+    <case showFixme="true" minzoom="13" tag="fixme_tag" value="yes" iconOrder="128" icon="fixme_tag_lowzoom_yes"  iconVisibleSize="10" intersectionSizeFactor="2" />
 
   </point>
 
@@ -1026,7 +1084,7 @@
     </switch>
 
     <!-- LINE - FIXME -->
-    <switch minzoom="13">
+    <switch minzoom="13" showFixme="true">
       <case tag="fixme_tag" value="yes" color="$fixmeColor"  />
       <apply>
         <case maxzoom="14" strokeWidth="2:2"/>
