@@ -18,6 +18,7 @@
   "devDependencies": {
     "express": "^4.17.2",
     "onchange": "^7.1.0",
+    "serve": "^13.0.2",
     "sqlite3": "^5.0.2"
   }
 }
