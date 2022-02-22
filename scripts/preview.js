@@ -130,7 +130,6 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
       try {
         user = JSON.parse(res).user;
       } catch (e) {}
-      console.log(err, res);
       if (err || !user) {
         document.querySelector('body').innerHTML = err;
       } else if (USERS.indexOf(user.display_name) === -1) {
@@ -190,7 +189,11 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
         {
           text: 'Edit in OSM (WorldTopoMap)',
           callback: (e) => window.open('https://www.openstreetmap.org/edit#background=custom:https://{switch:services,server}.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer/tile/{zoom}/{y}/{x}&map=16/' + e.latlng.lat + '/' + e.latlng.lng)
-        }      
+        },
+        {
+          text: 'Open with Google (Terrain)',
+          callback: (e) => window.open('https://www.google.com/maps/@?api=1&map_action=map&basemap=terrain&center='+ e.latlng.lat + ',' + e.latlng.lng + '&zoom=' + map.getZoom())
+        }
       ]
     })
     .setView(center, ${zoom});
