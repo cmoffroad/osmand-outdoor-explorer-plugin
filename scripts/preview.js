@@ -111,7 +111,7 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
     authenticate()
   };
 
-  const USERS = [ 'cmoffroad' ];
+  const USERS = [ 'cmoffroad', 'crsCR', 'kellerk', 'Bernhard Hiller', 'Russ McD', 'cdohrman', 'ben-cnx' ];
 
   function authenticate() {
     if (auth.authenticated()) {
