@@ -115,11 +115,15 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
     contextmenu: true,
     contextmenuWidth: 200,
     contextmenuItems: [
-      /*{
+      {
         text: 'Center map here',
         callback: (e) => map.panTo(e.latlng)
       },
-      '-',*/
+      {
+        text: 'Copy coordinates',
+        callback: (e) => navigator.clipboard.writeText(e.latlng.lat + ',' + e.latlng.lng)
+      },
+      '-',
       {
         text: 'Edit in OSM (Maxar)',
         callback: (e) => window.open('https://www.openstreetmap.org/edit#background=Maxar-Standard&map=16/' + e.latlng.lat + '/' + e.latlng.lng)
@@ -148,11 +152,14 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
     'google (satellite)': L.tileLayer('https://mt3.Google.com/vt?z={z}&x={x}&y={y}&lyrs=y')
   };
 
+  const hillshadeLayer = L.tileLayer('./tiles/{z}/{x}/{y}-hillshade.png', { minNativeZoom: 12, maxNativeZoom: 12, transparency: true, opacity: 0.2 }).addTo(map);
+
   var overlays = {
+    'SRTM Hillshade 20%': hillshadeLayer,
     'OSM GPS traces': L.tileLayer('https://{s}.gps-tile.openstreetmap.org/lines/{z}/{x}/{y}.png'),
+    'DRR Dynamic': L.tileLayer.wms('https://gisportal.drr.go.th/portal/sharing/servers/aa5fdea8d96542d49d3d8731d77458b7/rest/services/GISBaseMaps/DRR_Dynamic/MapServer/export?transparent=true&format=png&layers=show:1,2,3,4,5,6,7&bboxSR=102100&f=image')
   };
 
-  L.tileLayer('./tiles/{z}/{x}/{y}-hillshade.png', { minNativeZoom: 12, maxNativeZoom: 12, transparency: true, opacity: 0.2 }).addTo(map);
   
   L.control.layers(baseLayers, overlays).addTo(map);
 </script>
