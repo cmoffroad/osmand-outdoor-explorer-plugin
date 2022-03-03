@@ -75,21 +75,41 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
   <meta charset='utf-8' />
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <link rel='stylesheet' href='https://unpkg.com/leaflet@1.7.1/dist/leaflet.css' integrity='sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==' crossorigin='' />
-    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css' />
     <link rel='stylesheet' href='https://aratcliffe.github.io/Leaflet.contextmenu/dist/leaflet.contextmenu.css' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css' />
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js'></script>
     <script src='https://unpkg.com/leaflet@1.7.1/dist/leaflet.js' integrity='sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==' crossorigin=''></script>
     <script src='https://aratcliffe.github.io/Leaflet.contextmenu/dist/leaflet.contextmenu.js'></script>
     <script src='https://osmlab.github.io/osm-auth/osmauth.js'></script>
     <style>
-    html,body,#map{width:100%;height:100%;margin: 0; padding: 0;}
-    #crosshair { left: calc(50% - 10px); top: calc(50% - 10px); position: absolute; width: 20px; height: 20px; z-index: 10000; text-align: center; font-weight: normal; font-size: 32px; color: #222; text-shadow: 1px 1px 3px #fff; }
+    html,body,.app,.map,#map{width:100%;height:100%;margin: 0; padding: 0;}
+    .app { opacity: 0; }
+    .navigation { position: fixed; z-index: 967; }
+    .feedback { top: 50%; position: fixed; left: 50%; transform: translate(-50%, -50%); z-index: 1000; }
+    .logout { display: none; }
+    #crosshair { user-select: none; left: calc(50% - 10px); top: calc(50% - 10px); position: absolute; width: 20px; height: 20px; z-index: 10000; text-align: center; font-weight: normal; font-size: 32px; color: #222; text-shadow: 1px 1px 3px #fff; }
   </style>
 </head>
 <body>
-<div id='map'></div>
-<div id='crosshair'>⌖</div>
-<script>
-  
+  <div class='feedback'>Authenticating...</div>
+  <div class='app'>
+    <nav class='navigation light-blue lighten-1'>
+      <div class='nav-wrapper'>
+        <ul class='right'>
+          <li><a href='./build/osmand-offroad-survey-plugin.osf'>Download</a></li>
+          <li><a href='https://github.com/cmoffroad/osmand-offroad-survey-plugin'>Documentation</a></li>
+          <li class='logout'><a href='#' onclick='logout()'>Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class='map'>
+      <div id='map'></div>
+      <div id='crosshair'>⌖</div>
+    </div>
+  </div>
+  <script>
+
   var auth = osmAuth({
     oauth_secret: '9WfJnwQxDvvYagx1Ut0tZBsOZ0ZCzAvOje3u1TV0',
     oauth_consumer_key: 'WLwXbm6XFMG7WrVnE8enIF6GzyefYIN6oUJSxG65',
@@ -98,18 +118,22 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
     landing: window.location.href
   });
 
-  var urlParams = new URLSearchParams(window.location.search);
-  if(urlParams.has('oauth_token')){
-    auth.bootstrapToken(urlParams.get('oauth_token'), (error) => {
-      if(error !== null) {
-        window.location.href = window.location.origin;
-      } else 
-        authenticate();
-    });
+  if (window.location.protocol.match('file')) {
+    draw();
+  } else {
+    var urlParams = new URLSearchParams(window.location.search);
+    if(urlParams.has('oauth_token')){
+      auth.bootstrapToken(urlParams.get('oauth_token'), (error) => {
+        if(error !== null) {
+          window.location.href = window.location.origin;
+        } else 
+          authenticate();
+      });
+    }
+    else {
+      authenticate();
+    };
   }
-  else {
-    authenticate()
-  };
 
   const USERS = [ 'cmoffroad', 'crsCR', 'kellerk', 'Bernhard Hiller', 'Russ McD', 'cdohrman', 'ben-cnx' ];
 
@@ -131,10 +155,11 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
         user = JSON.parse(res).user;
       } catch (e) {}
       if (err || !user) {
-        document.querySelector('body').innerHTML = err;
+        document.querySelector('.feedback').innerHTML = err;
       } else if (USERS.indexOf(user.display_name) === -1) {
-        document.querySelector('body').innerHTML = '<br>&nbsp;&nbsp;&nbsp;&nbsp;Please contact OSM user <a href=https://www.openstreetmap.org/message/new/cmoffroad>cmoffroad</a> to request access.';
+        document.querySelector('.feedback').innerHTML = 'Please contact OSM user <a href=https://www.openstreetmap.org/message/new/cmoffroad>cmoffroad</a> to request access.';
       } else {
+        document.querySelector('.logout').style.display = 'block';
         draw();
       }
     });  
@@ -147,29 +172,30 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
 
   function draw() {
     const hash = location.hash || '#map=13/${lat}/${lon}';
-    const tokens = hash.substring(5).split('/');
+    const tokens = hash.substring(5).split('/').map(t => parseFloat(t));
 
     if (!location.hash) {
       history.pushState(null,null, hash);
     }
 
     const center = [ tokens[1], tokens[2] ], zoom = tokens[0];
+    console.log(center, zoom);
 
     const pluginLayer = L.tileLayer('./tiles/{z}/{x}/{y}.png?date=${date}', {
-      attribution: 'osmand-offroad-survey-plugin - <a href=https://github.com/cmoffroad/osmand-offroad-survey-plugin>Documentation</a> - <a href="#" onclick=logout()>Logout</a>',
+      attribution: '',
       minNativeZoom: ${zoom},
       maxNativeZoom: ${zoom}
     });
 
     var map = new L.Map('map', { 
       minZoom: 12, 
-      maxZoom: 15,
+      maxZoom: 16,
       maxBounds: ${xTiles} > 0 && ${yTiles} > 0 ? L.latLngBounds(
          L.latLng(${latMin}, ${lonMin}),
          L.latLng(${latMax}, ${lonMax})
       ) : undefined,
       layers: [ pluginLayer ],
-      zoomControl: true,
+      zoomControl: false,
       contextmenu: true,
       contextmenuWidth: 200,
       contextmenuItems: [
@@ -181,6 +207,19 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
           text: 'Copy coordinates',
           callback: (e) => navigator.clipboard.writeText(e.latlng.lat + ',' + e.latlng.lng)
         },
+        {
+          text: 'Download GPS data',
+          callback: (e) => window.open('https://api.openstreetmap.org/api/0.6/trackpoints?bbox=' + [map.getBounds().getWest(),map.getBounds().getSouth(),map.getBounds().getEast(),map.getBounds().getNorth()].join(',') + '&page=0')
+        },
+        '-',
+        {
+          text: 'Open with Google (Terrain)',
+          callback: (e) => window.open('https://www.google.com/maps/@?api=1&map_action=map&basemap=terrain&center='+ e.latlng.lat + ',' + e.latlng.lng + '&zoom=' + map.getZoom())
+        },
+        {
+          text: 'Open with Google (Street View)',
+          callback: (e) => window.open('https://www.google.com/maps/@?api=1&map_action=pano&basemap=terrain&viewpoint='+ e.latlng.lat + ',' + e.latlng.lng + '&zoom=' + map.getZoom())
+        },
         '-',
         {
           text: 'Edit in OSM (Maxar)',
@@ -189,14 +228,9 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
         {
           text: 'Edit in OSM (WorldTopoMap)',
           callback: (e) => window.open('https://www.openstreetmap.org/edit#background=custom:https://{switch:services,server}.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer/tile/{zoom}/{y}/{x}&map=16/' + e.latlng.lat + '/' + e.latlng.lng)
-        },
-        {
-          text: 'Open with Google (Terrain)',
-          callback: (e) => window.open('https://www.google.com/maps/@?api=1&map_action=map&basemap=terrain&center='+ e.latlng.lat + ',' + e.latlng.lng + '&zoom=' + map.getZoom())
         }
       ]
-    })
-    .setView(center, ${zoom});
+    });
     map.attributionControl.setPrefix('');
     map.on('moveend', (e) => {
       const center = e.target.getCenter(), zoom = e.target.getZoom();
@@ -211,7 +245,8 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
       'komoot': L.tileLayer('https://{s}.tile.komoot.de/komoot/{z}/{x}/{y}.png?lang=en'),
       'mapy.cz': L.tileLayer('https://mapserver.mapy.cz/base-m/{z}-{x}-{y}?sdk=HgUbCgUbGkgqAQkYBxYEHQNHQlJfR1VfQlBZSw%3D%3D'),
       'google (terrain)': L.tileLayer('https://mt3.Google.com/vt?z={z}&x={x}&y={y}&lyrs=p'),
-      'google (satellite)': L.tileLayer('https://mt3.Google.com/vt?z={z}&x={x}&y={y}&lyrs=y')
+      'google (satellite)': L.tileLayer('https://mt3.Google.com/vt?z={z}&x={x}&y={y}&lyrs=y'),
+      'none': L.tileLayer('')
     };
 
     const hillshadeLayer = L.tileLayer('./tiles/{z}/{x}/{y}-hillshade.png', { minNativeZoom: 12, maxNativeZoom: 12, transparency: true, opacity: 0.2 }).addTo(map);
@@ -222,8 +257,16 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
       'DRR Dynamic': L.tileLayer.wms('https://gisportal.drr.go.th/portal/sharing/servers/aa5fdea8d96542d49d3d8731d77458b7/rest/services/GISBaseMaps/DRR_Dynamic/MapServer/export?transparent=true&format=png&layers=show:1,2,3,4,5,6,7&bboxSR=102100&f=image')
     };
 
+    L.control.zoom({ position: 'bottomleft' }).addTo(map);
     
-    L.control.layers(baseLayers, overlays).addTo(map);
+    L.control.layers(baseLayers, overlays, { position: 'bottomright' } ).addTo(map);
+
+    map.setView(center, ${zoom});
+    
+    document.querySelector('.app').style.opacity = 1;
+    document.querySelector('.feedback').style.display = 'none';
+
+
   }
 </script>
 </body>
