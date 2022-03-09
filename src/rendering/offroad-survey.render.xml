@@ -17,6 +17,8 @@
   <renderingProperty attr="showFixme" name="Show Fixme" description="Show Fixme Notes" type="boolean" possibleValues=""
     category="details"/>
 
+  <renderingProperty attr="showConcreteLanesAsPaved" name="Show concrete lanes as paved" description="Show concrete lanes as paved" type="boolean" possibleValues="" category="details"/>
+
   <!-- ATTRIBUTES -->
   <renderingAttribute name="defaultColor">
     <case attrColorValue="#fffbf4" />
@@ -83,7 +85,7 @@
       <case additional="surface=paved" />
       <case additional="surface=concrete" />
       <case additional="surface=concrete:plates" />
-      <case additional="surface=concrete:lanes" />
+      <case showConcreteLanesAsPaved="true" additional="surface=concrete:lanes" />
       <case additional="surface=asphalt" />
       <case additional="surface=chipseal" />
       <apply attrColorValue="#FFFFFF" />
