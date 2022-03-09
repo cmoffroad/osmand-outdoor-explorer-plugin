@@ -78,9 +78,12 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
     <link rel='stylesheet' href='https://aratcliffe.github.io/Leaflet.contextmenu/dist/leaflet.contextmenu.css' />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css' />
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet' />
     <script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js'></script>
     <script src='https://unpkg.com/leaflet@1.7.1/dist/leaflet.js' integrity='sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==' crossorigin=''></script>
     <script src='https://aratcliffe.github.io/Leaflet.contextmenu/dist/leaflet.contextmenu.js'></script>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
+    <script src="https://unpkg.com/mapbox-gl-leaflet/leaflet-mapbox-gl.js"></script>
     <script src='https://osmlab.github.io/osm-auth/osmauth.js'></script>
     <style>
     html,body,.app,.map,#map{width:100%;height:100%;margin: 0; padding: 0;}
@@ -135,7 +138,7 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
     };
   }
 
-  const USERS = [ 'cmoffroad', 'crsCR', 'kellerk', 'Bernhard Hiller', 'Russ McD', 'cdohrman', 'ben-cnx' ];
+  const USERS = [ 'cmoffroad', 'crsCR', 'kellerk', 'Bernhard Hiller', 'Russ McD', 'cdohrman', 'ben-cnx', 'CMEtours' ];
 
   function authenticate() {
     if (auth.authenticated()) {
@@ -168,6 +171,12 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
   function logout() {
     auth.logout();
     window.location.reload(); 
+  }
+
+  function getTileURL(zoom, lat, lon) {
+    var xtile = parseInt(Math.floor( (lon + 180) / 360 * (1<<zoom) ));
+    var ytile = parseInt(Math.floor( (1 - Math.log(Math.tan(lat * Math.PI / 180) + 1 / Math.cos(lat * Math.PI / 180)) / Math.PI) / 2 * (1<<zoom) ));
+    return '/tiles/' + zoom + '/' + xtile + '/' + ytile;
   }
 
   function draw() {
@@ -203,10 +212,16 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
           text: 'Center map here',
           callback: (e) => map.panTo(e.latlng)
         },
+        '-',
         {
           text: 'Copy coordinates',
           callback: (e) => navigator.clipboard.writeText(e.latlng.lat + ',' + e.latlng.lng)
         },
+        {
+          text: 'Copy tile URL',
+          callback: (e) => navigator.clipboard.writeText(getTileURL(map.getZoom(), e.latlng.lat, e.latlng.lng))
+        },
+        '-',
         {
           text: 'Download GPS data',
           callback: (e) => window.open('https://api.openstreetmap.org/api/0.6/trackpoints?bbox=' + [map.getBounds().getWest(),map.getBounds().getSouth(),map.getBounds().getEast(),map.getBounds().getNorth()].join(',') + '&page=0')
@@ -239,11 +254,15 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
 
     var baseLayers = {
       'osmand-offroad-survey-plugin': pluginLayer,
+      'komoot': L.tileLayer('https://tile.hosted.thunderforest.com/komoot-2/{z}/{x}/{y}.png'),
+      'strava': L.tileLayer('https://a.tiles.mapbox.com/styles/v1/strava/ck2gt6oil0c7y1cnvlz1uphnu/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic3RyYXZhIiwiYSI6IlpoeXU2U0UifQ.c7yhlZevNRFCqHYm6G6Cyg'),
+      'maps.me': L.mapboxGL({ style: 'https://tiles.maps.me/styles/mapsme_style.json' }),
+      'mapy.cz': L.tileLayer('https://mapserver.mapy.cz/base-m/{z}-{x}-{y}?sdk=HgUbCgUbGkgqAQkYBxYEHQNHQlJfR1VfQlBZSw%3D%3D'),
+      'osm': L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png'),
+      'cyclosm': L.tileLayer('https://b.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png'),
       'cyclemap': L.tileLayer('https://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey=6170aad10dfd42a38d4d8c709a536f38'),
       'opentopomap': L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png'),
       'worldtopomap': L.tileLayer('https://services.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'),
-      'komoot': L.tileLayer('https://{s}.tile.komoot.de/komoot/{z}/{x}/{y}.png?lang=en'),
-      'mapy.cz': L.tileLayer('https://mapserver.mapy.cz/base-m/{z}-{x}-{y}?sdk=HgUbCgUbGkgqAQkYBxYEHQNHQlJfR1VfQlBZSw%3D%3D'),
       'google (terrain)': L.tileLayer('https://mt3.Google.com/vt?z={z}&x={x}&y={y}&lyrs=p'),
       'google (satellite)': L.tileLayer('https://mt3.Google.com/vt?z={z}&x={x}&y={y}&lyrs=y'),
       'none': L.tileLayer('')
