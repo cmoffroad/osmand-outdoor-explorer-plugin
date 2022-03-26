@@ -105,7 +105,7 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
 
   var map = new L.Map('map', { 
     minZoom: 12, 
-    maxZoom: 15,
+    maxZoom: 16,
     maxBounds: ${xTiles} > 0 && ${yTiles} > 0 ? L.latLngBounds(
        L.latLng(${latMin}, ${lonMin}),
        L.latLng(${latMax}, ${lonMax})
@@ -115,6 +115,10 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
     contextmenu: true,
     contextmenuWidth: 200,
     contextmenuItems: [
+      {
+        text: 'Lookup GPS data',
+        callback: (e) => window.open('https://api.openstreetmap.org/api/0.6/trackpoints?bbox=' + [map.getBounds().getWest(),map.getBounds().getSouth(),map.getBounds().getEast(),map.getBounds().getNorth()].join(',') + '&page=0')
+      },
       /*{
         text: 'Center map here',
         callback: (e) => map.panTo(e.latlng)
