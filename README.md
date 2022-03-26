@@ -13,8 +13,6 @@ Noticeable features compared to standard offroad/topo map styles:
 - dead-end (`noexit=yes`) shown as black dots, fallen trees (`barrier=log`) as danger icon, all other barriers (`barrier=*`) as red dots, fixme as pink dots
 - unpaved roads that were not added based on a ground survey (`source=GPS`), as well as paths tagged without `motorcycle=yes` will have their color set to pink
 
-[Web Preview.](https://cmoffroad.github.io/osm-tools/osmand-offroad-survey-plugin-preview/)
-
 <p float="left">
   <img src="https://raw.githubusercontent.com/cmoffroad/osmand-offroad-survey-plugin/master/screenshots/sample1.jpeg" width="250" />
   <img src="https://raw.githubusercontent.com/cmoffroad/osmand-offroad-survey-plugin/master/screenshots/sample2.jpeg" width="250" />
@@ -30,7 +28,7 @@ Noticeable features compared to standard offroad/topo map styles:
 
 ### Plugin First-time Installation (Android only)
 
-- Download [Plugin OSF file](https://github.com/cmoffroad/osmand-offroad-survey-plugin/raw/master/build/osmand-offroad-survey-plugin.osf) from your mobile browser.
+- From your mobile browser, go to [Web Preview.](https://cmoffroad.github.io/osm-tools/osmand-offroad-survey-plugin-preview/) and click on Download.
 - Once download is complete, click on Open.
 - OsmAnd should automatically open and inform you the plugin has been successfully added.
 - Wait a few seconds for Suggested maps to show up (standard, contour lines, hillshade)
