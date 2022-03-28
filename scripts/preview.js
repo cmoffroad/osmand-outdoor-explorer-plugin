@@ -228,6 +228,15 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
         },
         '-',
         {
+          text: 'Compare Aerial Imagery',
+          callback: (e) => window.open('https://www.cmoffroad.com/aerial-imagery/#map=' + map.getZoom() + '/' + e.latlng.lat + '/' + e.latlng.lng)
+        },
+        {
+          text: 'Open with Thailands Roads Map',
+          callback: (e) => window.open('http://www.cmoffroad.com/thailand-roads/#map=' + map.getZoom() + '/' + e.latlng.lat + '/' + e.latlng.lng)
+        },
+        '-',
+        {
           text: 'Open with Google (Terrain)',
           callback: (e) => window.open('https://www.google.com/maps/@?api=1&map_action=map&basemap=terrain&center='+ e.latlng.lat + ',' + e.latlng.lng + '&zoom=' + map.getZoom())
         },
@@ -265,6 +274,7 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
       'worldtopomap': L.tileLayer('https://services.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'),
       'google (terrain)': L.tileLayer('https://mt3.Google.com/vt?z={z}&x={x}&y={y}&lyrs=p'),
       'google (satellite)': L.tileLayer('https://mt3.Google.com/vt?z={z}&x={x}&y={y}&lyrs=y'),
+      'TomTom': L.tileLayer('https://{s}.api.tomtom.com/map/1/tile/basic/main/{z}/{x}/{y}.png?key=8h504Wc4AXL6OPndqhrtKf70AovVBL3V'),
       'none': L.tileLayer('')
     };
 
@@ -272,8 +282,10 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
 
     var overlays = {
       'SRTM Hillshade 20%': hillshadeLayer,
+      'Mapbox Locator': L.tileLayer('https://api.mapbox.com/styles/v1/openstreetmap/ckasmteyi1tda1ipfis6wqhuq/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJja2w5YWtqbDAwcGFkMnZtdngzbWtlbDE3In0.U3DODCbBGFfFXkilttz1YA', { minNativeZoom: 15 }),
       'OSM GPS traces': L.tileLayer('https://{s}.gps-tile.openstreetmap.org/lines/{z}/{x}/{y}.png'),
-      'DRR Dynamic': L.tileLayer.wms('https://gisportal.drr.go.th/portal/sharing/servers/aa5fdea8d96542d49d3d8731d77458b7/rest/services/GISBaseMaps/DRR_Dynamic/MapServer/export?transparent=true&format=png&layers=show:1,2,3,4,5,6,7&bboxSR=102100&f=image')
+      'Strava traces': L.tileLayer('https://heatmap-external-a.strava.com/tiles/all/bluered/{z}/{x}/{y}.png?px=256', { maxNativeZoom: 12 }),
+      'L7108': L.tileLayer.wms('http://cld.drr.go.th/geoserver/gwc/service/wms?service=WMS&request=GetMap&layers=ProtoPj%3Agis_road_l7018&styles=&format=image%2Fpng&transparent=true&version=1.1.1&srs=EPSG%3A3857')
     };
 
     L.control.zoom({ position: 'bottomleft' }).addTo(map);
