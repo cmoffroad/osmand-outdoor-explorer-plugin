@@ -273,14 +273,12 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
       'opentopomap': L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png'),
       'worldtopomap': L.tileLayer('https://services.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'),
       'google (terrain)': L.tileLayer('https://mt3.Google.com/vt?z={z}&x={x}&y={y}&lyrs=p'),
-      'google (satellite)': L.tileLayer('https://mt3.Google.com/vt?z={z}&x={x}&y={y}&lyrs=y'),
-      'TomTom': L.tileLayer('https://{s}.api.tomtom.com/map/1/tile/basic/main/{z}/{x}/{y}.png?key=8h504Wc4AXL6OPndqhrtKf70AovVBL3V'),
       'none': L.tileLayer('')
     };
 
     const hillshadeLayer = L.tileLayer('./tiles/{z}/{x}/{y}-hillshade.png', { minNativeZoom: 12, maxNativeZoom: 12, transparency: true, opacity: 0.2 }).addTo(map);
 
-    var overlays = {
+    const overlays = {
       'SRTM Hillshade 20%': hillshadeLayer,
       'Mapbox Locator': L.tileLayer('https://api.mapbox.com/styles/v1/openstreetmap/ckasmteyi1tda1ipfis6wqhuq/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJja2w5YWtqbDAwcGFkMnZtdngzbWtlbDE3In0.U3DODCbBGFfFXkilttz1YA', { minNativeZoom: 15 }),
       'OSM GPS traces': L.tileLayer('https://{s}.gps-tile.openstreetmap.org/lines/{z}/{x}/{y}.png'),
