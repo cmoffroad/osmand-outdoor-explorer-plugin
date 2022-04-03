@@ -1,7 +1,5 @@
 # OsmAnd Offroad Survey Plugin
 
-[Quick Download Link.](https://github.com/cmoffroad/osmand-offroad-survey-plugin/raw/master/build/osmand-offroad-survey-plugin.osf)
-
 This plugin for OsmAnd includes a default profile for offroad surveys and a lightweight map style improving the appearance of unpaved roads and trails.
 
 Based on following offroad guidelines: https://github.com/cmoffroad/osm-guidelines
@@ -28,7 +26,7 @@ Noticeable features compared to standard offroad/topo map styles:
 
 ### Plugin First-time Installation (Android only)
 
-- From your mobile browser, go to [Web Preview.](https://www.cmoffroad.com/osmand-offroad-survey-plugin-preview/) and click on Download.
+- From your mobile browser, login via OpenStreetMap to [Web Preview.](https://www.cmoffroad.com/osmand-offroad-survey-plugin-preview/) and click on Download.
 - Once download is complete, click on Open.
 - OsmAnd should automatically open and inform you the plugin has been successfully added.
 - Wait a few seconds for Suggested maps to show up (standard, contour lines, hillshade)
