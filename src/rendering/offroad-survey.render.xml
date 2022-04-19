@@ -19,6 +19,84 @@
 
   <!-- <renderingProperty attr="showConcreteLanesAsPaved" name="Show concrete lanes as paved" description="Show concrete lanes as paved" type="boolean" possibleValues="" category="details"/> -->
 
+  <!-- MATERIAL COLORS -->
+
+  <renderingAttribute name="red">
+    <case attrColorValue="#f44336" />
+  </renderingAttribute>
+
+  <renderingAttribute name="pink">
+    <case attrColorValue="#e91e63" />
+  </renderingAttribute>
+
+  <renderingAttribute name="purple">
+    <case attrColorValue="#9c27b0" />
+  </renderingAttribute>
+
+  <renderingAttribute name="deepPurple">
+    <case attrColorValue="#673ab7" />
+  </renderingAttribute>
+
+  <renderingAttribute name="indigo">
+    <case attrColorValue="#3f51b5" />
+  </renderingAttribute>
+
+  <renderingAttribute name="blue">
+    <case attrColorValue="#2196f3" />
+  </renderingAttribute>
+
+  <renderingAttribute name="lightBlue">
+    <case attrColorValue="#03a9f4" />
+  </renderingAttribute>
+
+  <renderingAttribute name="cyan">
+    <case attrColorValue="#00bcd4" />
+  </renderingAttribute>
+
+  <renderingAttribute name="yellow">
+    <case attrColorValue="#ffeb3b" />
+  </renderingAttribute>
+
+  <renderingAttribute name="yellow">
+    <case attrColorValue="#ffeb3b" />
+  </renderingAttribute>
+
+  <renderingAttribute name="amber">
+    <case attrColorValue="#ffc107" />
+  </renderingAttribute>
+
+  <renderingAttribute name="orange">
+    <case attrColorValue="#ff9800" />
+  </renderingAttribute>
+
+  <renderingAttribute name="deepOrange">
+    <case attrColorValue="#ff5722" />
+  </renderingAttribute>
+
+  <renderingAttribute name="brown">
+    <case attrColorValue="#795548" />
+  </renderingAttribute>
+
+  <renderingAttribute name="grey">
+    <case attrColorValue="#9e9e9e" />
+  </renderingAttribute>
+
+  <renderingAttribute name="blueGrey">
+    <case attrColorValue="#607d8b" />
+  </renderingAttribute>
+
+  <renderingAttribute name="white">
+    <case attrColorValue="#FFFFFF" />
+  </renderingAttribute>
+
+  <renderingAttribute name="black">
+    <case attrColorValue="#000000" />
+  </renderingAttribute>
+
+  <renderingAttribute name="transparent">
+    <case attrColorValue="#00000000" />
+  </renderingAttribute>
+
   <!-- ATTRIBUTES -->
   <renderingAttribute name="defaultColor">
     <case attrColorValue="#fffbf4" />
@@ -30,18 +108,34 @@
 
   <renderingAttribute name="missingColor">
     <case attrColorValue="#fa00ff" />
+    <!-- <case attrColorValue="$grey" /> -->
+    <!-- <case attrColorValue="$brown" /> -->
+    <!-- <case attrColorValue="$blueGrey" /> -->
   </renderingAttribute>
 
-  <renderingAttribute name="transparentColor">
-    <case attrColorValue="#00000000" />
+  <renderingAttribute name="missingSurfaceColor">
+    <!-- <case attrColorValue="$grey" /> -->
+    <!-- <case attrColorValue="$brown" /> -->
+    <case attrColorValue="$blueGrey" />
+    <!-- <case attrColorValue="$deepPurple" /> -->
+    <!-- <case attrColorValue="$indigo" /> -->
   </renderingAttribute>
 
   <renderingAttribute name="fixmeColor">
-    <case attrColorValue="#fffb00" />
+    <case attrColorValue="#yellow" />
+  </renderingAttribute>
+
+  <renderingAttribute name="motorcycleColor">
+    <case attrColorValue="$yellow" />
+    <!-- <case attrColorValue="$orange" /> -->
+    <!-- <case attrColorValue="$deepOrange" /> -->
+    <!-- <case attrColorValue="$amber" /> -->
   </renderingAttribute>
 
   <renderingAttribute name="accessColor">
-    <case attrColorValue="#FF0000" />
+    <!-- <case attrColorValue="#FF0000" /> -->
+    <!-- <case attrColorValue="$pink" /> -->
+    <case attrColorValue="$grey" />
   </renderingAttribute>
 
   <renderingAttribute name="shadowRendering">
@@ -52,91 +146,100 @@
   </renderingAttribute>
 
   <renderingAttribute name="minorRoadStrokeColor">
-    <case attrColorValue="#444444" maxzoom="12" />
-    <apply additional="access=no" minzoom="13">
-      <case additional="foot=yes" />
-      <case attrColorValue="$accessColor" />
-    </apply>
-    <switch minzoom="13">
-      <case additional="access=private" />
-      <case additional="access=destination" />
-      <case additional="access=customers" />
-      <apply attrColorValue="$accessColor" />
-    </switch>
+    <case maxzoom="12" attrColorValue="$brown" />
     <apply minzoom="13">
-      <case additional="survey=ground" />
-      <case attrColorValue="$missingColor" />
-      <!-- <case showFixme="true" attrColorValue="$missingColor" />
-      <case showFixme="false" attrColorValue="$transparentColor" /> -->
+      <apply additional="access=no">
+        <case additional="foot=yes" />
+        <case attrColorValue="$accessColor" />
+      </apply>
+      <switch>
+        <case additional="access=private" />
+        <case additional="access=destination" />
+        <case additional="access=customers" />
+        <apply attrColorValue="$accessColor" />
+      </switch>
+      <apply>
+        <case additional="survey=ground" />
+        <case attrColorValue="$missingColor" />
+      </apply>
+      <!-- <case additional="motorcycle=yes" attrColorValue="$motorcycleColor" /> -->
+      <switch>
+        <case additional="surface=paved" />
+        <case additional="surface=concrete" />
+        <case additional="surface=concrete:plates" />
+        <case additional="surface=concrete:lanes" />
+        <case additional="surface=asphalt" />
+        <case additional="surface=chipseal" />
+        <apply attrColorValue="$white" />
+      </switch>
+      <case additional="surface=" attrColorValue="$black" />
+      <case attrColorValue="$missingSurfaceColor" />
     </apply>
-    <switch>
-      <case additional="surface=paved" />
-      <case additional="surface=concrete" />
-      <case additional="surface=concrete:plates" />
-      <case additional="surface=concrete:lanes" />
-      <case additional="surface=asphalt" />
-      <case additional="surface=chipseal" />
-      <apply attrColorValue="#FFFFFF" />
-    </switch>
-    <case additional="surface=" attrColorValue="#000000" minzoom="13" />
-    <case attrColorValue="#888888" minzoom="13" />
-  </renderingAttribute>
-
-  <renderingAttribute name="majorRoadStrokeColor">
-    <case attrColorValue="#000000" maxzoom="12" />
-    <switch>
-      <case additional="surface=paved" />
-      <case additional="surface=concrete" />
-      <case additional="surface=concrete:plates" />
-      <case additional="surface=concrete:lanes" />
-      <case additional="surface=asphalt" />
-      <case additional="surface=chipseal" />
-      <apply attrColorValue="#FFFFFF" />
-    </switch>
-    <case additional="surface=" attrColorValue="#000000" minzoom="13" />
-    <case attrColorValue="#FFFFFF" minzoom="13" />
   </renderingAttribute>
 
   <renderingAttribute name="minorRoadCasingColor">
-    <apply additional="access=no" minzoom="13">
-      <case additional="foot=yes" />
-      <case attrColorValue="$transparentColor" />
-    </apply>
-    <switch minzoom="13">
-      <case additional="access=private" />
-      <case additional="access=destination" />
-      <case additional="access=customers" />
-      <apply attrColorValue="$transparentColor" />
-    </switch>
     <apply minzoom="13">
-      <case additional="survey=ground" />
-      <case attrColorValue="$transparentColor" />
+      <case additional="fixme_tag=yes" color="$yellow" />
+      <apply additional="access=no">
+        <case additional="foot=yes" />
+        <case attrColorValue="$transparent" />
+      </apply>
+      <switch>
+        <case additional="access=private" />
+        <case additional="access=destination" />
+        <case additional="access=customers" />
+        <apply attrColorValue="$transparent" />
+      </switch>
+      <apply>
+        <case additional="survey=ground" />
+        <case attrColorValue="$transparent" />
+      </apply>
+      <!-- <case additional="motorcycle=yes" attrColorValue="$motorcycleColor" /> -->
+      <switch>
+        <case additional="surface=paved" />
+        <case additional="surface=concrete" />
+        <case additional="surface=concrete:plates" />
+        <case additional="surface=concrete:lanes" />
+        <case additional="surface=asphalt" />
+        <case additional="surface=chipseal" />
+        <apply attrColorValue="$black" />
+      </switch>
+      <case additional="surface=" attrColorValue="$transparent" />
+      <case attrColorValue="$transparent" />
     </apply>
-    <switch>
-      <case additional="surface=paved" />
-      <case additional="surface=concrete" />
-      <case additional="surface=concrete:plates" />
-      <case additional="surface=concrete:lanes" />
-      <case additional="surface=asphalt" />
-      <case additional="surface=chipseal" />
-      <apply attrColorValue="#000000" />
-    </switch>
-    <case attrColorValue="$transparentColor" />
+  </renderingAttribute>
+
+  <renderingAttribute name="majorRoadStrokeColor">
+    <case maxzoom="12" attrColorValue="$black" />
+    <apply minzoom="13">
+      <switch>
+        <case additional="surface=paved" />
+        <case additional="surface=concrete" />
+        <case additional="surface=concrete:plates" />
+        <case additional="surface=concrete:lanes" />
+        <case additional="surface=asphalt" />
+        <case additional="surface=chipseal" />
+        <apply attrColorValue="$white" />
+      </switch>
+      <case additional="surface=" attrColorValue="$black" />
+      <case attrColorValue="$white" />
+    </apply>
   </renderingAttribute>
 
   <renderingAttribute name="majorRoadCasingColor">
-    <case attrColorValue="#000000" maxzoom="12" />
-    <switch>
-      <case additional="surface=paved" />
-      <case additional="surface=concrete" />
-      <case additional="surface=concrete:plates" />
-      <case additional="surface=concrete:lanes" />
-      <case additional="surface=asphalt" />
-      <case additional="surface=chipseal" />
-      <apply attrColorValue="#000000" />
-    </switch>
-    <case additional="surface=" attrColorValue="#FFFFFF" minzoom="13" />
-    <case attrColorValue="#000000" />
+    <apply minzoom="13">
+      <switch>
+        <case additional="surface=paved" />
+        <case additional="surface=concrete" />
+        <case additional="surface=concrete:plates" />
+        <case additional="surface=concrete:lanes" />
+        <case additional="surface=asphalt" />
+        <case additional="surface=chipseal" />
+        <apply attrColorValue="$black" />
+      </switch>
+      <case additional="surface=" attrColorValue="$white" />
+      <case attrColorValue="$black" />
+    </apply>
   </renderingAttribute>
 
   <renderingAttribute name="gpx">
@@ -870,8 +973,6 @@
               <case tag="highway" value="service" />
               <apply 
                 color="$minorRoadStrokeColor" 
-                color__1="$minorRoadCasingColor"
-                color_0="$minorRoadCasingColor" 
                 shadowColor="$minorRoadCasingColor" 
                 shadowRadius="1:1" 
               />
@@ -904,17 +1005,14 @@
         <!-- [highway=path|footway] -->
         <case tag="highway" value="path" />
         <case tag="highway" value="footway" />
-        <apply_if maxzoom="13" strokeWidth_5="0.5"  strokeWidth="1.5" />
-        <apply_if maxzoom="14" strokeWidth_5="0.75"  strokeWidth="1.75" />
-        <apply_if minzoom="15" strokeWidth_5="1"  strokeWidth="2" />
-        <apply_if minzoom="16" strokeWidth_5="1.5" strokeWidth="2.5" />
-        <apply_if minzoom="16" strokeWidth_5="2" strokeWidth="3" />
-        <apply_if minzoom="17" strokeWidth_5="3" strokeWidth="4" />
-        <apply color="$minorRoadCasingColor" color_5="$minorRoadStrokeColor" pathEffect_5="" pathEffect=""
-          >
-<!--           <apply_if additional="motorcycle=yes" pathEffect_5="" pathEffect=""  /> -->
-          <!-- <apply_if additional="surface=paved" strokeWidth="1" shadowRadius="1" /> -->
-        </apply>
+        <apply_if maxzoom="13" strokeWidth="1" />
+        <apply_if maxzoom="14" strokeWidth="1.25" />
+        <apply_if minzoom="15" strokeWidth="1.5" />
+        <apply_if minzoom="16" strokeWidth="2" />
+        <apply_if minzoom="16" strokeWidth="2.5" />
+        <apply_if minzoom="17" strokeWidth="3.5" />
+        <apply shadowColor="$minorRoadCasingColor" color="$minorRoadStrokeColor" pathEffect="4_2" shadowRadius="1" />
+        <apply_if additional="motorcycle=yes" pathEffect="" />
       </switch>
       <!-- [highway=cycleway|bridleway|busway|pedestrian|escape|raceway] -->
       <switch>
