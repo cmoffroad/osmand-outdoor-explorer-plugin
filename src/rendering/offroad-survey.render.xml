@@ -113,20 +113,12 @@
     <!-- <case attrColorValue="$blueGrey" /> -->
   </renderingAttribute>
 
-  <renderingAttribute name="missingSurfaceColor">
-    <!-- <case attrColorValue="$grey" /> -->
-    <!-- <case attrColorValue="$brown" /> -->
-    <case attrColorValue="$blueGrey" />
-    <!-- <case attrColorValue="$deepPurple" /> -->
-    <!-- <case attrColorValue="$indigo" /> -->
-  </renderingAttribute>
-
   <renderingAttribute name="fixmeColor">
     <case attrColorValue="#yellow" />
   </renderingAttribute>
 
   <renderingAttribute name="motorcycleColor">
-    <case attrColorValue="$yellow" />
+    <case attrColorValue="$orange" />
     <!-- <case attrColorValue="$orange" /> -->
     <!-- <case attrColorValue="$deepOrange" /> -->
     <!-- <case attrColorValue="$amber" /> -->
@@ -134,8 +126,12 @@
 
   <renderingAttribute name="accessColor">
     <!-- <case attrColorValue="#FF0000" /> -->
-    <!-- <case attrColorValue="$pink" /> -->
-    <case attrColorValue="$grey" />
+    <case attrColorValue="$pink" />
+    <!-- <case attrColorValue="$grey" /> -->
+  </renderingAttribute>
+
+  <renderingAttribute name="buildingColor">
+    <case minzoom="14" attrColorValue="$grey" />
   </renderingAttribute>
 
   <renderingAttribute name="shadowRendering">
@@ -145,10 +141,12 @@
     <case attrIntValue="0"/>
   </renderingAttribute>
 
-  <renderingAttribute name="minorRoadStrokeColor">
-    <case maxzoom="12" attrColorValue="$brown" />
+  <!-- PATHS -->
+
+  <renderingAttribute name="pathStrokeColor">
+    <case maxzoom="12" attrColorValue="$transparent" />
     <apply minzoom="13">
-      <apply additional="access=no">
+      <!-- <apply additional="access=no">
         <case additional="foot=yes" />
         <case attrColorValue="$accessColor" />
       </apply>
@@ -157,12 +155,85 @@
         <case additional="access=destination" />
         <case additional="access=customers" />
         <apply attrColorValue="$accessColor" />
-      </switch>
+      </switch> -->
       <apply>
         <case additional="survey=ground" />
         <case attrColorValue="$missingColor" />
       </apply>
-      <!-- <case additional="motorcycle=yes" attrColorValue="$motorcycleColor" /> -->
+      <switch>
+        <case additional="surface=paved" />
+        <case additional="surface=concrete" />
+        <case additional="surface=concrete:plates" />
+        <case additional="surface=concrete:lanes" />
+        <case additional="surface=asphalt" />
+        <case additional="surface=chipseal" />
+        <apply attrColorValue="$white" />
+      </switch>
+      <switch>
+        <case tag="highway" value="steps" />
+        <case additional="smoothness=impassable" />
+        <case additional="motorcycle=no" />
+        <apply attrColorValue="$pink" pathEffect="2_2" />
+      </switch>    
+      <case additional="motorcycle=yes" attrColorValue="$black" />
+      <!-- <case additional="surface=" attrColorValue="$missingColor" /> -->
+      <case attrColorValue="$missingColor" />
+    </apply>
+  </renderingAttribute>
+
+  <renderingAttribute name="pathCasingColor">
+    <apply minzoom="13" pathEffect="">
+      <case additional="fixme_tag=yes" color="$yellow" />
+      <!-- <apply additional="access=no">
+        <case additional="foot=yes" />
+        <case attrColorValue="$transparent" />
+      </apply>
+      <switch>
+        <case additional="access=private" />
+        <case additional="access=destination" />
+        <case additional="access=customers" />
+        <apply attrColorValue="$transparent" />
+      </switch> -->
+      <apply>
+        <case additional="survey=ground" />
+        <case attrColorValue="$transparent" />
+      </apply>
+      <apply additional="motorcycle=yes" pathEffect=" " />
+      <switch>
+        <case additional="surface=paved" />
+        <case additional="surface=concrete" />
+        <case additional="surface=concrete:plates" />
+        <case additional="surface=concrete:lanes" />
+        <case additional="surface=asphalt" />
+        <case additional="surface=chipseal" />
+        <apply attrColorValue="$black" />
+      </switch>
+      <case additional="smoothness=horrible" attrColorValue="$yellow" />
+      <case additional="smoothness=very_horrible" attrColorValue="$deepOrange" />
+      <!-- <case additional="surface=" attrColorValue="$transparent" /> -->
+      <case attrColorValue="$transparent" />
+    </apply>
+  </renderingAttribute>
+
+  <!-- MINOR ROADS -->
+
+  <renderingAttribute name="minorRoadStrokeColor">
+    <case maxzoom="12" attrColorValue="$brown" />
+    <apply minzoom="13">
+      <!-- <apply additional="access=no">
+        <case additional="foot=yes" />
+        <case attrColorValue="$accessColor" />
+      </apply>
+      <switch>
+        <case additional="access=private" />
+        <case additional="access=destination" />
+        <case additional="access=customers" />
+        <apply attrColorValue="$accessColor" />
+      </switch> -->
+      <apply>
+        <case additional="survey=ground" />
+        <case attrColorValue="$grey" />
+      </apply>
       <switch>
         <case additional="surface=paved" />
         <case additional="surface=concrete" />
@@ -173,28 +244,32 @@
         <apply attrColorValue="$white" />
       </switch>
       <case additional="surface=" attrColorValue="$black" />
-      <case attrColorValue="$missingSurfaceColor" />
+      <switch>
+        <case tag="highway" value="path" />
+        <case tag="highway" value="track" />
+        <apply attrColorValue="$black" />
+      </switch>
+      <case attrColorValue="$grey" />
     </apply>
   </renderingAttribute>
 
   <renderingAttribute name="minorRoadCasingColor">
     <apply minzoom="13">
       <case additional="fixme_tag=yes" color="$yellow" />
-      <apply additional="access=no">
+      <!-- <apply additional="access=no">
         <case additional="foot=yes" />
-        <case attrColorValue="$transparent" />
+        <case attrColorValue="$accessColor" />
       </apply>
       <switch>
         <case additional="access=private" />
         <case additional="access=destination" />
         <case additional="access=customers" />
-        <apply attrColorValue="$transparent" />
-      </switch>
+        <apply attrColorValue="$accessColor" />
+      </switch> -->
       <apply>
         <case additional="survey=ground" />
         <case attrColorValue="$transparent" />
       </apply>
-      <!-- <case additional="motorcycle=yes" attrColorValue="$motorcycleColor" /> -->
       <switch>
         <case additional="surface=paved" />
         <case additional="surface=concrete" />
@@ -204,10 +279,12 @@
         <case additional="surface=chipseal" />
         <apply attrColorValue="$black" />
       </switch>
-      <case additional="surface=" attrColorValue="$transparent" />
-      <case attrColorValue="$transparent" />
+      <case additional="surface=" attrColorValue="$transparent"/>
+      <case attrColorValue="$black" />
     </apply>
   </renderingAttribute>
+
+  <!-- MAJOR ROADS -->
 
   <renderingAttribute name="majorRoadStrokeColor">
     <case maxzoom="12" attrColorValue="$black" />
@@ -810,6 +887,11 @@
       <apply color="$defaultColor"/>
     </switch>
 
+    <switch>
+      <case tag="building" value=""/>
+      <apply color="$buildingColor" />
+    </switch>
+
   </polygon>
 
   <line>
@@ -817,224 +899,87 @@
     <case minzoom="1" tag="natural" value="coastline_broken" color="#111111" strokeWidth=":1"/>
     <case minzoom="5" tag="natural" value="coastline_line" color="#4580cf" strokeWidth=":1"/>
 
-    <!-- LINE - HIGHWAY LOW ZOOM -->
+    <!-- LINE - HIGHWAY-->
     <switch>
       <switch minzoom="6">
-        <switch maxzoom="12">
-          <switch>
-            <switch>
-              <case tag="highway" value="motorway" color="$majorRoadStrokeColor" color__2="$majorRoadCasingColor" shadowColor="$majorRoadCasingColor"/>
-              <case tag="highway" value="trunk" color="$majorRoadStrokeColor" color__2="$majorRoadCasingColor" shadowColor="$majorRoadCasingColor"/>
-              <apply>
-                <case maxzoom="6" strokeWidth="0.5"/>
-                <case maxzoom="8" strokeWidth="1:1"/>
-                <case maxzoom="9" strokeWidth="1.2:1.2"/>
-                <case maxzoom="10" strokeWidth="1.6:1.6"/>
-                <case maxzoom="11" strokeWidth="1.8:1.8"/>
-                <case maxzoom="12" strokeWidth="2.2:2.2"/>
-                <case maxzoom="13" strokeWidth="2.5:2.5" strokeWidth_3="2.5:2.5"/>
-              </apply>
-              <apply>
-                <switch>
-                  <case maxzoom="6" shadowRadius="1"/>
-                  <case minzoom="7" shadowRadius="1:1">
-                  </case>
-                </switch>
-              </apply>
-            </switch>
-            <switch shadowRadius=":1">
-              <case tag="highway" value="motorway_link" color="$majorRoadStrokeColor" shadowColor="$majorRoadCasingColor"/>
-              <case tag="highway" value="trunk_link" color="$majorRoadStrokeColor" shadowColor="$majorRoadCasingColor"/>
-              <apply>
-                <case minzoom="11" maxzoom="11" strokeWidth="1.2:1.2"/>
-                <case maxzoom="12" strokeWidth="1.6:1.6"/>
-                <case maxzoom="13" strokeWidth="1.8:1.8" strokeWidth_3="1.8:1.8"/>
-              </apply>
-            </switch>
-            <apply cap="ROUND"/>
-          </switch>
-          <switch minzoom="6" maxzoom="13">
-            <case tag="highway" value="primary">
-              <apply_if maxzoom="6" strokeWidth="0.4"/>
-              <apply_if minzoom="7" strokeWidth="0.9"/>
-              <apply_if minzoom="9" strokeWidth="1.3:1.3"/>
-              <apply_if minzoom="10" strokeWidth="1.7:1.7"/>
-              <apply_if minzoom="11" strokeWidth="1.8:1.8"/>
-              <apply_if minzoom="12" strokeWidth="2:2"/>
-              <apply_if minzoom="13" strokeWidth="2:2" strokeWidth_3="2:2"/>
-            </case>
-            <case tag="highway" value="primary_link">
-              <apply_if minzoom="11" maxzoom="11" strokeWidth="1.1:1.1"/>
-              <apply_if minzoom="12" strokeWidth="1.4:1.4"/>
-              <apply_if minzoom="13" strokeWidth="1.6:1.6" strokeWidth_3="1.6:1.6"/>
-            </case>
-            <apply color="$majorRoadStrokeColor" cap="ROUND"/>
-            <apply_if minzoom="7" shadowColor="$majorRoadCasingColor"/>
-            <apply>
-              <switch minzoom="7">
-                <case maxzoom="8" shadowRadius="1"/>
-                <case minzoom="9" shadowRadius="1:1">
-                </case>
-              </switch>
-            </apply>
-          </switch>
-        </switch>
-
-        <switch minzoom="9" maxzoom="13">
-          <case tag="highway" value="secondary">
-            <apply_if maxzoom="9" strokeWidth="1.1:1.1"/>
-            <apply_if minzoom="10" strokeWidth="1.3:1.3"/>
-            <apply_if minzoom="11" strokeWidth="1.5:1.5"/>
-            <apply_if minzoom="12" strokeWidth="1.7:1.7"/>
-            <apply_if minzoom="13" strokeWidth="1.7:1.7" strokeWidth_3="1.7:1.7"/>
-          </case>
-          <case tag="highway" value="secondary_link">
-            <apply_if minzoom="11" strokeWidth="1:1"/>
-            <apply_if minzoom="12" strokeWidth="1.1:1.1"/>
-            <apply_if minzoom="13" strokeWidth="1.2:1.2" strokeWidth_3="1.2:1.2"/>
-          </case>
-          <apply color="$majorRoadStrokeColor" shadowColor="$majorRoadCasingColor" cap="ROUND"/>
-          <apply>
-            <switch minzoom="8">
-              <case maxzoom="11" shadowRadius="1"/>
-              <case minzoom="12" shadowRadius="1:1">
-              </case>
-            </switch>
-          </apply>
-        </switch>
+        <case tag="highway" value="motorway" />
+        <case tag="highway" value="motorway_link" />
+        <case tag="highway" value="trunk" />
+        <case tag="highway" value="trunk_link" />
+        <case tag="highway" value="primary" />
+        <case tag="highway" value="primary_link" />
+        <case tag="highway" value="secondary" />
+        <case tag="highway" value="secondary_link" />
+        <apply_if maxzoom="6" strokeWidth="0.5"/>
+        <apply_if minzoom="7" strokeWidth="0.75"/>
+        <apply_if minzoom="8" strokeWidth="1"/>
+        <apply_if maxzoom="9" strokeWidth="1.25" />
+        <apply_if minzoom="10" strokeWidth="1.5" />
+        <apply_if minzoom="11" strokeWidth="1.75" />
+        <apply_if minzoom="12" strokeWidth="2" />
+        <apply_if minzoom="13" strokeWidth="2.5" />
+        <apply_if maxzoom="14" strokeWidth="3.25" />
+        <apply_if maxzoom="15" strokeWidth="4"/>
+        <apply_if maxzoom="16" strokeWidth="4.75" />
+        <apply_if maxzoom="17" strokeWidth="5.5"/>
+        <apply_if maxzoom="18" strokeWidth="6.25" />
+        <apply_if minzoom="19" strokeWidth="7" />
+        <apply 
+          color="$majorRoadStrokeColor" 
+          shadowColor="$majorRoadCasingColor"  
+          cap="ROUND" 
+          shadowRadius="1"/>
       </switch>
-      <switch>
-        <switch minzoom="14">
-          <switch>
-            <case tag="highway" value="motorway" color="$majorRoadStrokeColor" color__1="$majorRoadStrokeColor" color__2="$majorRoadCasingColor" color_0="$majorRoadCasingColor" shadowColor="$majorRoadCasingColor"/>
-            <case tag="highway" value="trunk" color="$majorRoadStrokeColor" color__1="$majorRoadStrokeColor" color__2="$majorRoadCasingColor" color_0="$majorRoadCasingColor" shadowColor="$majorRoadCasingColor"/>
-            <case tag="highway" value="primary" color="$majorRoadStrokeColor" color__1="$majorRoadStrokeColor" color_0="$majorRoadCasingColor" shadowColor="$majorRoadCasingColor"/>
-            <case tag="highway" value="secondary" color="$majorRoadStrokeColor" color__1="$majorRoadCasingColor" color_0="$majorRoadCasingColor" shadowColor="$majorRoadCasingColor"/>
-            <apply cap="ROUND" shadowRadius="1:1">
-              <case maxzoom="14" strokeWidth="4:4" strokeWidth_3="4:4"/>
-              <case maxzoom="15" strokeWidth="5.5:5.5" strokeWidth_3="5.5:5.5"/>
-              <case maxzoom="16" strokeWidth="7:7" strokeWidth_3="7:7"/>
-              <case maxzoom="17" strokeWidth="8.5:8.5" strokeWidth_3="8.5:8.5"/>
-              <case maxzoom="18" strokeWidth="10:10" strokeWidth_3="10:10"/>
-              <case minzoom="19" strokeWidth="11.5:11.5" strokeWidth_3="11.5:11.5"/>
-            </apply>
-          </switch>
-          <switch>
-            <case tag="highway" value="motorway_link" color="$majorRoadStrokeColor" color__1="$majorRoadStrokeColor" shadowColor="$majorRoadCasingColor" />
-            <case tag="highway" value="trunk_link" color="$majorRoadStrokeColor" color__1="$majorRoadStrokeColor" shadowColor="$majorRoadCasingColor" />
-            <case tag="highway" value="primary_link" color="$majorRoadStrokeColor" color__1="$majorRoadStrokeColor" shadowColor="$majorRoadCasingColor" />
-            <case tag="highway" value="secondary_link" color="$majorRoadStrokeColor" color__1="$majorRoadStrokeColor" shadowColor="$majorRoadCasingColor" />
-            <apply cap="ROUND" shadowRadius="1:1">
-              <case maxzoom="14" strokeWidth="2.5:2.5" strokeWidth_3="2.5:2.5"/>
-              <case maxzoom="15" strokeWidth="3.7:3.7" strokeWidth_3="3.7:3.7"/>
-              <case maxzoom="16" strokeWidth="4:4" strokeWidth_3="4:4"/>
-              <case maxzoom="17" strokeWidth="5:5" strokeWidth_3="5:5"/>
-              <case maxzoom="18" strokeWidth="6:6" strokeWidth_3="6:6"/>
-              <case minzoom="19" strokeWidth="7:7" strokeWidth_3="7:7"/>
-            </apply>
-          </switch>
-        </switch>
-        <!-- <switch>
-          <switch minzoom="11">
-            <case tag="highway" value="tertiary"/>
-            <case tag="highway" value="tertiary_link"/>
-            <apply shadowColor="#000000"/>
-            <apply_if maxzoom="11" shadowRadius="1"/>
-            <apply_if minzoom="12" shadowRadius="1:1"/>
-            <apply color="$minorRoadStrokeColor" color__1="$majorRoadCasingColor" color__3="$minorRoadCasingColor" shadowColor="$minorRoadCasingColor" cap="ROUND">
-              <case maxzoom="13">
-                <apply>
-                  <apply_if minzoom="11" maxzoom="11" strokeWidth="0.9" strokeWidth_3="0.9"/>
-                  <apply_if minzoom="12" maxzoom="12" strokeWidth="1:1" strokeWidth_3="1:1"/>
-                  <apply_if minzoom="13" maxzoom="13" strokeWidth="1.5:1.5" strokeWidth_3="1.5:1.5"/>
-                </apply>
-              </case>
-              <case minzoom="14" color_0="$minorRoadCasingColor">
-                <case maxzoom="14" strokeWidth="2.5:2.5" strokeWidth_3="2.5:2.5"/>
-                <case maxzoom="15" strokeWidth="4.5:4.5" strokeWidth_3="4.5:4.5"/>
-                <case maxzoom="16" strokeWidth="6:6" strokeWidth_3="6:6"/>
-                <case maxzoom="17" strokeWidth="9:9" strokeWidth_3="9:9"/>
-                <case maxzoom="18" strokeWidth="10.5:10.5" strokeWidth_3="10.5:10.5"/>
-                <case minzoom="19" strokeWidth="12:12" strokeWidth_3="12:12"/>
-              </case>
-            </apply>
-          </switch>
-        </switch> -->
-        <switch>
-          <switch>
-            <!-- [highway=tertiary|unclassified|track|residential|living_street|service] -->
-            <switch minzoom="12">
-              <case tag="highway" value="tertiary"/>
-              <case tag="highway" value="tertiary_link"/>
-              <case tag="highway" value="unclassified" />
-              <case tag="highway" value="living_street" />
-              <case tag="highway" value="residential" />
-              <case tag="highway" value="track" />
-              <case tag="highway" value="service" />
-              <apply 
-                color="$minorRoadStrokeColor" 
-                shadowColor="$minorRoadCasingColor" 
-                shadowRadius="1:1" 
-              />
-            </switch>
-          </switch>
-          <apply>
-            <case maxzoom="13" strokeWidth="0.7" strokeWidth_3="0.7" shadowRadius=":1"/>
-            <case minzoom="14" maxzoom="14" strokeWidth="1:1" strokeWidth_3="1:1" shadowRadius=":1">
-            </case>
-            <case minzoom="15" maxzoom="15" strokeWidth="2:2" strokeWidth_3="2:2"/>
-            <case minzoom="16" maxzoom="16" strokeWidth="3:3" strokeWidth_3="3:3"/>
-            <case minzoom="17" maxzoom="17" strokeWidth="4:4" strokeWidth_3="4:4"/>
-            <case minzoom="18" maxzoom="18" strokeWidth="5.5:5.5" strokeWidth_3="5.5:5.5"/>
-            <case minzoom="19" strokeWidth="7:7" strokeWidth_3="7:7"/>
-          </apply>
-        </switch>
-      </switch>
-      <apply_if minzoom="13" maxzoom="13" pathEffect_3="1_3"/>
-      <apply_if minzoom="14" maxzoom="14" pathEffect_3="2_6"/>
-      <apply_if minzoom="15" maxzoom="15" pathEffect_3="2_8"/>
-      <apply_if minzoom="16" maxzoom="16" pathEffect_3="2_11"/>
-      <apply_if minzoom="17" maxzoom="17" pathEffect_3="2_13"/>
-      <apply_if minzoom="18" maxzoom="18" pathEffect_3="2_17"/>
-      <apply_if minzoom="19" pathEffect_3="2_20"/>
-    </switch>
-
-    <!-- LINE - HIGHWAY HIGH ZOOM -->
-    <switch minzoom="13">
-      <switch>
-        <!-- [highway=path|footway] -->
-        <case tag="highway" value="path" />
-        <case tag="highway" value="footway" />
-        <apply_if maxzoom="13" strokeWidth="1" />
-        <apply_if maxzoom="14" strokeWidth="1.25" />
-        <apply_if minzoom="15" strokeWidth="1.5" />
-        <apply_if minzoom="16" strokeWidth="2" />
-        <apply_if minzoom="16" strokeWidth="2.5" />
-        <apply_if minzoom="17" strokeWidth="3.5" />
-        <apply shadowColor="$minorRoadCasingColor" color="$minorRoadStrokeColor" pathEffect="4_2" shadowRadius="1" />
-        <apply_if additional="motorcycle=yes" pathEffect="" />
-      </switch>
-      <!-- [highway=cycleway|bridleway|busway|pedestrian|escape|raceway] -->
-      <switch>
-        <case tag="highway" value="cycleway" />
+        
+      <!-- MINOR ROARDS-->
+      <switch minzoom="12">
+        <case tag="highway" value="tertiary"/>
+        <case tag="highway" value="tertiary_link"/>
+        <case tag="highway" value="unclassified" />
+        <case tag="highway" value="living_street" />
+        <case tag="highway" value="residential" />
+        <case tag="highway" value="track" />
+        <case tag="highway" value="service" />
         <case tag="highway" value="busway" />
         <case tag="highway" value="pedestrian" />
-        <apply_if maxzoom="12" strokeWidth_5="0.5:0.5" />
-        <apply_if maxzoom="13" strokeWidth_5="0.5:0.5" />
-        <apply_if maxzoom="14" strokeWidth_5="0.7:0.7" />
-        <apply_if minzoom="15" strokeWidth_5="1:1" />
-        <apply shadowRadius="2" color_5="#FF0000" strokeWidth="0.5" />
+        <case tag="highway" value="escape" />
+        <case tag="highway" value="raceway" />
+        <apply_if maxzoom="13" strokeWidth="1.5" />
+        <apply_if minzoom="14" strokeWidth="2.25"  />
+        <apply_if minzoom="15" strokeWidth="3" />
+        <apply_if minzoom="16" strokeWidth="3.75" />
+        <apply_if minzoom="17" strokeWidth="4.5" />
+        <apply_if minzoom="18" strokeWidth="5.25" />
+        <apply_if minzoom="19" strokeWidth="6" />
+        <apply 
+          color="$minorRoadStrokeColor" 
+          shadowColor="$minorRoadCasingColor"
+          cap="ROUND" 
+          shadowRadius="1"
+        />
       </switch>
-      <case minzoom="15" tag="highway" value="steps" strokeWidth="0.1">
-        <case maxzoom="15">
-          <case layer="1" strokeWidth_4="1.7:1.7" strokeWidth_5="1.7:1.7"/>
-          <case strokeWidth_4="2:2" strokeWidth_5="2:2"/>
-        </case>
-        <case maxzoom="15" strokeWidth=""/>
-        <case minzoom="16" strokeWidth_4="2:2" strokeWidth_5="2:2"/>
-        <apply color_5="#FF0000" pathEffect_5="1_2"/>
-        <apply_if additional="conveying=yes" pathEffect_5="2_1"/>
-      </case>
+
+      <switch minzoom="13">
+        <!-- PATHS -->
+        <case tag="highway" value="path" />
+        <case tag="highway" value="footway" />
+        <case tag="highway" value="cycleway" />
+        <case tag="highway" value="bridleway" />
+        <case tag="highway" value="steps" />
+        <apply_if maxzoom="13" strokeWidth="0.5" />
+        <apply_if maxzoom="14" strokeWidth="0.75" />
+        <apply_if minzoom="15" strokeWidth="1" />
+        <apply_if minzoom="16" strokeWidth="1.25" />
+        <apply_if minzoom="17" strokeWidth="1.5" />
+        <apply_if minzoom="18" strokeWidth="1.75" />
+        <apply_if minzoom="19" strokeWidth="2" />
+        <apply 
+          shadowColor="$pathCasingColor" 
+          color="$pathStrokeColor"
+          cap="ROUND" 
+          shadowRadius="1"
+        />
+      </switch>
     </switch>
 
     <!-- LINE - WATER -->
