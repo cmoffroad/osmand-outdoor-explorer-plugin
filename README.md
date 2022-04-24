@@ -1,5 +1,7 @@
 # OsmAnd Offroad Survey Plugin
 
+> **currently in beta testing, and only available to regular OSM mappers in Northern Thailand.**
+
 This plugin for OsmAnd includes a default profile for offroad surveys and a lightweight map style improving the appearance of unpaved roads and trails.
 
 Based on following offroad guidelines: https://github.com/cmoffroad/osm-guidelines
