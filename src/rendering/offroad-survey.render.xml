@@ -11,11 +11,11 @@
   <renderingProperty attr="contourWidth" name="Contour lines width" description="Contour lines width" type="string" possibleValues="thin,medium,thick" defaultValueDescription="default"/>
   <renderingProperty attr="contourDensity" name="Contour lines density" description="Contour lines density" type="string" possibleValues="low,medium_w,high" defaultValueDescription="default"/>
 
-  <renderingProperty attr="showBoundaries" name="Show Boundaries" description="Show Administrative Boundaries" type="boolean" possibleValues=""
-    category="details"/>
+  <!-- <renderingProperty attr="showBoundaries" name="Show Boundaries" description="Show Administrative Boundaries" type="boolean" possibleValues=""
+    category="details"/> -->
 
-  <renderingProperty attr="showFixme" name="Show Fixme" description="Show Fixme Notes" type="boolean" possibleValues=""
-    category="details"/>
+  <!-- <renderingProperty attr="showFixme" name="Show Fixme" description="Show Fixme Notes" type="boolean" possibleValues=""
+    category="details"/> -->
 
   <!-- <renderingProperty attr="showConcreteLanesAsPaved" name="Show concrete lanes as paved" description="Show concrete lanes as paved" type="boolean" possibleValues="" category="details"/> -->
 
@@ -113,16 +113,9 @@
     <!-- <case attrColorValue="$blueGrey" /> -->
   </renderingAttribute>
 
-  <renderingAttribute name="fixmeColor">
+  <!-- <renderingAttribute name="fixmeColor">
     <case attrColorValue="#yellow" />
-  </renderingAttribute>
-
-  <renderingAttribute name="motorcycleColor">
-    <case attrColorValue="$orange" />
-    <!-- <case attrColorValue="$orange" /> -->
-    <!-- <case attrColorValue="$deepOrange" /> -->
-    <!-- <case attrColorValue="$amber" /> -->
-  </renderingAttribute>
+  </renderingAttribute> -->
 
   <renderingAttribute name="accessColor">
     <!-- <case attrColorValue="#FF0000" /> -->
@@ -144,8 +137,8 @@
   <!-- PATHS -->
 
   <renderingAttribute name="pathStrokeColor">
-    <apply minzoom="13" pathEffect="">
-      <!-- <apply additional="access=no">
+    <apply minzoom="13">
+      <apply additional="access=no">
         <case additional="foot=yes" />
         <case attrColorValue="$accessColor" />
       </apply>
@@ -153,8 +146,9 @@
         <case additional="access=private" />
         <case additional="access=destination" />
         <case additional="access=customers" />
+        <case additional="motorcycle=no" />
         <apply attrColorValue="$accessColor" />
-      </switch> -->
+      </switch>
       <apply>
         <case additional="survey=ground" />
         <case attrColorValue="$missingColor" />
@@ -169,35 +163,37 @@
         <apply attrColorValue="$white" />
       </switch>
       <switch>
+        <case tag="highway" value="footway" />
         <case tag="highway" value="steps" />
         <case additional="smoothness=impassable" />
         <case additional="motorcycle=no" />
-        <apply attrColorValue="$pink" pathEffect="2_2" />
+        <apply attrColorValue="$black" pathEffect="3_3" />
       </switch>    
-      <case additional="motorcycle=yes" attrColorValue="$black" />
+      <case additional="motorcycle=yes" attrColorValue="$black" pathEffect="" />
       <!-- <case additional="surface=" attrColorValue="$missingColor" /> -->
-      <case attrColorValue="$missingColor" />
+      <case attrColorValue="$deepOrange" pathEffect="" />
     </apply>
   </renderingAttribute>
 
   <renderingAttribute name="pathCasingColor">
-    <apply minzoom="13" pathEffect="">
-      <case additional="fixme_tag=yes" color="$yellow" />
-      <!-- <apply additional="access=no">
-        <case additional="foot=yes" />
-        <case attrColorValue="$transparent" />
-      </apply>
+    <apply minzoom="13">
+<!--       <case additional="fixme_tag=yes" color="$yellow" /> -->
       <switch>
         <case additional="access=private" />
         <case additional="access=destination" />
         <case additional="access=customers" />
+        <case additional="motorcycle=no" />
         <apply attrColorValue="$transparent" />
-      </switch> -->
+      </switch>
       <apply>
         <case additional="survey=ground" />
         <case attrColorValue="$transparent" />
       </apply>
-      <apply additional="motorcycle=yes" pathEffect=" " />
+      <apply>
+        <case additional="survey=ground" />
+        <case attrColorValue="$transparent" />
+      </apply>
+      <apply additional="motorcycle=yes" />
       <switch>
         <case additional="surface=paved" />
         <case additional="surface=concrete" />
@@ -227,6 +223,7 @@
         <case additional="access=private" />
         <case additional="access=destination" />
         <case additional="access=customers" />
+        <case additional="motorcycle=no" />
         <apply attrColorValue="$accessColor" />
       </switch>
       <apply>
@@ -250,14 +247,14 @@
         <case tag="highway" value="track" />
         <apply attrColorValue="$black" />
       </switch>
-      <case attrColorValue="$grey" />
+      <case attrColorValue="$white" />
     </apply>
   </renderingAttribute>
 
   <renderingAttribute name="minorRoadCasingColor">
     <case tag="highway" value="tertiary" maxzoom="12" attrColorValue="$black" />
     <apply minzoom="13">
-      <case additional="fixme_tag=yes" color="$yellow" />
+      <!-- <case additional="fixme_tag=yes" color="$yellow" /> -->
       <apply additional="access=no">
         <case additional="foot=yes" />
         <case attrColorValue="$transparent" />
@@ -266,6 +263,7 @@
         <case additional="access=private" />
         <case additional="access=destination" />
         <case additional="access=customers" />
+        <case additional="motorcycle=no" />
         <apply attrColorValue="$transparent" />
       </switch>
       <apply>
@@ -281,7 +279,12 @@
         <case additional="surface=chipseal" />
         <apply attrColorValue="$black" />
       </switch>
-      <case additional="surface=" attrColorValue="$transparent"/>
+      <switch>
+        <case additional="surface=" />
+        <case tag="highway" value="path" />
+        <case tag="highway" value="track" />
+        <apply attrColorValue="$transparent" />
+      </switch>
       <case attrColorValue="$black" />
     </apply>
   </renderingAttribute>
@@ -731,20 +734,13 @@
     </switch> -->
 
     <!-- TEXT - FIXME -->
-    <switch showFixme="true" minzoom="13" intersectionSizeFactor="0" intersectionMargin="0">
+    <!-- <switch showFixme="true" minzoom="13" intersectionSizeFactor="0" intersectionMargin="0">
       <switch tag="fixme_tag" value="yes" nameTag="fixme" textColor="#ffffff" textHaloColor="#ccf800e0" textWrapWidth="20" textOrder="1">
         <case maxzoom="15" textSize="10" textDy="-40"/>
         <case minzoom="16" textSize="11" textDy="-50"/>
       </switch>
-      <!-- <switch>
-        <case tag="description_tag" value="yes" nameTag="description"/>
-        <apply textColor="#ffffff" textHaloColor="#cc347b4c" textOrder="33" textWrapWidth="20">
-          <apply_if minzoom="13" textSize="11" textDy="30"/>
-          <apply_if engine_v1="true" minzoom="16" textDy="24"/>
-        </apply>
-      </switch> -->
       <apply textBold="true" textHaloRadius="2"/>
-    </switch>
+    </switch> -->
 
     <!-- <switch minzoom="14" textColor="#000000" textHaloRadius="$highwayTrackTextHaloRadiusDay" textHaloColor="$highwayTrackTextHaloColorDay" textOnPath="true" nameTag="">
       <case tag="highway" value="primary" textOrder="94"/>
@@ -829,7 +825,7 @@
     </case>
 
     <!-- POINT - FIXME -->
-    <case showFixme="true" minzoom="14" tag="fixme_tag" value="yes" iconOrder="128" icon="fixme_tag_lowzoom_yes"  iconVisibleSize="10" intersectionSizeFactor="2" />
+    <case minzoom="14" tag="fixme_tag" value="yes" iconOrder="128" icon="fixme_tag_lowzoom_yes"  iconVisibleSize="10" intersectionSizeFactor="2" />
 
   </point>
 
@@ -1103,7 +1099,7 @@
     </switch>
 
     <!-- LINE - FIXME -->
-    <switch minzoom="13" showFixme="true">
+    <!-- <switch minzoom="13" showFixme="true">
       <case tag="fixme_tag" value="yes" color="$fixmeColor" />
       <apply>
         <case maxzoom="14" strokeWidth="2:2"/>
@@ -1113,7 +1109,7 @@
         <case maxzoom="18" strokeWidth="6:6"/>
         <case minzoom="19" strokeWidth="7:7"/>
       </apply>
-    </switch>
+    </switch> -->
 
     <!-- LINE - ADMIN LEVELS -->
     <switch minzoom="2">
@@ -1130,7 +1126,7 @@
         <case minzoom="9" strokeWidth="6:6" strokeWidth_0="1:1"/>
       </apply>
     </switch>
-    <switch minzoom="2" showBoundaries="true">
+    <!-- <switch minzoom="2" showBoundaries="true">
       <case tag="admin_level" value="3"/>
       <case tag="admin_level" value="4"/>
       <apply color="$boundaryColorOuter" pathEffect="10_10">
@@ -1147,17 +1143,8 @@
       <switch>
         <case tag="admin_level" value="5" minzoom="11" pathEffect="6_3_2_3_2_3" pathEffect_0="6_3_2_3_2_3"/>
         <case tag="admin_level" value="6" minzoom="11" pathEffect="6_3_2_3" pathEffect_0="6_3_2_3"/>
-<!--         <case tag="admin_level" value="7" minzoom="12" pathEffect="5_1" pathEffect_0="5_1"/>
-        <case tag="admin_level" value="8" minzoom="12" pathEffect="5_1" pathEffect_0="5_1"/>
-        <case tag="admin_level" value="9" minzoom="13" pathEffect="4_1" pathEffect_0="4_1"/>
-        <case tag="admin_level" value="10" minzoom="13" pathEffect="4_1" pathEffect_0="4_1"/>
- -->        <apply color="$boundaryColorOuter" color_0="$boundaryColorInner" strokeWidth="3:3" strokeWidth_0="0.6"/>
+        <apply color="$boundaryColorOuter" color_0="$boundaryColorInner" strokeWidth="3:3" strokeWidth_0="0.6"/>
       </switch>
-      <!-- <case tag="boundary" value="national_park" minzoom="7">
-        <case maxzoom="9" strokeWidth="1.5:1.5"/>
-        <case minzoom="10" strokeWidth="3:3"/>
-        <apply color="$boundaryNationalParkColor2" color_0="$boundaryNationalParkColor" strokeWidth_0="0.6" pathEffect="4_1" pathEffect_0="4_1"/>
-      </case> -->
-    </switch>
+    </switch> -->
   </line>
 </renderingStyle>
