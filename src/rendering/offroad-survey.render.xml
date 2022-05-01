@@ -108,6 +108,7 @@
 
   <renderingAttribute name="missingColor">
     <case attrColorValue="#fa00ff" />
+    <!-- <case attrColorValue="$deepPurple" /> -->
     <!-- <case attrColorValue="$grey" /> -->
     <!-- <case attrColorValue="$brown" /> -->
     <!-- <case attrColorValue="$blueGrey" /> -->
@@ -169,9 +170,12 @@
         <case additional="motorcycle=no" />
         <apply attrColorValue="$black" pathEffect="3_3" />
       </switch>    
-      <case additional="motorcycle=yes" attrColorValue="$black" pathEffect="" />
-      <!-- <case additional="surface=" attrColorValue="$missingColor" /> -->
-      <case attrColorValue="$deepOrange" pathEffect="" />
+      
+      <apply additional="motorcycle=yes">
+        <case additional="smoothness=very_horrible" attrColorValue="$black" pathEffect="10_3" />
+        <case attrColorValue="$black" pathEffect="" />
+      </apply>
+      <case attrColorValue="$black" pathEffect="10_3_3_3" />
     </apply>
   </renderingAttribute>
 
@@ -203,8 +207,8 @@
         <case additional="surface=chipseal" />
         <apply attrColorValue="$black" />
       </switch>
-      <case additional="smoothness=horrible" attrColorValue="$yellow" />
-      <case additional="smoothness=very_horrible" attrColorValue="$deepOrange" />
+      <!-- <case additional="smoothness=horrible" attrColorValue="$yellow" />
+      <case additional="smoothness=very_horrible" attrColorValue="$deepOrange" /> -->
       <!-- <case additional="surface=" attrColorValue="$transparent" /> -->
       <case attrColorValue="$transparent" />
     </apply>
@@ -213,7 +217,9 @@
   <!-- MINOR ROADS -->
 
   <renderingAttribute name="minorRoadStrokeColor">
-    <case tag="highway" value="tertiary" maxzoom="12" attrColorValue="$grey" />
+    <case tag="highway" value="tertiary" maxzoom="12" attrColorValue="$white" />
+    <case tag="highway" value="track" maxzoom="12" attrColorValue="$grey" />
+    <case tag="highway" value="unclassified" maxzoom="12" attrColorValue="$grey" />
     <apply minzoom="13">
       <apply additional="access=no">
         <case additional="foot=yes" />
