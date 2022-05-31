@@ -11,6 +11,7 @@
     "commit": "bash scripts/commit.sh",
     "download": "bash scripts/download.sh",
     "redraw": "bash scripts/redraw.sh",
+    "hillshade": "node scripts/tiles/extract.js",
     "preview": "node scripts/preview.js > scripts/preview.sh && sh scripts/preview.sh",
     "site": "node scripts/preview.js 49 > scripts/preview.sh && sh scripts/preview.sh"
   },

@@ -84,18 +84,16 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
     <script src='https://aratcliffe.github.io/Leaflet.contextmenu/dist/leaflet.contextmenu.js'></script>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
     <script src="https://unpkg.com/mapbox-gl-leaflet/leaflet-mapbox-gl.js"></script>
-    <script src='https://osmlab.github.io/osm-auth/osmauth.js'></script>
     <style>
     html,body,.app,.map,#map{width:100%;height:100%;margin: 0; padding: 0;}
-    .app { opacity: 0; }
     .navigation { position: fixed; z-index: 967; }
     .feedback { top: 50%; position: fixed; left: 50%; transform: translate(-50%, -50%); z-index: 1000; }
     .logout { display: none; }
     #crosshair { user-select: none; left: calc(50% - 10px); top: calc(50% - 10px); position: absolute; width: 20px; height: 20px; z-index: 10000; text-align: center; font-weight: normal; font-size: 32px; color: #222; text-shadow: 1px 1px 3px #fff; }
+    .leaflet-layer.slope img { filter: grayscale(1); }
   </style>
 </head>
 <body>
-  <div class='feedback'>Authenticating...</div>
   <div class='app'>
     <nav class='navigation light-blue lighten-1'>
       <div class='nav-wrapper'>
@@ -112,66 +110,6 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
     </div>
   </div>
   <script>
-
-  var auth = osmAuth({
-    oauth_secret: '9WfJnwQxDvvYagx1Ut0tZBsOZ0ZCzAvOje3u1TV0',
-    oauth_consumer_key: 'WLwXbm6XFMG7WrVnE8enIF6GzyefYIN6oUJSxG65',
-    auto: true,
-    singlepage: true,
-    landing: window.location.href
-  });
-
-  if (window.location.protocol.match('file')) {
-    draw();
-  } else {
-    var urlParams = new URLSearchParams(window.location.search);
-    if(urlParams.has('oauth_token')){
-      auth.bootstrapToken(urlParams.get('oauth_token'), (error) => {
-        if(error !== null) {
-          window.location.href = window.location.origin;
-        } else 
-          authenticate();
-      });
-    }
-    else {
-      authenticate();
-    };
-  }
-
-  const USERS = [ 'cmoffroad', 'crsCR', 'kellerk', 'Bernhard Hiller', 'Russ McD', 'cdohrman', 'ben-cnx', 'CMEtours' ];
-
-  function authenticate() {
-    if (auth.authenticated()) {
-      loadUser();
-    } else {
-      auth.authenticate(loadUser);
-    }
-  }
-
-  function loadUser() {
-    auth.xhr({
-      method: 'GET',
-      path: '/api/0.6/user/details.json'
-    }, (err, res) => {
-      let user = undefined;
-      try {
-        user = JSON.parse(res).user;
-      } catch (e) {}
-      if (err || !user) {
-        document.querySelector('.feedback').innerHTML = err;
-      } else if (USERS.indexOf(user.display_name) === -1) {
-        document.querySelector('.feedback').innerHTML = 'Please contact OSM user <a href=https://www.openstreetmap.org/message/new/cmoffroad>cmoffroad</a> to request access.';
-      } else {
-        document.querySelector('.logout').style.display = 'block';
-        draw();
-      }
-    });  
-  }
-
-  function logout() {
-    auth.logout();
-    window.location.reload(); 
-  }
 
   function getTileURL(zoom, lat, lon) {
     var xtile = parseInt(Math.floor( (lon + 180) / 360 * (1<<zoom) ));
@@ -248,10 +186,6 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
         {
           text: 'Edit in OSM (Maxar)',
           callback: (e) => window.open('https://www.openstreetmap.org/edit#background=Maxar-Standard&map=16/' + e.latlng.lat + '/' + e.latlng.lng)
-        },
-        {
-          text: 'Edit in OSM (WorldTopoMap)',
-          callback: (e) => window.open('https://www.openstreetmap.org/edit#background=custom:https://{switch:services,server}.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer/tile/{zoom}/{y}/{x}&map=16/' + e.latlng.lat + '/' + e.latlng.lng)
         }
       ]
     });
@@ -276,10 +210,13 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
       'none': L.tileLayer('')
     };
 
-    const hillshadeLayer = L.tileLayer('./tiles/{z}/{x}/{y}-hillshade.png', { minNativeZoom: 12, maxNativeZoom: 12, transparency: true, opacity: 0.2 }).addTo(map);
+    const hillshadeLayer = L.tileLayer('./tiles/{z}/{x}/{y}-hillshade.png', { className: 'hillshade', minNativeZoom: 12, maxNativeZoom: 12, transparency: true, opacity: 0.2 }).addTo(map);
+
+    const slopeLayer = L.tileLayer('./tiles/{z}/{x}/{y}-slope.png', { className: 'slope', minNativeZoom: 11, maxNativeZoom: 11, transparency: true, opacity: 0.5 });
 
     const overlays = {
       'SRTM Hillshade 20%': hillshadeLayer,
+      'SRTM Slope': slopeLayer,
       'Mapbox Locator': L.tileLayer('https://api.mapbox.com/styles/v1/openstreetmap/ckasmteyi1tda1ipfis6wqhuq/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJja2w5YWtqbDAwcGFkMnZtdngzbWtlbDE3In0.U3DODCbBGFfFXkilttz1YA', { minNativeZoom: 15 }),
       'OSM GPS traces': L.tileLayer('https://{s}.gps-tile.openstreetmap.org/lines/{z}/{x}/{y}.png'),
       'Strava traces': L.tileLayer('https://heatmap-external-a.strava.com/tiles/all/bluered/{z}/{x}/{y}.png?px=256', { maxNativeZoom: 12 }),
@@ -294,9 +231,9 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
     
     document.querySelector('.app').style.opacity = 1;
     document.querySelector('.feedback').style.display = 'none';
-
-
   }
+
+  draw();
 </script>
 </body>
 </html>`
@@ -317,7 +254,7 @@ const processZoom = (zoom, lat, lon, xTiles, yTiles, dirTiles, obfs) => {
   }
 
   console.log(`java -Xms64M -Xmx1024M -cp ../OsmAndMapCreator-main/OsmAndMapCreator.jar net.osmand.swing.OsmAndImageRendering \
-  -native=/Users/julien/Documents/WORKSPACE/OsmAnd/OsmAnd-core-legacy/binaries/darwin/intel/Release \
+  -native=/Users/julien/Documents/WORKSPACE/OSM/OsmAnd-core-legacy/binaries/darwin/intel/Release \
   -obfFiles=./obf/ \
   -gpxFile=./tmp/${zoom}.gpx \
   -output=./tmp`);
@@ -342,7 +279,7 @@ const lat = tile2lat(y+0.5, zooms[0]), lon = tile2lon(x+0.5, zooms[0]);
 
 const date = new Date().toISOString().split('T')[0];
 
-const previewDir = `../../OSM/osm-tools/osmand-offroad-survey-plugin-preview`;
+const previewDir = `../osm-tools/osmand-offroad-survey-plugin-preview`;
 
 if (xTiles > 0 && yTiles > 0) {
   const dirTiles = `${previewDir}/tiles`;
@@ -350,6 +287,8 @@ if (xTiles > 0 && yTiles > 0) {
 
   console.log(`rm -rf ./tmp/*`);
   console.log(`rm -rf ${dirTiles}`);
+
+  console.log(`npm run hillshade`);
 
   const obfs = getOBFs(dirObfs);
 

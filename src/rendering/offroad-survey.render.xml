@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <renderingStyle name="Offroad survey" depends="" version="1">
 
-  <renderingProperty attr="appMode" name="Rendering mode" description="Map optimization for respective User Profile" type="string" possibleValues="browse map,car,bicycle,pedestrian"/>
-
   <renderingProperty attr="baseAppMode" name="Default Rendering mode" description="Map optimization for respective User Profile based on base (parent) profile"
-    type="string" possibleValues="default, car, bicycle, pedestrian, public_transport, boat, ski"/>
+    type="string" possibleValues="motorcycle, bicycle, pedestrian"/>
 
   <!-- PROPERTY - CONTOUR LINES -->
   <renderingProperty attr="contourLines" name="Show contour lines" description="Select minimum zoom level to display in map if available. Separate contour file may be needed." type="string" possibleValues="disabled,16,15,14,13,12,11" defaultValueDescription="default13" category="details"/>
@@ -147,7 +145,7 @@
         <case additional="access=private" />
         <case additional="access=destination" />
         <case additional="access=customers" />
-        <case additional="motorcycle=no" />
+        <case baseAppMode="motorcycle" additional="motorcycle=no" />
         <apply attrColorValue="$accessColor" />
       </switch>
       <apply>
@@ -164,18 +162,17 @@
         <apply attrColorValue="$white" />
       </switch>
       <switch>
-        <case tag="highway" value="footway" />
+        <!-- <case tag="highway" value="footway" /> -->
         <case tag="highway" value="steps" />
         <case additional="smoothness=impassable" />
-        <case additional="motorcycle=no" />
         <apply attrColorValue="$black" pathEffect="3_3" />
       </switch>    
       
-      <apply additional="motorcycle=yes">
-        <case additional="smoothness=very_horrible" attrColorValue="$black" pathEffect="10_3" />
+      <apply baseAppMode="motorcycle" additional="motorcycle=yes">
+        <!-- <case additional="smoothness=very_horrible" attrColorValue="$black" pathEffect="10_3" /> -->
         <case attrColorValue="$black" pathEffect="" />
       </apply>
-      <case attrColorValue="$black" pathEffect="10_3_3_3" />
+      <case attrColorValue="$black" pathEffect="6_3" />
     </apply>
   </renderingAttribute>
 
@@ -186,7 +183,7 @@
         <case additional="access=private" />
         <case additional="access=destination" />
         <case additional="access=customers" />
-        <case additional="motorcycle=no" />
+        <case baseAppMode="motorcycle" additional="motorcycle=no" />
         <apply attrColorValue="$transparent" />
       </switch>
       <apply>
@@ -197,7 +194,7 @@
         <case additional="survey=ground" />
         <case attrColorValue="$transparent" />
       </apply>
-      <apply additional="motorcycle=yes" />
+      <apply baseAppMode="motorcycle" additional="motorcycle=yes" />
       <switch>
         <case additional="surface=paved" />
         <case additional="surface=concrete" />
@@ -229,7 +226,7 @@
         <case additional="access=private" />
         <case additional="access=destination" />
         <case additional="access=customers" />
-        <case additional="motorcycle=no" />
+        <case baseAppMode="motorcycle" additional="motorcycle=no" />
         <apply attrColorValue="$accessColor" />
       </switch>
       <apply>
@@ -269,7 +266,7 @@
         <case additional="access=private" />
         <case additional="access=destination" />
         <case additional="access=customers" />
-        <case additional="motorcycle=no" />
+        <case baseAppMode="motorcycle" additional="motorcycle=no" />
         <apply attrColorValue="$transparent" />
       </switch>
       <apply>
