@@ -143,15 +143,21 @@
       </apply>
       <switch>
         <case additional="access=private" />
-        <case additional="access=destination" />
-        <case additional="access=customers" />
-        <case baseAppMode="motorcycle" additional="motorcycle=no" />
+        <!-- <case additional="access=destination" />
+        <case additional="access=customers" /> -->
+        <case additional="motorcycle=no" />
         <apply attrColorValue="$accessColor" />
       </switch>
       <apply>
         <case additional="survey=ground" />
         <case attrColorValue="$missingColor" />
       </apply>
+      <switch>
+        <case additional="motorcycle=no" />
+        <case tag="highway" value="steps" />
+        <case additional="smoothness=impassable" />
+        <apply attrColorValue="$black" pathEffect="2_4" />
+      </switch>
       <switch>
         <case additional="surface=paved" />
         <case additional="surface=concrete" />
@@ -161,15 +167,7 @@
         <case additional="surface=chipseal" />
         <apply attrColorValue="$white" />
       </switch>
-      <switch>
-        <!-- <case tag="highway" value="footway" /> -->
-        <case tag="highway" value="steps" />
-        <case additional="smoothness=impassable" />
-        <apply attrColorValue="$black" pathEffect="3_3" />
-      </switch>    
-      
-      <apply baseAppMode="motorcycle" additional="motorcycle=yes">
-        <!-- <case additional="smoothness=very_horrible" attrColorValue="$black" pathEffect="10_3" /> -->
+      <apply additional="motorcycle=yes">
         <case attrColorValue="$black" pathEffect="" />
       </apply>
       <case attrColorValue="$black" pathEffect="6_3" />
@@ -183,7 +181,7 @@
         <case additional="access=private" />
         <case additional="access=destination" />
         <case additional="access=customers" />
-        <case baseAppMode="motorcycle" additional="motorcycle=no" />
+        <case additional="motorcycle=no" />
         <apply attrColorValue="$transparent" />
       </switch>
       <apply>
@@ -194,7 +192,7 @@
         <case additional="survey=ground" />
         <case attrColorValue="$transparent" />
       </apply>
-      <apply baseAppMode="motorcycle" additional="motorcycle=yes" />
+      <apply additional="motorcycle=yes" />
       <switch>
         <case additional="surface=paved" />
         <case additional="surface=concrete" />
@@ -226,7 +224,7 @@
         <case additional="access=private" />
         <case additional="access=destination" />
         <case additional="access=customers" />
-        <case baseAppMode="motorcycle" additional="motorcycle=no" />
+        <case additional="motorcycle=no" />
         <apply attrColorValue="$accessColor" />
       </switch>
       <apply>
@@ -266,7 +264,7 @@
         <case additional="access=private" />
         <case additional="access=destination" />
         <case additional="access=customers" />
-        <case baseAppMode="motorcycle" additional="motorcycle=no" />
+        <case additional="motorcycle=no" />
         <apply attrColorValue="$transparent" />
       </switch>
       <apply>
@@ -402,7 +400,7 @@
     <case attrColorValue="#ffffff"/>
   </renderingAttribute>
 
-  <renderingConstant name="highwayTrackTextHaloColorDay" value="#aaf1eae4"/>  
+  <renderingConstant name="highwayTrackTextHaloColorDay" value="#aaf1eae4"/>
 
   <renderingConstant name="boundaryNationalParkColor" value="#a0800080"/>
   <renderingConstant name="boundaryNationalParkColor2" value="#5009dd09"/>
@@ -926,13 +924,13 @@
         <apply_if maxzoom="17" strokeWidth="5.5"/>
         <apply_if maxzoom="18" strokeWidth="6.25" />
         <apply_if minzoom="19" strokeWidth="7" />
-        <apply 
-          color="$majorRoadStrokeColor" 
-          shadowColor="$majorRoadCasingColor"  
-          cap="ROUND" 
+        <apply
+          color="$majorRoadStrokeColor"
+          shadowColor="$majorRoadCasingColor"
+          cap="ROUND"
           shadowRadius="1"/>
       </switch>
-        
+
       <!-- MINOR ROARDS-->
       <switch minzoom="11">
         <case tag="highway" value="tertiary"/>
@@ -953,10 +951,10 @@
         <apply_if minzoom="17" strokeWidth="4.5" />
         <apply_if minzoom="18" strokeWidth="5.25" />
         <apply_if minzoom="19" strokeWidth="6" />
-        <apply 
-          color="$minorRoadStrokeColor" 
+        <apply
+          color="$minorRoadStrokeColor"
           shadowColor="$minorRoadCasingColor"
-          cap="ROUND" 
+          cap="ROUND"
           shadowRadius="1"
         />
       </switch>
@@ -975,10 +973,10 @@
         <apply_if minzoom="17" strokeWidth="1.5" />
         <apply_if minzoom="18" strokeWidth="1.75" />
         <apply_if minzoom="19" strokeWidth="2" />
-        <apply 
-          shadowColor="$pathCasingColor" 
+        <apply
+          shadowColor="$pathCasingColor"
           color="$pathStrokeColor"
-          cap="ROUND" 
+          cap="ROUND"
           shadowRadius="1"
         />
       </switch>

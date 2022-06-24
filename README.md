@@ -1,17 +1,15 @@
 # OsmAnd Offroad Survey Plugin
 
-> **currently in beta testing, and only available to regular OSM mappers in Northern Thailand.**
-
 This plugin for OsmAnd includes a default profile for offroad surveys and a lightweight map style improving the appearance of unpaved roads and trails.
 
 Based on following offroad guidelines: https://github.com/cmoffroad/osm-guidelines
 
 Noticeable features compared to standard offroad/topo map styles:
 
-- roads colored based on OSM `surface` tag (paved/unpaved/unspecified)
+- roads colored based on OSM `surface` tag (paved/unpaved)
 - tracks have the same line thickness as residential and service roads
-- dead-end (`noexit=yes`) shown as black dots, fallen trees (`barrier=log`) as danger icon, all other barriers (`barrier=*`) as red dots, fixme as pink dots
-- unpaved roads that were not added based on a ground survey (`source=GPS`), as well as paths tagged without `motorcycle=yes` will have their color set to pink
+- dead-end (`noexit=yes`) shown as black dots, fallen trees (`barrier=log`) and all other barriers (`barrier=*`) as red dots, fixme as pink dots
+- unpaved roads and paths that were not added based on a ground survey (`source=GPS`) will have their color set to pink (e.g. added via satellite imagery)
 
 <p float="left">
   <img src="https://raw.githubusercontent.com/cmoffroad/osmand-offroad-survey-plugin/master/screenshots/sample1.jpeg" width="250" />
@@ -49,7 +47,7 @@ Please note that in the free OsmAnd version:
 - elevation data (Countour lines and Terrain) is not shown
 - OSM country datasets are updated once a month
 
-If you are serious about doing offroad ground surveys, you can purchase a [one time or yearly subscription](https://docs.osmand.net/en/main@latest/osmand/purchases/android#free-and-paid-features) to enable:
+If you are serious about doing offroad ground surveys, you can purchase a one time or yearly subscription to enable:
 - elevation data
 - hourly OSM datasets update
 
@@ -63,18 +61,15 @@ Future plugin updates can be manually installed by following the exact same firs
 
 ## Documentation
 
-|Type|Tag|Style|
+|Style|Description|Common Tags|
 |---|---|---|
-|way|`highway=track + surface=unpaved + source=GPS`|![](https://www.gifpng.com/100x3/000000/?border-width=0&border-type=rectangle&border-color=FFFFFF&font-size=0)|
-|way|`highway=track`|![](https://www.gifpng.com/100x3/fa00ff/?border-width=0&border-type=rectangle&border-color=fa00ff&font-size=0)|
-|way|`highway=path + motorcycle=yes + surface=unpaved + source=GPS`|![](https://gifpng.com/100x20/FFFFFF/000000?font-size=35&text=-%20-%20-%20-%20-)|
-|way|`highway=path`|![](https://gifpng.com/100x20/F6F8FA/fa00ff?font-size=35&text=-%20-%20-%20-%20-)|
-|way|`highway=footway + surface=unpaved + source=GPS`|![](https://gifpng.com/100x15/FFFFFF/000000?text=-%20-%20-%20-%20-%20-%20-%20-%20-)|
-|way|`highway=footway`|![](https://gifpng.com/100x15/F6F8FA/fa00ff?text=-%20-%20-%20-%20-%20-%20-%20-%20-)|
-|way|`highway={other} + surface=asphalt\|concrete\|concrete:lanes\|chipseal\|paved`|![](https://www.gifpng.com/100x6/FFFFFF/?border-width=1&border-type=rectangle&border-color=000000&font-size=0)|
-|way|`highway={other} + surface={other}`|![](https://www.gifpng.com/100x6/000000/?border-width=1&border-type=rectangle&border-color=FFFFFF&font-size=0)|
-|way|`highway={other} + !surface`|![](https://www.gifpng.com/100x6/888888/?border-width=1&border-type=rectangle&border-color=FFFFFF&font-size=0)|
-|way|`highway=service`|![](https://www.gifpng.com/100x6/FFFFFF/?border-width=1&border-type=rectangle&border-color=FF0000&font-size=0)|
+|![](https://www.gifpng.com/100x3/000000/?border-width=0&border-type=rectangle&border-color=FFFFFF&font-size=0)|Confirmed Unpaved Road|`highway=track + surface=unpaved + source=GPS`|
+|![](https://www.gifpng.com/100x3/fa00ff/?border-width=0&border-type=rectangle&border-color=fa00ff&font-size=0)|Unconfirmed Unpaved Road|
+|![](https://www.gifpng.com/100x1/000000/?border-width=0&border-type=rectangle&border-color=FFFFFF&font-size=0)|Confirmed Motorcycle Path|`highway=path + motorcycle=yes + surface=unpaved + source=GPS`|
+|![](https://gifpng.com/100x20/FFFFFF/000000?font-size=35&text=-%20-%20-%20-%20-)|Confirmed Path|`highway=path + surface=unpaved + source=GPS`|
+|![](https://gifpng.com/100x20/F6F8FA/fa00ff?font-size=35&text=-%20-%20-%20-%20-)|Unconfirmed Path|
+|![](https://www.gifpng.com/100x6/FFFFFF/?border-width=1&border-type=rectangle&border-color=000000&font-size=0)|Confirmed Paved Road|`highway=* + surface=paved + source=GPS`
+|![](https://www.gifpng.com/100x6/888888/?border-width=1&border-type=rectangle&border-color=FFFFFF&font-size=0)|Unconfirmed paved road|
 
 
 ## Contact

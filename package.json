@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "description": "",
   "scripts": {
-    "start": "bash scripts/watch.sh",
+    "start": "bash scripts/debug.sh",
+    "watch": "bash scripts/watch.sh",
     "push": "bash scripts/push.sh",
     "test": "bash scripts/test.sh",
     "build": "bash scripts/build.sh",
-    "debug": "bash scripts/debug.sh",
     "commit": "bash scripts/commit.sh",
     "download": "bash scripts/download.sh",
     "redraw": "bash scripts/redraw.sh",

@@ -36,7 +36,7 @@ const generateGPX = (zoom, lat, lon, xTiles, yTiles, obfs) => {
   // const obfs = "Thailand_asia_22_02_10,Thailand_asia_22_02_00,Thailand_asia_22_01_00,Thailand_asia,Thailand_asia.srtm".split(',');
 
   const xml = `<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
-<gpx version='1.1' xmlns='http://www.topografix.com/GPX/1/1' 
+<gpx version='1.1' xmlns='http://www.topografix.com/GPX/1/1'
   width='${xTiles*tileSize}' height='${yTiles*tileSize}' zoom='${zoom}' mapDensity='1'
   renderingProperties='appMode=default,lang=en,contourLines=11,contourDensity=medium_w,contourWidth=thin'
   renderingName='src/rendering/offroad-survey'
@@ -49,7 +49,7 @@ const generateGPX = (zoom, lat, lon, xTiles, yTiles, obfs) => {
     </extensions>
   </wpt>
 </gpx>`;
-  
+
   console.log(`echo "${xml.replace(/\n/g, '')}" > ./tmp/${zoom}.gpx`)
 }
 
@@ -134,8 +134,8 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
       maxNativeZoom: ${zoom}
     });
 
-    var map = new L.Map('map', { 
-      minZoom: 12, 
+    var map = new L.Map('map', {
+      minZoom: 12,
       maxZoom: 16,
       maxBounds: ${xTiles} > 0 && ${yTiles} > 0 ? L.latLngBounds(
          L.latLng(${latMin}, ${lonMin}),
@@ -186,13 +186,17 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
         {
           text: 'Edit in OSM (Maxar)',
           callback: (e) => window.open('https://www.openstreetmap.org/edit#background=Maxar-Standard&map=16/' + e.latlng.lat + '/' + e.latlng.lng)
+        },
+        {
+          text: 'Edit in OSM (Bing)',
+          callback: (e) => window.open('https://www.openstreetmap.org/edit#background=Bing&map=16/' + e.latlng.lat + '/' + e.latlng.lng)
         }
       ]
     });
     map.attributionControl.setPrefix('');
     map.on('moveend', (e) => {
       const center = e.target.getCenter(), zoom = e.target.getZoom();
-      history.pushState(null,null, '#map=' + zoom + '/' + center.lat + '/' + center.lng);      
+      history.pushState(null,null, '#map=' + zoom + '/' + center.lat + '/' + center.lng);
     });
 
     var baseLayers = {
@@ -224,11 +228,11 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
     };
 
     L.control.zoom({ position: 'bottomleft' }).addTo(map);
-    
+
     L.control.layers(baseLayers, overlays, { position: 'bottomright' } ).addTo(map);
 
     map.setView(center, ${zoom});
-    
+
     document.querySelector('.app').style.opacity = 1;
     document.querySelector('.feedback').style.display = 'none';
   }
@@ -242,7 +246,7 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
 }
 
 const processZoom = (zoom, lat, lon, xTiles, yTiles, dirTiles, obfs) => {
-  
+
   const [xTileCenter, yTileCenter] = deg2num(lat, lon, zoom);
   const xTileMin = parseInt(xTileCenter + 1 - (xTiles / 2));
   const yTileMin = parseInt(yTileCenter + 1 - (yTiles / 2));
