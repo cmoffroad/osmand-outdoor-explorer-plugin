@@ -71,17 +71,17 @@ Notes:
 
 |Style|Category|OpenStreetMap Tags|
 |---|---|---|
-|![](https://www.gifpng.com/100x12/888888/?border-width=2&border-type=rectangle&border-color=FFFFFF&font-size=0)|Unconfirmed|`highway=motorway\|primary\|secondary`|
-|![](https://www.gifpng.com/100x12/FFFFFF/?border-width=2&border-type=rectangle&border-color=000000&font-size=0)|Paved|`highway=motorway\|primary\|secondary + surface=paved + source=GPS`
-|![](https://www.gifpng.com/100x12/000000/?border-width=2&border-type=rectangle&border-color=FFFFFF&font-size=0)|Unpaved|`highway=motorway\|primary\|secondary + surface=unpaved + source=GPS`|
+|![](https://www.gifpng.com/100x12/888888/?border-width=1&border-type=rectangle&border-color=FFFFFF&font-size=0)|Unconfirmed|`highway=motorway\|trunk\|primary\|secondary`|
+|![](https://www.gifpng.com/100x12/FFFFFF/?border-width=1&border-type=rectangle&border-color=000000&font-size=0)|Paved|`highway=motorway\|trunk\|primary\|secondary + surface=paved + source=GPS`
+|![](https://www.gifpng.com/100x12/000000/?border-width=1&border-type=rectangle&border-color=FFFFFF&font-size=0)|Unpaved|`highway=motorway\|trunk\|primary\|secondary + surface=unpaved + source=GPS`|
 
 ### Minor Roads
 
 |Style|Category|OpenStreetMap Tags|
 |---|---|---|
-|![](https://www.gifpng.com/100x6/888888/?border-width=1&border-type=rectangle&border-color=FFFFFF&font-size=0)|Unconfirmed|`highway=tertiary\|unclassified\|service\|residential`|
-|![](https://www.gifpng.com/100x6/FFFFFF/?border-width=1&border-type=rectangle&border-color=000000&font-size=0)|Paved|`highway=tertiary\|unclassified\|service\|residential + surface=paved + source=GPS`|
-|![](https://www.gifpng.com/100x6/000000/?border-width=1&border-type=rectangle&border-color=FFFFFF&font-size=0)|Unpaved|`highway=tertiary\|unclassified\|service\|residential + surface=unpaved + source=GPS`|
+|![](https://www.gifpng.com/100x6/888888/?border-width=1&border-type=rectangle&border-color=FFFFFF&font-size=0)|Unconfirmed|`highway=tertiary\|unclassified\|residential\|service`|
+|![](https://www.gifpng.com/100x6/FFFFFF/?border-width=1&border-type=rectangle&border-color=000000&font-size=0)|Paved|`highway=tertiary\|unclassified\|residential\|service + surface=paved + source=GPS`|
+|![](https://www.gifpng.com/100x6/000000/?border-width=1&border-type=rectangle&border-color=FFFFFF&font-size=0)|Unpaved|`highway=tertiary\|unclassified\|residential\|service + surface=unpaved + source=GPS`|
 
 ### Double Tracks
 
