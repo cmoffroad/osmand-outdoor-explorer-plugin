@@ -59,11 +59,13 @@ If you are serious about doing offroad ground surveys, you can purchase a one ti
 
 Future plugin updates can be manually installed by following the exact same first 3 steps as above.
 
+> If there are no visible change, remove the plugin from OSMAnd menu and reinstall the plugin.
+
 ## Documentation
 
 Notes:
-- `Unconfirmed`: based on satellite imagery, may not be accurate.
-- `Confirmed`: verified on the ground using a GPS trace
+- `Unconfirmed`: based on satellite imagery, may be inaccurate, abandoned or inexisting.
+- `Confirmed`: verified on the ground using a GPS trace.
 - `surface=paved`: support custom tag values `paved`, `asphalt`, `chipseal`, `concrete`, `concrete:plates`, `concrete:lanes`, `paving_stones`
 - `surface=unpaved`: support all other surface tag values
 
@@ -85,34 +87,54 @@ Notes:
 
 ### Double Tracks
 
-|Style|Category|OpenStreetMap Tags |
+|Style|Category|OpenStreetMap Tags|
 |---|---|---|
 |![](https://www.gifpng.com/100x3/fa00ff/?border-width=0&border-type=rectangle&border-color=fa00ff&font-size=0)|Unconfirmed|`highway=track`|
 |![](https://www.gifpng.com/100x6/FFFFFF/?border-width=1&border-type=rectangle&border-color=000000&font-size=0)|Paved|`highway=track + surface=paved + source=GPS`|
-|![](https://www.gifpng.com/100x6/000000/?border-width=1&border-type=rectangle&border-color=FFFFFF&font-size=0)|Beginner/Unknown|`highway=track + surface=unpaved + source=GPS`|
-|![](https://www.gifpng.com/100x8/000000/?border-width=2&border-type=rectangle&border-color=ffeb3b&font-size=0)|Intermediate|`highway=track + surface=unpaved + source=GPS + dirtbike:scale=2`|
+|![](https://www.gifpng.com/100x6/000000/?border-width=1&border-type=rectangle&border-color=FFFFFF&font-size=0)|Unpaved|`highway=track + surface=unpaved + source=GPS`|
+<!-- |![](https://www.gifpng.com/100x8/000000/?border-width=2&border-type=rectangle&border-color=ffeb3b&font-size=0)|Intermediate|`highway=track + surface=unpaved + source=GPS + dirtbike:scale=2`|
 |![](https://www.gifpng.com/100x8/000000/?border-width=2&border-type=rectangle&border-color=ff9800&font-size=0)|Advanced|`highway=track + surface=unpaved + source=GPS + dirtbike:scale=3`|
 |![](https://www.gifpng.com/100x8/000000/?border-width=2&border-type=rectangle&border-color=f44336&font-size=0)|Pro|`highway=track + surface=unpaved + source=GPS + dirtbike:scale=4`|
-
-### Motorcycle Single Tracks
-
-|Style|Category|OpenStreetMap Tags |
-|---|---|---|
-|![](https://www.gifpng.com/100x1/fa00ff/?border-width=0&border-type=rectangle&border-color=FFFFFF&font-size=0)|Unconfirmed|`highway=path + motorcycle=yes`|
-|![](https://www.gifpng.com/100x1/000000/?border-width=0&border-type=rectangle&border-color=FFFFFF&font-size=0)|Paved|`highway=path + surface=paved + motorcycle=yes + source=GPS`|
-|![](https://www.gifpng.com/100x1/000000/?border-width=0&border-type=rectangle&border-color=FFFFFF&font-size=0)|Beginner/Unknown|`highway=path + surface=unpaved + motorcycle=yes + source=GPS`|
-|![](https://www.gifpng.com/100x3/000000/ffeb3b?border-width=1&border-type=rectangle&border-color=ffeb3b&font-size=0)|Intermediate|`highway=path + surface=unpaved + motorcycle=yes + source=GPS + dirtbike:scale=2`|
-|![](https://www.gifpng.com/100x3/000000/?border-width=1&border-type=rectangle&border-color=ff9800&font-size=0)|Advanced|`highway=path + surface=unpaved + motorcycle=yes + source=GPS + dirtbike:scale=3`|
-|![](https://www.gifpng.com/100x3/000000/?border-width=1&border-type=rectangle&border-color=f44336&font-size=0)|Pro|`highway=path + surface=unpaved + motorcycle=yes + source=GPS + dirtbike:scale=4`|
-
-### Hiking Trails
+ -->
+### Enduro Single Tracks (`enduro` mode)
 
 |Style|Category|OpenStreetMap Tags |
 |---|---|---|
-|![](https://gifpng.com/100x20/FFFFFF/fa00ff?font-size=35&text=%E2%80%93%E2%80%93%E2%80%93%E2%80%93%E2%80%93)|Unconfirmed|`highway=path\|footway`|
-|![](https://gifpng.com/100x20/f6f8fa/000000?font-size=35&text=%E2%80%93%E2%80%93%E2%80%93%E2%80%93%E2%80%93)|Confirmed|`highway=path\|footway + surface=unpaved + source=GPS`|
-|![](https://gifpng.com/100x20/FFFFFF/FF0000?font-size=35&text=-%20-%20-%20-%20-)|Impassable|`highway=path + smoothness=impassable`|
+|![](https://www.gifpng.com/100x3/FFFFFF/?border-width=1&border-type=rectangle&border-color=000000&font-size=0)|Paved|`highway=path + surface=paved + source=GPS + motorcycle=yes`|
+|![](https://www.gifpng.com/100x1/000000/?border-width=0&border-type=rectangle&border-color=FFFFFF&font-size=0)|Beginner/Unknown|`highway=path + surface=unpaved + source=GPS + motorcycle=yes + (dirtbike:scale=1)`|
+|![](https://www.gifpng.com/100x3/000000/ffeb3b?border-width=1&border-type=rectangle&border-color=ffeb3b&font-size=0)|Intermediate|`highway=path + surface=unpaved+ source=GPS + motorcycle=yes + dirtbike:scale=2`|
+|![](https://www.gifpng.com/100x3/000000/?border-width=1&border-type=rectangle&border-color=ff9800&font-size=0)|Advanced|`highway=path + surface=unpaved + source=GPS + motorcycle=yes + dirtbike:scale=3`|
+|![](https://www.gifpng.com/100x3/000000/?border-width=1&border-type=rectangle&border-color=f44336&font-size=0)|Pro|`highway=path + surface=unpaved + source=GPS + motorcycle=yes + dirtbike:scale=4`|
+|![](https://www.gifpng.com/100x3/000000/?border-width=1&border-type=rectangle&border-color=fa00ff&font-size=0)|Potential|`highway=path + surface=unpaved + source=GPS + dirtbike:scale=0`|
+|![](https://gifpng.com/100x20/FFFFFF/fa00ff?font-size=35&text=-%20-%20-%20-%20-)|Unconfirmed|`highway=path`|
 |![](https://gifpng.com/100x20/f6f8fa/FF0000?font-size=35&text=-%20-%20-%20-%20-)|Stairs|`highway=steps`|
+<!-- |![](https://gifpng.com/100x20/FFFFFF/FF0000?font-size=35&text=-%20-%20-%20-%20-)|Impassable|`highway=path + dirtbike:scale=6`|
+|![](https://gifpng.com/100x20/FFFFFF/FF0000?font-size=35&text=-%20-%20-%20-%20-)|Forbidden|`highway=path + motorcycle=no`| -->
+
+### MTB Single Tracks (`mtb` mode)
+
+|Style|Category|OpenStreetMap Tags |
+|---|---|---|
+|![](https://www.gifpng.com/100x3/FFFFFF/?border-width=1&border-type=rectangle&border-color=000000&font-size=0)|Paved|`highway=path + surface=paved + source=GPS + bicycle=yes`|
+|![](https://www.gifpng.com/100x1/000000/?border-width=0&border-type=rectangle&border-color=FFFFFF&font-size=0)|Beginner/Unknown|`highway=path + surface=unpaved + source=GPS + bicycle=yes + (mtb:scale=0\|1)`|
+|![](https://www.gifpng.com/100x3/000000/ffeb3b?border-width=1&border-type=rectangle&border-color=ffeb3b&font-size=0)|Intermediate|`highway=path + surface=unpaved+ source=GPS + bicycle=yes + mtb:scale=2`|
+|![](https://www.gifpng.com/100x3/000000/?border-width=1&border-type=rectangle&border-color=ff9800&font-size=0)|Advanced|`highway=path + surface=unpaved + source=GPS + bicycle=yes + mtb:scale=3`|
+|![](https://www.gifpng.com/100x3/000000/?border-width=1&border-type=rectangle&border-color=f44336&font-size=0)|Pro|`highway=path + surface=unpaved + source=GPS + bicycle=yes + mtb:scale=4\|5`|
+|![](https://gifpng.com/100x20/f6f8fa/fa00ff?font-size=35&text=-%20-%20-%20-%20-)|Unconfirmed|`highway=path`|
+|![](https://gifpng.com/100x20/FFFFFF/FF0000?font-size=35&text=-%20-%20-%20-%20-)|Stairs|`highway=steps`|
+<!-- |![](https://gifpng.com/100x20/FFFFFF/FF0000?font-size=35&text=-%20-%20-%20-%20-)|Impassable|`highway=path + mtb:scale=6`|
+|![](https://gifpng.com/100x20/FFFFFF/FF0000?font-size=35&text=-%20-%20-%20-%20-)|Forbidden|`highway=footway + motorcycle=no`| -->
+
+### Hiking Tracks (`hiking` mode)
+
+|Style|Category|OpenStreetMap Tags |
+|---|---|---|
+|![](https://www.gifpng.com/100x3/FFFFFF/?border-width=1&border-type=rectangle&border-color=000000&font-size=0)|Paved|`highway=path + surface=paved + source=GPS`|
+|![](https://www.gifpng.com/100x1/000000/?border-width=0&border-type=rectangle&border-color=FFFFFF&font-size=0)|Beginner/Unknown|`highway=path + surface=unpaved + source=GPS + (sac_scale=hiking)`|
+|![](https://www.gifpng.com/100x3/000000/ffeb3b?border-width=1&border-type=rectangle&border-color=ffeb3b&font-size=0)|Intermediate|`highway=path + surface=unpaved+ source=GPS + sac_scale=mountain_hiking`|
+|![](https://www.gifpng.com/100x3/000000/?border-width=1&border-type=rectangle&border-color=ff9800&font-size=0)|Advanced|`highway=path + surface=unpaved + source=GPS + sac_scale=demanding_mountain_hiking`|
+|![](https://www.gifpng.com/100x3/000000/?border-width=1&border-type=rectangle&border-color=f44336&font-size=0)|Pro|`highway=path + surface=unpaved + source=GPS + sac_scale=alpine_hiking\|demanding_alpine_hiking\|difficult_alpine_hiking`|
+|![](https://gifpng.com/100x20/f6f8fa/fa00ff?font-size=35&text=-%20-%20-%20-%20-)|Unconfirmed|`highway=path`|
 
 ## Questions
 

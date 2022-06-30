@@ -140,7 +140,7 @@
   "context_menu_items": "{\"hidden\":[],\"order\":[],\"main\":[]}",
   "voice_provider": "en-tts",
   "renderer": "Offroad survey",
-  "nrenderer_appMode": "motorcycle",
+  "nrenderer_appMode": "enduro",
   "nrenderer_defAppMode": "",
   "routing_recalc_distance": "0.0",
   "routing_straight_angle": "30.0",
@@ -214,5 +214,4 @@
   "nrenderer_whiteWaterSports": "false",
   "nrenderer_roadStyle": "",
   "nrenderer_pisteRoutes": "false",
-  "nrenderer_groundSurveyMode": "true"
 }
