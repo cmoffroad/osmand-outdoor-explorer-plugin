@@ -1,6 +1,6 @@
-# OsmAnd Offroad Survey Plugin
+# OsmAnd Outdoor Explorer Plugin
 
-This plugin for OsmAnd includes a default profile for offroad surveys and a lightweight map style improving the appearance of unpaved roads and trails.
+This plugin for OsmAnd includes a default profile for outdoor exploration and a lightweight map style improving the appearance of unpaved roads and paths.
 
 Based on following offroad guidelines: https://github.com/cmoffroad/osm-guidelines
 
@@ -12,8 +12,8 @@ Noticeable features compared to standard offroad/topo map styles:
 - unpaved roads and paths that have not been confirmed with a ground survey have their color set to pink (e.g. added via satellite imagery)
 
 <p float="left">
-  <img src="https://raw.githubusercontent.com/cmoffroad/osmand-offroad-survey-plugin/master/screenshots/sample1.jpeg" width="250" />
-  <img src="https://raw.githubusercontent.com/cmoffroad/osmand-offroad-survey-plugin/master/screenshots/sample2.jpeg" width="250" />
+  <img src="https://raw.githubusercontent.com/cmoffroad/osmand-outdoor-explorer-plugin/master/screenshots/sample1.jpeg" width="250" />
+  <img src="https://raw.githubusercontent.com/cmoffroad/osmand-outdoor-explorer-plugin/master/screenshots/sample2.jpeg" width="250" />
 </p>
 
 ## Setup
@@ -26,7 +26,7 @@ Noticeable features compared to standard offroad/topo map styles:
 
 ### Plugin First-time Installation (Android only)
 
-- From your mobile browser, login via OpenStreetMap to [Web Preview.](https://www.cmoffroad.com/osmand-offroad-survey-plugin-preview/) and click on Download.
+- From your mobile browser, login via OpenStreetMap to [Web Preview.](https://www.cmoffroad.com/osmand-outdoor-explorer-plugin-preview/) and click on Download.
 - Once download is complete, click on Open.
 - OsmAnd should automatically open and inform you the plugin has been successfully added.
 - Wait a few seconds for Suggested maps to show up (standard, contour lines, hillshade)
@@ -47,7 +47,7 @@ Please note that in the free OsmAnd version:
 - elevation data (Contour lines and Terrain) is not shown
 - OSM country datasets are updated once a month
 
-If you are serious about doing offroad ground surveys, you can purchase a one time or yearly subscription to enable:
+If you are serious about doing outdoor exploration, you can purchase a one time or yearly subscription to enable:
 - elevation data
 - hourly OSM datasets update
 

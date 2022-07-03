@@ -139,7 +139,7 @@
   "configure_map_items": "{\"hidden\":[],\"order\":[]}",
   "context_menu_items": "{\"hidden\":[],\"order\":[],\"main\":[]}",
   "voice_provider": "en-tts",
-  "renderer": "Offroad survey",
+  "renderer": "Outdoor Explorer",
   "nrenderer_appMode": "car",
   "nrenderer_activityMode": "enduro",
   "nrenderer_defAppMode": "",

@@ -39,7 +39,7 @@ const generateGPX = (zoom, lat, lon, xTiles, yTiles, obfs) => {
 <gpx version='1.1' xmlns='http://www.topografix.com/GPX/1/1'
   width='${xTiles*tileSize}' height='${yTiles*tileSize}' zoom='${zoom}' mapDensity='1'
   renderingProperties='activityMode=enduro,hideUnconfirmed=true,lang=en,contourLines=11,contourDensity=medium_w,contourWidth=thin'
-  renderingName='src/rendering/offroad-survey'
+  renderingName='src/rendering/outdoor-explorer'
 >
   <wpt lat='${lat}' lon='${lon}'>
     <name>${zoom}</name>
@@ -71,7 +71,7 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
   const html = `<!DOCTYPE html>
 <html>
 <head>
-  <title>OsmAnd Offroad-Survey Plugin Preview (Northern Thailand)</title>
+  <title>OsmAnd Outdoor Explorer Plugin Preview (Northern Thailand)</title>
   <meta charset='utf-8' />
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <link rel='stylesheet' href='https://unpkg.com/leaflet@1.7.1/dist/leaflet.css' integrity='sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==' crossorigin='' />
@@ -98,8 +98,8 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
     <nav class='navigation light-blue lighten-1'>
       <div class='nav-wrapper'>
         <ul class='right'>
-          <li><a href='./build/osmand-offroad-survey-plugin.osf'>Download</a></li>
-          <li><a href='https://github.com/cmoffroad/osmand-offroad-survey-plugin'>Documentation</a></li>
+          <li><a href='./build/osmand-outdoor-explorer-plugin.osf'>Download</a></li>
+          <li><a href='https://github.com/cmoffroad/osmand-outdoor-explorer-plugin'>Documentation</a></li>
           <li class='logout'><a href='#' onclick='logout()'>Logout</a></li>
         </ul>
       </div>
@@ -200,7 +200,7 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
     });
 
     var baseLayers = {
-      'osmand-offroad-survey-plugin': pluginLayer,
+      'osmand-outdoor-explorer-plugin': pluginLayer,
       'komoot': L.tileLayer('https://tile.hosted.thunderforest.com/komoot-2/{z}/{x}/{y}.png'),
       'strava': L.tileLayer('https://a.tiles.mapbox.com/styles/v1/strava/ck2gt6oil0c7y1cnvlz1uphnu/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic3RyYXZhIiwiYSI6IlpoeXU2U0UifQ.c7yhlZevNRFCqHYm6G6Cyg'),
       'maps.me': L.mapboxGL({ style: 'https://tiles.maps.me/styles/mapsme_style.json' }),
@@ -282,7 +282,7 @@ const lat = tile2lat(y+0.5, zooms[0]), lon = tile2lon(x+0.5, zooms[0]);
 
 const date = new Date().toISOString().split('T')[0];
 
-const previewDir = `../osm-tools/osmand-offroad-survey-plugin-preview`;
+const previewDir = `../osm-tools/osmand-outdoor-explorer-plugin-preview`;
 
 if (xTiles > 0 && yTiles > 0) {
   const dirTiles = `${previewDir}/tiles`;

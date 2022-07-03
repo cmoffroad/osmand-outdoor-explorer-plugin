@@ -9,7 +9,7 @@ express()
 
   if (!dbs.hasOwnProperty(db)) {
     const connection = new sqlite3.Database(`./obf/${db}.sqlitedb`, (err) => {
-      if (err) 
+      if (err)
         return next(err);
 
       dbs[db] = connection;
@@ -20,7 +20,7 @@ express()
 .get('/:db/:z/:x/:y', (req, res, next) => {
   const { db, z, x, y } = req.params;
   dbs[db].get(`SELECT * FROM tiles WHERE z = ${z} AND x = ${x} AND y = ${y} LIMIT 1`, (err, data) => {
-    if (err) 
+    if (err)
       next(err);
 
     if (!data)
@@ -32,7 +32,7 @@ express()
       'Content-Type': 'image/png',
       'Content-Length': img.length
     });
-    res.end(img); 
+    res.end(img);
   })
 })
 .listen(3000);

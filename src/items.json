@@ -3,30 +3,30 @@
    "items":[
       {
          "type":"PLUGIN",
-         "pluginId":"offroad-survey.plugin",
+         "pluginId":"outdoor-explorer.plugin",
          "version" : 1,
          "icon": {
-            "" : "@offroad-survey-id.png"
+            "" : "@outdoor-explorer-id.png"
          },
          "image": {
-             "" :"@offroad-survey-image.png"
+             "" :"@outdoor-explorer-image.png"
          },
          "name":{
-            "":"Offroad Survey"
+            "":"Outdoor Explorer"
          },
          "description":{
-            "":"<p>This plugin for OsmAnd includes a default profile for offroad surveys and a lightweight map style improving the appearance of unpaved roads and trails.</p><p>More info at <a href='https://github.com/cmoffroad/osmand-offroad-survey-plugin'>https://github.com/cmoffroad/osmand-offroad-survey-plugin</a></p>"
+            "":"<p>This plugin for OsmAnd includes a profile for outdoor exploration and a lightweight map style improving the appearance of unpaved roads and trails.</p><p>More info at <a href='https://github.com/cmoffroad/osmand-outdoor-explorer-plugin'>https://github.com/cmoffroad/osmand-outdoor-explorer-plugin</a></p>"
          }
       },
       {
          "type":"RESOURCES",
-         "pluginId":"offroad-survey.plugin",
+         "pluginId":"outdoor-explorer.plugin",
          "file":"res"
       },
       {
          "type": "PROFILE",
-         "pluginId":"offroad-survey.plugin",
-         "file": "profile_motorcycle.json",
+         "pluginId":"outdoor-explorer.plugin",
+         "file": "profile_outdoor_explorer.json",
          "appMode": {
            "iconColor": "DEFAULT",
            "iconName": "ic_action_enduro_motorcycle",
@@ -36,19 +36,19 @@
            "parent": "car",
            "routeService": "OSMAND",
            "routingProfile": "pedestrian",
-           "stringKey": "pedestrian",
-           "userProfileName": "Offroad Survey"
+           "stringKey": "profile_outdoor_explorer",
+           "userProfileName": "Outdoor Explorer"
          }
       },
       {
          "type":"FILE",
-         "pluginId":"offroad-survey.plugin",
+         "pluginId":"outdoor-explorer.plugin",
          "subtype" : "rendering_style",
-         "file":"\/rendering\/offroad-survey.render.xml"
+         "file":"\/rendering\/outdoor-explorer.render.xml"
       },
       {
          "type":"SUGGESTED_DOWNLOADS",
-         "pluginId":"offroad-survey.plugin",
+         "pluginId":"outdoor-explorer.plugin",
          "items": [
             {
                 "scope-id" : "test-downloads",

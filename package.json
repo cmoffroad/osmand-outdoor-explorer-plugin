@@ -1,5 +1,5 @@
 {
-  "name": "osmand-plugin-offroad-survey",
+  "name": "osmand-outdoor-explorer-plugin",
   "version": "0.1.0",
   "description": "",
   "scripts": {
@@ -13,7 +13,7 @@
     "redraw": "bash scripts/redraw.sh",
     "hillshade": "node scripts/tiles/extract.js",
     "preview": "node scripts/preview.js > scripts/preview.sh && sh scripts/preview.sh",
-    "site": "npm run download &&& node scripts/preview.js 49 > scripts/preview.sh && sh scripts/preview.sh"
+    "site": "npm run download && node scripts/preview.js 49 > scripts/preview.sh && sh scripts/preview.sh"
   },
   "author": "cmoffroad",
   "license": "MIT",

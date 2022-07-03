@@ -14,9 +14,8 @@
 
   <renderingProperty attr="activityMode" name="Activity Mode" description="Rendering mode for trail difficulty scales"  type="string" possibleValues="enduro, mtb, hiking" category="details" defaultValue="enduro" />
 
-
-  <renderingProperty attr="hideUnconfirmed" name="Hide Unconfirmed" description="Tone down unconfirmed tracks and trails" type="boolean" possibleValues=""
-    category="details"/>
+  <renderingProperty attr="hideUnconfirmed" name="Hide Unconfirmed" description="Tone down unconfirmed tracks and trails" type="boolean" possibleValues="true, false" defaultValue="false"
+    category="hide"/>
 
   <!-- MATERIAL COLORS -->
 

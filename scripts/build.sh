@@ -1,2 +1,2 @@
-rm ../osm-tools/osmand-offroad-survey-plugin-preview/build/osmand-offroad-survey-plugin.osf
-cd ./src && zip -x "**/.DS_Store" -r ../../osm-tools/osmand-offroad-survey-plugin-preview/build/osmand-offroad-survey-plugin.osf .
+rm ../osm-tools/osmand-outdoor-explorer-plugin-preview/build/osmand-outdoor-explorer-plugin.osf
+cd ./src && zip -x "**/.DS_Store" -r ../../osm-tools/osmand-outdoor-explorer-plugin-preview/build/osmand-outdoor-explorer-plugin.osf .
