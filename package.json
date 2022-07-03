@@ -7,13 +7,13 @@
     "watch": "bash scripts/watch.sh",
     "push": "bash scripts/push.sh",
     "test": "bash scripts/test.sh",
-    "build": "bash scripts/build.sh & npm run download & npm run site",
+    "build": "bash scripts/build.sh",
     "commit": "bash scripts/commit.sh",
     "download": "bash scripts/download.sh",
     "redraw": "bash scripts/redraw.sh",
     "hillshade": "node scripts/tiles/extract.js",
     "preview": "node scripts/preview.js > scripts/preview.sh && sh scripts/preview.sh",
-    "site": "node scripts/preview.js 49 > scripts/preview.sh && sh scripts/preview.sh"
+    "site": "npm run download &&& node scripts/preview.js 49 > scripts/preview.sh && sh scripts/preview.sh"
   },
   "author": "cmoffroad",
   "license": "MIT",
