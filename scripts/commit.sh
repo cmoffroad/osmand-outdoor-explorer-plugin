@@ -1,3 +1,4 @@
-git add ./build/osmand-outdoor-explorer-plugin.osf
-git commit -m "update OSF"
+cd ../osm-tools
+git add ./osmand-outdoor-explorer-plugin-preview/*
+git commit -m "build"
 git push
