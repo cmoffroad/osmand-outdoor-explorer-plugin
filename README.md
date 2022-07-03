@@ -33,8 +33,9 @@ Noticeable features compared to standard offroad/topo map styles:
 - Download suggested datasets for your country (if not yet installed)
 - Select OK
 - Tap profile icon on top left corner
-- Select offroad motorcycle icon
+- Scroll down to Map Style and select "Outdoor Explorer"
 - Map style can be configured further under "Details".
+- Select Activity Mode (enduro, mtb or hiking) to highlight trails difficulty.
 
 > If a "Permission Denied" error occurs, 
 > - open your Android phone Settings application
