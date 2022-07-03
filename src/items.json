@@ -26,7 +26,7 @@
       {
          "type": "PROFILE",
          "pluginId":"outdoor-explorer.plugin",
-         "file": "profile-outdoor-explorer.json",
+         "file": "outdoor-explorer.json",
          "appMode": {
            "iconColor": "DEFAULT",
            "iconName": "ic_action_enduro_motorcycle",
@@ -36,7 +36,7 @@
            "parent": "car",
            "routeService": "OSMAND",
            "routingProfile": "pedestrian",
-           "stringKey": "profile-outdoor-explorer",
+           "stringKey": "outdoor-explorer",
            "userProfileName": "Outdoor Explorer"
          }
       },

@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "start": "bash scripts/debug.sh",
+    "update": "npm run build && npm run site && npm run commit",
     "watch": "bash scripts/watch.sh",
     "push": "bash scripts/push.sh",
     "test": "bash scripts/test.sh",
