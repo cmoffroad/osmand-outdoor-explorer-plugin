@@ -8,8 +8,8 @@ Noticeable features compared to standard offroad/topo map styles:
 
 - roads colored based on OSM `surface` tag (paved/unpaved)
 - tracks have the same line thickness as residential and service roads
-- dead-end (`noexit=yes`) shown as black dots, fallen trees (`barrier=log`) and all other barriers (`barrier=*`) as red dots, fixme as pink dots
-- unpaved roads and paths that have not been confirmed with a ground survey (`source=GPS`) have their color set to pink (e.g. added via satellite imagery)
+- dead-end shown as black dots, obstacles and all other barriers as red dots, continue as pink dots
+- unpaved roads and paths that have not been confirmed with a ground survey have their color set to pink (e.g. added via satellite imagery)
 
 <p float="left">
   <img src="https://raw.githubusercontent.com/cmoffroad/osmand-offroad-survey-plugin/master/screenshots/sample1.jpeg" width="250" />
@@ -101,15 +101,19 @@ Notes:
 |Style|Category|OpenStreetMap Tags |
 |---|---|---|
 |![](https://www.gifpng.com/100x3/FFFFFF/?border-width=1&border-type=rectangle&border-color=000000&font-size=0)|Paved|`highway=path + surface=paved + source=GPS + motorcycle=yes`|
-|![](https://www.gifpng.com/100x1/000000/?border-width=0&border-type=rectangle&border-color=FFFFFF&font-size=0)|Beginner/Unknown|`highway=path + surface=unpaved + source=GPS + motorcycle=yes + (dirtbike:scale=1)`|
-|![](https://www.gifpng.com/100x3/000000/ffeb3b?border-width=1&border-type=rectangle&border-color=ffeb3b&font-size=0)|Intermediate|`highway=path + surface=unpaved+ source=GPS + motorcycle=yes + dirtbike:scale=2`|
-|![](https://www.gifpng.com/100x3/000000/?border-width=1&border-type=rectangle&border-color=ff9800&font-size=0)|Advanced|`highway=path + surface=unpaved + source=GPS + motorcycle=yes + dirtbike:scale=3`|
-|![](https://www.gifpng.com/100x3/000000/?border-width=1&border-type=rectangle&border-color=f44336&font-size=0)|Pro|`highway=path + surface=unpaved + source=GPS + motorcycle=yes + dirtbike:scale=4`|
+|![](https://www.gifpng.com/100x1/000000/?border-width=0&border-type=rectangle&border-color=FFFFFF&font-size=0)|Beginner/Unknown|`highway=path + surface=unpaved + source=GPS + motorcycle=yes + (dirtbike:scale=1\|2)`|
+|![](https://www.gifpng.com/100x3/000000/ffeb3b?border-width=1&border-type=rectangle&border-color=ffeb3b&font-size=0)|Intermediate|`highway=path + surface=unpaved + source=GPS + motorcycle=yes + dirtbike:scale=3`|
+|![](https://www.gifpng.com/100x3/000000/?border-width=1&border-type=rectangle&border-color=ff9800&font-size=0)|Advanced|`highway=path + surface=unpaved + source=GPS + motorcycle=yes + dirtbike:scale=4`|
+|![](https://www.gifpng.com/100x3/000000/?border-width=1&border-type=rectangle&border-color=f44336&font-size=0)|Pro|`highway=path + surface=unpaved + source=GPS + motorcycle=yes + dirtbike:scale=5`|
 |![](https://www.gifpng.com/100x3/000000/?border-width=1&border-type=rectangle&border-color=fa00ff&font-size=0)|Potential|`highway=path + surface=unpaved + source=GPS + dirtbike:scale=0`|
-|![](https://gifpng.com/100x20/FFFFFF/fa00ff?font-size=35&text=-%20-%20-%20-%20-)|Unconfirmed|`highway=path`|
+|![](https://gifpng.com/100x20/FFFFFF/FF0000?font-size=35&text=-%20-%20-%20-%20-)|Impassable|`highway=path + surface=unpaved + source=GPS + dirtbike:scale=6`|
 |![](https://gifpng.com/100x20/f6f8fa/FF0000?font-size=35&text=-%20-%20-%20-%20-)|Stairs|`highway=steps`|
+|![](https://gifpng.com/100x20/FFFFFF/fa00ff?font-size=35&text=-%20-%20-%20-%20-)|Unconfirmed|`highway=path`|
 <!-- |![](https://gifpng.com/100x20/FFFFFF/FF0000?font-size=35&text=-%20-%20-%20-%20-)|Impassable|`highway=path + dirtbike:scale=6`|
 |![](https://gifpng.com/100x20/FFFFFF/FF0000?font-size=35&text=-%20-%20-%20-%20-)|Forbidden|`highway=path + motorcycle=no`| -->
+
+
+> Difficulty rating based on https://wiki.openstreetmap.org/wiki/User:CMoffroad/Key:dirtbike:scale
 
 ### MTB Single Tracks (`mtb` mode)
 
@@ -117,11 +121,13 @@ Notes:
 |---|---|---|
 |![](https://www.gifpng.com/100x3/FFFFFF/?border-width=1&border-type=rectangle&border-color=000000&font-size=0)|Paved|`highway=path + surface=paved + source=GPS + bicycle=yes`|
 |![](https://www.gifpng.com/100x1/000000/?border-width=0&border-type=rectangle&border-color=FFFFFF&font-size=0)|Beginner/Unknown|`highway=path + surface=unpaved + source=GPS + bicycle=yes + (mtb:scale=0\|1)`|
-|![](https://www.gifpng.com/100x3/000000/ffeb3b?border-width=1&border-type=rectangle&border-color=ffeb3b&font-size=0)|Intermediate|`highway=path + surface=unpaved+ source=GPS + bicycle=yes + mtb:scale=2`|
+|![](https://www.gifpng.com/100x3/000000/ffeb3b?border-width=1&border-type=rectangle&border-color=ffeb3b&font-size=0)|Intermediate|`highway=path + surface=unpaved + source=GPS + bicycle=yes + mtb:scale=2`|
 |![](https://www.gifpng.com/100x3/000000/?border-width=1&border-type=rectangle&border-color=ff9800&font-size=0)|Advanced|`highway=path + surface=unpaved + source=GPS + bicycle=yes + mtb:scale=3`|
 |![](https://www.gifpng.com/100x3/000000/?border-width=1&border-type=rectangle&border-color=f44336&font-size=0)|Pro|`highway=path + surface=unpaved + source=GPS + bicycle=yes + mtb:scale=4\|5`|
-|![](https://gifpng.com/100x20/f6f8fa/fa00ff?font-size=35&text=-%20-%20-%20-%20-)|Unconfirmed|`highway=path`|
+|![](https://gifpng.com/100x20/f6f8fa/FF0000?font-size=35&text=-%20-%20-%20-%20-)|Impassable|`highway=path + surface=unpaved + source=GPS + mtb:scale=6`|
 |![](https://gifpng.com/100x20/FFFFFF/FF0000?font-size=35&text=-%20-%20-%20-%20-)|Stairs|`highway=steps`|
+|![](https://gifpng.com/100x20/f6f8fa/000000?font-size=35&text=-%20-%20-%20-%20-)|Confirmed|`highway=path + surface=unpaved + source=GPS`|
+|![](https://gifpng.com/100x20/FFFFFF/fa00ff?font-size=35&text=-%20-%20-%20-%20-)|Unconfirmed|`highway=path`|
 <!-- |![](https://gifpng.com/100x20/FFFFFF/FF0000?font-size=35&text=-%20-%20-%20-%20-)|Impassable|`highway=path + mtb:scale=6`|
 |![](https://gifpng.com/100x20/FFFFFF/FF0000?font-size=35&text=-%20-%20-%20-%20-)|Forbidden|`highway=footway + motorcycle=no`| -->
 
@@ -131,9 +137,9 @@ Notes:
 |---|---|---|
 |![](https://www.gifpng.com/100x3/FFFFFF/?border-width=1&border-type=rectangle&border-color=000000&font-size=0)|Paved|`highway=path + surface=paved + source=GPS`|
 |![](https://www.gifpng.com/100x1/000000/?border-width=0&border-type=rectangle&border-color=FFFFFF&font-size=0)|Beginner/Unknown|`highway=path + surface=unpaved + source=GPS + (sac_scale=hiking)`|
-|![](https://www.gifpng.com/100x3/000000/ffeb3b?border-width=1&border-type=rectangle&border-color=ffeb3b&font-size=0)|Intermediate|`highway=path + surface=unpaved+ source=GPS + sac_scale=mountain_hiking`|
+|![](https://www.gifpng.com/100x3/000000/ffeb3b?border-width=1&border-type=rectangle&border-color=ffeb3b&font-size=0)|Intermediate|`highway=path + surface=unpaved + source=GPS + sac_scale=mountain_hiking`|
 |![](https://www.gifpng.com/100x3/000000/?border-width=1&border-type=rectangle&border-color=ff9800&font-size=0)|Advanced|`highway=path + surface=unpaved + source=GPS + sac_scale=demanding_mountain_hiking`|
-|![](https://www.gifpng.com/100x3/000000/?border-width=1&border-type=rectangle&border-color=f44336&font-size=0)|Pro|`highway=path + surface=unpaved + source=GPS + sac_scale=alpine_hiking\|demanding_alpine_hiking\|difficult_alpine_hiking`|
+|![](https://www.gifpng.com/100x3/000000/?border-width=1&border-type=rectangle&border-color=f44336&font-size=0)|Pro|`highway=path + surface=unpaved + source=GPS + sac_scale=alpine_hiking\|demanding_alpine_hiking`|
 |![](https://gifpng.com/100x20/f6f8fa/fa00ff?font-size=35&text=-%20-%20-%20-%20-)|Unconfirmed|`highway=path`|
 
 ## Questions

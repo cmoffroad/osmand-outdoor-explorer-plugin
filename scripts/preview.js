@@ -38,7 +38,7 @@ const generateGPX = (zoom, lat, lon, xTiles, yTiles, obfs) => {
   const xml = `<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
 <gpx version='1.1' xmlns='http://www.topografix.com/GPX/1/1'
   width='${xTiles*tileSize}' height='${yTiles*tileSize}' zoom='${zoom}' mapDensity='1'
-  renderingProperties='appMode=enduro,presentationMode=true,lang=en,contourLines=11,contourDensity=medium_w,contourWidth=thin'
+  renderingProperties='activityMode=enduro,hideUnconfirmed=true,lang=en,contourLines=11,contourDensity=medium_w,contourWidth=thin'
   renderingName='src/rendering/offroad-survey'
 >
   <wpt lat='${lat}' lon='${lon}'>
@@ -221,7 +221,6 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
     const overlays = {
       'SRTM Hillshade 20%': hillshadeLayer,
       'SRTM Slope': slopeLayer,
-      'Mapbox Locator': L.tileLayer('https://api.mapbox.com/styles/v1/openstreetmap/ckasmteyi1tda1ipfis6wqhuq/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJja2w5YWtqbDAwcGFkMnZtdngzbWtlbDE3In0.U3DODCbBGFfFXkilttz1YA', { minNativeZoom: 15 }),
       'OSM GPS traces': L.tileLayer('https://{s}.gps-tile.openstreetmap.org/lines/{z}/{x}/{y}.png'),
       'Strava traces': L.tileLayer('https://heatmap-external-a.strava.com/tiles/all/bluered/{z}/{x}/{y}.png?px=256', { maxNativeZoom: 12 }),
       'L7108': L.tileLayer.wms('http://cld.drr.go.th/geoserver/gwc/service/wms?service=WMS&request=GetMap&layers=ProtoPj%3Agis_road_l7018&styles=&format=image%2Fpng&transparent=true&version=1.1.1&srs=EPSG%3A3857')
