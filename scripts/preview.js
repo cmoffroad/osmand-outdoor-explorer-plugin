@@ -97,9 +97,10 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
   <div class='app'>
     <nav class='navigation light-blue lighten-1'>
       <div class='nav-wrapper'>
+        <h5 class="left white-text">&nbsp;&nbsp;osmand-outdoor-explorer-plugin</h5>
         <ul class='right'>
-          <li><a href='./build/osmand-outdoor-explorer-plugin.osf'>Download</a></li>
-          <li><a href='https://github.com/cmoffroad/osmand-outdoor-explorer-plugin'>Documentation</a></li>
+          <li><a target="_blank" href='./build/osmand-outdoor-explorer-plugin.osf'>Download</a></li>
+          <li><a target="_blank" href='https://github.com/cmoffroad/osmand-outdoor-explorer-plugin'>Documentation</a></li>
           <li class='logout'><a href='#' onclick='logout()'>Logout</a></li>
         </ul>
       </div>
@@ -203,7 +204,6 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
       'osmand-outdoor-explorer-plugin': pluginLayer,
       'komoot': L.tileLayer('https://tile.hosted.thunderforest.com/komoot-2/{z}/{x}/{y}.png'),
       'strava': L.tileLayer('https://a.tiles.mapbox.com/styles/v1/strava/ck2gt6oil0c7y1cnvlz1uphnu/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic3RyYXZhIiwiYSI6IlpoeXU2U0UifQ.c7yhlZevNRFCqHYm6G6Cyg'),
-      'maps.me': L.mapboxGL({ style: 'https://tiles.maps.me/styles/mapsme_style.json' }),
       'mapy.cz': L.tileLayer('https://mapserver.mapy.cz/base-m/{z}-{x}-{y}?sdk=HgUbCgUbGkgqAQkYBxYEHQNHQlJfR1VfQlBZSw%3D%3D'),
       'osm': L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png'),
       'cyclosm': L.tileLayer('https://b.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png'),
@@ -219,11 +219,10 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
     const slopeLayer = L.tileLayer('./tiles/{z}/{x}/{y}-slope.png', { className: 'slope', minNativeZoom: 11, maxNativeZoom: 11, transparency: true, opacity: 0.5 });
 
     const overlays = {
-      'SRTM Hillshade 20%': hillshadeLayer,
+      'SRTM Hillshade': hillshadeLayer,
       'SRTM Slope': slopeLayer,
       'OSM GPS traces': L.tileLayer('https://{s}.gps-tile.openstreetmap.org/lines/{z}/{x}/{y}.png'),
-      'Strava traces': L.tileLayer('https://heatmap-external-a.strava.com/tiles/all/bluered/{z}/{x}/{y}.png?px=256', { maxNativeZoom: 12 }),
-      'L7108': L.tileLayer.wms('http://cld.drr.go.th/geoserver/gwc/service/wms?service=WMS&request=GetMap&layers=ProtoPj%3Agis_road_l7018&styles=&format=image%2Fpng&transparent=true&version=1.1.1&srs=EPSG%3A3857')
+      'Strava Heatmap': L.tileLayer('https://heatmap-external-a.strava.com/tiles/all/bluered/{z}/{x}/{y}.png?px=256', { maxNativeZoom: 12 })
     };
 
     L.control.zoom({ position: 'bottomleft' }).addTo(map);

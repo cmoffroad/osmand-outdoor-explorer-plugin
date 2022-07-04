@@ -26,13 +26,13 @@ Noticeable features compared to standard offroad/topo map styles:
 
 ### Plugin First-time Installation (Android only)
 
-- From your mobile browser, login via OpenStreetMap to [Web Preview.](https://www.cmoffroad.com/osmand-outdoor-explorer-plugin-preview/) and click on Download.
+- From your mobile browser, open [Web Preview.](https://www.cmoffroad.com/osmand-outdoor-explorer-plugin-preview/) and click on Download.
 - Once download is complete, click on Open.
 - OsmAnd should automatically open and inform you the plugin has been successfully added.
 - Wait a few seconds for Suggested maps to show up (standard, contour lines, hillshade)
 - Download suggested datasets for your country (if not yet installed)
 - Select OK
-- Tap profile icon on top left corner
+- Tap current profile icon on top left corner
 - Scroll down to Map Style and select "Outdoor Explorer"
 - Map style can be configured further under "Details".
 - Select Activity Mode (enduro, mtb or hiking) to highlight trails difficulty.
@@ -58,9 +58,11 @@ If you are serious about doing outdoor exploration, you can purchase a one time 
 
 ### Plugin Future Updates
 
-Future plugin updates can be manually installed by following the exact same first 3 steps as above.
-
-> If there are no visible change, remove the plugin from OSMAnd menu and reinstall the plugin.
+- go to Plugins > scroll down to Outdoor Explorer and tap menu > Delete
+- Close App 
+- From your mobile browser, open [Web Preview.](https://www.cmoffroad.com/osmand-outdoor-explorer-plugin-preview/) and click on Download.
+- Once download is complete, click on Open.
+- OsmAnd should automatically open and inform you the plugin has been successfully added (updated)
 
 ## Documentation
 

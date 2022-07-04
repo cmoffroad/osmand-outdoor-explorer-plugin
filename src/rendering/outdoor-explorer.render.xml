@@ -2,7 +2,7 @@
 <renderingStyle name="Offroad survey" depends="" version="1">
 
   <!-- PROPERTY - CONTOUR LINES -->
-  <renderingProperty attr="contourLines" name="Show contour lines" description="Select minimum zoom level to display in map if available. Separate contour file may be needed." type="string" possibleValues="disabled,16,15,14,13,12,11" defaultValueDescription="default" category="details"/>
+  <renderingProperty attr="contourLines" name="Show contour lines" description="Select minimum zoom level to display in map if available. Separate contour file may be needed." type="string" possibleValues="disabled,16,15,14,13,12,11" defaultValueDescription="default13" category="details"/>
   <renderingProperty attr="contourWidth" name="Contour lines width" description="Contour lines width" type="string" possibleValues="thin,medium,thick" defaultValueDescription="default"/>
   <renderingProperty attr="contourDensity" name="Contour lines density" description="Contour lines density" type="string" possibleValues="low,medium_w,high" defaultValueDescription="default"/>
 
@@ -361,7 +361,7 @@
 
   <renderingAttribute name="woodColor">
     <case attrColorValue="#c4ecb4"/>
-
+    <!-- <case attrColorValue="$red"/> -->
 <!--     <case attrColorValue="#c8e9c3"/> -->
   </renderingAttribute>
 
@@ -1075,6 +1075,7 @@
         <switch>
           <case minzoom="13" additional="contourtype=10m" color="$contourLineColor"/>
           <case minzoom="12" additional="contourtype=20m" color="$contourLineColor"/>
+          <case minzoom="12" additional="contourtype=40f" color="$contourLineColor"/>
           <apply>
             <case contourWidth="thin" strokeWidth="0.5"/>
             <case contourWidth="medium" strokeWidth="1"/>
@@ -1111,6 +1112,10 @@
           </apply>
         </switch>
       </apply>
+      <apply_if engine_v1="false" minzoom="15" pathIcon="stroke_brown_left" pathIconStep="100">
+        <apply_if contourColorScheme="light_brown" pathIcon="stroke_light_brown_left"/>
+        <apply_if contourColorScheme="dark_brown" pathIcon="stroke_dark_brown_left"/>
+      </apply_if>
     </switch>
 
     <!-- LINE - ADMIN LEVELS -->
