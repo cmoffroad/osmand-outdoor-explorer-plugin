@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<renderingStyle name="Offroad survey" depends="" version="1">
+<renderingStyle name="Offroad survey" depends="" version="1.1">
 
   <!-- PROPERTY - CONTOUR LINES -->
   <renderingProperty attr="contourLines" name="Show contour lines" description="Select minimum zoom level to display in map if available. Separate contour file may be needed." type="string" possibleValues="disabled,16,15,14,13,12,11" defaultValueDescription="default13" category="details"/>
@@ -16,6 +16,8 @@
 
   <renderingProperty attr="hideUnconfirmed" name="Unconfirmed Trails" description="Tone down unconfirmed tracks and trails" type="boolean" possibleValues="true, false" defaultValue="false"
     category="hide"/>
+
+  <renderingProperty attr="engine_v1" type="boolean"/>
 
   <!-- MATERIAL COLORS -->
 
@@ -124,21 +126,15 @@
 
   <renderingAttribute name="pathStrokeColor">
     <apply minzoom="13">
-      <switch>
-        <case activityMode="enduro" tag="highway" value="steps" />
-        <case activityMode="enduro" additional="dirtbike:scale=6" />
-        <case activityMode="enduro" additional="smoothness=impassable" />
-        <case activityMode="enduro" additional="motorcycle=no" />
-        <case activityMode="mtb" tag="highway" value="steps" />
-        <case activityMode="mtb" additional="smoothness=impassable" />
-        <case activityMode="mtb" additional="mtb:scale=6" />
-        <case activityMode="mtb" additional="bicycle=no" />
-        <apply attrColorValue="$red" pathEffect="3_3" />
-      </switch>
       <apply>
         <case additional="survey=ground" />
         <case attrColorValue="$missingColor" />
       </apply>
+      <switch>
+        <case activityMode="enduro" tag="highway" value="steps" />
+        <case activityMode="mtb" tag="highway" value="steps" />
+        <apply attrColorValue="$red" pathEffect="1_3" />
+      </switch>
       <switch>
         <case additional="surface=paved" />
         <case additional="surface=concrete" />
@@ -150,14 +146,25 @@
         <apply attrColorValue="$white" />
       </switch>
       <switch>
+        <case activityMode="enduro" additional="dirtbike:scale=6" />
+        <case activityMode="mtb" additional="mtb:scale=6" />
+        <apply attrColorValue="$pink" pathEffect="3_3" />
+      </switch>
+      <switch hideUnconfirmed="false">
+        <case activityMode="enduro" additional="dirtbike:scale=0" />
+        <apply attrColorValue="#fa00ff" pathEffect="" />
+      </switch>
+      <switch>
+        <case activityMode="enduro" additional="dirtbike:scale=0" />
+        <apply attrColorValue="$black" pathEffect="3_3" />
+      </switch>
+      <switch>
         <case activityMode="enduro" additional="motorcycle=yes" />
         <case activityMode="enduro" additional="dirtbike:scale=" />
         <case activityMode="mtb" additional="bicycle=yes" />
         <case activityMode="mtb" additional="mtb:scale=" />
         <case activityMode="hiking" />
-        <apply attrColorValue="$black" pathEffect="">
-          <apply_if activityMode="enduro" additional="dirtbike:scale=0" pathEffect="3_3" />
-        </apply>
+        <apply attrColorValue="$black" pathEffect="" />
       </switch>
       <case attrColorValue="$black" pathEffect="3_3" />
     </apply>
@@ -165,21 +172,15 @@
 
   <renderingAttribute name="pathCasingColor">
     <apply minzoom="13">
-      <switch>
-        <case activityMode="enduro" tag="highway" value="steps" />
-        <case activityMode="enduro" additional="dirtbike:scale=6" />
-        <case activityMode="enduro" additional="smoothness=impassable" />
-        <case activityMode="enduro" additional="motorcycle=no" />
-        <case activityMode="mtb" tag="highway" value="steps" />
-        <case activityMode="mtb" additional="smoothness=impassable" />
-        <case activityMode="mtb" additional="mtb:scale=6" />
-        <case activityMode="mtb" additional="bicycle=no" />
-        <apply attrColorValue="$transparent" pathEffect="3_3" />
-      </switch>
       <apply>
         <case additional="survey=ground" />
         <case attrColorValue="$transparent" />
       </apply>
+      <switch>
+        <case activityMode="enduro" tag="highway" value="steps" />
+        <case activityMode="mtb" tag="highway" value="steps" />
+        <apply attrColorValue="$transparent" />
+      </switch>
       <switch>
         <case additional="surface=paved" />
         <case additional="surface=concrete" />
@@ -190,13 +191,21 @@
         <case additional="surface=paving_stones" />
         <apply attrColorValue="$black" />
       </switch>
+      <switch>
+        <case activityMode="enduro" additional="dirtbike:scale=6" />
+        <case activityMode="mtb" additional="mtb:scale=6" />
+        <apply attrColorValue="$transparent" />
+      </switch>
+      <switch>
+        <case activityMode="enduro" additional="dirtbike:scale=0" />
+        <apply attrColorValue="$transparent" />
+      </switch>
       <apply activityMode="enduro">
         <case additional="dirtbike:scale=5" attrColorValue="$pink" />
         <case additional="dirtbike:scale=4" attrColorValue="$orange" />
         <case additional="dirtbike:scale=3" attrColorValue="$yellow" />
         <case additional="dirtbike:scale=2" attrColorValue="$transparent" />
         <case additional="dirtbike:scale=1" attrColorValue="$transparent" />
-        <case additional="dirtbike:scale=0" attrColorValue="#fa00ff" />
       </apply>
       <apply activityMode="hiking">
         <case additional="sac_scale=difficult_alpine_hiking" attrColorValue="$pink" />
@@ -207,7 +216,6 @@
         <case additional="sac_scale=hiking" attrColorValue="$transparent" />
       </apply>
       <apply activityMode="mtb">
-        <case additional="mtb:scale=6" attrColorValue="$pink" />
         <case additional="mtb:scale=5" attrColorValue="$pink" />
         <case additional="mtb:scale=4" attrColorValue="$pink" />
         <case additional="mtb:scale=3" attrColorValue="$orange" />
@@ -273,33 +281,7 @@
         <case additional="surface=" />
         <case tag="highway" value="path" />
         <case tag="highway" value="track" />
-        <apply>
-          <apply activityMode="enduro">
-            <case additional="dirtbike:scale=5" attrColorValue="$pink" />
-            <case additional="dirtbike:scale=4" attrColorValue="$orange" />
-            <case additional="dirtbike:scale=3" attrColorValue="$yellow" />
-            <case additional="dirtbike:scale=2" attrColorValue="$transparent" />
-            <case additional="dirtbike:scale=1" attrColorValue="$transparent" />
-          </apply>
-          <apply activityMode="hiking">
-            <case additional="sac_scale=difficult_alpine_hiking" attrColorValue="$pink" />
-            <case additional="sac_scale=demanding_alpine_hiking" attrColorValue="$pink" />
-            <case additional="sac_scale=alpine_hiking" attrColorValue="$pink" />
-            <case additional="sac_scale=demanding_mountain_hiking" attrColorValue="$orange" />
-            <case additional="sac_scale=mountain_hiking" attrColorValue="$yellow" />
-            <case additional="sac_scale=hiking" attrColorValue="$transparent" />
-          </apply>
-          <apply activityMode="mtb">
-            <case additional="mtb:scale=6" attrColorValue="$pink" />
-            <case additional="mtb:scale=5" attrColorValue="$pink" />
-            <case additional="mtb:scale=4" attrColorValue="$pink" />
-            <case additional="mtb:scale=3" attrColorValue="$orange" />
-            <case additional="mtb:scale=2" attrColorValue="$yellow" />
-            <case additional="mtb:scale=1" attrColorValue="$transparent" />
-            <case additional="mtb:scale=0" attrColorValue="$transparent" />
-          </apply>
-          <case attrColorValue="$transparent" />
-        </apply>
+        <apply attrColorValue="$transparent" />
       </switch>
       <case attrColorValue="$black" />
     </apply>
@@ -347,9 +329,9 @@
       <case color="$gpsColor" />
       <apply cap="ROUND">
         <case>
-          <apply_if minzoom="3" maxzoom="5" strokeWidth="1"/>
-          <apply_if minzoom="6" maxzoom="11" strokeWidth="3"/>
-          <apply_if minzoom="12" strokeWidth="5"/>
+          <apply_if minzoom="3" maxzoom="5" strokeWidth="1:1"/>
+          <apply_if minzoom="6" maxzoom="11" strokeWidth="3:3"/>
+          <apply_if minzoom="12" strokeWidth="5:5"/>
         </case>
       </apply>
     </switch>
@@ -362,7 +344,6 @@
   <renderingAttribute name="woodColor">
     <case attrColorValue="#c4ecb4"/>
     <!-- <case attrColorValue="$red"/> -->
-<!--     <case attrColorValue="#c8e9c3"/> -->
   </renderingAttribute>
 
   <renderingAttribute name="contourLineColor">
@@ -884,11 +865,11 @@
           <case minzoom="7" tag="landuse" value="reservoir"/>
           <case minzoom="7" tag="landuse" value="water"/>
           <case minzoom="10" tag="landuse" value="basin"/>
-          <apply color_2="$waterColor" strokeWidth_2="0"/>
+          <apply color_2="$waterColor" strokeWidth_2="0:0"/>
         </switch>
       </switch>
       <apply color="$waterColor"/>
-      <apply_if additional="intermittent=yes" strokeWidth_2="1:0" color_2="#7479ec" pathEffect_2="7_5"/>
+      <apply_if additional="intermittent=yes" strokeWidth_2="1:0:1:0" color_2="#7479ec" pathEffect_2="7_5"/>
     </switch>
 
     <!-- POLYGON - LAND -->
@@ -924,20 +905,20 @@
         <case tag="highway" value="secondary_link" />
         <!-- <case tag="highway" value="tertiary"/>
         <case tag="highway" value="tertiary_link"/> -->
-        <apply_if maxzoom="6" strokeWidth="0.5"/>
-        <apply_if minzoom="7" strokeWidth="0.75"/>
-        <apply_if minzoom="8" strokeWidth="1"/>
-        <apply_if maxzoom="9" strokeWidth="1.25" />
-        <apply_if minzoom="10" strokeWidth="1.5" />
-        <apply_if minzoom="11" strokeWidth="1.75" />
-        <apply_if minzoom="12" strokeWidth="2" />
-        <apply_if minzoom="13" strokeWidth="2.5" />
-        <apply_if maxzoom="14" strokeWidth="3.25" />
-        <apply_if maxzoom="15" strokeWidth="4"/>
-        <apply_if maxzoom="16" strokeWidth="4.75" />
-        <apply_if maxzoom="17" strokeWidth="5.5"/>
-        <apply_if maxzoom="18" strokeWidth="6.25" />
-        <apply_if minzoom="19" strokeWidth="7" />
+        <apply_if maxzoom="6" strokeWidth="0.5:0.5"/>
+        <apply_if minzoom="7" strokeWidth="0.75:0.75"/>
+        <apply_if minzoom="8" strokeWidth="1:1"/>
+        <apply_if maxzoom="9" strokeWidth="1.25:1.25" />
+        <apply_if minzoom="10" strokeWidth="1.5:1.5" />
+        <apply_if minzoom="11" strokeWidth="1.75:1.75" />
+        <apply_if minzoom="12" strokeWidth="2:2" />
+        <apply_if minzoom="13" strokeWidth="2.5:2.5" />
+        <apply_if maxzoom="14" strokeWidth="3.25:3.25" />
+        <apply_if maxzoom="15" strokeWidth="4:4"/>
+        <apply_if maxzoom="16" strokeWidth="4.75:4.75" />
+        <apply_if maxzoom="17" strokeWidth="5.5:5.5"/>
+        <apply_if maxzoom="18" strokeWidth="6.25:6.25" />
+        <apply_if minzoom="19" strokeWidth="7:7" />
         <apply
           color="$majorRoadStrokeColor"
           shadowColor="$majorRoadCasingColor"
@@ -958,13 +939,13 @@
         <case tag="highway" value="pedestrian" />
         <case tag="highway" value="escape" />
         <case tag="highway" value="raceway" />
-        <apply_if maxzoom="13" strokeWidth="1.5" />
-        <apply_if minzoom="14" strokeWidth="2.25"  />
-        <apply_if minzoom="15" strokeWidth="3" />
-        <apply_if minzoom="16" strokeWidth="3.75" />
-        <apply_if minzoom="17" strokeWidth="4.5" />
-        <apply_if minzoom="18" strokeWidth="5.25" />
-        <apply_if minzoom="19" strokeWidth="6" />
+        <apply_if maxzoom="13" strokeWidth="1.5:1.5" />
+        <apply_if minzoom="14" strokeWidth="2.25:2.25"  />
+        <apply_if minzoom="15" strokeWidth="3:3" />
+        <apply_if minzoom="16" strokeWidth="3.75:3.75" />
+        <apply_if minzoom="17" strokeWidth="4.5:4.5" />
+        <apply_if minzoom="18" strokeWidth="5.25:5.25" />
+        <apply_if minzoom="19" strokeWidth="6:6" />
         <apply
           color="$minorRoadStrokeColor"
           shadowColor="$minorRoadCasingColor"
@@ -980,13 +961,13 @@
         <case tag="highway" value="cycleway" />
         <case tag="highway" value="bridleway" />
         <case tag="highway" value="steps" />
-        <apply_if maxzoom="13" strokeWidth="0.5" />
-        <apply_if maxzoom="14" strokeWidth="0.75" />
-        <apply_if minzoom="15" strokeWidth="1" />
-        <apply_if minzoom="16" strokeWidth="1.25" />
-        <apply_if minzoom="17" strokeWidth="1.5" />
-        <apply_if minzoom="18" strokeWidth="1.75" />
-        <apply_if minzoom="19" strokeWidth="2" />
+        <apply_if maxzoom="13" strokeWidth="0.5:0.5" />
+        <apply_if maxzoom="14" strokeWidth="0.75:0.75" />
+        <apply_if minzoom="15" strokeWidth="1:1" />
+        <apply_if minzoom="16" strokeWidth="1.25:1.25" />
+        <apply_if minzoom="17" strokeWidth="1.5:1.5" />
+        <apply_if minzoom="18" strokeWidth="1.75:1.75" />
+        <apply_if minzoom="19" strokeWidth="2:2" />
         <apply
           shadowColor="$pathCasingColor"
           color="$pathStrokeColor"
@@ -1000,11 +981,11 @@
     <switch>
       <switch minzoom="12">
         <case tag="waterway" value="stream" />
-        <apply_if minzoom="13" maxzoom="13" strokeWidth="1.2"/>
-        <apply_if minzoom="14" maxzoom="14" strokeWidth="1.5"/>
+        <apply_if minzoom="13" maxzoom="13" strokeWidth="1.2:1.2"/>
+        <apply_if minzoom="14" maxzoom="14" strokeWidth="1.5:1.5"/>
         <apply_if minzoom="15" maxzoom="16" strokeWidth="1.2:1.2"/>
         <apply_if minzoom="17" maxzoom="17" strokeWidth="1.4:1.4"/>
-        <apply_if minzoom="18" strokeWidth="2:2"/>
+        <apply_if minzoom="18" strokeWidth="2:2:2:2"/>
       </switch>
       <switch minzoom="5" >
         <case tag="waterway" value="river">
@@ -1021,8 +1002,8 @@
           </apply>
         </case>
         <apply>
-          <apply_if maxzoom="9" strokeWidth="0.6"/>
-          <apply_if minzoom="10" maxzoom="12" strokeWidth="1:1"/>
+          <apply_if maxzoom="9" strokeWidth="0.6:0.6"/>
+          <apply_if minzoom="10" maxzoom="12" strokeWidth="1:1:1:1"/>
           <apply_if minzoom="13" maxzoom="13" strokeWidth="1.2:1.2"/>
           <apply_if minzoom="14" maxzoom="14" strokeWidth="1.5:1.5"/>
           <apply_if minzoom="15" maxzoom="16" strokeWidth="1.8:1.8"/>
@@ -1035,8 +1016,8 @@
         <case tag="waterway" value="ditch"/>
         <case tag="waterway" value="drain"/>
         <apply>
-          <apply_if minzoom="13" maxzoom="13" strokeWidth="1"/>
-          <apply_if minzoom="14" maxzoom="14" strokeWidth="1.3"/>
+          <apply_if minzoom="13" maxzoom="13" strokeWidth="1:1"/>
+          <apply_if minzoom="14" maxzoom="14" strokeWidth="1.3:1.3"/>
           <apply_if minzoom="15" maxzoom="16" strokeWidth="1:1"/>
           <apply_if minzoom="17" maxzoom="17" strokeWidth="1.2:1.2"/>
           <apply_if minzoom="18" strokeWidth="1.7:1.7"/>
@@ -1062,7 +1043,7 @@
       <case minzoom="15" contourLines="15"/>
       <case minzoom="16" contourLines="16"/>
       <apply>
-        <switch>
+        <!-- <switch>
           <case minzoom="15" additional="contourtype=5m" color="$contourLineColor"/>
           <case minzoom="13" additional="contourtype=20f" color="$contourLineColor"/>
           <apply>
@@ -1071,51 +1052,36 @@
             <case contourWidth="thick" strokeWidth="1.1"/>
             <case strokeWidth="0.3"/>
           </apply>
-        </switch>
+        </switch> -->
         <switch>
           <case minzoom="13" additional="contourtype=10m" color="$contourLineColor"/>
           <case minzoom="12" additional="contourtype=20m" color="$contourLineColor"/>
-          <case minzoom="12" additional="contourtype=40f" color="$contourLineColor"/>
           <apply>
-            <case contourWidth="thin" strokeWidth="0.5"/>
-            <case contourWidth="medium" strokeWidth="1"/>
-            <case contourWidth="thick" strokeWidth="1.5"/>
+            <case contourWidth="thin" strokeWidth="0.6"/>
+            <case contourWidth="medium" strokeWidth="0.9"/>
+            <case contourWidth="thick" strokeWidth="1.3"/>
             <case strokeWidth="0.5"/>
           </apply>
         </switch>
         <switch minzoom="11">
           <case additional="contourtype=50m" color="$contourLineColor50m"/>
           <apply>
-            <case contourWidth="thin" strokeWidth="0.6"/>
-            <case contourWidth="medium" strokeWidth="0.9"/>
-            <case contourWidth="thick" strokeWidth="1.3"/>
+            <case contourWidth="thin" strokeWidth="0.9"/>
+            <case contourWidth="medium" strokeWidth="1.3"/>
+            <case contourWidth="thick" strokeWidth="1.9"/>
             <case strokeWidth="0.6"/>
           </apply>
         </switch>
         <switch minzoom="11">
           <case additional="contourtype=100m" color="$contourLineColor100m"/>
-          <case additional="contourtype=200f" color="$contourLineColor100m"/>
           <apply>
-            <case contourWidth="thin" strokeWidth="1"/>
-            <case contourWidth="medium" strokeWidth="1.3"/>
-            <case contourWidth="thick" strokeWidth="1.9"/>
+            <case contourWidth="thin" strokeWidth="1.2"/>
+            <case contourWidth="medium" strokeWidth="1.8"/>
+            <case contourWidth="thick" strokeWidth="2.6"/>
             <case strokeWidth="1"/>
           </apply>
         </switch>
-        <switch minzoom="11">
-          <case additional="contourtype=1000f" color="$contourLineColor100m"/>
-          <apply>
-            <case contourWidth="thin" strokeWidth="1.3"/>
-            <case contourWidth="medium" strokeWidth="1.5"/>
-            <case contourWidth="thick" strokeWidth="2.1"/>
-            <case strokeWidth="1.3"/>
-          </apply>
-        </switch>
       </apply>
-      <apply_if engine_v1="false" minzoom="15" pathIcon="stroke_brown_left" pathIconStep="100">
-        <apply_if contourColorScheme="light_brown" pathIcon="stroke_light_brown_left"/>
-        <apply_if contourColorScheme="dark_brown" pathIcon="stroke_dark_brown_left"/>
-      </apply_if>
     </switch>
 
     <!-- LINE - ADMIN LEVELS -->
@@ -1124,13 +1090,13 @@
       <case tag="admin_level" value="1"/>
       <case tag="admin_level" value="2"/>
       <apply color="$boundaryColorOuter">
-        <case maxzoom="2" strokeWidth="0.7"/>
-        <case maxzoom="3" strokeWidth="0.9" strokeWidth_0="0.8"/>
-        <case maxzoom="4" strokeWidth="1:1" strokeWidth_0="0.8"/>
-        <case maxzoom="5" strokeWidth="2:2" strokeWidth_0="1"/>
-        <case maxzoom="6" strokeWidth="3:3" strokeWidth_0="1.3"/>
-        <case maxzoom="8" strokeWidth="4:4" strokeWidth_0="1:1"/>
-        <case minzoom="9" strokeWidth="6:6" strokeWidth_0="1:1"/>
+        <case maxzoom="2" strokeWidth="0.7:0.7"/>
+        <case maxzoom="3" strokeWidth="0.9:0.9" strokeWidth_0="0.8:0.8"/>
+        <case maxzoom="4" strokeWidth="1:1:1:1" strokeWidth_0="0.8:0.8"/>
+        <case maxzoom="5" strokeWidth="2:2:2:2" strokeWidth_0="1:1"/>
+        <case maxzoom="6" strokeWidth="3:3:3:3" strokeWidth_0="1.3:1.3"/>
+        <case maxzoom="8" strokeWidth="4:4:4:4" strokeWidth_0="1:1:1:1"/>
+        <case minzoom="9" strokeWidth="6:6:6:6" strokeWidth_0="1:1:1:1"/>
       </apply>
     </switch>
   </line>

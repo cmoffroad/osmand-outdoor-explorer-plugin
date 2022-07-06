@@ -97,7 +97,7 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
   <div class='app'>
     <nav class='navigation light-blue lighten-1'>
       <div class='nav-wrapper'>
-        <h5 class="left white-text">&nbsp;&nbsp;osmand-outdoor-explorer-plugin</h5>
+        <h5 class='left white-text hide-on-small-only'>&nbsp;&nbsp;osmand-outdoor-explorer-plugin</h5>
         <ul class='right'>
           <li><a target="_blank" href='./build/osmand-outdoor-explorer-plugin.osf'>Download</a></li>
           <li><a target="_blank" href='https://github.com/cmoffroad/osmand-outdoor-explorer-plugin'>Documentation</a></li>
@@ -211,6 +211,7 @@ const generateHTML = (zooms, lat, lon, xTiles, yTiles, date, previewDir) => {
       'opentopomap': L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png'),
       'worldtopomap': L.tileLayer('https://services.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'),
       'google (terrain)': L.tileLayer('https://mt3.Google.com/vt?z={z}&x={x}&y={y}&lyrs=p'),
+      'google (satellite)': L.tileLayer('https://mt3.Google.com/vt?z={z}&x={x}&y={y}&lyrs=s'),
       'none': L.tileLayer('')
     };
 
