@@ -58,11 +58,10 @@ If you are serious about doing outdoor exploration, you can purchase a one time 
 
 ### Plugin Future Updates
 
-- go to Plugins > scroll down to Outdoor Explorer and tap menu > Delete
-- Close App 
 - From your mobile browser, open [Web Preview.](https://www.cmoffroad.com/osmand-outdoor-explorer-plugin-preview/) and click on Download.
 - Once download is complete, click on Open.
 - OsmAnd should automatically open and inform you the plugin has been successfully added (updated)
+- Close and re-open the application to be sure the rendered is updated.
 
 ## Documentation
 
