@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<renderingStyle name="Offroad survey" depends="" version="1.1">
+<renderingStyle name="Outdoor explorer" depends="" version="1">
 
   <!-- PROPERTY - CONTOUR LINES -->
   <renderingProperty attr="contourLines" name="Show contour lines" description="Select minimum zoom level to display in map if available. Separate contour file may be needed." type="string" possibleValues="disabled,16,15,14,13,12,11" defaultValueDescription="default13" category="details"/>
@@ -869,7 +869,7 @@
         </switch>
       </switch>
       <apply color="$waterColor"/>
-      <apply_if additional="intermittent=yes" strokeWidth_2="1:0:1:0" color_2="#7479ec" pathEffect_2="7_5"/>
+      <apply_if additional="intermittent=yes" strokeWidth_2="1:0" color_2="#7479ec" pathEffect_2="7_5"/>
     </switch>
 
     <!-- POLYGON - LAND -->
@@ -985,7 +985,7 @@
         <apply_if minzoom="14" maxzoom="14" strokeWidth="1.5:1.5"/>
         <apply_if minzoom="15" maxzoom="16" strokeWidth="1.2:1.2"/>
         <apply_if minzoom="17" maxzoom="17" strokeWidth="1.4:1.4"/>
-        <apply_if minzoom="18" strokeWidth="2:2:2:2"/>
+        <apply_if minzoom="18" strokeWidth="2:2"/>
       </switch>
       <switch minzoom="5" >
         <case tag="waterway" value="river">
@@ -1003,7 +1003,7 @@
         </case>
         <apply>
           <apply_if maxzoom="9" strokeWidth="0.6:0.6"/>
-          <apply_if minzoom="10" maxzoom="12" strokeWidth="1:1:1:1"/>
+          <apply_if minzoom="10" maxzoom="12" strokeWidth="1:1"/>
           <apply_if minzoom="13" maxzoom="13" strokeWidth="1.2:1.2"/>
           <apply_if minzoom="14" maxzoom="14" strokeWidth="1.5:1.5"/>
           <apply_if minzoom="15" maxzoom="16" strokeWidth="1.8:1.8"/>
@@ -1092,11 +1092,11 @@
       <apply color="$boundaryColorOuter">
         <case maxzoom="2" strokeWidth="0.7:0.7"/>
         <case maxzoom="3" strokeWidth="0.9:0.9" strokeWidth_0="0.8:0.8"/>
-        <case maxzoom="4" strokeWidth="1:1:1:1" strokeWidth_0="0.8:0.8"/>
-        <case maxzoom="5" strokeWidth="2:2:2:2" strokeWidth_0="1:1"/>
-        <case maxzoom="6" strokeWidth="3:3:3:3" strokeWidth_0="1.3:1.3"/>
-        <case maxzoom="8" strokeWidth="4:4:4:4" strokeWidth_0="1:1:1:1"/>
-        <case minzoom="9" strokeWidth="6:6:6:6" strokeWidth_0="1:1:1:1"/>
+        <case maxzoom="4" strokeWidth="1:1" strokeWidth_0="0.8:0.8"/>
+        <case maxzoom="5" strokeWidth="2:2" strokeWidth_0="1:1"/>
+        <case maxzoom="6" strokeWidth="3:3" strokeWidth_0="1:1"/>
+        <case maxzoom="8" strokeWidth="4:4" strokeWidth_0="1:1"/>
+        <case minzoom="9" strokeWidth="6:6" strokeWidth_0="1:1"/>
       </apply>
     </switch>
   </line>
