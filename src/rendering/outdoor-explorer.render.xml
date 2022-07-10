@@ -53,8 +53,20 @@
     <case attrColorValue="#00bcd4" />
   </renderingAttribute>
 
-  <renderingAttribute name="yellow">
-    <case attrColorValue="#ffeb3b" />
+  <renderingAttribute name="teal">
+    <case attrColorValue="#009688" />
+  </renderingAttribute>
+
+  <renderingAttribute name="green">
+    <case attrColorValue="#4caf50" />
+  </renderingAttribute>
+
+  <renderingAttribute name="lightGreen">
+    <case attrColorValue="#8bc34a" />
+  </renderingAttribute>
+
+  <renderingAttribute name="lime">
+    <case attrColorValue="#cddc39" />
   </renderingAttribute>
 
   <renderingAttribute name="yellow">
@@ -97,6 +109,27 @@
     <case attrColorValue="#00000000" />
   </renderingAttribute>
 
+  <renderingAttribute name="beginnerColor">
+    <case attrColorValue="$black" />
+  </renderingAttribute>
+
+  <renderingAttribute name="intermediateColor">
+    <!-- <case attrColorValue="$orange" /> -->
+    <case attrColorValue="#f57c00" />
+    <!-- <case attrColorValue="#ff5722" /> -->
+  </renderingAttribute>
+
+  <renderingAttribute name="advancedColor">
+    <!-- <case attrColorValue="$pink" /> -->
+    <case attrColorValue="#c2185b" />
+    <!-- <case attrColorValue="#d32f2f" /> -->
+  </renderingAttribute>
+
+  <renderingAttribute name="extremeColor">
+    <!-- <case attrColorValue="$deepPurple" /> -->
+    <case attrColorValue="#512da8" />
+  </renderingAttribute>
+
   <!-- ATTRIBUTES -->
   <renderingAttribute name="defaultColor">
     <case attrColorValue="#fffbf4" />
@@ -107,8 +140,14 @@
   </renderingAttribute>
 
   <renderingAttribute name="missingColor">
-    <case hideUnconfirmed="true" attrColorValue="$grey" />
-    <case attrColorValue="#fa00ff" />
+    <case attrColorValue="$grey" />
+  </renderingAttribute>
+
+  <renderingAttribute name="unconfirmedColor">
+    <!-- <case attrColorValue="#fa00ff" /> -->
+    <!-- <case attrColorValue="#e666fb" /> -->
+    <case attrColorValue="#e040fb" />
+
   </renderingAttribute>
 
   <renderingAttribute name="buildingColor">
@@ -124,16 +163,25 @@
 
   <!-- PATHS -->
 
+  <renderingAttribute name="pathVisibility">
+    <apply pathEffect="">
+      <apply_if additional="trail_visibility=intermediate" pathEffect="6_3" />
+      <apply_if additional="trail_visibility=bad" pathEffect="6_3" />
+      <apply_if additional="trail_visibility=horrible" pathEffect="6_3" />
+      <apply_if additional="trail_visibility=no" pathEffect="3_3" />
+    </apply>
+  </renderingAttribute>
+
   <renderingAttribute name="pathStrokeColor">
     <apply minzoom="13">
       <apply>
         <case additional="survey=ground" />
-        <case attrColorValue="$missingColor" />
+        <case attrColorValue="$grey" />
       </apply>
       <switch>
         <case activityMode="enduro" tag="highway" value="steps" />
         <case activityMode="mtb" tag="highway" value="steps" />
-        <apply attrColorValue="$red" pathEffect="1_3" />
+        <apply attrColorValue="$brown" pathEffect="1_3" />
       </switch>
       <switch>
         <case additional="surface=paved" />
@@ -147,26 +195,60 @@
       </switch>
       <switch>
         <case activityMode="enduro" additional="dirtbike:scale=6" />
+        <case activityMode="enduro" additional="dirtbike:scale=5" />
+        <case activityMode="enduro" additional="dirtbike:scale=4" />
+        <case activityMode="hiking" additional="sac_scale=difficult_alpine_hiking" />
+        <case activityMode="hiking" additional="sac_scale=demanding_alpine_hiking" />
+        <case activityMode="hiking" additional="sac_scale=alpine_hiking" />
         <case activityMode="mtb" additional="mtb:scale=6" />
-        <apply attrColorValue="$pink" pathEffect="3_3" />
-      </switch>
-      <switch hideUnconfirmed="false">
-        <case activityMode="enduro" additional="dirtbike:scale=0" />
-        <apply attrColorValue="#fa00ff" pathEffect="" />
+        <case activityMode="mtb" additional="mtb:scale=5" />
+        <case activityMode="mtb" additional="mtb:scale=4" />
+        <apply attrColorValue="$extremeColor" pathEffect="">
+          <apply_if additional="trail_visibility=intermediate" pathEffect="9_6" />
+          <apply_if additional="trail_visibility=bad" pathEffect="9_6" />
+          <apply_if additional="trail_visibility=horrible" pathEffect="3_6" />
+          <apply_if additional="trail_visibility=no" pathEffect="3_6" />
+        </apply>
       </switch>
       <switch>
-        <case activityMode="enduro" additional="dirtbike:scale=0" />
-        <apply attrColorValue="$black" pathEffect="3_3" />
+        <case activityMode="enduro" additional="dirtbike:scale=3" />
+        <case activityMode="hiking" additional="sac_scale=demanding_mountain_hiking" />
+        <case activityMode="mtb" additional="mtb:scale=3"  />
+        <apply attrColorValue="$advancedColor" pathEffect="">
+          <apply_if additional="trail_visibility=intermediate" pathEffect="9_6" />
+          <apply_if additional="trail_visibility=bad" pathEffect="9_6" />
+          <apply_if additional="trail_visibility=horrible" pathEffect="3_6" />
+          <apply_if additional="trail_visibility=no" pathEffect="3_6" />
+        </apply>
       </switch>
       <switch>
+        <case activityMode="enduro" additional="dirtbike:scale=2" />
+        <case activityMode="hiking" additional="sac_scale=mountain_hiking" />
+        <case activityMode="mtb" additional="mtb:scale=2" />
+        <apply attrColorValue="$intermediateColor" pathEffect="">
+          <apply_if additional="trail_visibility=intermediate" pathEffect="9_6" />
+          <apply_if additional="trail_visibility=bad" pathEffect="9_6" />
+          <apply_if additional="trail_visibility=horrible" pathEffect="3_6" />
+          <apply_if additional="trail_visibility=no" pathEffect="3_6" />
+        </apply>
+      </switch>
+      <switch>
+        <case activityMode="enduro" additional="dirtbike:scale=1" />
+        <case activityMode="enduro" additional="dirtbike:scale=0" />
         <case activityMode="enduro" additional="motorcycle=yes" />
-        <case activityMode="enduro" additional="dirtbike:scale=" />
-        <case activityMode="mtb" additional="bicycle=yes" />
-        <case activityMode="mtb" additional="mtb:scale=" />
+        <case activityMode="hiking" additional="sac_scale=hiking" />
         <case activityMode="hiking" />
-        <apply attrColorValue="$black" pathEffect="" />
+        <case activityMode="mtb" additional="mtb:scale=1" />
+        <case activityMode="mtb" additional="mtb:scale=0" />
+        <case activityMode="mtb" additional="bicycle=yes" />
+        <apply attrColorValue="$beginnerColor" pathEffect="">
+          <apply_if additional="trail_visibility=intermediate" pathEffect="9_6" />
+          <apply_if additional="trail_visibility=bad" pathEffect="9_6" />
+          <apply_if additional="trail_visibility=horrible" pathEffect="3_6" />
+          <apply_if additional="trail_visibility=no" pathEffect="3_6" />
+        </apply>
       </switch>
-      <case attrColorValue="$black" pathEffect="3_3" />
+      <case attrColorValue="$unconfirmedColor" pathEffect=""/>
     </apply>
   </renderingAttribute>
 
@@ -191,38 +273,6 @@
         <case additional="surface=paving_stones" />
         <apply attrColorValue="$black" />
       </switch>
-      <switch>
-        <case activityMode="enduro" additional="dirtbike:scale=6" />
-        <case activityMode="mtb" additional="mtb:scale=6" />
-        <apply attrColorValue="$transparent" />
-      </switch>
-      <switch>
-        <case activityMode="enduro" additional="dirtbike:scale=0" />
-        <apply attrColorValue="$transparent" />
-      </switch>
-      <apply activityMode="enduro">
-        <case additional="dirtbike:scale=5" attrColorValue="$pink" />
-        <case additional="dirtbike:scale=4" attrColorValue="$orange" />
-        <case additional="dirtbike:scale=3" attrColorValue="$yellow" />
-        <case additional="dirtbike:scale=2" attrColorValue="$transparent" />
-        <case additional="dirtbike:scale=1" attrColorValue="$transparent" />
-      </apply>
-      <apply activityMode="hiking">
-        <case additional="sac_scale=difficult_alpine_hiking" attrColorValue="$pink" />
-        <case additional="sac_scale=demanding_alpine_hiking" attrColorValue="$pink" />
-        <case additional="sac_scale=alpine_hiking" attrColorValue="$pink" />
-        <case additional="sac_scale=demanding_mountain_hiking" attrColorValue="$orange" />
-        <case additional="sac_scale=mountain_hiking" attrColorValue="$yellow" />
-        <case additional="sac_scale=hiking" attrColorValue="$transparent" />
-      </apply>
-      <apply activityMode="mtb">
-        <case additional="mtb:scale=5" attrColorValue="$pink" />
-        <case additional="mtb:scale=4" attrColorValue="$pink" />
-        <case additional="mtb:scale=3" attrColorValue="$orange" />
-        <case additional="mtb:scale=2" attrColorValue="$yellow" />
-        <case additional="mtb:scale=1" attrColorValue="$transparent" />
-        <case additional="mtb:scale=0" attrColorValue="$transparent" />
-      </apply>
       <case attrColorValue="$transparent" />
     </apply>
   </renderingAttribute>
@@ -236,9 +286,7 @@
     <apply minzoom="13">
       <apply>
         <case additional="survey=ground" />
-        <case tag="highway" value="track" attrColorValue="$missingColor" />
-        <case additional="surface=unpaved" attrColorValue="$missingColor" />
-        <case attrColorValue="$grey" />
+        <case attrColorValue="$missingColor" />
       </apply>
       <switch>
         <case additional="surface=paved" />
@@ -250,11 +298,46 @@
         <case additional="surface=paving_stones" />
         <apply attrColorValue="$white" />
       </switch>
-      <case additional="surface=" attrColorValue="$black" />
       <switch>
-        <case tag="highway" value="path" />
+        <case additional="surface=" />
         <case tag="highway" value="track" />
-        <apply attrColorValue="$black" />
+        <apply>
+          <switch>
+            <case activityMode="enduro" additional="dirtbike:scale=6" />
+            <case activityMode="enduro" additional="dirtbike:scale=5" />
+            <case activityMode="enduro" additional="dirtbike:scale=4" />
+            <case activityMode="hiking" additional="sac_scale=difficult_alpine_hiking" />
+            <case activityMode="hiking" additional="sac_scale=demanding_alpine_hiking" />
+            <case activityMode="hiking" additional="sac_scale=alpine_hiking" />
+            <case activityMode="mtb" additional="mtb:scale=6" />
+            <case activityMode="mtb" additional="mtb:scale=5" />
+            <case activityMode="mtb" additional="mtb:scale=4" />
+            <apply attrColorValue="$extremeColor" pathEffect="" />
+          </switch>
+          <switch>
+            <case activityMode="enduro" additional="dirtbike:scale=3" />
+            <case activityMode="hiking" additional="sac_scale=demanding_mountain_hiking" />
+            <case activityMode="mtb" additional="mtb:scale=3"  />
+            <apply attrColorValue="$advancedColor" pathEffect="" />
+          </switch>
+          <switch>
+            <case activityMode="enduro" additional="dirtbike:scale=2" />
+            <case activityMode="hiking" additional="sac_scale=mountain_hiking" />
+            <case activityMode="mtb" additional="mtb:scale=2" />
+            <apply attrColorValue="$intermediateColor" pathEffect="" />
+          </switch>
+          <switch>
+            <case activityMode="enduro" additional="dirtbike:scale=1" />
+            <case activityMode="enduro" additional="dirtbike:scale=0" />
+            <case activityMode="enduro" additional="motorcycle=yes" />
+            <case activityMode="hiking" additional="sac_scale=hiking" />
+            <case activityMode="mtb" additional="mtb:scale=1" />
+            <case activityMode="mtb" additional="mtb:scale=0" />
+            <case activityMode="mtb" additional="bicycle=yes" />
+            <apply attrColorValue="$beginnerColor" pathEffect="" />
+          </switch>
+          <case attrColorValue="$black" />
+        </apply>
       </switch>
       <case attrColorValue="$white" />
     </apply>
@@ -279,7 +362,6 @@
       </switch>
       <switch>
         <case additional="surface=" />
-        <case tag="highway" value="path" />
         <case tag="highway" value="track" />
         <apply attrColorValue="$transparent" />
       </switch>
@@ -342,25 +424,16 @@
   </renderingAttribute>
 
   <renderingAttribute name="woodColor">
-    <case attrColorValue="#c4ecb4"/>
+    <case attrColorValue="#66c4ecb4"/>
     <!-- <case attrColorValue="$red"/> -->
   </renderingAttribute>
 
   <renderingAttribute name="contourLineColor">
-    <case attrColorValue="#AAAAAACC">
-    </case>
-  </renderingAttribute>
-  <renderingAttribute name="contourLineColor50m">
-    <case attrColorValue="#AAAAAACC">
-    </case>
-  </renderingAttribute>
-  <renderingAttribute name="contourLineColor100m">
-    <case attrColorValue="#AAAAAACC">
-    </case>
+    <case attrColorValue="#66AAAACC" />
   </renderingAttribute>
 
   <renderingAttribute name="landuseResidentialColor">
-    <case attrColorValue="#CCCCCC"/>
+    <case attrColorValue="#CCCCCCCC"/>
   </renderingAttribute>
 
   <renderingAttribute name="landuseOrchardColor">
@@ -728,7 +801,7 @@
     </switch> -->
 
     <!-- TEXT - FIXME -->
-    <!-- <switch showFixme="true" minzoom="13" intersectionSizeFactor="0" intersectionMargin="0">
+    <!-- <switch minzoom="13" intersectionSizeFactor="0" intersectionMargin="0">
       <switch tag="fixme_tag" value="yes" nameTag="fixme" textColor="#ffffff" textHaloColor="#ccf800e0" textWrapWidth="20" textOrder="1">
         <case maxzoom="15" textSize="10" textDy="-40"/>
         <case minzoom="16" textSize="11" textDy="-50"/>
@@ -832,15 +905,20 @@
       <switch minzoom="6">
         <case tag="natural" value="wood"/>
         <case tag="landuse" value="forest"/>
+        <case tag="natural" value="scrub"/>
+        <case tag="natural" value="grassland"/>
+        <case tag="landuse" value="meadow"/>
+        <case tag="landuse" value="grass"/>
+        <case tag="natural" value="heath"/>
         <apply color="$woodColor" color_0="$woodColor"/>
       </switch>
-      <case minzoom="12" tag="natural" value="scrub">
+      <!-- <case minzoom="12" tag="natural" value="scrub">
         <apply_if maxzoom="13" color="#b3e3b5"/>
         <apply_if minzoom="14" color_0="#B3E3B5" />
-      </case>
-      <case minzoom="12" tag="landuse" value="orchard" color="$landuseOrchardColor" color_0="$landuseOrchardColor" color_2="#499720">
-      </case>
-      <switch minzoom="6" color="$grassColor">
+      </case> -->
+      <!-- <case minzoom="12" tag="landuse" value="orchard" color="$landuseOrchardColor" color_0="$landuseOrchardColor" color_2="#499720">
+      </case> -->
+      <!-- <switch minzoom="6" color="$grassColor">
         <case tag="natural" value="grassland"/>
         <case tag="landuse" value="meadow"/>
         <case minzoom="12" tag="landuse" value="grassland"/>
@@ -849,10 +927,10 @@
         <case tag="landuse" value="grass"/>
         <case tag="natural" value="heath"/>
         <apply color="$grassColor"/>
-      </switch>
+      </switch> -->
       <case minzoom="9" tag="landuse" value="residential" color="$landuseResidentialColor" />
-      <case minzoom="6" tag="landuse" value="farmland" color="$farmlandColor"/>
-      <case minzoom="12" tag="landuse" value="farmyard" color="$farmyardColor"/>
+      <!-- <case minzoom="6" tag="landuse" value="farmland" color="$farmlandColor"/>
+      <case minzoom="12" tag="landuse" value="farmyard" color="$farmyardColor"/> -->
     </switch>
 
     <!-- POLYGON - WATER -->
@@ -893,6 +971,7 @@
     <case minzoom="5" tag="natural" value="coastline_line" color="#4580cf" strokeWidth=":1"/>
 
     <!-- LINE - HIGHWAY-->
+
     <switch>
       <switch minzoom="6">
         <case tag="highway" value="motorway" />
@@ -1064,7 +1143,7 @@
           </apply>
         </switch>
         <switch minzoom="11">
-          <case additional="contourtype=50m" color="$contourLineColor50m"/>
+          <case additional="contourtype=50m" color="$contourLineColor"/>
           <apply>
             <case contourWidth="thin" strokeWidth="0.9"/>
             <case contourWidth="medium" strokeWidth="1.3"/>
@@ -1073,7 +1152,7 @@
           </apply>
         </switch>
         <switch minzoom="11">
-          <case additional="contourtype=100m" color="$contourLineColor100m"/>
+          <case additional="contourtype=100m" color="$contourLineColor"/>
           <apply>
             <case contourWidth="thin" strokeWidth="1.2"/>
             <case contourWidth="medium" strokeWidth="1.8"/>
