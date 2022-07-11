@@ -118,7 +118,8 @@
 
   <renderingAttribute name="advancedColor">
     <!-- <case attrColorValue="$pink" /> -->
-    <case attrColorValue="#c2185b" />
+    <!-- <case attrColorValue="#c2185b" /> -->
+    <case attrColorValue="#f50057" />
     <!-- <case attrColorValue="#d32f2f" /> -->
   </renderingAttribute>
 
@@ -179,139 +180,85 @@
     </apply>
   </renderingAttribute>
 
+  <renderingAttribute name="pathScaleColor">
+    <switch>
+      <case activityMode="enduro" additional="dirtbike:scale=6" />
+      <case activityMode="enduro" additional="dirtbike:scale=5" />
+      <case activityMode="enduro" additional="dirtbike:scale=4" />
+      <case activityMode="hiking" additional="sac_scale=difficult_alpine_hiking" />
+      <case activityMode="hiking" additional="sac_scale=demanding_alpine_hiking" />
+      <case activityMode="hiking" additional="sac_scale=alpine_hiking" />
+      <case activityMode="mtb" additional="mtb:scale=6" />
+      <case activityMode="mtb" additional="mtb:scale=5" />
+      <case activityMode="mtb" additional="mtb:scale=4" />
+      <apply attrColorValue="$extremeColor" />
+    </switch>
+    <switch>
+      <case activityMode="enduro" additional="dirtbike:scale=3" />
+      <case activityMode="hiking" additional="sac_scale=demanding_mountain_hiking" />
+      <case activityMode="mtb" additional="mtb:scale=3"  />
+      <apply attrColorValue="$advancedColor" />
+    </switch>
+    <switch>
+      <case activityMode="enduro" additional="dirtbike:scale=2" />
+      <case activityMode="hiking" additional="sac_scale=mountain_hiking" />
+      <case activityMode="mtb" additional="mtb:scale=2" />
+      <apply attrColorValue="$intermediateColor" />
+    </switch>
+    <switch>
+      <case activityMode="enduro" additional="dirtbike:scale=1" />
+      <case activityMode="enduro" additional="dirtbike:scale=0" />
+      <case activityMode="enduro" additional="motorcycle=yes" />
+      <case activityMode="hiking" additional="sac_scale=hiking" />
+      <case activityMode="hiking" />
+      <case activityMode="mtb" additional="mtb:scale=1" />
+      <case activityMode="mtb" additional="mtb:scale=0" />
+      <case activityMode="mtb" additional="bicycle=yes" />
+      <apply attrColorValue="$beginnerColor" />
+    </switch>
+  </renderingAttribute>
+
   <renderingAttribute name="pathStrokeColor">
-    <apply minzoom="13">
-      <apply>
-        <case additional="survey=ground" />
-        <case attrColorValue="$grey" />
-      </apply>
-      <switch>
-        <case activityMode="enduro" tag="highway" value="steps" />
-        <case activityMode="mtb" tag="highway" value="steps" />
-        <apply attrColorValue="$brown" pathEffect="1_3" />
-      </switch>
-      <switch>
-        <case additional="surface=paved" />
-        <case additional="surface=concrete" />
-        <case additional="surface=concrete:plates" />
-        <case additional="surface=concrete:lanes" />
-        <case additional="surface=asphalt" />
-        <case additional="surface=chipseal" />
-        <case additional="surface=paving_stones" />
-        <apply attrColorValue="$white" />
-      </switch>
-      <switch>
-        <case activityMode="enduro" additional="dirtbike:scale=6" />
-        <case activityMode="enduro" additional="dirtbike:scale=5" />
-        <case activityMode="enduro" additional="dirtbike:scale=4" />
-        <case activityMode="hiking" additional="sac_scale=difficult_alpine_hiking" />
-        <case activityMode="hiking" additional="sac_scale=demanding_alpine_hiking" />
-        <case activityMode="hiking" additional="sac_scale=alpine_hiking" />
-        <case activityMode="mtb" additional="mtb:scale=6" />
-        <case activityMode="mtb" additional="mtb:scale=5" />
-        <case activityMode="mtb" additional="mtb:scale=4" />
-        <apply attrColorValue="$extremeColor" pathEffect="">
-          <switch>
-            <case additional="trail_visibility=intermediate" />
-            <case additional="trail_visibility=bad" />
-            <apply_if minzoom="15" pathEffect="3_3" />
-            <apply_if minzoom="16" pathEffect="6_4" />
-            <apply_if minzoom="18" pathEffect="12_6" />
-          </switch>
-          <switch>
-            <case additional="trail_visibility=horrible" />
-            <case additional="trail_visibility=no" />
-            <apply_if minzoom="15" pathEffect="1_3" />
-            <apply_if minzoom="16" pathEffect="1_4" />
-            <apply_if minzoom="18" pathEffect="1_6" />
-          </switch>
-        </apply>
-      </switch>
-      <switch>
-        <case activityMode="enduro" additional="dirtbike:scale=3" />
-        <case activityMode="hiking" additional="sac_scale=demanding_mountain_hiking" />
-        <case activityMode="mtb" additional="mtb:scale=3"  />
-        <apply attrColorValue="$advancedColor" pathEffect="">
-          <switch>
-            <case additional="trail_visibility=intermediate" />
-            <case additional="trail_visibility=bad" />
-            <apply_if minzoom="15" pathEffect="3_3" />
-            <apply_if minzoom="16" pathEffect="6_4" />
-            <apply_if minzoom="18" pathEffect="12_6" />
-          </switch>
-          <switch>
-            <case additional="trail_visibility=horrible" />
-            <case additional="trail_visibility=no" />
-            <apply_if minzoom="15" pathEffect="1_3" />
-            <apply_if minzoom="16" pathEffect="1_4" />
-            <apply_if minzoom="18" pathEffect="1_6" />
-          </switch>
-        </apply>
-      </switch>
-      <switch>
-        <case activityMode="enduro" additional="dirtbike:scale=2" />
-        <case activityMode="hiking" additional="sac_scale=mountain_hiking" />
-        <case activityMode="mtb" additional="mtb:scale=2" />
-        <apply attrColorValue="$intermediateColor" pathEffect="">
-          <switch>
-            <case additional="trail_visibility=intermediate" />
-            <case additional="trail_visibility=bad" />
-            <apply_if minzoom="15" pathEffect="3_3" />
-            <apply_if minzoom="16" pathEffect="6_4" />
-            <apply_if minzoom="18" pathEffect="12_6" />
-          </switch>
-          <switch>
-            <case additional="trail_visibility=horrible" />
-            <case additional="trail_visibility=no" />
-            <apply_if minzoom="15" pathEffect="1_3" />
-            <apply_if minzoom="16" pathEffect="1_4" />
-            <apply_if minzoom="18" pathEffect="1_6" />
-          </switch>
-        </apply>
-      </switch>
-      <switch>
-        <case activityMode="enduro" additional="dirtbike:scale=1" />
-        <case activityMode="enduro" additional="dirtbike:scale=0" />
-        <case activityMode="enduro" additional="motorcycle=yes" />
-        <case activityMode="hiking" additional="sac_scale=hiking" />
-        <case activityMode="hiking" />
-        <case activityMode="mtb" additional="mtb:scale=1" />
-        <case activityMode="mtb" additional="mtb:scale=0" />
-        <case activityMode="mtb" additional="bicycle=yes" />
-        <apply attrColorValue="$beginnerColor" pathEffect="">
-          <switch>
-            <case additional="trail_visibility=intermediate" />
-            <case additional="trail_visibility=bad" />
-            <apply_if minzoom="15" pathEffect="3_3" />
-            <apply_if minzoom="16" pathEffect="6_4" />
-            <apply_if minzoom="18" pathEffect="12_6" />
-          </switch>
-          <switch>
-            <case additional="trail_visibility=horrible" />
-            <case additional="trail_visibility=no" />
-            <apply_if minzoom="15" pathEffect="1_3" />
-            <apply_if minzoom="16" pathEffect="1_4" />
-            <apply_if minzoom="18" pathEffect="1_6" />
-          </switch>
-        </apply>
-      </switch>
-      <case attrColorValue="$unconfirmedColor" pathEffect="">
-        <switch>
-          <case additional="trail_visibility=intermediate" />
-          <case additional="trail_visibility=bad" />
-          <apply_if minzoom="15" pathEffect="3_3" />
-          <apply_if minzoom="16" pathEffect="6_4" />
-          <apply_if minzoom="18" pathEffect="12_6" />
-        </switch>
-        <switch>
-          <case additional="trail_visibility=horrible" />
-          <case additional="trail_visibility=no" />
-          <apply_if minzoom="15" pathEffect="1_3" />
-          <apply_if minzoom="16" pathEffect="1_4" />
-          <apply_if minzoom="18" pathEffect="1_6" />
-        </switch>
-      </case>
+    <apply>
+      <case additional="survey=ground" />
+      <case attrColorValue="$grey" />
     </apply>
+    <switch>
+      <case activityMode="enduro" tag="highway" value="steps" />
+      <case activityMode="mtb" tag="highway" value="steps" />
+      <apply attrColorValue="$brown" pathEffect="1_3" />
+    </switch>
+    <switch>
+      <case additional="surface=paved" />
+      <case additional="surface=concrete" />
+      <case additional="surface=concrete:plates" />
+      <case additional="surface=concrete:lanes" />
+      <case additional="surface=asphalt" />
+      <case additional="surface=chipseal" />
+      <case additional="surface=paving_stones" />
+      <apply attrColorValue="$white" />
+    </switch>
+    <apply pathEffect="">
+      <switch>
+        <case additional="trail_visibility=intermediate" />
+        <case additional="trail_visibility=bad" />
+        <apply minzoom="15" pathEffect="4_3" />
+        <apply minzoom="16" pathEffect="6_4" />
+        <apply minzoom="17" pathEffect="8_5" />
+        <apply minzoom="18" pathEffect="10_8" />
+      </switch>
+      <switch>
+        <case additional="trail_visibility=horrible" />
+        <case additional="trail_visibility=no" />
+        <case additional="obstacle=vegetation" />
+        <apply minzoom="15" pathEffect="1_3" />
+        <apply minzoom="16" pathEffect="1_4" />
+        <apply minzoom="17" pathEffect="1_5" />
+        <apply minzoom="18" pathEffect="1_8" />
+      </switch>
+    </apply>
+    <apply attrColorValue="$pathScaleColor" />
+    <case attrColorValue="$unconfirmedColor" />
   </renderingAttribute>
 
   <renderingAttribute name="pathCasingColor">
@@ -360,6 +307,26 @@
         <case additional="surface=paving_stones" />
         <apply attrColorValue="$white" />
       </switch>
+      <apply pathEffect="">
+        <switch>
+          <case additional="trail_visibility=intermediate" />
+          <case additional="trail_visibility=bad" />
+          <apply minzoom="15" pathEffect="8_6"  />
+          <apply minzoom="16" pathEffect="12_8" />
+          <apply minzoom="17" pathEffect="16_10" />
+          <apply minzoom="18" pathEffect="20_16" />
+        </switch>
+        <switch>
+          <case additional="trail_visibility=horrible" />
+          <case additional="trail_visibility=no" />
+          <case additional="obstacle=vegetation" />
+          <apply minzoom="15" pathEffect="2_6" />
+          <apply minzoom="16" pathEffect="2_8" />
+          <apply minzoom="17" pathEffect="2_10" />
+          <apply minzoom="18" pathEffect="2_16" />
+        </switch>
+      </apply>
+      <apply attrColorValue="$pathScaleColor" />
       <switch>
         <case additional="surface=" />
         <case tag="highway" value="track" />
