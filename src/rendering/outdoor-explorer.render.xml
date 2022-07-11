@@ -14,9 +14,6 @@
 
   <renderingProperty attr="activityMode" name="Activity Mode" description="Rendering mode for trail difficulty scales"  type="string" possibleValues="enduro, mtb, hiking" category="details" defaultValue="enduro" />
 
-  <renderingProperty attr="hideUnconfirmed" name="Unconfirmed Trails" description="Tone down unconfirmed tracks and trails" type="boolean" possibleValues="true, false" defaultValue="false"
-    category="hide"/>
-
   <renderingProperty attr="engine_v1" type="boolean"/>
 
   <!-- MATERIAL COLORS -->
@@ -165,10 +162,20 @@
 
   <renderingAttribute name="pathVisibility">
     <apply pathEffect="">
-      <apply_if additional="trail_visibility=intermediate" pathEffect="6_3" />
-      <apply_if additional="trail_visibility=bad" pathEffect="6_3" />
-      <apply_if additional="trail_visibility=horrible" pathEffect="6_3" />
-      <apply_if additional="trail_visibility=no" pathEffect="3_3" />
+      <switch>
+        <case additional="trail_visibility=intermediate" />
+        <case additional="trail_visibility=bad" />
+        <apply_if minzoom="15" pathEffect="3_3" />
+        <apply_if minzoom="16" pathEffect="6_4" />
+        <apply_if minzoom="18" pathEffect="12_6" />
+      </switch>
+      <switch>
+        <case additional="trail_visibility=horrible" />
+        <case additional="trail_visibility=no" />
+        <apply_if minzoom="15" pathEffect="1_3" />
+        <apply_if minzoom="16" pathEffect="1_4" />
+        <apply_if minzoom="18" pathEffect="1_6" />
+      </switch>
     </apply>
   </renderingAttribute>
 
@@ -913,7 +920,7 @@
     </case>
 
     <!-- POINT - FIXME -->
-    <case hideUnconfirmed="false" minzoom="14" tag="fixme_tag" value="yes" iconOrder="128" icon="fixme_tag_lowzoom_yes"  iconVisibleSize="10" intersectionSizeFactor="2" />
+    <case minzoom="14" tag="fixme_tag" value="yes" iconOrder="128" icon="fixme_tag_lowzoom_yes"  iconVisibleSize="10" intersectionSizeFactor="2" />
 
   </point>
 
@@ -968,7 +975,7 @@
         </switch>
       </switch>
       <apply color="$waterColor"/>
-      <apply_if additional="intermittent=yes" strokeWidth_2="1:0" color_2="#7479ec" pathEffect_2="7_5"/>
+      <!-- <apply_if additional="intermittent=yes" strokeWidth_2="1:0" color_2="#7479ec" pathEffect_2="7_5"/> -->
     </switch>
 
     <!-- POLYGON - LAND -->
@@ -1093,12 +1100,12 @@
             <case maxzoom="13" />
             <case maxzoom="14" />
             <case minzoom="15" />
-            <apply_if additional="intermittent=yes"/>
+            <!-- <apply_if additional="intermittent=yes"/> -->
           </apply>
         </case>
         <case tag="waterway" value="canal">
           <apply minzoom="15">
-            <apply_if additional="intermittent=yes"/>
+            <!-- <apply_if additional="intermittent=yes"/> -->
           </apply>
         </case>
         <apply>
@@ -1123,13 +1130,13 @@
           <apply_if minzoom="18" strokeWidth="1.7:1.7"/>
         </apply>
       </switch>
-      <apply_if additional="intermittent=yes">
+      <!-- <apply_if additional="intermittent=yes">
         <case maxzoom="13" pathEffect="4.5_3"/>
         <case maxzoom="14" pathEffect="6_4"/>
         <case maxzoom="16" pathEffect="8_5"/>
         <case maxzoom="17" pathEffect="9_5.5"/>
         <case minzoom="18" pathEffect="12_7"/>
-      </apply_if>
+      </apply_if> -->
       <apply color="$waterColor" onewayArrowsColor="#000000FF" />
     </switch>
 
