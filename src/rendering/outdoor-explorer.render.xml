@@ -387,9 +387,7 @@
   </renderingAttribute>
 
   <renderingAttribute name="waterColor">
-
-    <case attrColorValue="#4400bcd4"/>
-    <!-- <case attrColorValue="#997fc0ee"/> -->
+    <case attrColorValue="#AA7fc0ee"/>
   </renderingAttribute>
 
   <renderingAttribute name="woodColor">
