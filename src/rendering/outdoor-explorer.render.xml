@@ -107,25 +107,38 @@
   </renderingAttribute>
 
   <renderingAttribute name="beginnerColor">
+    <!-- <case attrColorValue="$teal" /> -->
+    <!-- <case attrColorValue="$green" /> -->
+    <!-- <case attrColorValue="$indigo" /> -->
+    <!-- <case attrColorValue="$lightGreen" /> -->
+    <!-- <case attrColorValue="$green" /> -->
     <case attrColorValue="$black" />
   </renderingAttribute>
 
   <renderingAttribute name="intermediateColor">
-    <!-- <case attrColorValue="$orange" /> -->
-    <case attrColorValue="#f57c00" />
+    <case attrColorValue="$green" />
+
+    <!-- <case attrColorValue="$indigo" /> -->
+    <!-- <case attrColorValue="$blue" /> -->
+    <!-- <case attrColorValue="$green" /> -->
+    <!-- <case attrColorValue="$teal" /> -->
+    <!-- <case attrColorValue="#f57c00" /> -->
     <!-- <case attrColorValue="#ff5722" /> -->
+    <!-- <case attrColorValue="$orange" /> -->
   </renderingAttribute>
 
   <renderingAttribute name="advancedColor">
+    <case attrColorValue="#f57c00" />
+    <!-- <case attrColorValue="#f50057" /> -->
     <!-- <case attrColorValue="$pink" /> -->
     <!-- <case attrColorValue="#c2185b" /> -->
-    <case attrColorValue="#f50057" />
     <!-- <case attrColorValue="#d32f2f" /> -->
   </renderingAttribute>
 
   <renderingAttribute name="extremeColor">
+    <case attrColorValue="#f50057" />
+    <!-- <case attrColorValue="#512da8" /> -->
     <!-- <case attrColorValue="$deepPurple" /> -->
-    <case attrColorValue="#512da8" />
   </renderingAttribute>
 
   <!-- ATTRIBUTES -->
@@ -161,25 +174,6 @@
 
   <!-- PATHS -->
 
-  <renderingAttribute name="pathVisibility">
-    <apply pathEffect="">
-      <switch>
-        <case additional="trail_visibility=intermediate" />
-        <case additional="trail_visibility=bad" />
-        <apply_if minzoom="15" pathEffect="3_3" />
-        <apply_if minzoom="16" pathEffect="6_4" />
-        <apply_if minzoom="18" pathEffect="12_6" />
-      </switch>
-      <switch>
-        <case additional="trail_visibility=horrible" />
-        <case additional="trail_visibility=no" />
-        <apply_if minzoom="15" pathEffect="1_3" />
-        <apply_if minzoom="16" pathEffect="1_4" />
-        <apply_if minzoom="18" pathEffect="1_6" />
-      </switch>
-    </apply>
-  </renderingAttribute>
-
   <renderingAttribute name="pathScaleColor">
     <switch>
       <case activityMode="enduro" additional="dirtbike:scale=6" />
@@ -191,6 +185,8 @@
       <case activityMode="mtb" additional="mtb:scale=6" />
       <case activityMode="mtb" additional="mtb:scale=5" />
       <case activityMode="mtb" additional="mtb:scale=4" />
+      <case activityMode="enduro" tag="highway" value="steps" />
+      <case activityMode="mtb" tag="highway" value="steps" />
       <apply attrColorValue="$extremeColor" />
     </switch>
     <switch>
@@ -223,11 +219,6 @@
       <case additional="survey=ground" />
       <case attrColorValue="$grey" />
     </apply>
-    <switch>
-      <case activityMode="enduro" tag="highway" value="steps" />
-      <case activityMode="mtb" tag="highway" value="steps" />
-      <apply attrColorValue="$brown" pathEffect="1_3" />
-    </switch>
     <switch>
       <case additional="surface=paved" />
       <case additional="surface=concrete" />
@@ -307,25 +298,6 @@
         <case additional="surface=paving_stones" />
         <apply attrColorValue="$white" />
       </switch>
-      <apply pathEffect="">
-        <switch>
-          <case additional="trail_visibility=intermediate" />
-          <case additional="trail_visibility=bad" />
-          <apply minzoom="15" pathEffect="8_6"  />
-          <apply minzoom="16" pathEffect="12_8" />
-          <apply minzoom="17" pathEffect="16_10" />
-          <apply minzoom="18" pathEffect="20_16" />
-        </switch>
-        <switch>
-          <case additional="trail_visibility=horrible" />
-          <case additional="trail_visibility=no" />
-          <case additional="obstacle=vegetation" />
-          <apply minzoom="15" pathEffect="2_6" />
-          <apply minzoom="16" pathEffect="2_8" />
-          <apply minzoom="17" pathEffect="2_10" />
-          <apply minzoom="18" pathEffect="2_16" />
-        </switch>
-      </apply>
       <apply attrColorValue="$pathScaleColor" />
       <switch>
         <case additional="surface=" />
@@ -415,7 +387,9 @@
   </renderingAttribute>
 
   <renderingAttribute name="waterColor">
-    <case attrColorValue="#AA7fc0ee"/>
+
+    <case attrColorValue="#4400bcd4"/>
+    <!-- <case attrColorValue="#997fc0ee"/> -->
   </renderingAttribute>
 
   <renderingAttribute name="woodColor">
@@ -1035,6 +1009,7 @@
         <case tag="highway" value="cycleway" />
         <case tag="highway" value="bridleway" />
         <case tag="highway" value="steps" />
+        <!-- <case tag="tracktype" value="grade5" /> -->
         <apply_if maxzoom="13" strokeWidth="0.75:0.75" />
         <apply_if maxzoom="14" strokeWidth="0.95:0.95" />
         <apply_if minzoom="15" strokeWidth="1.15:1.15" />
