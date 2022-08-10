@@ -202,7 +202,6 @@
       <apply attrColorValue="$intermediateColor" />
     </switch>
     <switch>
-      <case activityMode="enduro" tag="highway" value="track" additional="tracktype=grade5" />
       <case activityMode="enduro" additional="dirtbike:scale=1" />
       <case activityMode="enduro" additional="dirtbike:scale=0" />
       <case activityMode="enduro" additional="motorcycle=yes" />
@@ -928,14 +927,15 @@
 
     <switch>
       <!-- PATHS -->
-      <switch minzoom="13">
+      <switch minzoom="11">
         <case tag="highway" value="track" additional="tracktype=grade5" />
+        <case tag="highway" value="track" additional="smoothness=very_horrible" />
+        <case tag="highway" value="track" additional="smoothness=impassable" />
         <case tag="highway" value="path" />
         <case tag="highway" value="footway" />
         <case tag="highway" value="cycleway" />
         <case tag="highway" value="bridleway" />
         <case tag="highway" value="steps" />
-        <!-- <case tag="tracktype" value="grade5" /> -->
         <apply_if maxzoom="13" strokeWidth="0.75:0.75" />
         <apply_if maxzoom="14" strokeWidth="0.95:0.95" />
         <apply_if minzoom="15" strokeWidth="1.15:1.15" />
