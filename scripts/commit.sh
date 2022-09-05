@@ -1,4 +1,4 @@
-cd ../osm-tools
-git add ./osmand-outdoor-explorer-plugin-preview/**/*
-git commit -m "build"
+cd ../osm-tools/tiles/
+git add .
+git commit -m "update tiles"
 git push

@@ -9,8 +9,11 @@
   <!-- <renderingProperty attr="showBoundaries" name="Show Boundaries" description="Show Administrative Boundaries" type="boolean" possibleValues=""
     category="details"/> -->
 
-  <!-- <renderingProperty attr="showFixme" name="Show Fixme" description="Show Fixme Notes" type="boolean" possibleValues=""
-    category="details"/> -->
+  <renderingProperty attr="hideBackground" name="Hide Background" description=""
+    type="boolean" possibleValues="" category="hide"/>
+
+  <renderingProperty attr="hideForeground" name="Hide Text" description=""
+    type="boolean" possibleValues="" category="hide"/>
 
   <renderingProperty attr="activityMode" name="Activity Mode" description="Rendering mode for trail difficulty scales"  type="string" possibleValues="enduro, mtb, hiking" category="details" defaultValue="enduro" />
 
@@ -688,130 +691,132 @@
 
   <text>
 
-    <!-- TEXT - VILLAGE -->
-    <switch minzoom="3" textColor="$placeCityVillageTextColor" textWrapWidth="20" textBold="true" textDy="-4">
-      <case minzoom="5" tag="place" value="city" nameTag="" intersectionMargin="25" textOrder="32">
-        <case minzoom="6" maxzoom="7" textSize="17"/>
-        <case minzoom="8" textSize="20"/>
-      </case>
-      <switch>
-        <case minzoom="8" tag="place" value="town" textSize="16" textOrder="36" nameTag="" intersectionMargin="15"/>
-      </switch>
-      <switch>
-        <case minzoom="11" tag="place" value="village" textSize="14" textOrder="40" nameTag="" intersectionMargin="15">
-      <!--     <apply_if minzoom="16" textSize="16"/>
-          <apply_if minzoom="17" textSize="17"/> -->
-        </case>
-      </switch>
-      <switch>
-        <case minzoom="13" tag="place" value="hamlet" textSize="12" textOrder="40" nameTag="" intersectionMargin="15">
-      <!--     <apply_if minzoom="16" textSize="16"/>
-          <apply_if minzoom="17" textSize="17"/> -->
-        </case>
-      </switch>
-      <apply textHaloRadius="$placeTextHaloRadiusDay" textHaloColor="$placeCityVillageTextHaloColor"/>
-      <apply textDy="-5"/>
-    </switch>
+    <switch hideForeground="false">
 
-    <!-- TEXT - CONTOUR LINES -->
-    <switch tag="contour" value="elevation" nameTag="elevation" textOnPath="false" textBold="true" textOrder="255" textHaloColor="#bbffffff" textHaloRadius="1">
-      <case minzoom="13" contourLines="11"/>
-      <case minzoom="13" contourLines="12"/>
-      <case minzoom="13" contourLines="13"/>
-      <case minzoom="13" contourLines=""/>
-      <case minzoom="14" contourLines="14"/>
-      <case minzoom="15" contourLines="15"/>
-      <case minzoom="16" contourLines="16"/>
-      <apply>
-        <!-- <case minzoom="14" additional="contourtype=20m" textColor="#666666" textSize="11" textMinDistance="170">
+      <!-- TEXT - VILLAGE -->
+      <switch minzoom="3" textColor="$placeCityVillageTextColor" textWrapWidth="20" textBold="true" textDy="-4">
+        <case minzoom="5" tag="place" value="city" nameTag="" intersectionMargin="25" textOrder="32">
+          <case minzoom="6" maxzoom="7" textSize="17"/>
+          <case minzoom="8" textSize="20"/>
         </case>
-        <switch minzoom="15">
-          <case additional="contourtype=10m"/>
-          <case additional="contourtype=40f"/>
-          <apply textColor="#777777" textSize="10" textMinDistance="160"/>
-        </switch> -->
         <switch>
-          <case additional="contourtype=100m" textSize="11"/>
-          <!-- <case additional="contourtype=1000f" textSize="12"/>
-          <case additional="contourtype=200f" textSize="11"/> -->
-          <apply textColor="#444444" textOrder="250" textMinDistance="250"/>
+          <case minzoom="8" tag="place" value="town" textSize="16" textOrder="36" nameTag="" intersectionMargin="15"/>
         </switch>
-        <case additional="contourtype=50m" textColor="#666666" textSize="11" textMinDistance="200" textOrder="254">
-        </case>
-      </apply>
-    </switch>
-
-    <!-- TEXT - WATER -->
-    <!-- <switch textColor="#266579" textHaloRadius="1" textHaloColor="$waterTextHaloColor" textItalic="true">
-      <switch textSize="12">
-        <case minzoom="13" tag="landuse" value="water" nameTag="" textWrapWidth="20" textOrder="218"/>
-        <case minzoom="13" tag="landuse" value="reservoir" nameTag="" textWrapWidth="20" textOrder="218"/>
         <switch>
-          <case minzoom="15" tag="waterway" value="waterfall" additional="osmand_remarkable_waterfall=yes" nameTag2="height" textWrapWidth="20" textOnPath="true" textOrder="217"/>
-          <case minzoom="15" tag="waterway" value="waterfall" nameTag="" textWrapWidth="20" textOnPath="true" textOrder="217"/>
+          <case minzoom="11" tag="place" value="village" textSize="14" textOrder="40" nameTag="" intersectionMargin="15">
+        <!--     <apply_if minzoom="16" textSize="16"/>
+            <apply_if minzoom="17" textSize="17"/> -->
+          </case>
         </switch>
+        <switch>
+          <case minzoom="13" tag="place" value="hamlet" textSize="12" textOrder="40" nameTag="" intersectionMargin="15">
+        <!--     <apply_if minzoom="16" textSize="16"/>
+            <apply_if minzoom="17" textSize="17"/> -->
+          </case>
+        </switch>
+        <apply textHaloRadius="$placeTextHaloRadiusDay" textHaloColor="$placeCityVillageTextHaloColor"/>
+        <apply textDy="-5"/>
       </switch>
-    </switch> -->
 
-    <!-- TEXT - FIXME -->
-    <!-- <switch minzoom="13" intersectionSizeFactor="0" intersectionMargin="0">
-      <switch tag="fixme_tag" value="yes" nameTag="fixme" textColor="#ffffff" textHaloColor="#ccf800e0" textWrapWidth="20" textOrder="1">
-        <case maxzoom="15" textSize="10" textDy="-40"/>
-        <case minzoom="16" textSize="11" textDy="-50"/>
-      </switch>
-      <apply textBold="true" textHaloRadius="2"/>
-    </switch> -->
-
-    <!-- <switch minzoom="14" textColor="#000000" textHaloRadius="$highwayTrackTextHaloRadiusDay" textHaloColor="$highwayTrackTextHaloColorDay" textOnPath="true" nameTag="">
-      <case tag="highway" value="primary" textOrder="94"/>
-      <case tag="highway" value="secondary" textOrder="94"/>
-      <case tag="highway" value="tertiary" textOrder="94"/>
-      <case minzoom="16" tag="area:highway" value="tertiary" textBold="true" textItalic="true" textOrder="95" intersectsWith="any" textWrapWidth="25"/>
-      <case tag="highway" value="tertiary_link" textOrder="96"/>
-      <apply>
-        <case maxzoom="14" textSize="12"/>
-        <case maxzoom="15" textSize="13"/>
-        <case maxzoom="16" textSize="14"/>
-        <case maxzoom="17" textSize="16"/>
-        <case minzoom="18" textSize="18"/>
-      </apply>
-    </switch> -->
-
-    <!-- <switch minzoom="13">
-      <switch>
-        <case tag="highway" value="track" nameTag="" textOrder="11"/>
-        <case tag="highway" value="path" nameTag="" textOrder="12"/>
-        <case tag="highway" value="footway" nameTag="" textOrder="13"/>
+      <!-- TEXT - CONTOUR LINES -->
+      <switch tag="contour" value="elevation" nameTag="elevation" textOnPath="false" textBold="true" textOrder="255" textHaloColor="#bbffffff" textHaloRadius="1">
+        <case minzoom="13" contourLines="11"/>
+        <case minzoom="13" contourLines="12"/>
+        <case minzoom="13" contourLines="13"/>
+        <case minzoom="13" contourLines=""/>
+        <case minzoom="14" contourLines="14"/>
+        <case minzoom="15" contourLines="15"/>
+        <case minzoom="16" contourLines="16"/>
         <apply>
-          <case nameTag="" />
-          <apply maxzoom="14" textSize="12"/>
+          <!-- <case minzoom="14" additional="contourtype=20m" textColor="#666666" textSize="11" textMinDistance="170">
+          </case>
+          <switch minzoom="15">
+            <case additional="contourtype=10m"/>
+            <case additional="contourtype=40f"/>
+            <apply textColor="#777777" textSize="10" textMinDistance="160"/>
+          </switch> -->
+          <switch>
+            <case additional="contourtype=100m" textSize="11"/>
+            <!-- <case additional="contourtype=1000f" textSize="12"/>
+            <case additional="contourtype=200f" textSize="11"/> -->
+            <apply textColor="#444444" textOrder="250" textMinDistance="250"/>
+          </switch>
+          <case additional="contourtype=50m" textColor="#666666" textSize="11" textMinDistance="200" textOrder="254">
+          </case>
         </apply>
       </switch>
-      <apply textColor="#000000" textHaloRadius="$highwayTrackTextHaloRadiusDay" textHaloColor="$highwayTrackTextHaloColorDay" textOnPath="true"/>
-      <apply_if minzoom="15">
-        <case maxzoom="15" textSize="13"/>
-        <case maxzoom="16" textSize="14"/>
-        <case maxzoom="17" textSize="16"/>
-        <case minzoom="18" textSize="18"/>
-      </apply_if>
-    </switch> -->
 
+      <!-- TEXT - WATER -->
+      <!-- <switch textColor="#266579" textHaloRadius="1" textHaloColor="$waterTextHaloColor" textItalic="true">
+        <switch textSize="12">
+          <case minzoom="13" tag="landuse" value="water" nameTag="" textWrapWidth="20" textOrder="218"/>
+          <case minzoom="13" tag="landuse" value="reservoir" nameTag="" textWrapWidth="20" textOrder="218"/>
+          <switch>
+            <case minzoom="15" tag="waterway" value="waterfall" additional="osmand_remarkable_waterfall=yes" nameTag2="height" textWrapWidth="20" textOnPath="true" textOrder="217"/>
+            <case minzoom="15" tag="waterway" value="waterfall" nameTag="" textWrapWidth="20" textOnPath="true" textOrder="217"/>
+          </switch>
+        </switch>
+      </switch> -->
+
+      <!-- TEXT - FIXME -->
+      <!-- <switch minzoom="13" intersectionSizeFactor="0" intersectionMargin="0">
+        <switch tag="fixme_tag" value="yes" nameTag="fixme" textColor="#ffffff" textHaloColor="#ccf800e0" textWrapWidth="20" textOrder="1">
+          <case maxzoom="15" textSize="10" textDy="-40"/>
+          <case minzoom="16" textSize="11" textDy="-50"/>
+        </switch>
+        <apply textBold="true" textHaloRadius="2"/>
+      </switch> -->
+
+      <!-- <switch minzoom="14" textColor="#000000" textHaloRadius="$highwayTrackTextHaloRadiusDay" textHaloColor="$highwayTrackTextHaloColorDay" textOnPath="true" nameTag="">
+        <case tag="highway" value="primary" textOrder="94"/>
+        <case tag="highway" value="secondary" textOrder="94"/>
+        <case tag="highway" value="tertiary" textOrder="94"/>
+        <case minzoom="16" tag="area:highway" value="tertiary" textBold="true" textItalic="true" textOrder="95" intersectsWith="any" textWrapWidth="25"/>
+        <case tag="highway" value="tertiary_link" textOrder="96"/>
+        <apply>
+          <case maxzoom="14" textSize="12"/>
+          <case maxzoom="15" textSize="13"/>
+          <case maxzoom="16" textSize="14"/>
+          <case maxzoom="17" textSize="16"/>
+          <case minzoom="18" textSize="18"/>
+        </apply>
+      </switch> -->
+
+      <!-- <switch minzoom="13">
+        <switch>
+          <case tag="highway" value="track" nameTag="" textOrder="11"/>
+          <case tag="highway" value="path" nameTag="" textOrder="12"/>
+          <case tag="highway" value="footway" nameTag="" textOrder="13"/>
+          <apply>
+            <case nameTag="" />
+            <apply maxzoom="14" textSize="12"/>
+          </apply>
+        </switch>
+        <apply textColor="#000000" textHaloRadius="$highwayTrackTextHaloRadiusDay" textHaloColor="$highwayTrackTextHaloColorDay" textOnPath="true"/>
+        <apply_if minzoom="15">
+          <case maxzoom="15" textSize="13"/>
+          <case maxzoom="16" textSize="14"/>
+          <case maxzoom="17" textSize="16"/>
+          <case minzoom="18" textSize="18"/>
+        </apply_if>
+      </switch> -->
+
+    </switch>
 
   </text>
 
   <point>
-
     <!-- POINT - VIEWPOINT -->
-    <case minzoom="14" tag="tourism" value="viewpoint" icon="topo_viewpoint" shield="topo_viewpoint_shield" iconOrder="85" iconVisibleSize="10" intersectionSizeFactor="2"/>
+    <case  hideForeground="false" minzoom="14" tag="tourism" value="viewpoint" icon="topo_viewpoint" shield="topo_viewpoint_shield" iconOrder="85" iconVisibleSize="10" intersectionSizeFactor="2"/>
 
     <!-- POINT - PEAK -->
-    <case minzoom="14" tag="natural" value="peak" iconOrder="65" icon="natural_peak" iconVisibleSize="10" intersectionSizeFactor="2" />
+    <case hideForeground="false" minzoom="14" tag="natural" value="peak" iconOrder="65" icon="natural_peak" iconVisibleSize="10" intersectionSizeFactor="2" />
 
     <!-- POINT - FORD -->
-    <case minzoom="14" tag="ford" value="yes" icon="topo_ford" shield="topo_ford_shield" iconVisibleSize="10" intersectionSizeFactor="2"/>
+    <case hideForeground="false" minzoom="14" tag="ford" value="yes" icon="topo_ford" shield="topo_ford_shield" iconVisibleSize="10" intersectionSizeFactor="2"/>
 
     <!-- POINT - TEMPLE -->
-    <case minzoom="14" tag="amenity" value="place_of_worship" iconOrder="40" iconVisibleSize="10" intersectionSizeFactor="2">
+    <case hideForeground="false" minzoom="14" tag="amenity" value="place_of_worship" iconOrder="40" iconVisibleSize="10" intersectionSizeFactor="2">
       <case additional="religion=christian" icon="topo_christian" shield="topo_christian_shield"/>
       <case additional="religion=jewish" icon="topo_jewish" shield="topo_jewish_shield"/>
       <case additional="religion=muslim" icon="topo_muslim" shield="topo_muslim_shield"/>
@@ -824,34 +829,34 @@
     </case>
 
     <!-- POINT - WATERFALL -->
-    <case minzoom="14" tag="waterway" value="waterfall" icon="topo_waterfall" shield="topo_waterfall_shield"/>
+    <case hideForeground="false" minzoom="14" tag="waterway" value="waterfall" icon="topo_waterfall" shield="topo_waterfall_shield"/>
 
     <!-- POINT - CAVE -->
-    <case minzoom="14" tag="natural" value="cave_entrance" icon="topo_cave" shield="topo_cave_shield" iconOrder="85"/>
+    <case hideForeground="false" minzoom="14" tag="natural" value="cave_entrance" icon="topo_cave" shield="topo_cave_shield" iconOrder="85"/>
 
     <!-- POINT - NOEXIT -->
-    <case minzoom="14" tag="noexit" value="yes" icon="" >
+    <case hideForeground="false" minzoom="14" tag="noexit" value="yes" icon="" >
       <apply_if maxzoom="14" icon="barrier_small_black_bold_2"/>
       <apply_if minzoom="15" icon="barrier_small_black_bold_1"/>
     </case>
 
     <!-- POINT - GATE -->
-    <case minzoom="14" tag="barrier" value="log" icon="mm_hazard_yes">
+    <case hideForeground="false" minzoom="14" tag="barrier" value="log" icon="mm_hazard_yes">
     </case>
 
-    <case minzoom="14" tag="barrier" value="" >
+    <case hideForeground="false" minzoom="14" tag="barrier" value="" >
       <apply_if maxzoom="14" icon="barrier_small_red_bold_2"/>
       <apply_if minzoom="15" icon="barrier_small_red_bold_1"/>
     </case>
 
     <!-- POINT - FIXME -->
-    <case minzoom="14" tag="fixme_tag" value="yes" iconOrder="128" icon="fixme_tag_lowzoom_yes"  iconVisibleSize="10" intersectionSizeFactor="2" />
-
+    <case hideForeground="false" minzoom="14" tag="fixme_tag" value="yes" iconOrder="128" icon="fixme_tag_lowzoom_yes"  iconVisibleSize="10" intersectionSizeFactor="2" />
   </point>
 
   <polygon>
+
     <!-- POLYGON - LANDUSE -->
-    <switch>
+    <switch hideBackground="false">
       <case minzoom="11" tag="natural" value="beach" color_0="$beachColor"/>
       <case minzoom="11" tag="natural" value="sand" color_0="$sandColor"/>
       <case minzoom="6" tag="natural" value="desert" color="$desertColor"/>
@@ -887,7 +892,7 @@
     </switch>
 
     <!-- POLYGON - WATER -->
-    <switch>
+    <switch hideBackground="false">
       <switch>
         <case minzoom="1" tag="natural" value="coastline"/>
         <switch>
@@ -904,14 +909,14 @@
     </switch>
 
     <!-- POLYGON - LAND -->
-    <switch>
+    <switch hideBackground="false">
       <case tag="place" value="island"/>
       <case tag="place" value="islet"/>
       <case tag="natural" value="land"/>
       <apply color="$defaultColor"/>
     </switch>
 
-    <switch>
+    <switch hideForeground="false">
       <case tag="building" value=""/>
       <apply color="$buildingColor" />
     </switch>
@@ -920,12 +925,12 @@
 
   <line>
     <!-- LINE - COASTLINE -->
-    <case minzoom="1" tag="natural" value="coastline_broken" color="#111111" strokeWidth=":1"/>
-    <case minzoom="5" tag="natural" value="coastline_line" color="#4580cf" strokeWidth=":1"/>
+    <case hideBackground="false" minzoom="1" tag="natural" value="coastline_broken" color="#111111" strokeWidth=":1"/>
+    <case hideBackground="false" minzoom="5" tag="natural" value="coastline_line" color="#4580cf" strokeWidth=":1"/>
 
     <!-- LINE - HIGHWAY-->
 
-    <switch>
+    <switch hideForeground="false">
       <!-- PATHS -->
       <switch minzoom="11">
         <case tag="highway" value="track" additional="tracktype=grade5" />
@@ -1011,7 +1016,7 @@
     </switch>
 
     <!-- LINE - WATER -->
-    <switch>
+    <switch hideBackground="false">
       <switch minzoom="12">
         <case tag="waterway" value="stream" />
         <apply_if minzoom="13" maxzoom="13" strokeWidth="1.2:1.2"/>
@@ -1067,7 +1072,7 @@
     </switch>
 
     <!-- LINE - CONTOUR -->
-    <switch tag="contour" value="elevation">
+    <switch tag="contour" value="elevation" hideBackground="false">
       <case minzoom="11" contourLines="11"/>
       <case minzoom="12" contourLines="12"/>
       <case minzoom="13" contourLines="13"/>
@@ -1118,7 +1123,7 @@
     </switch>
 
     <!-- LINE - ADMIN LEVELS -->
-    <switch minzoom="2">
+    <switch minzoom="2" hideBackground="false">
       <case tag="admin_level" value="0"/>
       <case tag="admin_level" value="1"/>
       <case tag="admin_level" value="2"/>

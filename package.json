@@ -4,17 +4,15 @@
   "description": "",
   "scripts": {
     "start": "bash scripts/debug.sh",
-    "update": "npm run build && npm run download && npm run site && npm run commit",
+    "update": "npm run download && npm run tiles",
+    "commit": "bash scripts/commit.sh",
     "watch": "bash scripts/watch.sh",
     "push": "bash scripts/push.sh",
     "test": "bash scripts/test.sh",
-    "build": "bash scripts/build.sh",
-    "commit": "bash scripts/commit.sh",
+    "dist": "bash scripts/dist.sh",
     "download": "bash scripts/download.sh",
     "redraw": "bash scripts/redraw.sh",
-    "hillshade": "node scripts/tiles/extract.js",
-    "preview": "node scripts/preview.js > scripts/preview.sh && sh scripts/preview.sh",
-    "site": "node scripts/preview.js 49 > scripts/preview.sh && sh scripts/preview.sh"
+    "tiles": "node scripts/tiles.js 49 | bash"
   },
   "author": "cmoffroad",
   "license": "MIT",

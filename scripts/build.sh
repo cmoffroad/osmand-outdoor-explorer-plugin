@@ -1,2 +1,0 @@
-rm ../osm-tools/osmand-outdoor-explorer-plugin-preview/build/osmand-outdoor-explorer-plugin.osf
-cd ./src && zip -x "**/.DS_Store" -r ../../osm-tools/osmand-outdoor-explorer-plugin-preview/build/osmand-outdoor-explorer-plugin.osf .
