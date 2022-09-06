@@ -65,13 +65,13 @@ const processZoom = (zoom, lat, lon, xTiles, yTiles, dirTiles, obfs) => {
     console.log(`mkdir -p ${dirTiles}/${zoom}/${xTileMin + x}`);
   }
 
-  console.log(`java -Xms64M -Xmx2048M -cp ../OsmAndMapCreator-main/OsmAndMapCreator.jar net.osmand.swing.OsmAndImageRendering \
+  console.log(`java -Xms512M -Xmx3072M -cp ../OsmAndMapCreator-main/OsmAndMapCreator.jar net.osmand.swing.OsmAndImageRendering \
   -native=/Users/julien/Documents/WORKSPACE/OSM/OsmAnd-core-legacy/binaries/darwin/intel/Release \
   -obfFiles=./obf/ \
   -gpxFile=./tmp/${zoom}.gpx \
   -output=./tmp`);
 
-  console.log(`convert ./tmp/${zoom}.png -transparent "#FFFBF7" -crop 256x256 -set filename:tile "%[fx:page.x/256+${xTileMin}]/%[fx:page.y/256+${yTileMin}]" +repage "${dirTiles}/${zoom}/%[filename:tile].png"`);
+  console.log(`convert -limit memory 2048MiB ./tmp/${zoom}.png -transparent "#FFFBF7" -crop 256x256 -set filename:tile "%[fx:page.x/256+${xTileMin}]/%[fx:page.y/256+${yTileMin}]" +repage "${dirTiles}/${zoom}/%[filename:tile].png"`);
 }
 
 const dirObfs  = `./obf`;
