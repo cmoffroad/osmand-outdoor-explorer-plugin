@@ -55,9 +55,9 @@ const generateGPX = (zoom, lat, lon, xTiles, yTiles, obfs) => {
 
 const processZoom = (zoom, lat, lon, xTiles, yTiles, dirTiles, obfs) => {
 
-  const [xTileCenter, yTileCenter] = deg2num(lat, lon, zoom);
-  const xTileMin = parseInt(xTileCenter + 1 - (xTiles / 2));
-  const yTileMin = parseInt(yTileCenter + 1 - (yTiles / 2));
+  const [ xTileCenter, yTileCenter ] = deg2num(lat, lon, zoom);
+  const xTileMin = parseInt(xTileCenter - (xTiles / 2));
+  const yTileMin = parseInt(yTileCenter - (yTiles / 2));
 
   generateGPX(zoom, lat, lon, xTiles, yTiles, obfs);
 
@@ -65,7 +65,7 @@ const processZoom = (zoom, lat, lon, xTiles, yTiles, dirTiles, obfs) => {
     console.log(`mkdir -p ${dirTiles}/${zoom}/${xTileMin + x}`);
   }
 
-  console.log(`java -Xms64M -Xmx1024M -cp ../OsmAndMapCreator-main/OsmAndMapCreator.jar net.osmand.swing.OsmAndImageRendering \
+  console.log(`java -Xms64M -Xmx2048M -cp ../OsmAndMapCreator-main/OsmAndMapCreator.jar net.osmand.swing.OsmAndImageRendering \
   -native=/Users/julien/Documents/WORKSPACE/OSM/OsmAnd-core-legacy/binaries/darwin/intel/Release \
   -obfFiles=./obf/ \
   -gpxFile=./tmp/${zoom}.gpx \
@@ -78,18 +78,15 @@ const dirObfs  = `./obf`;
 const dirTiles = `../osm-tools/tiles`;
 
 const args = process.argv.slice(2);
-const tiles = parseInt(args[0] || '11');
+const xTiles = Math.ceil(parseInt(args[0] || '3') / 2.0) * 2;
+const yTiles = Math.ceil(parseInt(args[1] || '3') / 2.0) * 2;
 
-const center = [ 19.2085242, 98.8059622 ];
-const zooms = [ 13 ];
+const point = [ 19.070825827131095,99.03986245393754 ];
+const zooms = [ 12, 13, 14 ];
 
-// needs to be odd for now
-const xTiles = tiles;
-const yTiles = tiles;
-
-const [x, y] = deg2num(center[0], center[1], zooms[0]);
-const lat = tile2lat(y+0.5, zooms[0]);
-const lon = tile2lon(x+0.5, zooms[0]);
+const [x, y] = deg2num(point[0], point[1], zooms[0]);
+const lat = tile2lat(y, zooms[0]);
+const lon = tile2lon(x, zooms[0]);
 
 console.log(`rm -rf ./tmp/*`);
 console.log(`rm -rf ${dirTiles}`);
@@ -97,7 +94,7 @@ console.log(`rm -rf ${dirTiles}`);
 const obfs = getOBFs(dirObfs);
 
 for (var i=0;i<zooms.length; i++) {
-  processZoom(zooms[i], lat, lon, xTiles/Math.pow(2, i), yTiles/Math.pow(2, i), dirTiles, obfs);
+  processZoom(zooms[i], lat, lon, xTiles * Math.pow(2, i), yTiles * Math.pow(2, i), dirTiles, obfs);
 }
 
 const hillshadeDB = new sqlite3.Database(`./obf/Hillshade Thailand asia.sqlitedb`, (err) => {})
