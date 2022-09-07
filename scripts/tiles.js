@@ -38,7 +38,7 @@ const generateGPX = (zoom, lat, lon, xTiles, yTiles, obfs) => {
   const xml = `<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
 <gpx version='1.1' xmlns='http://www.topografix.com/GPX/1/1'
   width='${xTiles*tileSize}' height='${yTiles*tileSize}' zoom='${zoom}' mapDensity='1'
-  renderingProperties='activityMode=enduro,lang=en,contourLines=11,contourDensity=medium_w,contourWidth=thin,hideBackground=true'
+  renderingProperties='activityMode=enduro,lang=en,hideContour=true,hideBuildings=true,hideBoundaries=true,hideLanduse=true,hideWater=true'
   renderingName='src/rendering/outdoor-explorer'
 >
   <wpt lat='${lat}' lon='${lon}'>

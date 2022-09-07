@@ -9,10 +9,28 @@
   <!-- <renderingProperty attr="showBoundaries" name="Show Boundaries" description="Show Administrative Boundaries" type="boolean" possibleValues=""
     category="details"/> -->
 
-  <renderingProperty attr="hideBackground" name="Hide Background" description=""
+  <renderingProperty attr="hideLanduse" name="Hide Landuse Features" description=""
     type="boolean" possibleValues="" category="hide"/>
 
-  <renderingProperty attr="hideForeground" name="Hide Text" description=""
+  <renderingProperty attr="hideWater" name="Hide Water" description=""
+    type="boolean" possibleValues="" category="hide"/>
+
+  <renderingProperty attr="hideContour" name="Hide Contour" description=""
+    type="boolean" possibleValues="" category="hide"/>
+
+  <renderingProperty attr="hideBoundaries" name="Hide Boundaries" description=""
+    type="boolean" possibleValues="" category="hide"/>
+
+  <renderingProperty attr="hideRoads" name="Hide Roads" description=""
+    type="boolean" possibleValues="" category="hide"/>
+
+  <renderingProperty attr="hideTexts" name="Hide Text" description=""
+    type="boolean" possibleValues="" category="hide"/>
+
+  <renderingProperty attr="hidePOIs" name="Hide POIs" description=""
+    type="boolean" possibleValues="" category="hide"/>
+
+  <renderingProperty attr="hideBuildings" name="Hide Buildings" description=""
     type="boolean" possibleValues="" category="hide"/>
 
   <renderingProperty attr="activityMode" name="Activity Mode" description="Rendering mode for trail difficulty scales"  type="string" possibleValues="enduro, mtb, hiking" category="details" defaultValue="enduro" />
@@ -20,6 +38,10 @@
   <renderingProperty attr="engine_v1" type="boolean"/>
 
   <!-- MATERIAL COLORS -->
+
+  <renderingAttribute name="countryBoundaryColor">
+    <case attrColorValue="#55673ab7" />
+  </renderingAttribute>
 
   <renderingAttribute name="red">
     <case attrColorValue="#f44336" />
@@ -438,8 +460,10 @@
     <case attrColorValue="#990002B4"/>
   </renderingAttribute>
   <renderingAttribute name="boundaryColorOuter">
-    <case minzoom="12" attrColorValue="#500002B4"/>
-    <case attrColorValue="#300002B4"/>
+    <!-- <case minzoom="12" attrColorValue="#500002B4"/>
+    <case attrColorValue="#300002B4"/> -->
+    <!-- <case minzoom="12" attrColorValue="#55607d8b"/> -->
+    <case attrColorValue="#55607d8b"/>
   </renderingAttribute>
 
   <renderingAttribute name="placeCityVillageTextColor">
@@ -691,7 +715,7 @@
 
   <text>
 
-    <switch hideForeground="false">
+    <switch hideTexts="false">
 
       <!-- TEXT - VILLAGE -->
       <switch minzoom="3" textColor="$placeCityVillageTextColor" textWrapWidth="20" textBold="true" textDy="-4">
@@ -807,16 +831,16 @@
 
   <point>
     <!-- POINT - VIEWPOINT -->
-    <case  hideForeground="false" minzoom="14" tag="tourism" value="viewpoint" icon="topo_viewpoint" shield="topo_viewpoint_shield" iconOrder="85" iconVisibleSize="10" intersectionSizeFactor="2"/>
+    <case hidePOIs="false" minzoom="14" tag="tourism" value="viewpoint" icon="topo_viewpoint" shield="topo_viewpoint_shield" iconOrder="85" iconVisibleSize="10" intersectionSizeFactor="2"/>
 
     <!-- POINT - PEAK -->
-    <case hideForeground="false" minzoom="14" tag="natural" value="peak" iconOrder="65" icon="natural_peak" iconVisibleSize="10" intersectionSizeFactor="2" />
+    <case hidePOIs="false" minzoom="14" tag="natural" value="peak" iconOrder="65" icon="natural_peak" iconVisibleSize="10" intersectionSizeFactor="2" />
 
     <!-- POINT - FORD -->
-    <case hideForeground="false" minzoom="14" tag="ford" value="yes" icon="topo_ford" shield="topo_ford_shield" iconVisibleSize="10" intersectionSizeFactor="2"/>
+    <case hidePOIs="false" minzoom="14" tag="ford" value="yes" icon="topo_ford" shield="topo_ford_shield" iconVisibleSize="10" intersectionSizeFactor="2"/>
 
     <!-- POINT - TEMPLE -->
-    <case hideForeground="false" minzoom="14" tag="amenity" value="place_of_worship" iconOrder="40" iconVisibleSize="10" intersectionSizeFactor="2">
+    <case hidePOIs="false" minzoom="14" tag="amenity" value="place_of_worship" iconOrder="40" iconVisibleSize="10" intersectionSizeFactor="2">
       <case additional="religion=christian" icon="topo_christian" shield="topo_christian_shield"/>
       <case additional="religion=jewish" icon="topo_jewish" shield="topo_jewish_shield"/>
       <case additional="religion=muslim" icon="topo_muslim" shield="topo_muslim_shield"/>
@@ -829,34 +853,34 @@
     </case>
 
     <!-- POINT - WATERFALL -->
-    <case hideForeground="false" minzoom="14" tag="waterway" value="waterfall" icon="topo_waterfall" shield="topo_waterfall_shield"/>
+    <case hidePOIs="false" minzoom="14" tag="waterway" value="waterfall" icon="topo_waterfall" shield="topo_waterfall_shield"/>
 
     <!-- POINT - CAVE -->
-    <case hideForeground="false" minzoom="14" tag="natural" value="cave_entrance" icon="topo_cave" shield="topo_cave_shield" iconOrder="85"/>
+    <case hidePOIs="false" minzoom="14" tag="natural" value="cave_entrance" icon="topo_cave" shield="topo_cave_shield" iconOrder="85"/>
 
     <!-- POINT - NOEXIT -->
-    <case hideForeground="false" minzoom="14" tag="noexit" value="yes" icon="" >
+    <case hidePOIs="false" minzoom="14" tag="noexit" value="yes" icon="" >
       <apply_if maxzoom="14" icon="barrier_small_black_bold_2"/>
       <apply_if minzoom="15" icon="barrier_small_black_bold_1"/>
     </case>
 
     <!-- POINT - GATE -->
-    <case hideForeground="false" minzoom="14" tag="barrier" value="log" icon="mm_hazard_yes">
+    <case hidePOIs="false" minzoom="14" tag="barrier" value="log" icon="mm_hazard_yes">
     </case>
 
-    <case hideForeground="false" minzoom="14" tag="barrier" value="" >
+    <case hidePOIs="false" minzoom="14" tag="barrier" value="" >
       <apply_if maxzoom="14" icon="barrier_small_red_bold_2"/>
       <apply_if minzoom="15" icon="barrier_small_red_bold_1"/>
     </case>
 
     <!-- POINT - FIXME -->
-    <case hideForeground="false" minzoom="14" tag="fixme_tag" value="yes" iconOrder="128" icon="fixme_tag_lowzoom_yes"  iconVisibleSize="10" intersectionSizeFactor="2" />
+    <case hidePOIs="false" minzoom="14" tag="fixme_tag" value="yes" iconOrder="128" icon="fixme_tag_lowzoom_yes"  iconVisibleSize="10" intersectionSizeFactor="2" />
   </point>
 
   <polygon>
 
     <!-- POLYGON - LANDUSE -->
-    <switch hideBackground="false">
+    <switch hideLanduse="false">
       <case minzoom="11" tag="natural" value="beach" color_0="$beachColor"/>
       <case minzoom="11" tag="natural" value="sand" color_0="$sandColor"/>
       <case minzoom="6" tag="natural" value="desert" color="$desertColor"/>
@@ -892,7 +916,7 @@
     </switch>
 
     <!-- POLYGON - WATER -->
-    <switch hideBackground="false">
+    <switch hideWater="false">
       <switch>
         <case minzoom="1" tag="natural" value="coastline"/>
         <switch>
@@ -909,14 +933,14 @@
     </switch>
 
     <!-- POLYGON - LAND -->
-    <switch hideBackground="false">
+    <switch hideLanduse="false">
       <case tag="place" value="island"/>
       <case tag="place" value="islet"/>
       <case tag="natural" value="land"/>
       <apply color="$defaultColor"/>
     </switch>
 
-    <switch hideForeground="false">
+    <switch hideBuildings="false">
       <case tag="building" value=""/>
       <apply color="$buildingColor" />
     </switch>
@@ -925,12 +949,12 @@
 
   <line>
     <!-- LINE - COASTLINE -->
-    <case hideBackground="false" minzoom="1" tag="natural" value="coastline_broken" color="#111111" strokeWidth=":1"/>
-    <case hideBackground="false" minzoom="5" tag="natural" value="coastline_line" color="#4580cf" strokeWidth=":1"/>
+    <case hideLanduse="false" minzoom="1" tag="natural" value="coastline_broken" color="#111111" strokeWidth=":1"/>
+    <case hideLanduse="false" minzoom="5" tag="natural" value="coastline_line" color="#4580cf" strokeWidth=":1"/>
 
     <!-- LINE - HIGHWAY-->
 
-    <switch hideForeground="false">
+    <switch hideRoads="false">
       <!-- PATHS -->
       <switch minzoom="11">
         <case tag="highway" value="track" additional="tracktype=grade5" />
@@ -1016,7 +1040,7 @@
     </switch>
 
     <!-- LINE - WATER -->
-    <switch hideBackground="false">
+    <switch hideWater="false">
       <switch minzoom="12">
         <case tag="waterway" value="stream" />
         <apply_if minzoom="13" maxzoom="13" strokeWidth="1.2:1.2"/>
@@ -1072,7 +1096,7 @@
     </switch>
 
     <!-- LINE - CONTOUR -->
-    <switch tag="contour" value="elevation" hideBackground="false">
+    <switch tag="contour" value="elevation" hideContour="false">
       <case minzoom="11" contourLines="11"/>
       <case minzoom="12" contourLines="12"/>
       <case minzoom="13" contourLines="13"/>
@@ -1123,19 +1147,34 @@
     </switch>
 
     <!-- LINE - ADMIN LEVELS -->
-    <switch minzoom="2" hideBackground="false">
+    <switch minzoom="2" hideBoundaries="false">
       <case tag="admin_level" value="0"/>
       <case tag="admin_level" value="1"/>
       <case tag="admin_level" value="2"/>
-      <apply color="$boundaryColorOuter">
-        <case maxzoom="2" strokeWidth="0.7:0.7"/>
-        <case maxzoom="3" strokeWidth="0.9:0.9" strokeWidth_0="0.8:0.8"/>
-        <case maxzoom="4" strokeWidth="1:1" strokeWidth_0="0.8:0.8"/>
-        <case maxzoom="5" strokeWidth="2:2" strokeWidth_0="1:1"/>
-        <case maxzoom="6" strokeWidth="3:3" strokeWidth_0="1:1"/>
-        <case maxzoom="8" strokeWidth="4:4" strokeWidth_0="1:1"/>
-        <case minzoom="9" strokeWidth="6:6" strokeWidth_0="1:1"/>
-      </apply>
+      <apply color="#55607d8b" strokeWidth="3:3" pathEffect="12_2" />
+    </switch>
+
+    <switch minzoom="4" hideBoundaries="false">
+      <!-- <case tag="admin_level" value="3" pathEffect="6_1"/> -->
+      <case tag="admin_level" value="4" pathEffect="6_1"/>
+      <apply color="#55607d8b" strokeWidth="2:2" />
+    </switch>
+
+    <switch hideBoundaries="false">
+      <switch>
+        <case tag="admin_level" value="5" minzoom="11" pathEffect="6_3_2_3_2_3" pathEffect_0="6_3_2_3_2_3"/>
+        <case tag="admin_level" value="6" minzoom="11" pathEffect="6_3_2_3" pathEffect_0="6_3_2_3"/>
+        <case tag="admin_level" value="7" minzoom="12" pathEffect="5_1" pathEffect_0="5_1"/>
+        <case tag="admin_level" value="8" minzoom="12" pathEffect="5_1" pathEffect_0="5_1"/>
+        <!-- <case tag="admin_level" value="9" minzoom="13" pathEffect="4_1" pathEffect_0="4_1"/>
+        <case tag="admin_level" value="10" minzoom="13" pathEffect="4_1" pathEffect_0="4_1"/> -->
+        <apply color="#55607d8b" strokeWidth="1:1" />
+      </switch>
+      <!-- <case tag="boundary" value="national_park" minzoom="7">
+        <case maxzoom="9" strokeWidth="1.5:1.5"/>
+        <case minzoom="10" strokeWidth="3:3"/>
+        <apply color="$boundaryNationalParkColor2" color_0="$boundaryNationalParkColor" strokeWidth_0="0.6" pathEffect="4_1" pathEffect_0="4_1"/>
+      </case> -->
     </switch>
   </line>
 </renderingStyle>
