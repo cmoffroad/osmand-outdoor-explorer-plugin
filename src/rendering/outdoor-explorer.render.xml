@@ -176,7 +176,8 @@
   </renderingAttribute>
 
   <renderingAttribute name="missingColor">
-    <case attrColorValue="$grey" />
+    <case attrColorValue="#B9B9B9" />
+    <!-- <case attrColorValue="$grey" /> -->
   </renderingAttribute>
 
   <renderingAttribute name="unconfirmedColor">
@@ -327,7 +328,7 @@
         <case attrColorValue="$black" />
       </apply>
     </switch>
-    <case attrColorValue="$white" />
+    <case attrColorValue="$missingColor" />
   </renderingAttribute>
 
   <renderingAttribute name="minorRoadCasingColor">
