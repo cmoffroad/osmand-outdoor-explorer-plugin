@@ -26,7 +26,7 @@ Noticeable features compared to standard offroad/topo map styles:
 
 ### Plugin First-time Installation (Android only)
 
-- From your mobile browser, click here on [Download](./dist/osmand-outdoor-explorer-plugin.osf).
+- From your mobile browser, click here on [Download](https://github.com/cmoffroad/osmand-outdoor-explorer-plugin/raw/master/dist/osmand-outdoor-explorer-plugin.osf).
 - Once download is complete, click on Open.
 - OsmAnd should automatically open and inform you the plugin has been successfully added.
 - Wait a few seconds for Suggested maps to show up (standard, contour lines, hillshade)

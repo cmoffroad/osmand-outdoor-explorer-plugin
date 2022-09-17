@@ -10,9 +10,9 @@
     "push": "bash scripts/push.sh",
     "test": "bash scripts/test.sh",
     "dist": "bash scripts/dist.sh",
-    "download": "bash scripts/download.sh",
+    "download": "node scripts/download.js | bash",
     "redraw": "bash scripts/redraw.sh",
-    "tiles": "node scripts/tiles.js 20 20 | bash"
+    "tiles": "node scripts/tiles.js | bash"
   },
   "author": "cmoffroad",
   "license": "MIT",

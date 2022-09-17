@@ -168,7 +168,9 @@
 
   <!-- ATTRIBUTES -->
   <renderingAttribute name="defaultColor">
-    <case attrColorValue="#fffbf4" />
+    <case attrColorValue="#ffffff" />
+    <!-- <case attrColorValue="#e6ffe6" /> -->
+    <!-- <case attrColorValue="$lightGreen" /> -->
   </renderingAttribute>
 
   <renderingAttribute name="gpsColor">
@@ -328,7 +330,7 @@
         <case attrColorValue="$black" />
       </apply>
     </switch>
-    <case attrColorValue="$missingColor" />
+    <case attrColorValue="$unconfirmedColor" />
   </renderingAttribute>
 
   <renderingAttribute name="minorRoadCasingColor">
@@ -351,7 +353,7 @@
       <case tag="highway" value="track" />
       <apply attrColorValue="$transparent" />
     </switch>
-    <case attrColorValue="$black" />
+    <case attrColorValue="$transparent" />
   </renderingAttribute>
 
   <!-- MAJOR ROADS -->
@@ -983,6 +985,8 @@
 
       <!-- MINOR ROARDS-->
       <switch minzoom="11">
+        <case tag="highway" value="tertiary"/>
+        <case tag="highway" value="tertiary_link"/>
         <case tag="highway" value="unclassified" />
         <case tag="highway" value="living_street" />
         <case tag="highway" value="residential" />
@@ -1016,8 +1020,6 @@
         <case tag="highway" value="primary_link" />
         <case tag="highway" value="secondary" />
         <case tag="highway" value="secondary_link" />
-        <case tag="highway" value="tertiary"/>
-        <case tag="highway" value="tertiary_link"/>
         <apply_if minzoom="6" strokeWidth="0.5:0.5"/>
         <apply_if minzoom="7" strokeWidth="0.75:0.75"/>
         <apply_if minzoom="8" strokeWidth="1:1"/>
