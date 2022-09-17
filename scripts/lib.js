@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path')
-const { exec } = require("child_process");
 const sqlite3 = require('sqlite3')
 
 function tile2lon(x,z) { return (x/Math.pow(2,z)*360-180); }
@@ -68,7 +67,9 @@ const processZoom = (zoom, lat, lon, xTiles, yTiles, dirTiles, obfs) => {
   -gpxFile=./tmp/${zoom}.gpx \
   -output=./tmp`);
 
-  console.log(`convert -limit memory 2048MiB ./tmp/${zoom}.png -transparent "#e6ffe6" -crop 256x256 -set filename:tile "%[fx:page.x/256+${xTileMin}]/%[fx:page.y/256+${yTileMin}]" +repage "${dirTiles}/${zoom}/%[filename:tile].png"`);
+  console.log(`convert ./tmp/${zoom}.png -transparent white ./tmp/${zoom}.png`);
+
+  console.log(`convert -limit memory 2048MiB ./tmp/${zoom}.png -crop 256x256 -set filename:tile "%[fx:page.x/256+${xTileMin}]/%[fx:page.y/256+${yTileMin}]" +repage "${dirTiles}/${zoom}/%[filename:tile].png"`);
 }
 
 
