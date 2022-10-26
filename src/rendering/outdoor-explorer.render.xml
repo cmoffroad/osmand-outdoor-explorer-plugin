@@ -33,6 +33,9 @@
   <renderingProperty attr="hideBuildings" name="Hide Buildings" description=""
     type="boolean" possibleValues="" category="hide"/>
 
+  <renderingProperty attr="groundSurveyMode" name="Ground Survey Mode" description=""
+    type="boolean" possibleValues="" category="details" defaultValue="true" />
+
   <renderingProperty attr="activityMode" name="Activity Mode" description="Rendering mode for trail difficulty scales"  type="string" possibleValues="enduro, mtb, hiking" category="details" defaultValue="enduro" />
 
   <renderingProperty attr="engine_v1" type="boolean"/>
@@ -238,12 +241,15 @@
       <case activityMode="mtb" additional="mtb:scale=1" />
       <case activityMode="mtb" additional="mtb:scale=0" />
       <case activityMode="mtb" additional="bicycle=yes" />
+      <case tag="highway" value="track" additional="tracktype=grade5" />
+      <case tag="highway" value="track" additional="smoothness=very_horrible" />
+      <case tag="highway" value="track" additional="smoothness=impassable" />
       <apply attrColorValue="$beginnerColor" />
     </switch>
   </renderingAttribute>
 
   <renderingAttribute name="pathStrokeColor">
-    <apply>
+    <apply groundSurveyMode="true">
       <case additional="survey=ground" />
       <case attrColorValue="$grey" />
     </apply>
@@ -277,12 +283,13 @@
       </switch>
     </apply>
     <apply attrColorValue="$pathScaleColor" />
-    <case attrColorValue="$unconfirmedColor" />
+    <case groundSurveyMode="true" attrColorValue="$unconfirmedColor" />
+    <case groundSurveyMode="false" attrColorValue="$grey" />
   </renderingAttribute>
 
   <renderingAttribute name="pathCasingColor">
     <apply minzoom="13">
-      <apply>
+      <apply groundSurveyMode="true">
         <case additional="survey=ground" />
         <case attrColorValue="$transparent" />
       </apply>
@@ -308,7 +315,7 @@
   <!-- MINOR ROADS -->
 
   <renderingAttribute name="minorRoadStrokeColor">
-    <apply>
+    <apply groundSurveyMode="true">
       <case additional="survey=ground" />
       <case attrColorValue="$missingColor" />
     </apply>
@@ -330,11 +337,12 @@
         <case attrColorValue="$black" />
       </apply>
     </switch>
-    <case attrColorValue="$unconfirmedColor" />
+    <case groundSurveyMode="true" attrColorValue="$unconfirmedColor" />
+    <case groundSurveyMode="false" attrColorValue="$grey" />
   </renderingAttribute>
 
   <renderingAttribute name="minorRoadCasingColor">
-    <apply>
+    <apply groundSurveyMode="true">
       <case additional="survey=ground" />
       <case attrColorValue="$transparent" />
     </apply>
