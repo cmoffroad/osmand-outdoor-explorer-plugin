@@ -36,6 +36,9 @@
   <renderingProperty attr="groundSurveyMode" name="Ground Survey Mode" description=""
     type="boolean" possibleValues="" category="details" defaultValue="true" />
 
+  <renderingProperty attr="showFixme" name="Show Fixme" description=""
+    type="boolean" possibleValues="" category="details" />
+
   <renderingProperty attr="activityMode" name="Activity Mode" description="Rendering mode for trail difficulty scales"  type="string" possibleValues="enduro, mtb, hiking" category="details" defaultValue="enduro" />
 
   <renderingProperty attr="engine_v1" type="boolean"/>
@@ -963,9 +966,23 @@
     <case hideLanduse="false" minzoom="1" tag="natural" value="coastline_broken" color="#111111" strokeWidth=":1"/>
     <case hideLanduse="false" minzoom="5" tag="natural" value="coastline_line" color="#4580cf" strokeWidth=":1"/>
 
+    <!-- LINE - FIXME -->
+    <switch showFixme="true" minzoom="11">
+      <case tag="fixme_tag" value="yes" color="$yellow"/>
+      <apply>
+        <case maxzoom="14" strokeWidth="4:4"/>
+        <case maxzoom="15" strokeWidth="6:6"/>
+        <case maxzoom="16" strokeWidth="8:8"/>
+        <case maxzoom="17" strokeWidth="10:10"/>
+        <case maxzoom="18" strokeWidth="12:12"/>
+        <case minzoom="19" strokeWidth="14:14"/>
+      </apply>
+    </switch>
+
     <!-- LINE - HIGHWAY-->
 
     <switch hideRoads="false">
+
       <!-- PATHS -->
       <switch minzoom="11">
         <case tag="highway" value="track" additional="tracktype=grade5" />
