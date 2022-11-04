@@ -1,15 +1,17 @@
 const { exec } = require("child_process");
 
-const now = new Date();
-const month = now.getMonth() + 1;
-const year = now.getFullYear() - 2000;
+const args = process.argv.slice(2);
 
-const regions = [ 'Thailand_asia' ] //, 'Indonesia_nusa-tenggara-timur_asia' ]
+const today = new Date();
+const day = args[0] ? parseInt(args[0]) : today.getDate()
+const month = args[1] ? parseInt(args[1]) : today.getMonth() + 1;
+const year = args[2] ? parseInt(args[2]) : today.getFullYear() - 2000;
+
+const regions = [ 'Thailand_asia' ];
 
 regions.forEach(region => {
-  const filename = `${region}_${year}_${month < 10 ? '0' : ''}${month}_00.obf`;
+  const filename = `${region}_${year}_${month < 10 ? '0' : ''}${month}_${day < 10 ? '0' : ''}${day}.obf`;
   const source = `https://download.osmand.net/download?aosmc=true&self=true&file=${filename}.gz`
   const target = `./obf/${filename}`;
-  const command = `curl -k -o - ${source} | gunzip > ${target}`;
-  console.log(command);
+  console.log(`curl -k -O ${source} && gunzip -f ${target}`);
 });
