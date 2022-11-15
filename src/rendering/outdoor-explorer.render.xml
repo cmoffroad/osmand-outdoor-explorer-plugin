@@ -147,7 +147,9 @@
   </renderingAttribute>
 
   <renderingAttribute name="intermediateColor">
-    <case attrColorValue="$yellow" />
+
+    <case attrColorValue="$lightGreen" />
+    <!-- <case attrColorValue="$yellow" /> -->
 
     <!-- <case attrColorValue="$indigo" /> -->
     <!-- <case attrColorValue="$blue" /> -->
@@ -192,6 +194,13 @@
     <!-- <case attrColorValue="#fa00ff" /> -->
     <!-- <case attrColorValue="#e666fb" /> -->
     <case attrColorValue="#e040fb" />
+
+  </renderingAttribute>
+
+  <renderingAttribute name="fixmeColor">
+    <!-- <case attrColorValue="#fa00ff" /> -->
+    <!-- <case attrColorValue="#AA3f51b5" /> -->
+    <case attrColorValue="$yellow" />
 
   </renderingAttribute>
 
@@ -968,7 +977,7 @@
 
     <!-- LINE - FIXME -->
     <switch showFixme="true" minzoom="11">
-      <case tag="fixme_tag" value="yes" color="$unconfirmedColor"/>
+      <case tag="fixme_tag" value="yes" color="$fixmeColor"/>
       <apply>
         <case maxzoom="14" strokeWidth="2:2"/>
         <case maxzoom="15" strokeWidth="3:3"/>
