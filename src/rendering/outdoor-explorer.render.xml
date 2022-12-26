@@ -1019,9 +1019,6 @@
 
       <!-- MINOR ROARDS-->
       <switch minzoom="11">
-        <case tag="highway" value="tertiary"/>
-        <case tag="highway" value="tertiary_link"/>
-        <case tag="highway" value="unclassified" />
         <case tag="highway" value="living_street" />
         <case tag="highway" value="residential" />
         <case tag="highway" value="track" />
@@ -1037,6 +1034,33 @@
         <apply_if minzoom="17" strokeWidth="3.75:3.75" />
         <apply_if minzoom="18" strokeWidth="4.5:4.5" />
         <apply_if minzoom="19" strokeWidth="5.5:5.5" />
+        <apply
+          color="$minorRoadStrokeColor"
+          shadowColor="$minorRoadCasingColor"
+          cap="ROUND"
+          shadowRadius="1"
+        />
+      </switch>
+
+      <!-- MEDIUM ROARDS-->
+      <switch minzoom="6">
+        <case tag="highway" value="tertiary"/>
+        <case tag="highway" value="tertiary_link"/>
+        <case tag="highway" value="unclassified" />
+        <apply_if minzoom="6" strokeWidth="0.5:0.5"/>
+        <apply_if minzoom="7" strokeWidth="0.75:0.75"/>
+        <apply_if minzoom="8" strokeWidth="1:1"/>
+        <apply_if maxzoom="9" strokeWidth="1.25:1.25" />
+        <apply_if minzoom="10" strokeWidth="1.5:1.5" />
+        <apply_if minzoom="11" strokeWidth="1.75:1.75" />
+        <apply_if minzoom="12" strokeWidth="2:2" />
+        <apply_if minzoom="13" strokeWidth="1.75:1.75" />
+        <apply_if minzoom="14" strokeWidth="2.5:2.5" />
+        <apply_if minzoom="15" strokeWidth="3.1:3.1"/>
+        <apply_if minzoom="16" strokeWidth="3.8:3.8" />
+        <apply_if minzoom="17" strokeWidth="4.6:4.6"/>
+        <apply_if minzoom="18" strokeWidth="5.3:5.3" />
+        <apply_if minzoom="19" strokeWidth="6.25:6.25" />
         <apply
           color="$minorRoadStrokeColor"
           shadowColor="$minorRoadCasingColor"
