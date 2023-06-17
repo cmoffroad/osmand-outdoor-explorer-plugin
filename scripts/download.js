@@ -12,6 +12,6 @@ const regions = [ 'Thailand_asia' ];
 regions.forEach(region => {
   const filename = `${region}_${year}_${month < 10 ? '0' : ''}${month}_${day < 10 ? '0' : ''}${day}.obf`;
   const source = `https://download.osmand.net/download?aosmc=true&self=true&file=${filename}.gz`
-  const target = `./obf/${filename}`;
+  const target = `./latest/${filename}`;
   console.log(`curl -k -O ${source} && gunzip -f ${target}`);
 });

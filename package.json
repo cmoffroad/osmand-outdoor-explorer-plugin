@@ -12,6 +12,7 @@
     "dist": "bash scripts/dist.sh",
     "download": "node scripts/download.js | bash",
     "redraw": "bash scripts/redraw.sh",
+    "snapshots": "node scripts/snapshots.js | bash",
     "tiles": "node scripts/tiles.js | bash"
   },
   "author": "cmoffroad",

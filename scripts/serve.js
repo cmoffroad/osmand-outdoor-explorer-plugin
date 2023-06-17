@@ -35,14 +35,14 @@ const exec = async (command) => {
 
 const generateImage = async (zoom, lat, lon, width, height) => {
   console.log(zoom, lat, lon, width, height);
-  const obfs = preview.getOBFs('./obf');
+  const obfs = preview.getOBFs('./latest');
   const now = +new Date();
   const imgPath = path.join(__dirname, '..', 'tmp', `serve.png`);
   const gpxPath = path.join(__dirname, '..', 'tmp', 'serve.gpx');
   const gpx = generateGPX(zoom, lat, lon, width, height, obfs);
   const command = (`java -Xms64M -Xmx1024M -cp ../OsmAndMapCreator-main/OsmAndMapCreator.jar net.osmand.swing.OsmAndImageRendering \
 -native=/Users/julien/Documents/WORKSPACE/OSM/OsmAnd-core-legacy/binaries/darwin/intel/Release \
--obfFiles=./obf/ \
+-obfFiles=./latest/ \
 -gpxFile=${gpxPath} \
 -output=./tmp`);
   console.log(command);

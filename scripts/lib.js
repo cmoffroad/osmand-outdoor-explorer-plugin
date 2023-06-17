@@ -49,6 +49,48 @@ const generateGPX = (zoom, lat, lon, xTiles, yTiles, obfs) => {
   console.log(`echo "${xml.replace(/\n/g, '')}" > ./tmp/${zoom}.gpx`)
 }
 
+const processSnapshots = (id, zoom, lat, lon, width, height, obfsRecord) => {
+  const snapshots = Object.entries(obfsRecord).map(([obfFolder, obfs]) => {
+    return processSnapshot(id, zoom, lat, lon, width, height, obfFolder, obfs);
+  })
+  console.log(`convert -delay 100 -resize 50% -loop 0 ${snapshots.join(' ')} ./snapshots/snapshot-${id}.gif`);
+}
+
+const processSnapshot = (id, zoom, lat, lon, width, height, obfFolder, obfs) => {
+  const snapshotName = `snapshot-${id}-${obfFolder}`;
+  const snapshotGpx  = `./tmp/${snapshotName}.gpx`;
+  const snapshotPng = `./snapshots/${snapshotName}.png`;
+
+
+  const xml = `<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<gpx version='1.1' xmlns='http://www.topografix.com/GPX/1/1'
+  width='${width}' height='${height}' zoom='${zoom}' mapDensity='1'
+  renderingProperties='showMtbRoutes=true,activityMode=mtb,lang=en,contourLines=11,contourWidth=thin,contourDensity=medium,region_hillshade=yes,groundSurveyMode=true'
+  renderingName='src/rendering/outdoor-explorer'
+>
+  <wpt lat='${lat}' lon='${lon}'>
+    <name>${snapshotName}</name>
+    <extensions>
+      <maps>${obfs.join(',')}</maps>
+      <zoom>${zoom}</zoom>
+    </extensions>
+  </wpt>
+</gpx>`;
+
+  console.log(`echo "${xml.replace(/\n/g, '')}" > ${snapshotGpx}`)
+
+  console.log(`java -Xms512M -Xmx3072M -cp ../OsmAndMapCreator-main/OsmAndMapCreator.jar net.osmand.swing.OsmAndImageRendering \
+  -native=/Users/julien/Documents/WORKSPACE/OSM/OsmAnd-core-legacy/binaries/darwin/intel/Release \
+  -obfFiles=./${obfFolder}/ \
+  -gpxFile=${snapshotGpx} \
+  -output=./snapshots`);
+
+  const text = obfFolder === 'latest' ? new Date().getFullYear() : obfFolder;
+  console.log(`convert -pointsize 30 -fill red -draw 'text 10,40 "${text}"' ${snapshotPng} ${snapshotPng}`);
+
+  return snapshotPng;
+}
+
 const processZoom = (zoom, lat, lon, xTiles, yTiles, dirTiles, obfs) => {
 
   const [ xTileCenter, yTileCenter ] = deg2num(lat, lon, zoom);
@@ -63,7 +105,7 @@ const processZoom = (zoom, lat, lon, xTiles, yTiles, dirTiles, obfs) => {
 
   console.log(`java -Xms512M -Xmx3072M -cp ../OsmAndMapCreator-main/OsmAndMapCreator.jar net.osmand.swing.OsmAndImageRendering \
   -native=/Users/julien/Documents/WORKSPACE/OSM/OsmAnd-core-legacy/binaries/darwin/intel/Release \
-  -obfFiles=./obf/ \
+  -obfFiles=./latest/ \
   -gpxFile=./tmp/${zoom}.gpx \
   -output=./tmp`);
 
@@ -127,5 +169,6 @@ const processOBFs = (dir, country, center, xTiles, yTiles, zooms) => {
 module.exports = {
   getOBFs,
   generateGPX,
-  processOBFs
+  processOBFs,
+  processSnapshots
 }
