@@ -1,17 +1,37 @@
-const { exec } = require("child_process");
-
-const args = process.argv.slice(2);
+const fs = require('fs');
 
 const today = new Date();
-const day = args[0] ? parseInt(args[0]) : today.getDate()
-const month = args[1] ? parseInt(args[1]) : today.getMonth() + 1;
-const year = args[2] ? parseInt(args[2]) : today.getFullYear() - 2000;
+
+let year = today.getFullYear() - 2000;
+if (year < 10)
+  year = `0${year}`;
+
+let month = today.getMonth() + 1;
+if (month < 10)
+  month = `0${month}`;
+
+let day = today.getDate()
+if (day < 10)
+  day = `0${day}`;
 
 const regions = [ 'Thailand_asia' ];
 
 regions.forEach(region => {
-  const filename = `${region}_${year}_${month < 10 ? '0' : ''}${month}_${day < 10 ? '0' : ''}${day}.obf`;
+  removeFiles(region, year, month);
+  downloadFile(region, year, month, "00");
+  downloadFile(region, year, month, day);
+});
+
+function downloadFile(region, year, month, day) {
+  const filename = `${region}_${year}_${month}_${day}.obf`;
   const source = `https://download.osmand.net/download?aosmc=true&self=true&file=${filename}.gz`
   const target = `./latest/${filename}`;
-  console.log(`curl -k -O ${source} && gunzip -f ${target}`);
-});
+  console.log(`curl -k -o - "${source}" | gunzip > "${target}"`);  
+}
+
+function removeFiles(region, year, month) {
+  const files = fs.readdirSync('./latest/').filter(f => f.match(`${region}_${year}_${month}`)); 
+  files.forEach(file => {
+    console.log(`rm ./latest/${file}`)
+  });
+}
