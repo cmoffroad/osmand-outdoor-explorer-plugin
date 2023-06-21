@@ -163,7 +163,7 @@ const processOBFs = (dir, country, center, xTiles, yTiles, zooms) => {
   // process slopes if exists
   const slopeFile = files.find(filename => filename.match('Slope'));
   if (slopeFile)
-    processSqlite(path.join(dir, slopeFile), [ 12 ], `../osm-tools/tiles/slope`);
+    processSqlite(path.join(dir, slopeFile), [ 11 ], `../osm-tools/tiles/slope`);
 }
 
 module.exports = {
