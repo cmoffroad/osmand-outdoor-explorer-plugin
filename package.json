@@ -13,7 +13,8 @@
     "download": "node scripts/download.js | bash",
     "redraw": "bash scripts/redraw.sh",
     "snapshots": "node scripts/snapshots.js | bash",
-    "tiles": "node scripts/tiles.js | bash"
+    "tiles": "node scripts/tiles.js | bash",
+    "update": "npm run download && npm run tiles && npm run commit"
   },
   "author": "cmoffroad",
   "license": "MIT",
