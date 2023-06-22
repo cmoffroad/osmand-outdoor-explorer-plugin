@@ -541,6 +541,10 @@
   <!-- MAJOR ROADS -->
 
   <renderingAttribute name="majorRoadStrokeColor">
+    <apply groundSurveyMode="true">
+      <case additional="survey=ground" />
+      <case attrColorValue="$missingColor" />
+    </apply>
     <switch>
       <case additional="surface=paved" />
       <case additional="surface=concrete" />
@@ -556,6 +560,10 @@
   </renderingAttribute>
 
   <renderingAttribute name="majorRoadCasingColor">
+    <apply groundSurveyMode="true">
+      <case additional="survey=ground" />
+      <case attrColorValue="$missingColor" />
+    </apply>
     <switch>
       <case additional="surface=paved" />
       <case additional="surface=concrete" />
@@ -565,7 +573,7 @@
       <case additional="surface=chipseal" />
       <apply attrColorValue="$black" />
     </switch>
-    <case additional="surface=" attrColorValue="$transparent" />
+    <case additional="surface=" attrColorValue="$black" />
     <case attrColorValue="$black" />
   </renderingAttribute>
 
@@ -1248,8 +1256,8 @@
         <apply_if minzoom="18" strokeWidth="5.3:5.3" />
         <apply_if minzoom="19" strokeWidth="6.25:6.25" />
         <apply
-          color="$minorRoadStrokeColor"
-          shadowColor="$minorRoadCasingColor"
+          color="$majorRoadStrokeColor"
+          shadowColor="$majorRoadCasingColor"
           cap="ROUND"
           shadowRadius="1"
         />
