@@ -10,17 +10,36 @@
 
 > I am not aware of any minimum compatible versions, tried it on a old mac with OSX 10.12, Xcode 9.2 Java 16
 
+### Python 2.7.10
+
+- open https://www.python.org/downloads/release/python-2710/
+- download Mac OS X 64-bit/32-bit installer
+- open installer and follow default instructions
+
+### Java SDK 16.0.1
+
+- open https://www.oracle.com/java/technologies/javase/jdk16-archive-downloads.html
+- download Java SE Development Kit 16 macOS Installer
+- open installer and follow default instructions
+
+## Xcode Command Line Tools
+
+      sudo rm -rf /Library/Developer/CommandLineTools
+      xcode-select --install
+
+## CMake
+
+      brew install cmake
+
 ## Instructions
 
 Based on official [documentation](https://docs.osmand.net/en/main@latest/development/build-osmand/how-to-compile-mapcreator-and-tools#compile-native-rendering-library-for-osmandmapcreator)
 
-      ### Create workspace directory for OsmAnd
-      mkdir ~/Documents/WORKSPACE/OsmAnd
 
 ### OsmAnd-core-legacy
 
       ### download repository
-      cd ~/Documents/WORKSPACE/OsmAnd
+      cd ~/WORKSPACES/OSM
       git clone https://github.com/osmandapp/OsmAnd-core-legacy.git
       cd OsmAnd-core-legacy/externals
 
@@ -29,7 +48,7 @@ Based on official [documentation](https://docs.osmand.net/en/main@latest/develop
       cd ../targets
 
       ### export JAVA
-      export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-16.0.1.jdk/Contents/Home
+      export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-16.jdk/Contents/Home
 
       ### compile
       sh intel-darwin.sh release
@@ -39,7 +58,7 @@ Based on official [documentation](https://docs.osmand.net/en/main@latest/develop
 ### OsmAnd-resources
       
       ### download
-      cd ~/Documents/WORKSPACE/OsmAnd
+      cd ~/Documents/WORKSPACE/OSM
       git clone https://github.com/osmandapp/OsmAnd-resources.git
 
 ### OsmAndMapCreator
