@@ -34,7 +34,7 @@ const generateGPX = (zoom, lat, lon, xTiles, yTiles, obfs) => {
   const xml = `<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
 <gpx version='1.1' xmlns='http://www.topografix.com/GPX/1/1'
   width='${xTiles*tileSize}' height='${yTiles*tileSize}' zoom='${zoom}' mapDensity='1'
-  renderingProperties='showMtbRoutes=true,activityMode=mtb,lang=en,hideContour=true,hideBuildings=true,hideBoundaries=false,hideLanduse=true,hideWater=true,groundSurveyMode=true'
+  renderingProperties='showMtbRoutes=true,activityMode=mtb,lang=en,hideContour=true,hideBuildings=true,hideBoundaries=false,hideLanduse=true,hideWater=false,groundSurveyMode=true'
   renderingName='src/rendering/outdoor-explorer'
 >
   <wpt lat='${lat}' lon='${lon}'>
@@ -152,18 +152,18 @@ const processOBFs = (dir, country, center, xTiles, yTiles, zooms) => {
 
   // process each zoom
   for (var i=0;i<zooms.length; i++) {
-    processZoom(zooms[i], lat, lon, xTiles * Math.pow(2, i), yTiles * Math.pow(2, i), `../osm-tools/tiles`, obfs);
+    processZoom(zooms[i], lat, lon, xTiles * Math.pow(2, i), yTiles * Math.pow(2, i), `../osm-tiles`, obfs);
   }
 
   // process hilldshades if exists
   const hillshadeFile = files.find(filename => filename.match('Hillshade'));
   if (hillshadeFile)
-    processSqlite(path.join(dir, hillshadeFile), [ 12 ], `../osm-tools/tiles/hillshade`);
+    processSqlite(path.join(dir, hillshadeFile), [ 12 ], `../osm-tiles/hillshade`);
 
   // process slopes if exists
   const slopeFile = files.find(filename => filename.match('Slope'));
   if (slopeFile)
-    processSqlite(path.join(dir, slopeFile), [ 11 ], `../osm-tools/tiles/slope`);
+    processSqlite(path.join(dir, slopeFile), [ 11 ], `../osm-tiles/slope`);
 }
 
 module.exports = {

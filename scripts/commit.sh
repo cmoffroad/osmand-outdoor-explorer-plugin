@@ -1,4 +1,4 @@
-cd ../osm-tools/tiles/
+cd ../osm-tiles/
 git add .
 git commit -m "update tiles"
 git push
