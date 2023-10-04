@@ -10,7 +10,7 @@
     "push": "bash scripts/push.sh",
     "test": "bash scripts/test.sh",
     "dist": "bash scripts/dist.sh",
-    "download": "node scripts/download.js | bash",
+    "download": "node scripts/download.js $DATE | bash",
     "redraw": "bash scripts/redraw.sh",
     "snapshots": "node scripts/snapshots.js | bash",
     "tiles": "node scripts/tiles.js | bash",

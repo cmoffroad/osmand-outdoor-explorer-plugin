@@ -1,24 +1,35 @@
 const fs = require('fs');
 
-const today = new Date();
+let year, month, day;
 
-let year = today.getFullYear() - 2000;
-if (year < 10)
-  year = `0${year}`;
+const arg = process.env.DATE;
+if (arg && arg.length === 6) {
+  year = arg.substring(0, 2);
+  month = arg.substring(2, 4);
+  day = arg.substring(4, 6);
+} else {
+  const today = new Date();
 
-let month = today.getMonth() + 1;
-if (month < 10)
-  month = `0${month}`;
+  year = today.getFullYear() - 2000;
+  if (year < 10)
+    year = `0${year}`;
 
-let day = today.getDate()
-if (day < 10)
-  day = `0${day}`;
+  month = today.getMonth() + 1;
+  if (month < 10)
+    month = `0${month}`;
+
+  day = today.getDate()
+  if (day < 10)
+    day = `0${day}`;
+}
 
 const regions = [ 'Thailand_asia' ];
 
 regions.forEach(region => {
   removeFiles(region, year, month);
-  downloadFile(region, year, month, "00");
+  if (day !== '00')
+    downloadFile(region, year, month, "00");
+
   downloadFile(region, year, month, day);
 });
 
