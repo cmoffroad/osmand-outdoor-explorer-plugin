@@ -1,2 +1,0 @@
-adb shell mv /sdcard/Android/data/net.osmand/files/live /sdcard/Android/data/net.osmand/files/live2 || adb shell mv /sdcard/Android/data/net.osmand/files/live2 /sdcard/Android/data/net.osmand/files/live
-adb shell am start -n "net.osmand/.plus.activities.search.GeoIntentActivity"

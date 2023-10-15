@@ -1,7 +1,1 @@
 .DS_Store
-/node_modules
-/latest
-/2020
-/tests
-/tmp
-*.log

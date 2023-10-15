@@ -1,1 +1,0 @@
-sh ../OsmAndMapCreator-main/OsmAndMapCreator.sh

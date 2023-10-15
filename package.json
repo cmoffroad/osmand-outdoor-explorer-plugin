@@ -3,25 +3,8 @@
   "version": "0.1.0",
   "description": "",
   "scripts": {
-    "start": "bash scripts/debug.sh",
-    "update": "npm run download && npm run tiles",
-    "commit": "bash scripts/commit.sh",
-    "watch": "bash scripts/watch.sh",
-    "push": "bash scripts/push.sh",
-    "test": "bash scripts/test.sh",
-    "dist": "bash scripts/dist.sh",
-    "download": "node scripts/download.js $DATE | bash",
-    "redraw": "bash scripts/redraw.sh",
-    "snapshots": "node scripts/snapshots.js | bash",
-    "tiles": "node scripts/tiles.js | bash",
-    "update": "npm run download && npm run tiles && npm run commit"
+    "dist": "bash scripts/dist.sh"
   },
   "author": "cmoffroad",
-  "license": "MIT",
-  "devDependencies": {
-    "express": "^4.17.2",
-    "onchange": "^7.1.0",
-    "serve": "^13.0.2",
-    "sqlite3": "^5.0.2"
-  }
+  "license": "MIT"
 }
