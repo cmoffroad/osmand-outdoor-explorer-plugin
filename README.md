@@ -118,12 +118,9 @@ Notes:
 > Difficulty rating based on https://wiki.openstreetmap.org/wiki/User:CMoffroad/Key:dirtbike:scale
 
 
-
-
 ## Questions
 
 Do you have any questions, or want to report a bug or request an improvement? 
 
 Please contact me via:
-- https://www.facebook.com/osmexplorer
-- https://www.openstreetmap.org/message/new/cmoffroad
+- https://www.openstreetmap.org/message/new/julcnx
