@@ -385,16 +385,12 @@
       <case additional="dirtbike:scale=" />
       <case attrColorValue="$unconfirmedColor" />
     </apply> -->
-    <switch>
-      <case activityMode="enduro" additional="dirtbike:scale=?" />
-      <apply attrColorValue="$unconfirmedColor" />
-    </switch>
     <!-- TODO: find solution -->
     <!-- <case tag="fixme_tag" value="yes" nameTag="fixme" attrColorValue="$unconfirmedColor" /> -->
     <switch>
-      <case activityMode="enduro" additional="dirtbike:scale=6" />
-      <case activityMode="enduro" additional="dirtbike:scale=5" />
-      <case activityMode="enduro" additional="dirtbike:scale=4" />
+      <case additional="dirtbike:scale=6" />
+      <case additional="dirtbike:scale=5" />
+      <case additional="dirtbike:scale=4" />
       <!-- <case activityMode="hiking" additional="sac_scale=difficult_alpine_hiking" />
       <case activityMode="hiking" additional="sac_scale=demanding_alpine_hiking" />
       <case activityMode="hiking" additional="sac_scale=alpine_hiking" /> -->
@@ -402,26 +398,26 @@
       <case activityMode="mtb" additional="mtb:scale=5" />
       <case activityMode="mtb" additional="mtb:scale=4" /> -->
       <!-- <case activityMode="enduro" tag="highway" value="steps" /> -->
-      <case activityMode="mtb" tag="highway" value="steps" />
-      <case activityMode="mtb" additional="motorcycle=no" />
+      <case tag="highway" value="steps" />
+      <case additional="motorcycle=no" />
       <apply attrColorValue="$extremeColor" />
     </switch>
     <switch>
-      <case activityMode="enduro" additional="dirtbike:scale=3" />
+      <case additional="dirtbike:scale=3" />
       <!-- <case activityMode="hiking" additional="sac_scale=demanding_mountain_hiking" /> -->
       <!-- <case activityMode="mtb" additional="mtb:scale=3"  /> -->
       <apply attrColorValue="$advancedColor" />
     </switch>
     <switch>
-      <case activityMode="enduro" additional="dirtbike:scale=2" />
-      <case activityMode="hiking" additional="sac_scale=mountain_hiking" />
+      <case additional="dirtbike:scale=2" />
+      <!-- <case activityMode="hiking" additional="sac_scale=mountain_hiking" /> -->
       <!-- <case tag="highway" value="track" additional="smoothness=very_horrible" /> -->
       <!-- <case activityMode="mtb" additional="mtb:scale=2" /> -->
       <apply attrColorValue="$intermediateColor" />
     </switch>
     <switch>
-      <case activityMode="enduro" additional="dirtbike:scale=1" />
-      <case activityMode="enduro" additional="dirtbike:scale=0" />
+      <case additional="dirtbike:scale=1" />
+      <case additional="dirtbike:scale=0" />
       <!-- <case activityMode="mtb" additional="motorcycle=yes" /> -->
       <!-- <case activityMode="hiking" additional="sac_scale=hiking" />
       <case activityMode="hiking" /> -->
@@ -437,6 +433,10 @@
       <case tag="highway" value="track" additional="smoothness=very_horrible" />
       <case tag="highway" value="track" additional="smoothness=impassable" /> -->
       <apply attrColorValue="$beginnerColor" />
+    </switch>
+    <switch>
+      <case activityMode="enduro" additional="dirtbike:scale=" />
+      <apply attrColorValue="$unconfirmedColor" />
     </switch>
     <case attrColorValue="$black" />
   </renderingAttribute>
