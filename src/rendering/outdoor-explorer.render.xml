@@ -1156,7 +1156,7 @@
     <case hideLanduse="false" minzoom="5" tag="natural" value="coastline_line" color="#4580cf" strokeWidth=":1"/>
 
     <!-- LINE - FIXME -->
-   <!--  <switch showFixme="true" minzoom="11">
+    <switch showFixme="true" minzoom="11">
       <case tag="fixme_tag" value="yes" color="$fixmeColor"/>
       <apply>
         <case maxzoom="14" strokeWidth="2:2"/>
@@ -1166,7 +1166,7 @@
         <case maxzoom="18" strokeWidth="6:6"/>
         <case minzoom="19" strokeWidth="7:7"/>
       </apply>
-    </switch> -->
+    </switch>
 
 
 
